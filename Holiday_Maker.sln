@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holiday_Maker", "Holiday_Maker\Holiday_Maker.csproj", "{F07961A6-C18B-49ED-A7BC-65E64BB804A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F07961A6-C18B-49ED-A7BC-65E64BB804A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07961A6-C18B-49ED-A7BC-65E64BB804A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07961A6-C18B-49ED-A7BC-65E64BB804A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07961A6-C18B-49ED-A7BC-65E64BB804A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0512BD43-AF7D-4105-AAB0-6A52A1A44515}
+	EndGlobalSection
+EndGlobal
