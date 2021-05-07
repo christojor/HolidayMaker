@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '/src/components/Home.vue'
+import API from '/src/components/API.vue'
 const routes = [
     {
-        path: '/',
-        name: 'Home',
-        component: Home,
-    },
+        path: '/API',
+        name: 'API',
+        component: API,
+    }
 ]
 const router = createRouter({
     history: createWebHistory(),
