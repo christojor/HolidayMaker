@@ -20,13 +20,10 @@ namespace Holiday_Maker.Controllers
             _roomRepo = new GenericRepository<Room>();
         }
 
-
-
-
         [HttpGet]
-        public IEnumerable<Room> GetAll()
+        public async Task<IEnumerable<Room>> GetAll()
         {
-            return _roomRepo.Get();
+            return await _roomRepo.GetAll();
         }
         
 
