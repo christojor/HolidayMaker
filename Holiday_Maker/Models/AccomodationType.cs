@@ -13,7 +13,7 @@ namespace Holiday_Maker.Models
         }
 
         public int Id { get; set; }
-        public string AccomodationType1 { get; set; }
+        public string Name { get; set; }
 
         public virtual ICollection<Accomodation> Accomodations { get; set; }
     }

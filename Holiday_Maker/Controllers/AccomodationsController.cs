@@ -16,18 +16,41 @@ namespace Holiday_Maker.Controllers
     {
         private readonly ApplicationDbContext _context;
         private IGenericRepository<Accomodation> _accomodationRepo;
+        private IGenericRepository<Room> _roomRepo;
+        private IGenericRepository<RoomType> _roomTypeRepo;
 
         public AccomodationsController(ApplicationDbContext context)
         {
             _context = context;
             _accomodationRepo = new GenericRepository<Accomodation>();
+            _roomRepo = new GenericRepository<Room>();
+            _roomTypeRepo = new GenericRepository<RoomType>();
         }
 
         // GET: api/Accomodations
         [HttpGet]
         public async Task<IEnumerable<Accomodation>> GetAccomodations()
         {
-            return await _accomodationRepo.GetAll();
+            // return await _accomodationRepo.GetAll();
+
+            /* QUERY RETURNING NESTED JSON */
+
+            var accommodationList = await _accomodationRepo.GetAll();
+            var roomList = await _roomRepo.GetAll();
+            var roomTypes = await _roomTypeRepo.GetAll();
+
+            foreach (var accommodation in accommodationList)
+            {
+                var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
+
+                foreach (var room in rooms)
+                {
+                    room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
+                    accommodation.Rooms.Add(room);
+                }
+            }
+
+            return accommodationList;
         }
 
         // GET: api/Accomodations/5

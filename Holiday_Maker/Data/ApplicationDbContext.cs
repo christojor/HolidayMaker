@@ -84,10 +84,9 @@ namespace Holiday_Maker.Models
             {
                 entity.ToTable("AccomodationType");
 
-                entity.Property(e => e.AccomodationType1)
+                entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("AccomodationType");
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Amenity>(entity =>
@@ -137,10 +136,9 @@ namespace Holiday_Maker.Models
             {
                 entity.ToTable("RoomType");
 
-                entity.Property(e => e.RoomType1)
+                entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("RoomType");
+                    .HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);
@@ -149,3 +147,4 @@ namespace Holiday_Maker.Models
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
+
