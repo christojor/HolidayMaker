@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import API from '/src/components/API.vue'
+import Hotels from '/src/components/pages/Hotels.vue'
 const routes = [
     {
-        path: '/API',
-        name: 'API',
-        component: API,
+        path: '/hotels',
+        name: 'Hotels',
+        component: Hotels,
     }
 ]
 const router = createRouter({

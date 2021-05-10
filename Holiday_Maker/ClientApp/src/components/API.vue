@@ -1,8 +1,10 @@
 <template>
-    <div v-for="accomodation in getAccomodations" :key="accomodation">
+    <div v-for="accomodation in getAccomodations" :key="accomodation" class="hotel-item">
+        <img :src="accomodation.imgSrc" alt="" class="hotel-item-img">
+        <div class="hotel-item-desc">
         <h1>{{accomodation.name}}</h1>
         <h1>{{accomodation.description}}</h1>
-        <img :src="accomodation.imgSrc" alt="">
+        </div>
     </div>
 </template>
 
