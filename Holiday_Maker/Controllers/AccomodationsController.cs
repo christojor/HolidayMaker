@@ -27,7 +27,6 @@ namespace Holiday_Maker.Controllers
             _context = context;
 
             // Repos
-
             _accomodationRepo = new GenericRepository<Accomodation>();
             _roomRepo = new GenericRepository<Room>();
             _roomTypeRepo = new GenericRepository<RoomType>();
