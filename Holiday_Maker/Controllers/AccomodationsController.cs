@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Holiday_Maker.Models;
 using Holiday_Maker.Repository;
+using Holiday_Maker.Services;
 
 namespace Holiday_Maker.Controllers
 {
@@ -15,16 +16,25 @@ namespace Holiday_Maker.Controllers
     public class AccomodationsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private IGenericRepository<Accomodation> _accomodationRepo;
-        private IGenericRepository<Room> _roomRepo;
-        private IGenericRepository<RoomType> _roomTypeRepo;
+        private readonly IGenericRepository<Accomodation> _accomodationRepo;
+        private readonly IGenericRepository<Room> _roomRepo;
+        private readonly IGenericRepository<RoomType> _roomTypeRepo;
+
+        private readonly AccomodationService _accomodationService;
 
         public AccomodationsController(ApplicationDbContext context)
         {
             _context = context;
+
+            // Repos
+
             _accomodationRepo = new GenericRepository<Accomodation>();
             _roomRepo = new GenericRepository<Room>();
             _roomTypeRepo = new GenericRepository<RoomType>();
+
+            // Services
+            _accomodationService = new AccomodationService();
+            
         }
 
         // GET: api/Accomodations
