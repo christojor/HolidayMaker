@@ -31,10 +31,17 @@ namespace Holiday_Maker.Services
             var accommodationList = await _accomodationRepo.GetAll();
             var roomList = await _roomRepo.GetAll();
             var roomTypes = await _roomTypeRepo.GetAll();
+            var amenityList = await _amenityRepo.GetAll();
+            var extrasList = await _extraRepo.GetAll();
 
             foreach (var accommodation in accommodationList)
             {
                 var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
+                var amenities = amenityList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+                var extras = extrasList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+
+                accommodation.Amenities.Add(amenities);
+                accommodation.Extras.Add(extras);
 
                 foreach (var room in rooms)
                 {

@@ -40,10 +40,6 @@ namespace Holiday_Maker.Controllers
         [HttpGet]
         public async Task<IEnumerable<Accomodation>> GetAccomodations()
         {
-            // return await _accomodationRepo.GetAll();
-
-            /* QUERY RETURNING NESTED JSON */
-
             return await _accomodationService.NestedAccomodations();
         }
 
