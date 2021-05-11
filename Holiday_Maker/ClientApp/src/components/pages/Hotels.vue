@@ -6,7 +6,7 @@
         </div>
 
         <div class="container3">
-            <API/>
+            <API :filter="filter"/>
         </div>
 
     </div>
@@ -15,7 +15,6 @@
 <script>
 import API from "/src/components/API.vue"
 import SearchProp from "/src/components/SearchProperty.vue"
-
 export default{
     components: {
         API,
@@ -23,8 +22,15 @@ export default{
     },
     methods: {
         filterSearch(filter){
-            
+            this.filter.PropName = filter.PropName
         }
     },
+    data() {
+        return{
+            filter: {
+                PropName: ''
+            }
+        }
+    }
 }
 </script>

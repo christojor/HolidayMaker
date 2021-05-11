@@ -1,4 +1,6 @@
 <template>
+        
+        <h1>{{filter.PropName}}</h1>
     <div v-for="accomodation in getAccomodations" :key="accomodation" class="hotel-item">
         <img :src="accomodation.imgSrc" alt="" class="hotel-item-img">
         <div class="hotel-item-desc">
@@ -14,7 +16,9 @@
     let getAccomodations = await rawResponse.json();
 
 export default {
-  
+  props: {
+    filter: Object
+  },
   data()
   {
     return{

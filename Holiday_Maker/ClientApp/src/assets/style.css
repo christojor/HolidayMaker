@@ -1,16 +1,29 @@
+body{
+    background-color: rgb(241, 241, 241);
+    margin: 0;
+}
+nav{
+    background-color: white;
+    height: 50px;
+    margin: 0;
+}
+nav a{
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+    margin-left: 76vw;
+}
 .container1{
     margin-left: 20vw;
     width: 1200px;
     height: fit-content;
     min-height: 100%;
-    background-color: aqua;    
 }
 .container2{
     display: inline-block;
     width: 28%;
     margin: 1%;
     height: fit-content;
-    background-color: green;
     vertical-align: top;
 }
 .container3{
@@ -18,14 +31,12 @@
     width: 68%;
     margin: 1%;
     height: fit-content;
-    background-color: orange;
     vertical-align: top;
 }
 .hotel-item{
     background-color: white;
     margin: 10px;
     height: 200px;
-    
 }
 .hotel-item-img{
     display: inline-block;
