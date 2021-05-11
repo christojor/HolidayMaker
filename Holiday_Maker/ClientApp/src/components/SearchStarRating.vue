@@ -1,6 +1,5 @@
 <template>
     <div class="filter-box">
-        <p style="margin:0px">____________________________________</p>
         <h3 style="margin:7px"> Property Rating </h3>
 
         <p class="slider-text">1</p> 
@@ -16,13 +15,13 @@
 export default{
     data() {
         return {
-            PropStars: 3
+            PropStars: 5
         }
     },
     methods: {
         handleSubmit(){
             let filter = {
-                PropStars: this.PropStars
+                PropStars: this.PropStars,
             }
             
             this.$emit('filter-search', filter);

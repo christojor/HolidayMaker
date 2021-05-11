@@ -1,10 +1,10 @@
 <template>
     <div class="filter-box">
-        <p style="margin:0px">____________________________________</p>
         <h3 style="margin:7px"> Search Property Name </h3>
-        <form @enter="handleSubmit">
+        <form @submit.prevent="handleSubmit">
             <input hidden>
             <input type="text" class="search-box" v-model="PropName">
+            <button hidden>Submit</button>
         </form>
     </div>
 </template>
@@ -21,7 +21,7 @@ export default{
             let filter = {
                 PropName: this.PropName
             }
-            
+            console.log("shit")
             this.$emit('filter-search', filter);
         }
     },
