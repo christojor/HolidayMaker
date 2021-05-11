@@ -47,7 +47,7 @@ namespace Holiday_Maker.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Accomodation>> GetAccomodation(int id)
         {
-            var accomodation = await _accomodationRepo.GetById(id);
+            var accomodation = await _accomodationService.NestedAccomodation(id);
 
             if (accomodation == null)
             {

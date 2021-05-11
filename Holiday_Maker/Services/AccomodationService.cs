@@ -53,5 +53,27 @@ namespace Holiday_Maker.Services
             return accommodationList;
         }
 
+        public async Task<Accomodation> NestedAccomodation(int id)
+        {
+            var accommodation = await _accomodationRepo.GetById(id);
+
+            var roomList = await _roomRepo.GetAll();
+            var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
+
+            var amenities = await _amenityRepo.GetAll();
+            var extras = await _extraRepo.GetAll();
+            accommodation.Amenities.Add(amenities.FirstOrDefault(a => a.AccomodationId == accommodation.Id));
+            accommodation.Extras.Add(extras.FirstOrDefault(a => a.AccomodationId == accommodation.Id));
+
+            foreach (var room in rooms)
+            {
+                room.RoomType = await _roomTypeRepo.GetById(room.RoomTypeId);
+                accommodation.Rooms.Add(room);
+            }
+
+            return accommodation;
+
+        }
+
     }
 }
