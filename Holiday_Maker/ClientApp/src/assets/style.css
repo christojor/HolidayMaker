@@ -62,3 +62,10 @@ nav a{
     background-color: white;
     border-radius: 5px;
 }
+.slider-text{
+    display: inline-block;
+    margin: 0;
+}
+.slider-stars{
+    margin: 0;
+}

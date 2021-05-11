@@ -2,7 +2,8 @@
     <div class="filter-box">
         <p style="margin:0px">____________________________________</p>
         <h3 style="margin:7px"> Search Property Name </h3>
-        <form @enter.prevent="handleSubmit">
+        <form @enter="handleSubmit">
+            <input hidden>
             <input type="text" class="search-box" v-model="PropName">
         </form>
     </div>
