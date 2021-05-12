@@ -9,7 +9,7 @@ namespace Holiday_Maker.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public int RoomId { get; set; }
+        public int AccomodationId { get; set; }
         public string GroupName { get; set; }
     }
 }

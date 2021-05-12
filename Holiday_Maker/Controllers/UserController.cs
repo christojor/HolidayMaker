@@ -39,7 +39,7 @@ namespace Holiday_Maker.Controllers
 
 
         [HttpGet("favorites")]
-        public async Task<IEnumerable<Room>> GetFavorites(int userId)
+        public async Task<ActionResult<IEnumerable<Accomodation>>> GetFavorites(int userId)
         {
 
             return await _userService.GetUserFavorites(userId);
@@ -53,9 +53,9 @@ namespace Holiday_Maker.Controllers
 
         // PUT api/<UserController>/5
         [HttpPost("favorites")]
-        public void PostFavorite(UserFavorite userFavorite)
+        public async void PostFavorite(UserFavorite userFavorite)
         {
-            _userService.AddUserFavorite(userFavorite);
+            await _userService.AddUserFavorite(userFavorite);
         }
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
