@@ -6,6 +6,7 @@
             <StarRating @filter-search="filterStars"/>
             <UserRating @filter-search="filterRating"/>
             <Price @filter-search="filterPrice"/>
+            <DropdownCheck/>
         </div>
 
         <div class="container3">
@@ -21,6 +22,7 @@ import Name from "/src/components/SearchProperty.vue"
 import StarRating from "/src/components/SearchStarRating.vue"
 import UserRating from "/src/components/SearchUserRating.vue"
 import Price from "/src/components/SearchPrice.vue"
+import DropdownCheck from "/src/components/dropdownCheck.vue"
 
     let rawResponse = await fetch('https://localhost:44323/api/accomodations');
     let getAccomodations = await rawResponse.json();
@@ -32,6 +34,7 @@ export default{
         StarRating,
         UserRating,
         Price,
+        DropdownCheck,
     },
     methods: {
         filterName(filter){

@@ -6,6 +6,7 @@ const routes = [
         name: 'Hotels',
         component: Hotels,
     }
+    
 ]
 const router = createRouter({
     history: createWebHistory(),
