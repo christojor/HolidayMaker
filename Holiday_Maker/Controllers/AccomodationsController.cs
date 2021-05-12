@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Holiday_Maker.Models;
 using Holiday_Maker.Repository;
+using Holiday_Maker.Services;
 
 namespace Holiday_Maker.Controllers
 {
@@ -15,49 +16,38 @@ namespace Holiday_Maker.Controllers
     public class AccomodationsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private IGenericRepository<Accomodation> _accomodationRepo;
-        private IGenericRepository<Room> _roomRepo;
-        private IGenericRepository<RoomType> _roomTypeRepo;
+        private readonly IGenericRepository<Accomodation> _accomodationRepo;
+        private readonly IGenericRepository<Room> _roomRepo;
+        private readonly IGenericRepository<RoomType> _roomTypeRepo;
+
+        private readonly AccomodationService _accomodationService;
 
         public AccomodationsController(ApplicationDbContext context)
         {
             _context = context;
+
+            // Repos
             _accomodationRepo = new GenericRepository<Accomodation>();
             _roomRepo = new GenericRepository<Room>();
             _roomTypeRepo = new GenericRepository<RoomType>();
+
+            // Services
+            _accomodationService = new AccomodationService();
+            
         }
 
         // GET: api/Accomodations
         [HttpGet]
         public async Task<IEnumerable<Accomodation>> GetAccomodations()
         {
-            // return await _accomodationRepo.GetAll();
-
-            /* QUERY RETURNING NESTED JSON */
-
-            var accommodationList = await _accomodationRepo.GetAll();
-            var roomList = await _roomRepo.GetAll();
-            var roomTypes = await _roomTypeRepo.GetAll();
-
-            foreach (var accommodation in accommodationList)
-            {
-                var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
-
-                foreach (var room in rooms)
-                {
-                    room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
-                    accommodation.Rooms.Add(room);
-                }
-            }
-
-            return accommodationList;
+            return await _accomodationService.NestedAccomodations();
         }
 
         // GET: api/Accomodations/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Accomodation>> GetAccomodation(int id)
         {
-            var accomodation = await _accomodationRepo.GetById(id);
+            var accomodation = await _accomodationService.NestedAccomodation(id);
 
             if (accomodation == null)
             {
