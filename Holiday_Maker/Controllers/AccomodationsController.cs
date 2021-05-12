@@ -136,26 +136,12 @@ namespace Holiday_Maker.Controllers
         [HttpPut]
         public async Task<IEnumerable<Accomodation>> Search(string country, string city)
         {
-
             var accomodation = _searchFunctionService.SearchAccomodationByCountryAndCity(country, city);
             if(accomodation !=null)
             {
                 return await accomodation.ToListAsync();
             }
             return new List<Accomodation>();
-
-           
         }
-        //public async Task<IActionResult>Search(string result)
-        //{
-        //    var accomodation = _searchFunctionService.SearchAccomodationByName(result);
-
-        //    if(accomodation !=null)
-        //    {
-        //        var resultCount = accomodation.Count();
-        //        //Koppling till front-end
-        //    }
-
-        //}
     }
 }
