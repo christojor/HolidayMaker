@@ -1,0 +1,142 @@
+body{
+    background-color: rgb(241, 241, 241);
+    margin: 0;
+}
+nav{
+    background-color: white;
+    height: 50px;
+    margin: 0;
+    border-bottom: 1px solid black;
+}
+nav a{
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+    margin-left: 76vw;
+}
+/*----------Layout----------*/
+.container1{
+    margin-left: 20vw;
+    width: 1200px;
+    height: fit-content;
+    min-height: 100%;
+}
+.container2{
+    display: inline-block;
+    width: 28%;
+    margin: 1%;
+    height: fit-content;
+    vertical-align: top;
+}
+.container3{
+    display: inline-block;
+    width: 68%;
+    margin: 1%;
+    height: fit-content;
+    vertical-align: top;
+}
+/*----------Hotel Items----------*/
+.hotel-item{
+    background-color: white;
+    margin: 10px;
+    height: 200px;
+}
+.hotel-item-img{
+    display: inline-block;
+    width: 250px;
+    height: 200px;
+}
+.hotel-item-desc{
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    font-size: 10px;
+}
+/*----------Filter List----------*/
+.filter-box{
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid black;
+}
+.search-box{
+    border-radius: 7px;
+    border-width: 1px;
+    border-style: solid;
+    margin: 7px;
+    font-size: 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+.slider-text{
+    display: inline-block;
+    margin: 0;
+    font-size: 17px;
+}
+.slider-stars{
+    margin: 0;
+}
+.price-button{
+    border: none;
+    width: 80%;
+    border-radius: 7px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 20px;
+}
+.focus{
+    border: none;
+    border-bottom: 3px solid green;
+}
+.show{
+    display: none;
+}
+.price-box{
+    background-color: transparent;
+    border: none;
+    margin: 5px;
+    font-size: 15px;
+}
+/*----------Dual Range Slider----------*/
+.range-slider {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    height: 3em;
+  }
+  
+  .range-slider svg,
+  .range-slider .dual-range {
+    position: absolute;
+    left: 10%;
+    bottom: 0;
+  }
+  .dual-range {
+    -webkit-appearance: none;
+    width: 80%;
+  }
+  /*input[type=range]*/
+  .dual-range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    background: #2497e3;
+    border-radius: 1px;
+    box-shadow: none;
+    border: 0;
+  }
+
+  .dual-range::-webkit-slider-thumb {
+    z-index: 2;
+    position: relative;
+    box-shadow: 0px 0px 0px #000;
+    border: 1px solid #2497e3;
+    height: 18px;
+    width: 18px;
+    border-radius: 25px;
+    background: #a1d0ff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -7px;
+  }
