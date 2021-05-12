@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Holiday_Maker.Models;
 using Holiday_Maker.Repository;
+using Holiday_Maker.Services;
 
 namespace Holiday_Maker.Controllers
 {
@@ -129,5 +130,32 @@ namespace Holiday_Maker.Controllers
         {
             return _context.Accomodations.Any(e => e.Id == id);
         }
+
+        private SearchFunctionService _searchFunctionService = new SearchFunctionService();
+
+        [HttpPut]
+        public async Task<IEnumerable<Accomodation>> Search(string country)
+        {
+
+            var accomodation = _searchFunctionService.SearchAccomodationByCountryAndCity(country);
+            if(accomodation !=null)
+            {
+                return await accomodation.ToListAsync();
+            }
+            return new List<Accomodation>();
+
+           
+        }
+        //public async Task<IActionResult>Search(string result)
+        //{
+        //    var accomodation = _searchFunctionService.SearchAccomodationByName(result);
+
+        //    if(accomodation !=null)
+        //    {
+        //        var resultCount = accomodation.Count();
+        //        //Koppling till front-end
+        //    }
+
+        //}
     }
 }
