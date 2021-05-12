@@ -1,5 +1,5 @@
 <template>
-    <div v-for="accomodation in getAccomodations" :key="accomodation" class="hotel-item">
+    <div v-for="accomodation in getAccomodations" :key="accomodation" class="hotel-item shadow-md">
         <img :src="accomodation.imgSrc" alt="" class="hotel-item-img">
         <div class="hotel-item-desc">
         <h1>{{accomodation.name}}</h1>

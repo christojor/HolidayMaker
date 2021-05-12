@@ -1,7 +1,7 @@
 <template>
     <div class="container1">
 
-        <div class="container2">
+        <div class="container2 shadow-md">
             <Name @filter-search="filterName"/>
             <StarRating @filter-search="filterStars"/>
             <UserRating @filter-search="filterRating"/>
