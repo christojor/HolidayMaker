@@ -4,15 +4,21 @@ body{
 }
 nav{
     background-color: white;
-    height: 50px;
+    height: 70px;
     margin: 0;
     border-bottom: 1px solid black;
+    padding-left: 20vw;
+    padding-right: 20vw;
+    text-align: right;
 }
 nav a{
     text-decoration: none;
     color: black;
     font-size: 30px;
-    margin-left: 76vw;
+    margin: 0;
+}
+aside{
+    position: absolute;
 }
 /*----------Layout----------*/
 .container1{
@@ -140,3 +146,20 @@ nav a{
     -webkit-appearance: none;
     margin-top: -7px;
   }
+
+  .theme-button{
+    border: 1px;
+    width: 200px;
+    border-radius: 7px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 18px;
+    margin: 15px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.theme-item:hover{
+    background-color: #95D5B2
+}

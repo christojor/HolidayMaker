@@ -12,6 +12,9 @@
         <h1>{{filter.PropRating}}</h1>
         <h1>{{filter.PropMinPrice}}</h1>
         <h1>{{filter.PropMaxPrice}}</h1>
+
+
+
 </template>
 
 <script>
