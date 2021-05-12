@@ -19,7 +19,7 @@
 
 export default {
 
-  created(){ // Life cycle hook - Created, Mounted, Updated, Destroyed
+  created(){ // Life cycle hook - Created, Mounted, Updated, Destroyed. PS. Benjamin gör mig arg.
 
   // Anropar async action i store, som sedan anropar mutation getAccomodationsData som sedan uppdaterar accomodations property i state
       this.$store.dispatch('getAccomodations');
@@ -28,12 +28,15 @@ export default {
 
   computed: {
 
+    // Calculated properties that can also be used to get and manipulate data from store
+
     text(){
 
-    // En simpel kodrad för att komma åt en data-variabel i state.
-    // OBS - Glöm inte $-tecknet, och att en computed ALLTID måste returnera ett värde!
+    let text = this.$store.state.text;
 
-      return this.$store.state.text;
+    text += " - Text added to property value from store."
+
+      return text
 
     },
     headline(){
@@ -59,12 +62,12 @@ export default {
     // att användas när mutationen updaterar data-variablen i state. Den kan vara av vilken datatyp som helst, 
     // men den måste ju stämma överens med den avsedda data-variablen i state.
 
-      this.$store.commit('changeText', 'Changed');
+      this.$store.commit('changeText', 'Changed'); // Commit used for calling mutations in store
 
     },
     getAccomodations(){
 
-      this.$store.dispatch('getAccomodations');
+      this.$store.dispatch('getAccomodations'); // Dispatch used for calling actions in store
 
     }
 
