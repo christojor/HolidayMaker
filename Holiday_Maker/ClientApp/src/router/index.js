@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import API from '/src/components/API.vue'
+import Searchbar from '/src/components/Searchbar.vue'
 const routes = [
     {
-        path: '/API',
-        name: 'API',
-        component: API,
+        path: '/Searchbar',
+        name: 'Searchbar',
+        component: Searchbar,
     }
 ]
 const router = createRouter({
