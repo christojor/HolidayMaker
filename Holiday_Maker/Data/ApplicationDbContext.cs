@@ -23,6 +23,7 @@ namespace Holiday_Maker.Models
         public virtual DbSet<Extra> Extras { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomType> RoomTypes { get; set; }
+        public virtual DbSet<UserFavorite> UserFavorites { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -141,10 +142,18 @@ namespace Holiday_Maker.Models
                     .HasMaxLength(50);
             });
 
+            modelBuilder.Entity<UserFavorite>(entity =>
+            {
+                entity.ToTable("UserFavorite");
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.GroupName).HasMaxLength(50);
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
-
