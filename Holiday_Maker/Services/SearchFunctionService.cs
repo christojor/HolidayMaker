@@ -45,16 +45,18 @@ namespace Holiday_Maker.Services
             }
             return accomodations;
         }
-        public IQueryable<Accomodation>SearchAccomodationByCountryAndCity(string country)
+        public IQueryable<Accomodation>SearchAccomodationByCountryAndCity(string country, string city)
         {
             var accomodations = _accomodationRepository.GetAllRaw();
 
             if(accomodations.Any(s=>s.Country.Equals(country)))
             {
-                //if(accomodations.Any(s=>s.City.Equals(city)))
-                //{
-                    accomodations = accomodations.Where(s => s.Country.Contains(country));
-               // }
+                accomodations = accomodations.Where(s => s.Country.Contains(country));
+            
+                if (accomodations.Any(s => s.City.Equals(city)))
+                {
+                    accomodations = accomodations.Where(s => s.City.Contains(city));
+                }
             }
             else
             {
