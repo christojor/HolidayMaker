@@ -1,6 +1,5 @@
 body{
-    background-color: rgb(241, 241, 241);
-    margin: 0;
+    height: 100%;
 }
 nav{
     background-color: white;
@@ -79,10 +78,14 @@ nav a{
 .price-button{
     border: none;
     width: 80%;
+    height: fit-content;
     border-radius: 7px;
     background-color: transparent;
     font-family: inherit;
     font-size: 20px;
+}
+.price-button:focus{
+    outline: none;
 }
 .focus{
     border: none;

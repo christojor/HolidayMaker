@@ -1,7 +1,7 @@
 <template>
     <div class="container1">
 
-        <div class="container2 shadow-md">
+        <div class="container2 shadow-md bg-green-1">
             <Name @filter-search="filterName"/>
             <StarRating @filter-search="filterStars"/>
             <UserRating @filter-search="filterRating"/>
@@ -61,7 +61,6 @@ export default{
             this.filter.PropRating = this.filter.PropRating
             this.filter.PropMinPrice = filter.PropMinPrice
             this.filter.PropMaxPrice = filter.PropMaxPrice
-            console.log(filter)
         }
     },
     data() {

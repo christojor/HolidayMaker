@@ -19,16 +19,14 @@
             </span>
         </button>
 
-        <div class="range-slider">
-            <div :class="{show: !toggle}">
+        <div class="range-slider"  :class="{show: !toggle}">
             
-                <input @change="slider" v-model.number="PropMinPrice" min="0" max="10000" step="500" type="range" class="dual-range"/>
-                <input @change="slider" v-model.number="PropMaxPrice" min="0" max="10000" step="500" type="range" class="dual-range"/>
-                
-                <svg width="80%" height="24">
-                    <line x1="4" y1="0" x2="300" y2="0" stroke="#444" stroke-width="12" stroke-dasharray="1 28"></line>
-                </svg>
-            </div>
+            <input @change="slider" v-model.number="PropMinPrice" min="0" max="10000" step="500" type="range" class="dual-range"/>
+            <input @change="slider" v-model.number="PropMaxPrice" min="0" max="10000" step="500" type="range" class="dual-range"/>
+            
+            <svg width="80%" height="24">
+                <line x1="4" y1="0" x2="300" y2="0" stroke="#444" stroke-width="12" stroke-dasharray="1 28"></line>
+            </svg>
         </div>
     </div>
 </template>
@@ -55,8 +53,8 @@ export default{
             }
 
             let filter = {
-                    PropMinPrice: this.PropMinPrice,
-                    PropMaxPrice: this.PropMaxPrice
+                PropMinPrice: this.PropMinPrice,
+                PropMaxPrice: this.PropMaxPrice
             }
 
             this.$emit('filter-search', filter);
