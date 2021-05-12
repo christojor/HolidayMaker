@@ -34,10 +34,7 @@ const store = createStore({
         text: "Unchanged",
         headline: "Welcome to our awesome website!",
         information: "This is just some random text.",
-        accomodations: [
-            { id: '1', name: 'user 1',},
-            { id: '2', name: 'user 2',},
-          ]
+        accomodations: []
    },
 
    // Methods for changing states synchronously
