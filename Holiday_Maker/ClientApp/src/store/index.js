@@ -1,31 +1,5 @@
 import { createStore } from "vuex" 
 
-// const state = {
-
-//     text: "Unchanged"
-
-// }
-
-
-// const mutations = {
-
-//   // state här nedan (in-argument) är hela state-objektet ovan fast samlat i en variabeln som mutationen använder 
-//   // för att updatera de olika data-variablerna i state-objektet.
-//   // In-argumentet value är helt enkelt det nya värdet man vill uppdatera data-variablen i state-objektet med.
-//   // Detta värdet skickar men med ifrån komponenten.
-
-//     changeText(state, value){
-
-//       state.text = value;
-
-//     }
-
-// }
-
-//  export default createStore({state, mutations})
-
-///////////////////////////////////////////////////////////////////////////////////////
-
 const store = createStore({
 
     // Properties
