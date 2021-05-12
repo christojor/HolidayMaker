@@ -133,7 +133,7 @@ namespace Holiday_Maker.Controllers
 
         private SearchFunctionService _searchFunctionService = new SearchFunctionService();
 
-        [HttpPut]
+        [HttpGet("search")]
         public async Task<IEnumerable<Accomodation>> Search(string country, string city)
         {
             var accomodation = _searchFunctionService.SearchAccomodationByCountryAndCity(country, city);
