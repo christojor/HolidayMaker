@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Hotels from '/src/components/pages/Hotels.vue'
+import Searchbar from '/src/components/Searchbar.vue'
 const routes = [
     {
-        path: '/hotels',
-        name: 'Hotels',
-        component: Hotels,
+        path: '/Searchbar',
+        name: 'Searchbar',
+        component: Searchbar,
     }
 ]
 const router = createRouter({
