@@ -4,7 +4,7 @@
         <form @submit.prevent="handleSubmit">
             <input hidden>
             <input type="text" class="search-box" v-model="PropName">
-            <button hidden>Submit</button>
+            <button hidden></button>
         </form>
     </div>
 </template>
@@ -21,7 +21,6 @@ export default{
             let filter = {
                 PropName: this.PropName
             }
-            console.log("shit")
             this.$emit('filter-search', filter);
         }
     },

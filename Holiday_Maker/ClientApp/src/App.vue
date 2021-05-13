@@ -1,10 +1,19 @@
 <template>
-    <nav class="bg-green-1">
-        <a href="/hotels">Hotels</a>
-    </nav>
-    <body class="bg-green-2">
+    <NavBar/>
+    <body>
         <router-view/>
     </body>
 </template>
+
+<script>
+import NavBar from '/src/components/NavBar.vue'
+
+export default{
+    components: {
+        NavBar,
+    },
+}
+</script>
+
 
 <style src="./assets/style.css"></style>
