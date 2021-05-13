@@ -12,7 +12,8 @@ nav a{
     text-decoration: none;
     color: black;
     font-size: 30px;
-    margin-left: 76vw;
+    margin-left: 10vw;
+    text-align: center;
 }
 /*----------Layout----------*/
 .container1{
