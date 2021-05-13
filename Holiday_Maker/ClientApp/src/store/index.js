@@ -8,6 +8,7 @@ const store = createStore({
         text: "Unchanged",
         headline: "Welcome to our awesome website!",
         information: "This is just some random text.",
+        message: 'Hello Vuex',
         accomodations: []
    },
 
@@ -31,6 +32,9 @@ const store = createStore({
         state.accomodations = payload;
   
       },
+      updateMessage (state, message) {
+        state.message = message
+    },
 
    },
 
