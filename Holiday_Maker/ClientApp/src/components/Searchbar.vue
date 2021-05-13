@@ -32,15 +32,6 @@
                 Search
             </button>
         </div>
-    <div style="position:relative;top:10px">
-        <h2>results</h2>
-        <p>Destination is: {{destination}}</p>
-        <p>check in date is {{check_in}}</p>
-        <p>check out date is {{check_out}}</p>
-        <p>nunber of guests: {{selected}}</p>
-        <a @click="search">Klicka här mögröv</a>
-        <p>resultat är {{response}}</p>
-    </div>
 </template>
 
 <script>
