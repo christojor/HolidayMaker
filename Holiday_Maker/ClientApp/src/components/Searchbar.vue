@@ -15,20 +15,32 @@
                         <p>Check out date</p>
                         <input class="rounded" ref="check_out" v-model="check_out" type="date" style="margin:2%">
                     </div>
-                    <!---<div class="border-8 border-solid rounded" style="background-color:#74C69D;border-color:#1b4332;flex:1">
-                        <select class="rounded" v-model="selected" style="margin-top:5.5%">
+                    <div class="border-8 border-solid rounded" style="background-color:#74C69D;border-color:#1b4332;flex:1;justify-content:center">
+                        <select class="rounded" v-model="selected" style="margin-top:5.5%;">
                             <option disabled value="">Number of guests</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
                         </select>
-                    </div>--->
+                    </div>      
+                </div>
+                <div class="flex flex-row flex-wrap gap-2" style="display:flex;justify-content:center;text-align:center;align-items:center;padding:1em">
+                    <div class="border-2 rounded" style="padding-left:1em;padding-right:1em">
+                        <label for="beachslider" style="padding-right:1em">Distance to beach</label>
+                        <input id="beechslider" type="range" min="50" v-model="distanceToBeech" max="1000" step="50" style="flex:1" @change="outputUpdate">
+                        <output for="beechslider" :value="500 + ' m'">{{distanceToBeech}}</output>
+                    </div>
+                    <div class="border-2 rounded" style="padding-left:1em;padding-right:1em">
+                        <label for="cityslider" style="padding-right:1em">Distance to city center</label>
+                        <input id="cityslider" type="range" min="50" v-model="distanceToCity" max="1000" step="50" style="flex:1" @change="outputUpdate">
+                        <output for="cityslider" :value="500 + ' m'">{{distanceToCity + " m"}}</output>
+                    </div>
                 </div>
                 
             </form>
         </div>
         <div>
-            <button @click.prevent="search()" class="rounded-full border-2 border-green-800" style="position:relative;top:10px;width:20em;">
+            <button @click="search()" class="rounded-full border-2 border-green-800" style="position:relative;top:10px;width:20em;">
                 Search
             </button>
         </div>
@@ -36,6 +48,13 @@
 
 <script>
 export default {
+    data()
+    {
+        return{
+            distanceToCity: 500,
+            distanceToBeech: 500
+        }
+    },
     methods:{
         async search()
         {
@@ -48,7 +67,8 @@ export default {
             let respone = await rawResponse.json()
             console.log(respone)
 
-        }
+        },
+
     },
     data() {
 
