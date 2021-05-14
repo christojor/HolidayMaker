@@ -1,8 +1,8 @@
 <template>
-    <NavBar/>
-    <body>
-        <router-view/>
-    </body>
+    <nav>
+        <a href="/hotels">Hotels</a>
+    </nav>
+    <router-view/>
 </template>
 
 <script>
@@ -17,3 +17,13 @@ export default{
 
 
 <style src="./assets/style.css"></style>
+
+<script>
+import NavBar from '/src/components/NavBar.vue'
+
+export default{
+    components: {
+        NavBar
+    },
+}
+</script>
