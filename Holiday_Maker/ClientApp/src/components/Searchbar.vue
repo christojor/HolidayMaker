@@ -28,7 +28,7 @@
                     <div class="border-2 rounded" style="padding-left:1em;padding-right:1em">
                         <label for="beachslider" style="padding-right:1em">Distance to beach</label>
                         <input id="beechslider" type="range" min="50" v-model="distanceToBeech" max="1000" step="50" style="flex:1" @change="outputUpdate">
-                        <output for="beechslider" :value="500 + ' m'">{{distanceToBeech}}</output>
+                        <output for="beechslider" :value="500 + ' m'">{{distanceToBeech + " m"}}</output>
                     </div>
                     <div class="border-2 rounded" style="padding-left:1em;padding-right:1em">
                         <label for="cityslider" style="padding-right:1em">Distance to city center</label>
