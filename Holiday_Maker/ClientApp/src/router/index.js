@@ -13,6 +13,7 @@ const routes = [
         name: 'StoreTest',
         component: StoreTest,
     },
+    {
         path: '/Searchbar',
         name: 'Searchbar',
         component: Searchbar,
