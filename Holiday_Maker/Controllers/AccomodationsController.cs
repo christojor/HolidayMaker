@@ -146,5 +146,12 @@ namespace Holiday_Maker.Controllers
         {
             return await _roomService.NestedRooms();
         }
+
+
+        [HttpGet("accomodation/rooms/{id}")]
+        public async Task<IEnumerable<Room>> GetRoomsAccomodation(int id)
+        {
+            return await _roomService.NestedRoomsByAccomodationId(id);
+        }
     }
 }
