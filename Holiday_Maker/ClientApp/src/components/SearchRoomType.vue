@@ -3,16 +3,16 @@
         <div class="multipleSelection drop-box">
             <div class="selectBox" @click="toggledisplay">
                     <select>
-                        <option>Select extras</option>
+                        <option>Select room type</option>
                     </select>
                     <div class="overSelect"></div>
             </div>
 
             <div :class="{show : toggle}" id="checkboxes" @click="handleSubmit">
                 
-                <div v-for="Extra in Extras" :key="Extra" class="flex items-center">
-                    <input type="checkbox" :id="Extra.Extra" v-model="Extra.Checked"/>
-                    <label :for="Extra.Extra">&nbsp;{{Extra.Extra}}</label>
+                <div v-for="Rooms in RoomTypes" :key="Rooms" class="flex items-center">
+                    <input type="checkbox" :id="Rooms.Type" v-model="Rooms.Checked"/>
+                    <label :for="Rooms.Type">&nbsp;{{Rooms.Type}}</label>
                 </div>
             </div>
         </div>
@@ -25,14 +25,11 @@ export default{
     data(){
         return{
             toggle: true,
-            Extras: [
-                {Extra: 'Self-Catering', Checked: false},
-                {Extra: 'Halfboard', Checked: false},
-                {Extra: 'Fullboard', Checked: false},
-                {Extra: 'All-Inclusive', Checked: false},
-                {Extra: 'Breakfast', Checked: false},
-                {Extra: 'ExtraBed', Checked: false},
-                {Extra: 'Crib', Checked: false},
+            RoomTypes: [
+                {Type: 'Single', Checked: false},
+                {Type: 'Doubble', Checked: false},
+                {Type: 'Suite', Checked: false},
+                {Type: 'Shared', Checked: false},
             ],
         }
     },
@@ -41,8 +38,9 @@ export default{
             this.toggle=!this.toggle
         },
         handleSubmit(){
+            
             let filter = {
-                PropExtras: this.Extras
+                PropRooms: this.RoomTypes
             }
             
             this.$emit('filter-search', filter);

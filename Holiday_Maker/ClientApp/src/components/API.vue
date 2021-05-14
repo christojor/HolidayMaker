@@ -2,17 +2,19 @@
     <div v-for="accomodation in getAccomodations" :key="accomodation" class="hotel-item shadow-md">
         <img :src="accomodation.imgSrc" alt="" class="hotel-item-img">
         <div class="hotel-item-desc">
-        <h1>{{accomodation.name}}</h1>
-        <h1>{{accomodation.description}}</h1>
+            <h1>{{accomodation.name}}</h1>
+            <h1>{{accomodation.description}}</h1>
         </div>
     </div>
-        
-        <h1>{{filter.PropName}}</h1>
-        <h1>{{filter.PropStars}}</h1>
-        <h1>{{filter.PropRating}}</h1>
-        <h1>{{filter.PropMinPrice}}</h1>
-        <h1>{{filter.PropMaxPrice}}</h1>
-        <h1 v-for="Extra in filter.PropExtras" :key="Extra"><h1 v-if="Extra.Checked == true">{{Extra.Extra}}</h1></h1>
+
+    <h1>{{filter.PropName}}</h1>
+    <h1>{{filter.PropStars}}</h1>
+    <h1>{{filter.PropRating}}</h1>
+    <h1>{{filter.PropMinPrice}}</h1>
+    <h1>{{filter.PropMaxPrice}}</h1>
+    <h1 v-for="Extra in filter.PropExtras" :key="Extra"><h1 v-if="Extra.Checked == true">{{Extra.Extra}}</h1></h1>
+    <h1 v-for="Rooms in filter.PropRooms" :key="Rooms"><h1 v-if="Rooms.Checked == true">{{Rooms.Type}}</h1></h1>
+    <h1 v-for="Ameniti in filter.PropAmanities" :key="Ameniti"><h1 v-if="Ameniti.Checked == true">{{Ameniti.Ameniti}}</h1></h1>
 </template>
 
 <script>
