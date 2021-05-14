@@ -13,6 +13,7 @@
         <h1>{{filter.PropMinPrice}}</h1>
         <h1>{{filter.PropMaxPrice}}</h1>
         <h1 v-for="Extra in filter.PropExtras" :key="Extra"><h1 v-if="Extra.Checked == true">{{Extra.Extra}}</h1></h1>
+        <h1 v-for="Rooms in filter.PropRooms" :key="Rooms"><h1 v-if="Rooms.Checked == true">{{Rooms.Type}}</h1></h1>
 </template>
 
 <script>
