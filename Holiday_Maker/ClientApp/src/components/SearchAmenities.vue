@@ -3,16 +3,16 @@
         <div class="multipleSelection drop-box">
             <div class="selectBox" @click="toggledisplay">
                     <select>
-                        <option>Select extras</option>
+                        <option>Select Amenities</option>
                     </select>
                     <div class="overSelect"></div>
             </div>
 
             <div :class="{show : toggle}" id="checkboxes" @click="handleSubmit">
                 
-                <div v-for="Extra in Extras" :key="Extra" class="flex items-center">
-                    <input type="checkbox" id="first" v-model="Extra.Checked"/>
-                    <label for="first">&nbsp;{{Extra.Extra}}</label>
+                <div v-for="Ameniti in Amenities" :key="Ameniti" class="flex items-center">
+                    <input type="checkbox" :id="Ameniti.Ameniti" v-model="Ameniti.Checked"/>
+                    <label :for="Ameniti.Ameniti">&nbsp;{{Ameniti.Ameniti}}</label>
                 </div>
             </div>
         </div>
@@ -25,14 +25,14 @@ export default{
     data(){
         return{
             toggle: true,
-            Extras: [
-                {Extra: 'Self-Catering', Checked: false},
-                {Extra: 'Halfboard', Checked: false},
-                {Extra: 'Fullboard', Checked: false},
-                {Extra: 'All-Inclusive', Checked: false},
-                {Extra: 'Breakfast', Checked: false},
-                {Extra: 'ExtraBed', Checked: false},
-                {Extra: 'Crib', Checked: false},
+            Amenities: [
+                {Ameniti: 'Entertainment', Checked: false},
+                {Ameniti: 'Resturants', Checked: false},
+                {Ameniti: 'WiFi', Checked: false},
+                {Ameniti: 'Pool', Checked: false},
+                {Ameniti: 'Gym', Checked: false},
+                {Ameniti: 'KidClub', Checked: false},
+                
             ],
         }
     },
@@ -42,7 +42,7 @@ export default{
         },
         handleSubmit(){
             let filter = {
-                PropExtras: this.Extras
+                PropAmeniti: this.Amenities
             }
             
             this.$emit('filter-search', filter);
