@@ -42,7 +42,7 @@ export default{
         },
         handleSubmit(){
             let filter = {
-                PropAmeniti: this.Amenities
+                PropAmenities: this.Amenities
             }
             
             this.$emit('filter-search', filter);
