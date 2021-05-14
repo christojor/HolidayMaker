@@ -34,8 +34,8 @@
 export default{
     data() {
         return {
-            PropMinPrice: "500",
-            PropMaxPrice: "10000",
+            PropMinPrice: 500,
+            PropMaxPrice: 10000,
             hover: true,
         }
     },

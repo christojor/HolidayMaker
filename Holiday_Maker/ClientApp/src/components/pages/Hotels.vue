@@ -12,7 +12,7 @@
         </div>
 
         <div class="container3 shadow-md bg-green-1">
-            <API :filter="filter" :getAccomodations="getAccomodations"/>
+            <API/>
         </div>
 
     </div>
@@ -28,9 +28,6 @@ import Extras from "/src/components/SearchExtras.vue"
 import Themes from "/src/components/Themes.vue"
 import Amenities from "/src/components/SearchAmenities.vue"
 import RoomType from "/src/components/SearchRoomType.vue"
-
-    let rawResponse = await fetch('https://localhost:44323/api/accomodations');
-    let getAccomodations = await rawResponse.json();
 
 export default{
     components: {
@@ -64,6 +61,8 @@ export default{
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
             this.filter.PropRooms = this.filter.PropRooms
+
+            this.filterList(this.filter)
         },
         filterRating(filter){
             this.filter.PropName = this.filter.PropName
@@ -74,6 +73,8 @@ export default{
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
             this.filter.PropRooms = this.filter.PropRooms
+
+            this.filterList(this.filter)
         },
         filterPrice(filter){
             this.filter.PropName = this.filter.PropName
@@ -84,6 +85,8 @@ export default{
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
             this.filter.PropRooms = this.filter.PropRooms
+
+            this.filterList(this.filter)
         },
         filterExtras(filter){
             this.filter.PropName = this.filter.PropName
@@ -114,8 +117,10 @@ export default{
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
             this.filter.PropRooms = filter.PropRooms
+        },
+        filterList(filter){
+            this.$store.commit("updateFilter", filter)
         }
-    
     },
     data() {
         return{
@@ -128,9 +133,11 @@ export default{
                 PropExtras: [],
                 PropAmenities: [],
                 PropRooms: [],
-            },
-            getAccomodations
+            }
         }
-    }
+    },
+    created() {
+    this.$store.dispatch("getAccomodations");
+  },
 }
 </script>

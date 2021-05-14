@@ -44,9 +44,7 @@
             </form>
         </div>
         <div style="width:100vw; text-align:center">
-            <button @click="search" class="rounded-full border-2" style="top:10px;width:20em;background-color:white;">
-                Search
-            </button>
+            <button @click="search" class="rounded-full border-2" style="top:10px;width:20em;background-color:white;">Search</button>
         </div>
 </template>
 
@@ -66,14 +64,13 @@ export default {
     methods:{
         async search()
         {
-            var presplit = this.$refs.destination.value
+            var presplit = this.destination
             var splitted = presplit.split(" ")
             console.log(splitted)
 
             let rawResponse = await fetch('https://localhost:44323/api/Accomodations/search?country=' + splitted[0] + '&city=' + splitted[1])
-            console.log(rawResponse)
-            let respone = await rawResponse.json()
-            console.log(respone)
+            let response = await rawResponse.json()
+            console.log(response)
 
         },
     }
