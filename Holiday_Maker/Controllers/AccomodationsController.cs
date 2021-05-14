@@ -21,6 +21,7 @@ namespace Holiday_Maker.Controllers
         private readonly IGenericRepository<RoomType> _roomTypeRepo;
 
         private readonly AccomodationService _accomodationService;
+        private readonly RoomService _roomService;
 
         public AccomodationsController(ApplicationDbContext context)
         {
@@ -33,6 +34,7 @@ namespace Holiday_Maker.Controllers
 
             // Services
             _accomodationService = new AccomodationService();
+            _roomService = new RoomService();
             
         }
 
@@ -131,6 +133,18 @@ namespace Holiday_Maker.Controllers
                 return await accomodation.ToListAsync();
             }
             return NotFound();
+        }
+
+        [HttpGet("rooms/{id}")]
+        public async Task<Room> GetRoom(int id)
+        {
+            return await _roomService.NestedRoom(id);
+        }
+
+        [HttpGet("rooms")]
+        public async Task<IEnumerable<Room>> GetRooms()
+        {
+            return await _roomService.NestedRooms();
         }
     }
 }
