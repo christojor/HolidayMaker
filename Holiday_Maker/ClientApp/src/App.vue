@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <a href="/hotels">Hotels</a>
+        <NavBar/>
     </nav>
     <router-view/>
 </template>
@@ -15,15 +15,4 @@ export default{
 }
 </script>
 
-
 <style src="./assets/style.css"></style>
-
-<script>
-import NavBar from '/src/components/NavBar.vue'
-
-export default{
-    components: {
-        NavBar
-    },
-}
-</script>
