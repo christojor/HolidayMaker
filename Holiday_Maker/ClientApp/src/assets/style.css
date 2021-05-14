@@ -24,7 +24,7 @@ aside{
 /*----------Layout----------*/
 .container1{
     margin-left: 20vw;
-    width: 1200px;
+    width: 1150px;
     height: fit-content;
     min-height: 100%;
 }
@@ -156,7 +156,7 @@ h1 {
     color: green;
 }
 .multipleSelection {
-    width: 300px;
+    width: 100%;
     background-color: #ffffff;
 }
 .selectBox {
