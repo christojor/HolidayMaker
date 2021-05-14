@@ -122,12 +122,10 @@ namespace Holiday_Maker.Controllers
             return _context.Accomodations.Any(e => e.Id == id);
         }
 
-        private SearchFunctionService _searchFunctionService = new SearchFunctionService();
-
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<Accomodation>>> Search(string country, string city)
         {
-            var accomodation = _searchFunctionService.SearchAccomodationByCountryAndCity(country, city);
+            var accomodation = _accomodationService.SearchAccomodationByCountryAndCity(country, city);
             if(accomodation !=null)
             {
                 return await accomodation.ToListAsync();

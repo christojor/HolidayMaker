@@ -74,6 +74,53 @@ namespace Holiday_Maker.Services
             return accommodation;
 
         }
+        public IQueryable<Accomodation> SearchAccomodationById(int Id)
+        {
+            var accomodations = _accomodationRepo.GetAllRaw();
+
+            if (accomodations.Any(s => s.AccomodationTypeId.Equals(Id)))
+            {
+                accomodations = accomodations.Where(s => s.AccomodationTypeId.Equals(Id));
+            }
+            else
+            {
+                accomodations = null;
+            }
+            return accomodations;
+        }
+        public IQueryable<Accomodation> SearchAccomodationByName(string keyWord)
+        {
+            var accomodations = _accomodationRepo.GetAllRaw();
+
+            if (accomodations.Any(s => s.Name.Contains(keyWord)))
+            {
+                accomodations = accomodations.Where(s => s.Name.Contains(keyWord));
+            }
+            else
+            {
+                accomodations = null;
+            }
+            return accomodations;
+        }
+        public IQueryable<Accomodation> SearchAccomodationByCountryAndCity(string country, string city)
+        {
+            var accomodations = _accomodationRepo.GetAllRaw();
+
+            if (accomodations.Any(s => s.Country.Equals(country)))
+            {
+                accomodations = accomodations.Where(s => s.Country.Contains(country));
+
+                if (accomodations.Any(s => s.City.Equals(city)))
+                {
+                    accomodations = accomodations.Where(s => s.City.Contains(city));
+                }
+            }
+            else
+            {
+                accomodations = null;
+            }
+            return accomodations;
+        }
 
     }
 }
