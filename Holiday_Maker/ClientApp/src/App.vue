@@ -1,11 +1,19 @@
 <template>
-  <nav>
-    <div>
-        <a href="/hotels">Hotels</a>
-        <a href="/storetest">StoreTest</a>
-    </div>
-  </nav>
-  <router-view />
+    <NavBar/>
+
+    <body>
+        <router-view/>
+    </body>
 </template>
+
+<script>
+import NavBar from '/src/components/NavBar.vue'
+
+export default{
+    components: {
+        NavBar,
+    },
+}
+</script>
 
 <style src="./assets/style.css"></style>
