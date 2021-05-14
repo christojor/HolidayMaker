@@ -9,6 +9,12 @@
       <li>
         <b>{{ accomodation.id }}. {{ accomodation.name }}</b>
         <img :src="accomodation.imgSrc" style="width: 25%; height: auto" />
+        <h1>
+          <button @click="goToAccommodation(accomodation.id)">
+            <b>Go to Details</b>
+          </button>
+        </h1>
+
         <br />
       </li>
     </ul>
@@ -66,6 +72,12 @@ export default {
     },
     getAccomodations() {
       this.$store.dispatch("getAccomodations"); // Dispatch used for calling actions in store
+    },
+    goToAccommodation(accommodationId) {
+      this.$router.push({
+        name: "Accommodation",
+        params: { id: accommodationId },
+      });
     },
   },
 };
