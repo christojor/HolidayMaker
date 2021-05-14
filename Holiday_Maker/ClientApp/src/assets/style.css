@@ -15,10 +15,11 @@ nav a{
     text-decoration: none;
     color: black;
     font-size: 30px;
-    margin-left: 76vw;
+    margin: 0;
 }
 aside{
     position: absolute;
+    left: 20vw;
 }
 /*----------Layout----------*/
 .container1{
@@ -112,23 +113,22 @@ aside{
 .range-slider {
     width: 100%;
     margin: auto;
-    margin-bottom: 0;
     text-align: center;
     position: relative;
     height: 3em;
-}
-
-.range-slider svg,
-.range-slider .dual-range {
+  }
+  
+  .range-slider svg,
+  .range-slider .dual-range {
     position: absolute;
     left: 10%;
     bottom: 0;
-}
-.dual-range {
+  }
+  .dual-range {
     -webkit-appearance: none;
     width: 80%;
-}
-.dual-range::-webkit-slider-runnable-track {
+  }
+  .dual-range::-webkit-slider-runnable-track {
     width: 100%;
     height: 5px;
     cursor: pointer;
@@ -136,9 +136,9 @@ aside{
     border-radius: 1px;
     box-shadow: none;
     border: 0;
-}
+  }
 
-.dual-range::-webkit-slider-thumb {
+  .dual-range::-webkit-slider-thumb {
     z-index: 2;
     position: relative;
     box-shadow: 0px 0px 0px #000;
@@ -151,3 +151,64 @@ aside{
     -webkit-appearance: none;
     margin-top: -7px;
   }
+/*-------------- Dropdowncheckboxes-----------*/
+h1 {
+    color: green;
+}
+.multipleSelection {
+    width: 300px;
+    background-color: #ffffff;
+}
+.selectBox {
+    position: relative;
+}
+.selectBox select {
+    width: 100%;
+    font-weight: bold;
+}
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+#checkBoxes {
+    display: none;
+    border: 1px #8DF5E4 solid;
+}
+#checkBoxes label {
+    display: block;
+}
+#checkBoxes label:hover {
+    background-color: #ffffff;
+}
+/*-----------------Theme Button---------------*/
+  .theme-button{
+    border: 1px;
+    width: 200px;
+    border-radius: 7px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 18px;
+    margin: 15px;
+    margin-bottom: 0;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid black;
+}
+.theme-button:focus{
+    outline: none;
+}
+.theme-item:hover{
+    background-color: #95D5B2
+}
+.content {
+    right: 20vw;
+    margin-right: 15px;
+    width: 200px;
+    text-align: center;
+}
+.content-link{
+    font-size: 17px;
+}
