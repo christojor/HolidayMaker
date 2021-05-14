@@ -21,11 +21,10 @@ const routes = [
         name: "Accommodation",
         component: Accommodation,
         props: true,
-      },
-      {
-  path: "/:catchAll(.*)",
-  component: NotFound,
-},
+    },
+    {
+        path: "/:catchAll(.*)",
+        component: NotFound,
     },
     {
         path: '/searchbar',
