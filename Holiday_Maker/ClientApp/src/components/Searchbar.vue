@@ -44,7 +44,7 @@
             </form>
         </div>
         <div style="width:100vw; text-align:center">
-            <button @click="search" class="rounded-full border-2" style="top:10px;width:20em;">
+            <button @click="search" class="rounded-full border-2" style="top:10px;width:20em;background-color:white;">
                 Search
             </button>
         </div>

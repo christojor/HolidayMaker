@@ -14,14 +14,9 @@ const routes = [
         component: StoreTest,
     },
     {
-        path: '/Searchbar',
+        path: '/searchbar',
         name: 'Searchbar',
         component: Searchbar,
-    },
-    {
-        path: '/Hotels',
-        name: 'Hotels',
-        component: Hotels,
     }
 ]
 const router = createRouter({
