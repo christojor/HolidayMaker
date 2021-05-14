@@ -6,6 +6,11 @@ const routes = [
         path: '/Searchbar',
         name: 'Searchbar',
         component: Searchbar,
+    },
+    {
+        path: '/Hotels',
+        name: 'Hotels',
+        component: Hotels,
     }
 ]
 const router = createRouter({

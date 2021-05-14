@@ -1,22 +1,27 @@
 <template>
-        <div class="border-4 border-solid rounded border-black" style="">
+        <div class="rounded search-dest-box" style="">
 
             <h class="text-2xl">Search for hotels</h>
             <form>
-                <div class="border-0 border-green-400 border-solid rounded flex flex-row flex-wrap gap-3" style="place-items:center;align-items:stretch;">
-                    <div class="border-8 border-solid rounded content-end" style="background-color:#74C69D;border-color:#1b4332;flex:1;">
-                        <input v-model="destination" class="rounded-t1-sm" ref="destination" type="text" placeholder="Enter your destination" style="magin:auto;display:inline-block;margin-top:5.5%">
+                <div class="rounded flex flex-row flex-wrap gap-3">
+                    <div class="rounded bg-green-3 search-div">
+                        <p>Destination</p>
+                        <input class="rounded search-input" v-model="destination" type="text" placeholder="Enter your destination">
                     </div>
-                    <div class="border-8 border-solid rounded" style="background-color:#74C69D;border-color:#1b4332;flex:1;">
+                    
+                    <div class="rounded bg-green-3 search-div">
                         <p>Check in date</p>
-                        <input class="rounded" ref="check_in" v-model="check_in" type="date">
+                        <input class="rounded search-input" ref="check_in" v-model="check_in" type="date">
                     </div>
-                    <div class="border-8 border-solid rounded" style="background-color:#74C69D;border-color:#1b4332;flex:1">
+                    
+                    <div class="rounded bg-green-3 search-div">
                         <p>Check out date</p>
-                        <input class="rounded" ref="check_out" v-model="check_out" type="date" style="margin:2%">
+                        <input class="rounded search-input" ref="check_out" v-model="check_out" type="date">
                     </div>
-                    <div class="border-8 border-solid rounded" style="background-color:#74C69D;border-color:#1b4332;flex:1;justify-content:center">
-                        <select class="rounded" v-model="selected" style="margin-top:5.5%;">
+                    
+                    <div class="rounded bg-green-3 search-div">
+                        <p>Guests</p>
+                        <select class="rounded search-input" v-model="selected">
                             <option disabled value="">Number of guests</option>
                             <option>1</option>
                             <option>2</option>
@@ -24,23 +29,22 @@
                         </select>
                     </div>      
                 </div>
-                <div class="flex flex-row flex-wrap gap-2" style="display:flex;justify-content:center;text-align:center;align-items:center;padding:1em">
+                <div class="flex flex-row flex-wrap gap-2" style="justify-content:center;padding:1em">
                     <div class="border-2 rounded" style="padding-left:1em;padding-right:1em">
                         <label for="beachslider" style="padding-right:1em">Distance to beach</label>
-                        <input id="beechslider" type="range" min="50" v-model="distanceToBeech" max="1000" step="50" style="flex:1" @change="outputUpdate">
-                        <output for="beechslider" :value="500 + ' m'">{{distanceToBeech}}</output>
+                        <input id="beechslider" type="range" min="50" v-model="distanceToBeech" max="1000" step="50" style="flex:1">
+                        <output for="beechslider" :value="500 + ' m'">{{distanceToBeech}} m</output>
                     </div>
                     <div class="border-2 rounded" style="padding-left:1em;padding-right:1em">
                         <label for="cityslider" style="padding-right:1em">Distance to city center</label>
-                        <input id="cityslider" type="range" min="50" v-model="distanceToCity" max="1000" step="50" style="flex:1" @change="outputUpdate">
-                        <output for="cityslider" :value="500 + ' m'">{{distanceToCity + " m"}}</output>
+                        <input id="cityslider" type="range" min="50" v-model="distanceToCity" max="1000" step="50" style="flex:1">
+                        <output for="cityslider" :value="500 + ' m'">{{distanceToCity}} m</output>
                     </div>
                 </div>
-                
             </form>
         </div>
-        <div>
-            <button @click="search()" class="rounded-full border-2 border-green-800" style="position:relative;top:10px;width:20em;">
+        <div style="width:100vw; text-align:center">
+            <button @click="search" class="rounded-full border-2" style="top:10px;width:20em;">
                 Search
             </button>
         </div>
@@ -52,7 +56,11 @@ export default {
     {
         return{
             distanceToCity: 500,
-            distanceToBeech: 500
+            distanceToBeech: 500,
+            destination: '',
+            check_in: '',
+            check_out: '',
+            selected: '',
         }
     },
     methods:{
@@ -68,16 +76,6 @@ export default {
             console.log(respone)
 
         },
-
-    },
-    data() {
-
-        return {
-            destination: '',
-            check_in: '',
-            check_out: '',
-        }
-        
-    },
+    }
 }
 </script>
