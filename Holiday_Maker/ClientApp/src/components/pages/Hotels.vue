@@ -8,6 +8,7 @@
             <Price @filter-search="filterPrice"/>
             <Extras @filter-search="filterExtras"/>
             <Amenities @filter-search="filterAmenities"/>
+            <Rooms @filter-search="filterAmenities"/>
         </div>
 
         <div class="container3 shadow-md bg-green-1">
@@ -26,6 +27,7 @@ import Price from "/src/components/SearchPrice.vue"
 import Extras from "/src/components/SearchExtras.vue"
 import Themes from '/src/components/Themes.vue'
 import Amenities from '/src/components/SearchAmenities.vue'
+import Rooms from '/src/components/SearchRooms.vue'
 
     let rawResponse = await fetch('https://localhost:44323/api/accomodations');
     let getAccomodations = await rawResponse.json();
@@ -40,6 +42,7 @@ export default{
         Themes,
         Extras,
         Amenities,
+        Rooms,
     },
     methods: {
         filterName(filter){
@@ -50,6 +53,7 @@ export default{
             this.filter.PropMaxPrice = this.filter.PropMaxPrice
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
+            this.filter.PropRooms = this.filter.PropRooms
         },
         filterStars(filter){
             this.filter.PropName = this.filter.PropName
@@ -59,6 +63,7 @@ export default{
             this.filter.PropMaxPrice = this.filter.PropMaxPrice
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
+            this.filter.PropRooms = this.filter.PropRooms
         },
         filterRating(filter){
             this.filter.PropName = this.filter.PropName
@@ -68,6 +73,7 @@ export default{
             this.filter.PropMaxPrice = this.filter.PropMaxPrice
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
+            this.filter.PropRooms = this.filter.PropRooms
         },
         filterPrice(filter){
             this.filter.PropName = this.filter.PropName
@@ -77,6 +83,7 @@ export default{
             this.filter.PropMaxPrice = filter.PropMaxPrice
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
+            this.filter.PropRooms = this.filter.PropRooms
         },
         filterExtras(filter){
             this.filter.PropName = this.filter.PropName
@@ -86,6 +93,7 @@ export default{
             this.filter.PropMaxPrice = this.filter.PropMaxPrice
             this.filter.PropExtras = filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
+            this.filter.PropRooms = this.filter.PropRooms
         },
         
         filterExtras(filter){
@@ -96,6 +104,17 @@ export default{
             this.filter.PropMaxPrice = this.filter.PropMaxPrice
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = filter.PropAmenities
+            this.filter.PropRooms = this.filter.PropRooms
+        },
+         filterExtras(filter){
+            this.filter.PropName = this.filter.PropName
+            this.filter.PropStars = this.filter.PropStars
+            this.filter.PropRating = this.filter.PropRating
+            this.filter.PropMinPrice = this.filter.PropMinPrice
+            this.filter.PropMaxPrice = this.filter.PropMaxPrice
+            this.filter.PropExtras = this.filter.PropExtras
+            this.filter.PropAmenities = filter.PropAmenities
+            this.filter.PropRooms = filter.PropRooms
         }
     
     },
@@ -109,6 +128,7 @@ export default{
                 PropMaxPrice: 10000,
                 PropExtras: [],
                 PropAmenities: [],
+                PropRooms: [],
 
             },
             getAccomodations
