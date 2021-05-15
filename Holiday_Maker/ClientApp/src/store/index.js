@@ -36,8 +36,7 @@ const store = createStore({
    },
    getters: {
         filteredList(state){
-            return getByRating(getByStars(state.accomodations ,state.filter), state.filter)
-            //getByMinPrice(getByMaxPrice(state.accomodations, state.filter), state.filter) funkar inte än, får panik
+            return getByRating(getByStars(getByMaxPrice(getByMinPrice(state.accomodations, state.filter), state.filter), state.filter), state.filter)
         }
    },
 

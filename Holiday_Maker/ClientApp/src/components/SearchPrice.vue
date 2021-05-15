@@ -4,23 +4,23 @@
         <h3 style="margin:7px"> Price </h3>
 
         <span @change="slider" class="toggle">
-            <h4 v-if="PropMinPrice <= 9999"  class="slider-text">  
-                From: <input disabled v-model.number="PropMinPrice" type="number"  min="0" max="10000" class="price-box"/></h4> <br/>
+            <h4 v-if="PropMinPrice <= 2999"  class="slider-text">  
+                From: <input disabled v-model.number="PropMinPrice" type="number" class="price-box"/></h4> <br/>
             
-            <h4 v-if="PropMinPrice == 10000" class="slider-text"> 
-                Over: <input disabled v-model.number="PropMaxPrice" type="number"  min="0" max="10000" class="price-box"/></h4>
+            <h4 v-if="PropMinPrice == 3000" class="slider-text"> 
+                Over: <input disabled v-model.number="PropMaxPrice" type="number" class="price-box"/></h4>
             
-            <h4 v-else-if="PropMaxPrice == 10000" class="slider-text"> 
-                To over: <input disabled v-model.number="PropMaxPrice" type="number"  min="0" max="10000" class="price-box"/></h4>
+            <h4 v-else-if="PropMaxPrice == 3000" class="slider-text"> 
+                To over: <input disabled v-model.number="PropMaxPrice" type="number" class="price-box"/></h4>
             
             <h4 v-else class="slider-text"> 
-                To: <input disabled v-model.number="PropMaxPrice" type="number"  min="0" max="10000" class="price-box"/></h4>
+                To: <input disabled v-model.number="PropMaxPrice" type="number" class="price-box"/></h4>
         </span>
 
         <div :class="{show: hover}" class="range-slider">
             
-            <input @change="slider" v-model.number="PropMinPrice" min="0" max="10000" step="500" type="range" class="dual-range"/>
-            <input @change="slider" v-model.number="PropMaxPrice" min="0" max="10000" step="500" type="range" class="dual-range"/>
+            <input @change="slider" v-model.number="PropMinPrice" min="0" max="3000" step="50" type="range" class="dual-range"/>
+            <input @change="slider" v-model.number="PropMaxPrice" min="0" max="3000" step="50" type="range" class="dual-range"/>
             
             <svg width="80%" height="24">
                 <line x1="4" y1="0" x2="300" y2="0" stroke="#444" stroke-width="12" stroke-dasharray="1 28"></line>
@@ -34,8 +34,8 @@
 export default{
     data() {
         return {
-            PropMinPrice: 500,
-            PropMaxPrice: 10000,
+            PropMinPrice: 50,
+            PropMaxPrice: 3000,
             hover: true,
         }
     },

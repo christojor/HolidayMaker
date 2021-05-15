@@ -12,9 +12,21 @@ export function getByRating(list, filter) {
 } 
 export function getByMinPrice(list, filter) {
     if (!filter.PropMinPrice) return list
-    return list.filter(item =>  item.rooms.price >= filter.PropMinPrice)
+    if(filter.PropMinPrice == 0){ 
+        return list
+    }
+    else if(filter.PropMinPrice == 3000){ 
+        return list.filter(item => item.rooms.filter(item => item.price > 3000).length > 0) 
+    }
+    return list.filter(item => item.rooms.filter(item => item.price >= filter.PropMinPrice).length > 0)
 } 
 export function getByMaxPrice(list, filter) {
-    if (!filter.PropMaxPrice) return list
-    return list.filter(item => item.rooms.price <= filter.PropMaxPrice)
+    if (filter.PropMaxPrice == null) return list
+    if(filter.PropMaxPrice == 0){ 
+        return null 
+    }
+    else if(filter.PropMaxPrice == 3000){ 
+        return list.filter(item => item.rooms.filter(item => item.price > 0).length > 0) 
+    }
+    return list.filter(item => item.rooms.filter(item => item.price <= filter.PropMaxPrice).length > 0)
 }
