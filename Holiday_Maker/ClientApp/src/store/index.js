@@ -9,7 +9,9 @@ const store = createStore({
         headline: "Welcome to our awesome website!",
         information: "This is just some random text.",
         message: 'Hello Vuex',
+
         accomodations: []
+        
    },
 
    // Methods for changing states synchronously
