@@ -1,6 +1,7 @@
 <template>
 
-            {{ accomodation.description }}
+<h2><b>ABOUT</b></h2>
+<p>{{ accomodation.description }}</p>
     
 </template>
 

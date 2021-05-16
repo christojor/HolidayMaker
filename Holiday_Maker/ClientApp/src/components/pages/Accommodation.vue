@@ -7,13 +7,13 @@
           <!-- Column Content -->
         </div>
 
-        <div class="w-4/6 overflow-hidden shadow-md rounded-md divide-y bg-green-1">
+        <div class="w-4/6 overflow-hidden shadow-md rounded-md divide-y-2 divide-black bg-green-1">
 
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full">
             <h1>Go back to list</h1>
           </div>
 
-          <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full">
+          <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
             <Gallery :accomodation="accomodation" />
           </div>
           
@@ -25,24 +25,27 @@
             <Rating :accomodation="accomodation" />
           </div>
 
-          <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-1">
+          <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
             <Description :accomodation="accomodation" />
           </div>
 
-          <div class="flex flex-wrap overflow-hidden xl:my-1 xl:px-1 xl:w-full divide-x">
+          <div class="flex flex-wrap overflow-hidden xl:my-1 xl:px-1 xl:w-full divide-x divide-black">
 
-            <div class="w-1/2 overflow-hidden p-1">
+            <div class="w-1/2 overflow-hidden p-2">
 
             <Amenities :amenities="accomodation.amenities" />
              
             </div>
             
-            <div class="w-1/2 overflow-hidden p-1">
+            <div class="w-1/2 overflow-hidden p-2">
             
             <Extras :extras="accomodation.extras" />
 
             </div>
         </div>
+        <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
+            <h1>Rooms Go Here?</h1>
+          </div>
         </div>
 
         <div class="w-1/6 overflow-hidden">
@@ -58,7 +61,7 @@
 <script>
 
 import Amenities from "/src/components/details/Amenities.vue"
-import Extras from "/src/components/details/Extras.vue"
+import Extras from "/src/components/details/Extras2.vue"
 import Description from "/src/components/details/Description.vue"
 import Gallery from "/src/components/details/Gallery.vue"
 import Navbar from "/src/components/details/Navbar.vue"
@@ -82,7 +85,6 @@ Gallery,
 Navbar,
 Rating,
 //  Rooms,
-//  Extras
   },
 };
 </script>
