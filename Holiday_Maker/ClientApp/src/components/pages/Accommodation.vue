@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
-            <h1>Rooms Go Here?</h1>
+            <Rooms />
           </div>
         </div>
 
@@ -66,7 +66,7 @@ import Description from "/src/components/details/Description.vue"
 import Gallery from "/src/components/details/Gallery.vue"
 import Navbar from "/src/components/details/Navbar.vue"
 import Rating from "/src/components/details/Rating.vue"
-// import Rooms from "/src/components/details/Rooms.vue"
+import Rooms from "/src/components/details/Rooms.vue"
 
 export default {
     props: ["id"],
@@ -84,7 +84,7 @@ Description,
 Gallery,
 Navbar,
 Rating,
-//  Rooms,
+Rooms,
   },
 };
 </script>
