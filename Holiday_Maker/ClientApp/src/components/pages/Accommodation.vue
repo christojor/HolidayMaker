@@ -61,7 +61,7 @@
 <script>
 
 import Amenities from "/src/components/details/Amenities.vue"
-import Extras from "/src/components/details/Extras2.vue"
+import Extras from "/src/components/details/Extras.vue"
 import Description from "/src/components/details/Description.vue"
 import Gallery from "/src/components/details/Gallery.vue"
 import Navbar from "/src/components/details/Navbar.vue"
