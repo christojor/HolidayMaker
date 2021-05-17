@@ -9,7 +9,12 @@ const store = createStore({
         headline: "Welcome to our awesome website!",
         information: "This is just some random text.",
         message: 'Hello Vuex',
-        accomodations: []
+        accomodations: [],
+        rooms: [],
+        userId: null,
+        accomodationId: null,
+        groupName: null
+
    },
 
    // Methods for changing states synchronously
@@ -23,7 +28,7 @@ const store = createStore({
 
        changeText(state, value){
 
-           state.text = value;
+           state.text = value
 
        },
 
@@ -32,10 +37,12 @@ const store = createStore({
         state.accomodations = payload;
   
       },
-      updateMessage (state, message) {
+      updateMessage(state, message) {
         state.message = message
-    },
-
+      },
+      getRoomsData(state, payload) {
+        state.rooms = payload
+      },
    },
 
    // Functions that call mutations asynchronously. Called by using dispatch (instead of state) in component.
@@ -45,6 +52,12 @@ const store = createStore({
     // Länk finns längre ner på sidan. Via commit kan du komma åt alla dina mutationer ovan.
     // Syntaxen är viktig. commit följt av paranteser där det första in-argumentet är en sträng med önskad 
     // mutationnamn och "the payload" som andra argument.
+    async getRooms({ commit }) {
+    let response = await fetch('https://localhost:44323/api/accomodations/rooms');
+    let json = await response.json();
+ 
+    commit('getRoomsData', json);
+ },
 
         async getAccomodations({ commit }) {
 
@@ -54,8 +67,8 @@ const store = createStore({
       
             commit('getAccomodationsData', json);
 
-   }
-}
+   },
+},
 
 })
 

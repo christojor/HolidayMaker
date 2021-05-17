@@ -3,7 +3,7 @@ import Hotels from '/src/components/pages/Hotels.vue'
 import StoreTest from '/src/components/pages/StoreTest.vue'
 import Accommodation from '/src/components/pages/Accommodation.vue'
 import NotFound from '/src/components/pages/NotFound.vue'
-
+import Favorite from '/src/components/FavoriteButton.vue'
 import Searchbar from '/src/components/Searchbar.vue'
 const routes = [
     {
@@ -30,6 +30,11 @@ const routes = [
         path: '/searchbar',
         name: 'Searchbar',
         component: Searchbar,
+    },
+    {
+        path: '/Favorite',
+        name: 'Favorite',
+        component: Favorite,
     }
 ]
 const router = createRouter({

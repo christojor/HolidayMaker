@@ -4,6 +4,7 @@
         <div class="hotel-item-desc">
             <h1>{{accomodation.name}}</h1>
             <h1>{{accomodation.description}}</h1>
+            <FavoriteButton :accomodationObject="accomodation" />
         </div>
     </div>
 
@@ -18,10 +19,14 @@
 </template>
 
 <script>
+import FavoriteButton from '/src/components/FavoriteButton.vue'
 export default {
   props: {
     filter: Object,
     getAccomodations: Object
+  },
+  components:{
+    FavoriteButton,
   }
 }
 </script>
