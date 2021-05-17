@@ -11,7 +11,6 @@ const store = createStore({
         information: "This is just some random text.",
         message: 'Hello Vuex',
         accomodations: [],
-        filteredAccomodations: [],
         filter: []
    },
 
