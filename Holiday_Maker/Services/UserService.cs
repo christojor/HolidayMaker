@@ -42,16 +42,32 @@ namespace Holiday_Maker.Services
         }
         public async Task<ActionResult> AddUserFavorite(UserFavorite userFavorite)
         {
-            var userFavorites = await _ufRepo.GetAll();
-            foreach (var favorite in userFavorites)
+            var getUserFavorites = await _ufRepo.GetAll();
+            var userFavorites = new List<UserFavorite>();
+
+            foreach (var favorite in getUserFavorites)
             {
                 if (favorite.UserId == userFavorite.UserId)
                 {
-                    if (favorite.AccomodationId != userFavorite.AccomodationId)
-                    {
-                        _ufRepo.Insert(userFavorite);
-                    }
+                    userFavorites.Add(favorite);
                 }
+            }
+
+            var result = userFavorites.Exists(u => u.AccomodationId.Equals(userFavorite.AccomodationId));
+            if(!result)
+            {
+                _ufRepo.Insert(userFavorite);
+            }
+            return NotFound();
+        }
+
+        public async Task<ActionResult> RemoveUserFavorite(UserFavorite userFavorite)
+        {
+            var favorites = await _ufRepo.GetAll();
+            var favorite = favorites.FirstOrDefault(f => f.UserId.Equals(userFavorite.UserId) && f.AccomodationId.Equals(userFavorite.AccomodationId));
+            if (favorite != null)
+            {
+                _ufRepo.Delete(favorite.Id);
             }
             return NotFound();
         }

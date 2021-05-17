@@ -58,9 +58,10 @@ namespace Holiday_Maker.Controllers
             await _userService.AddUserFavorite(userFavorite);
         }
         // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("favorites")]
+        public async void Delete(UserFavorite userFavorite)
         {
+            await _userService.RemoveUserFavorite(userFavorite);
         }
     }
 }

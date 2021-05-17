@@ -4,6 +4,12 @@
   <input v-model="message" />
   <p>{{ message }}</p>
 
+  <div v-for="room in rooms" :key="room">
+    <p>{{room.id}}</p>
+  </div>
+
+
+
   <div v-for="accomodation in accomodations" :key="accomodation">
     <ul>
       <li>
@@ -14,13 +20,11 @@
             <b>Go to Details</b>
           </button>
         </h1>
-
         <br />
       </li>
     </ul>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -29,6 +33,7 @@ export default {
 
     // Anropar async action i store, som sedan anropar mutation getAccomodationsData som sedan uppdaterar accomodations property i state
     this.$store.dispatch("getAccomodations");
+    this.$store.dispatch("getRooms");
   },
 
   computed: {
@@ -46,6 +51,9 @@ export default {
     },
     accomodations() {
       return this.$store.state.accomodations;
+    },
+    rooms() {
+      return this.$store.state.rooms;
     },
 
     // Computed property with two-way data binding
@@ -78,6 +86,9 @@ export default {
         name: "Accommodation",
         params: { id: accommodationId },
       });
+    },
+    getRooms() {
+      this.$store.dispatch("getRooms");
     },
   },
 };

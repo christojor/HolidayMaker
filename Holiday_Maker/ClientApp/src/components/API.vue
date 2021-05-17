@@ -8,6 +8,7 @@
         <div class="hotel-item-desc">
         <h1>{{accomodation.name}}</h1>
         <h1>{{accomodation.description}}</h1>
+        <FavoriteButton :accomodationObject="accomodation" />
         <button @click="goToAccommodation(accomodation.id)">
             <b>Go to Details</b>
           </button>
@@ -16,9 +17,16 @@
 </template>
 
 <script>
+import FavoriteButton from '/src/components/FavoriteButton.vue'
 import { mapGetters } from 'vuex'
 
 export default {
+  props: {
+    filter: Object,
+    getAccomodations: Object
+  },
+  components:{
+    FavoriteButton,
   computed:{ 
       ...mapGetters([
           'filteredList'
