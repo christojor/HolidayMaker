@@ -27,6 +27,7 @@ export default {
   },
   components:{
     FavoriteButton,
+  },
   computed:{ 
       ...mapGetters([
           'filteredList'
