@@ -19,15 +19,7 @@
 </template>
 
 <script>
-
-import { StarIcon } from '@heroicons/vue/solid'
-
 export default {
-
-    components: { 
-        StarIcon,
-    },
-
     props: {
             accomodation: {
                 type: Object,
