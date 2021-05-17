@@ -30,3 +30,12 @@ export function getByMaxPrice(list, filter) {
     }
     return list.filter(item => item.rooms.filter(item => item.price <= filter.PropMaxPrice).length > 0)
 }
+export function getByAmenities(list, filter) {
+    if (!filter.PropAmenities) return list
+    var checkedAmenities = filter.PropAmenities.filter(item => item.Checked == true)
+
+    var newlist = list.filter(item => console.log(item.amenities.Where(item.amenities == true)))
+
+
+    return list.filter(item => item.amenities.filter(a => a == true).length >= checkedAmenities.length)
+}

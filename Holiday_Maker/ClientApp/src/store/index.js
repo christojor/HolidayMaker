@@ -1,5 +1,5 @@
 import { createStore } from "vuex" 
-import { getByName, getByStars, getByRating , getByMaxPrice, getByMinPrice} from "../assets/filterMethods.js"
+import { getByName, getByStars, getByRating , getByMaxPrice, getByMinPrice, getByAmenities} from "../assets/filterMethods.js"
 
 const store = createStore({
 
@@ -35,7 +35,8 @@ const store = createStore({
    },
    getters: {
         filteredList(state){
-            return getByRating(getByStars(getByMaxPrice(getByMinPrice(state.accomodations, state.filter), state.filter), state.filter), state.filter)
+            //return getByRating(getByStars(getByMaxPrice(getByMinPrice(state.accomodations, state.filter), state.filter), state.filter), state.filter)
+            return getByAmenities(state.accomodations, state.filter)
         }
    },
 

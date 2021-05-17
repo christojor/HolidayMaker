@@ -1,5 +1,9 @@
 <template>
-    <div v-for="accomodation in filteredList" :key="accomodation" class="hotel-item shadow-md">
+    <div v-if="!filteredList.length" style="width:100%">
+      <h1 style="text-align:center;font-size:30px">Loading hotels...</h1>
+    </div>
+    
+    <div v v-else v-for="accomodation in filteredList" :key="accomodation" class="hotel-item shadow-md">
         <img :src="accomodation.imgSrc" alt="" class="hotel-item-img">
         <div class="hotel-item-desc">
         <h1>{{accomodation.name}}</h1>

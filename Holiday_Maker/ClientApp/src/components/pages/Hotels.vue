@@ -20,14 +20,14 @@
 
 <script>
 import API from "/src/components/API.vue"
-import Name from "/src/components/SearchProperty.vue"
-import StarRating from "/src/components/SearchStarRating.vue"
-import UserRating from "/src/components/SearchUserRating.vue"
-import Price from "/src/components/SearchPrice.vue"
-import Extras from "/src/components/SearchExtras.vue"
+import Name from "/src/components/Filters/SearchProperty.vue"
+import StarRating from "/src/components/Filters/SearchStarRating.vue"
+import UserRating from "/src/components/Filters/SearchUserRating.vue"
+import Price from "/src/components/Filters/SearchPrice.vue"
+import Extras from "/src/components/Filters/SearchExtras.vue"
 import Themes from "/src/components/Themes.vue"
-import Amenities from "/src/components/SearchAmenities.vue"
-import RoomType from "/src/components/SearchRoomType.vue"
+import Amenities from "/src/components/Filters/SearchAmenities.vue"
+import RoomType from "/src/components/Filters/SearchRoomType.vue"
 
 export default{
     components: {
@@ -107,6 +107,8 @@ export default{
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = filter.PropAmenities
             this.filter.PropRooms = this.filter.PropRooms
+
+            this.filterList(this.filter)
         },
         filterRooms(filter){
             this.filter.PropName = this.filter.PropName
