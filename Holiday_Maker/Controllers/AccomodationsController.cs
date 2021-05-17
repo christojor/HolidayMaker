@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Holiday_Maker.Models;
 using Holiday_Maker.Repository;
+using Holiday_Maker.Services;
 
 namespace Holiday_Maker.Controllers
 {
@@ -18,6 +19,7 @@ namespace Holiday_Maker.Controllers
         private IGenericRepository<Accomodation> _accomodationRepo;
         private IGenericRepository<Room> _roomRepo;
         private IGenericRepository<RoomType> _roomTypeRepo;
+        private AccomodationsService _accomodationsService;
 
         public AccomodationsController(ApplicationDbContext context)
         {
@@ -25,32 +27,57 @@ namespace Holiday_Maker.Controllers
             _accomodationRepo = new GenericRepository<Accomodation>();
             _roomRepo = new GenericRepository<Room>();
             _roomTypeRepo = new GenericRepository<RoomType>();
+            _accomodationsService = new AccomodationsService();
         }
 
         // GET: api/Accomodations
         [HttpGet]
-        public async Task<IEnumerable<Accomodation>> GetAccomodations()
+        public async Task<IEnumerable<Accomodation>> GetAccomodations(string theme)
         {
             // return await _accomodationRepo.GetAll();
 
             /* QUERY RETURNING NESTED JSON */
 
-            var accommodationList = await _accomodationRepo.GetAll();
-            var roomList = await _roomRepo.GetAll();
-            var roomTypes = await _roomTypeRepo.GetAll();
-
-            foreach (var accommodation in accommodationList)
+            if (theme == "")
             {
-                var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
 
-                foreach (var room in rooms)
+                var accommodationList = await _accomodationRepo.GetAll();
+                var roomList = await _roomRepo.GetAll();
+                var roomTypes = await _roomTypeRepo.GetAll();
+
+                foreach (var accommodation in accommodationList)
                 {
-                    room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
-                    accommodation.Rooms.Add(room);
+                    var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
+
+                    foreach (var room in rooms)
+                    {
+                        room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
+                        accommodation.Rooms.Add(room);
+                    }
                 }
+
+                return accommodationList;
+            }
+            else
+            {
+                var accommodationList = await _accomodationsService.GetAllByTheme(theme);
+                var roomList = await _roomRepo.GetAll();
+                var roomTypes = await _roomTypeRepo.GetAll();
+
+                foreach (var accommodation in accommodationList)
+                {
+                    var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
+
+                    foreach (var room in rooms)
+                    {
+                        room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
+                        accommodation.Rooms.Add(room);
+                    }
+                }
+
+                return accommodationList;
             }
 
-            return accommodationList;
         }
 
         // GET: api/Accomodations/5

@@ -5,8 +5,6 @@
         </aside>
         <a href="/hotels">Hotels</a>
         <Themes/>
-
-
     </nav>
 </template>
 

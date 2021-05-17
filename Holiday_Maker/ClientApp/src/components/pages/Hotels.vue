@@ -10,6 +10,7 @@
 
         <div class="container3">
             <API :filter="filter" :getAccomodations="getAccomodations"/>
+            
         </div>
 
     </div>
