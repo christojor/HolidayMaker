@@ -51,6 +51,8 @@ export default{
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
             this.filter.PropRooms = this.filter.PropRooms
+
+            this.filterList(this.filter)
         },
         filterStars(filter){
             this.filter.PropName = this.filter.PropName
