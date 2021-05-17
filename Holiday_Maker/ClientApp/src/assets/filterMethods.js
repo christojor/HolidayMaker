@@ -33,9 +33,33 @@ export function getByMaxPrice(list, filter) {
 export function getByAmenities(list, filter) {
     if (!filter.PropAmenities) return list
     var checkedAmenities = filter.PropAmenities.filter(item => item.Checked == true)
+    var checkedAmenitiesNames = []
+    checkedAmenities.filter(item => checkedAmenitiesNames.push(item.Amenity))
+    console.log(checkedAmenitiesNames[0])
+    
+    var amenitieslist = []
+    list.filter(item => amenitieslist.push(item.amenities[0]))
 
-    var newlist = list.filter(item => console.log(item.amenities.Where(item.amenities == true)))
+    if(checkedAmenitiesNames.includes("Entertainment") == true){
+        amenitieslist = amenitieslist.filter(a => a.entertainment == true)
+    }
+    if(checkedAmenitiesNames.includes("Resturants") == true){
+        amenitieslist = amenitieslist.filter(a => a.resturant == true)
+    }
+    if(checkedAmenitiesNames.includes("WiFi") == true){
+        amenitieslist = amenitieslist.filter(a => a.wiFi == true)
+    }
+    if(checkedAmenitiesNames.includes("Pool") == true){
+        amenitieslist = amenitieslist.filter(a => a.pool == true)
+    }
+    if(checkedAmenitiesNames.includes("Gym") == true){
+        amenitieslist = amenitieslist.filter(a => a.gym == true)
+    }
+    if(checkedAmenitiesNames.includes("KidClub") == true){
+        amenitieslist = amenitieslist.filter(a => a.kidClub == true)
+    }
+    
+    console.log(amenitieslist)
 
-
-    return list.filter(item => item.amenities.filter(a => a == true).length >= checkedAmenities.length)
+    return list.filter(item => amenitieslist.filter(a => a.accomodationId == item.id).length > 0)
 }
