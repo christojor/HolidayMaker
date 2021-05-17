@@ -12,14 +12,14 @@
         </div>
 
         <div class="container3 shadow-md bg-green-1">
-            <API/>
+            <HotelList/>
         </div>
 
     </div>
 </template>
 
 <script>
-import API from "/src/components/API.vue"
+import HotelList from "/src/components/HotelList.vue"
 import Name from "/src/components/filters/SearchProperty.vue"
 import StarRating from "/src/components/filters/SearchStarRating.vue"
 import UserRating from "/src/components/filters/SearchUserRating.vue"
@@ -31,7 +31,7 @@ import RoomType from "/src/components/filters/SearchRoomType.vue"
 
 export default{
     components: {
-        API,
+        HotelList,
         Name,
         StarRating,
         UserRating,
