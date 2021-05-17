@@ -1,6 +1,6 @@
 export function getByName(list, filter) {
     if (!filter.PropName) return list
-    return list.filter(item => item.name == filter.PropStars)
+    return list.filter(item => (item.name.toLowerCase()).includes(filter.PropName.toLowerCase()))
 }
 export function getByStars(list, filter) {
     if (!filter.PropStars) return list

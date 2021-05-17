@@ -57,6 +57,7 @@ aside{
     background-color: white;
     margin: 10px;
     height: 200px;
+    width: 762px;
     border-radius: 7px;
 }
 .hotel-item-img{
@@ -68,9 +69,24 @@ aside{
 }
 .hotel-item-desc{
     display: inline-block;
-    width: 50%;
+    width: 522;
     vertical-align: top;
-    font-size: 10px;
+    font-size: 11px;
+}
+.hotel-item-desc-left{
+    display: inline-block;
+    width: 370px;
+    height: 180px;
+    margin: 10px;
+    vertical-align: top;
+}
+.hotel-item-desc-right{
+    display: inline-block;
+    width: 100px;
+    height: 180px;
+    margin: 10px;
+    text-align: right;
+    font-size: 13px;
 }
 /*----------Filter List----------*/
 .filter-box{
