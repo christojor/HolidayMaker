@@ -51,9 +51,7 @@ const store = createStore({
         async getAccomodations({ commit }) {
 
             let response = await fetch('https://localhost:44323/api/accomodations');
-
             let json = await response.json();
-
             commit('getAccomodationsData', json);
         }
     }

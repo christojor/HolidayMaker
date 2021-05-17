@@ -2,123 +2,56 @@
   <div v-for="accomodation in accomodations" :key="accomodation">
     <div v-if="id == accomodation.id">
       <div class="flex flex-wrap overflow-hidden mt-3">
+
         <div class="w-1/6 overflow-hidden">
           <!-- Column Content -->
         </div>
 
-        <div
-          class="w-4/6 overflow-hidden shadow-md rounded-md divide-y bg-green-1"
-        >
-          <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full">
-            <h2 class="uppercase text-lg p-1" style="font-weight: bold">
-              {{ accomodation.name }}
-              <StarIcon class="h-5 w-5 text-blue-500"/>
-              
-            </h2>
+        <div class="w-4/6 overflow-hidden shadow-md rounded-md divide-y-2 divide-black bg-green-1">
+
+        <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full">
+            <h1>Go back to list</h1>
           </div>
 
           <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
-            <img
-              :src="accomodation.imgSrc"
-              class="img-fluid rounded-md"
-              style="width: 300px; height: auto"
-            />
+            <Gallery :accomodation="accomodation" />
+          </div>
+          
+          <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
+            <Navbar/>
           </div>
 
-          <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-1">
-            <h2><b>DESCRIPTION</b></h2>
-            {{ accomodation.description }}
+          <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
+            <Rating :accomodation="accomodation" />
           </div>
 
-          <div class="flex flex-wrap overflow-hidden xl:my-1 xl:px-1 xl:w-full divide-x">
-            <div
-              class="w-1/2 overflow-hidden p-1"
-              v-for="amenity in accomodation.amenities"
-              :key="amenity"
-            >
-              <table class="table-auto">
-                <thead>
-                  <tr>
-                    <th align="left">AMENITIES</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Entertainment:</td>
-                    <td>{{ amenity.entertainment }}</td>
-                  </tr>
-                  <tr>
-                    <td>Kid Club:</td>
-                    <td>{{ amenity.kidClub }}</td>
-                  </tr>
-                  <tr>
-                    <td>Gym:</td>
-                    <td>{{ amenity.gym }}</td>
-                  </tr>
-                  <tr>
-                    <td>Pool:</td>
-                    <td>{{ amenity.pool }}</td>
-                  </tr>
-                  <tr>
-                    <td>WiFi</td>
-                    <td>{{ amenity.wiFi }}</td>
-                  </tr>
-                  <tr>
-                    <td>Restaurant:</td>
-                    <td>{{ amenity.resturant }}</td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
+            <Description :accomodation="accomodation" />
+          </div>
+
+          <div class="flex flex-wrap overflow-hidden xl:my-1 xl:px-1 xl:w-full divide-x divide-black">
+
+            <div class="w-1/2 overflow-hidden p-2">
+
+            <Amenities :amenities="accomodation.amenities" />
+             
             </div>
-            <div
-              class="w-1/2 overflow-hidden p-1"
-              v-for="extra in accomodation.extras"
-              :key="extra"
-            >
-              <table class="table-auto">
-                <thead>
-                  <tr>
-                    <th align="left">EXTRAS</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Self Catering:</td>
-                    <td>{{ extra.selfCatering }}</td>
-                  </tr>
-                  <tr>
-                    <td>Half Board:</td>
-                    <td>{{ extra.halfBoard }}</td>
-                  </tr>
-                  <tr>
-                    <td>Full Board:</td>
-                    <td>{{ extra.fullBoard }}</td>
-                  </tr>
-                  <tr>
-                    <td>All Inclusive:</td>
-                    <td>{{ extra.allInclusive }}</td>
-                  </tr>
-                  <tr>
-                    <td>Breakfast:</td>
-                    <td>{{ extra.breakfast }}</td>
-                  </tr>
-                  <tr>
-                    <td>Extra Bed:</td>
-                    <td>{{ extra.extraBed }}</td>
-                  </tr>
-                  <tr>
-                    <td>Crib:</td>
-                    <td>{{ extra.crib }}</td>
-                  </tr>
-                </tbody>
-              </table>
+            
+            <div class="w-1/2 overflow-hidden p-2">
+            
+            <Extras :extras="accomodation.extras" />
+
             </div>
+        </div>
+        <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
+            <Rooms />
           </div>
         </div>
 
         <div class="w-1/6 overflow-hidden">
           <!-- Column Content -->
         </div>
+
       </div>
     </div>
   </div>
@@ -126,19 +59,32 @@
 
 
 <script>
-import { StarIcon } from '@heroicons/vue/solid'
+
+import Amenities from "/src/components/details/Amenities.vue"
+import Extras from "/src/components/details/Extras.vue"
+import Description from "/src/components/details/Description.vue"
+import Gallery from "/src/components/details/Gallery.vue"
+import Navbar from "/src/components/details/Navbar.vue"
+import Rating from "/src/components/details/Rating.vue"
+import Rooms from "/src/components/details/Rooms.vue"
 
 export default {
-  props: ["id"],
+    props: ["id"],
 
-components: { 
- StarIcon 
-  },
-
-  computed: {
+    computed: {
     accomodations() {
       return this.$store.state.accomodations;
     },
+  },
+
+components: { 
+Extras,
+Amenities,
+Description,
+Gallery,
+Navbar,
+Rating,
+Rooms,
   },
 };
 </script>
