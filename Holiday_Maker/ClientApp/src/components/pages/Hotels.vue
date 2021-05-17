@@ -12,14 +12,14 @@
         </div>
 
         <div class="container3 shadow-md bg-green-1">
-            <API/>
+            <HotelList/>
         </div>
 
     </div>
 </template>
 
 <script>
-import API from "/src/components/API.vue"
+import HotelList from "/src/components/HotelList.vue"
 import Name from "/src/components/filters/SearchProperty.vue"
 import StarRating from "/src/components/filters/SearchStarRating.vue"
 import UserRating from "/src/components/filters/SearchUserRating.vue"
@@ -31,7 +31,7 @@ import RoomType from "/src/components/filters/SearchRoomType.vue"
 
 export default{
     components: {
-        API,
+        HotelList,
         Name,
         StarRating,
         UserRating,
@@ -51,6 +51,8 @@ export default{
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
             this.filter.PropRooms = this.filter.PropRooms
+
+            this.filterList(this.filter)
         },
         filterStars(filter){
             this.filter.PropName = this.filter.PropName
@@ -130,8 +132,8 @@ export default{
                 PropName: '',
                 PropStars: 5,
                 PropRating: 0,
-                PropMinPrice: 500,
-                PropMaxPrice: 10000,
+                PropMinPrice: 50,
+                PropMaxPrice: 3000,
                 PropExtras: [],
                 PropAmenities: [],
                 PropRooms: [],
