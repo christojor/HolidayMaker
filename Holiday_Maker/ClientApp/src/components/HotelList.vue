@@ -26,6 +26,14 @@ export default {
       ...mapGetters([
           'filteredList'
       ])
-  }
+  },
+    methods: {
+        goToAccommodation(accommodationId) {
+            this.$router.push({
+                name: "Accommodation",
+                params: { id: accommodationId },
+            });
+        }
+    }
 }
 </script>

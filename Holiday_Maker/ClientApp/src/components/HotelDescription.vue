@@ -43,12 +43,6 @@ export default ({
         accomodation: Object
     },
     methods: {
-    goToAccommodation(accommodationId) {
-        this.$router.push({
-            name: "Accommodation",
-            params: { id: accommodationId },
-        });
-    },
     lowestRoom(accomodationId){
         if (!accomodationId) return accomodationId
     
