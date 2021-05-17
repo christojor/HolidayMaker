@@ -6,8 +6,8 @@
   </div>
 
   <div class="flex flex-row w-full overflow-hidden">
-    <StarIcon class="h-5 w-5 text-green-500"/>
-    <StarIcon class="h-5 w-5 text-green-500"/>
+    <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
+    <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
   </div>
 
   <div class="w-full overflow-hidden">
