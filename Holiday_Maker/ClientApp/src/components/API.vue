@@ -1,5 +1,9 @@
 <template>
-    <div v-for="accomodation in getAccomodations" :key="accomodation" class="hotel-item shadow-md">
+    <div v-if="!filteredList.length" style="width:100%">
+      <h1 style="text-align:center;font-size:30px">Loading hotels...</h1>
+    </div>
+    
+    <div v v-else v-for="accomodation in filteredList" :key="accomodation" class="hotel-item shadow-md">
         <img :src="accomodation.imgSrc" alt="" class="hotel-item-img">
         <div class="hotel-item-desc">
         <h1>{{accomodation.name}}</h1>
@@ -9,22 +13,16 @@
           </button>
         </div>
     </div>
-
-    <h1>{{filter.PropName}}</h1>
-    <h1>{{filter.PropStars}}</h1>
-    <h1>{{filter.PropRating}}</h1>
-    <h1>{{filter.PropMinPrice}}</h1>
-    <h1>{{filter.PropMaxPrice}}</h1>
-    <h1 v-for="Extra in filter.PropExtras" :key="Extra"><h1 v-if="Extra.Checked == true">{{Extra.Extra}}</h1></h1>
-    <h1 v-for="Ameniti in filter.PropAmenities" :key="Ameniti"><h1 v-if="Ameniti.Checked == true">{{Ameniti.Ameniti}}</h1></h1>
-    <h1 v-for="Rooms in filter.PropRooms" :key="Rooms"><h1 v-if="Rooms.Checked == true">{{Rooms.Type}}</h1></h1>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  props: {
-    filter: Object,
-    getAccomodations: Object
+  computed:{ 
+      ...mapGetters([
+          'filteredList'
+      ])
   },
   methods: {
     goToAccommodation(accommodationId) {

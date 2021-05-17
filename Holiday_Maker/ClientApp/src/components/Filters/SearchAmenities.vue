@@ -8,11 +8,11 @@
                     <div class="overSelect"></div>
             </div>
 
-            <div :class="{show : toggle}" id="checkboxes" @click="handleSubmit">
+            <div :class="{show : toggle}" id="checkboxes">
                 
-                <div v-for="Ameniti in Amenities" :key="Ameniti" class="flex items-center">
-                    <input type="checkbox" :id="Ameniti.Ameniti" v-model="Ameniti.Checked"/>
-                    <label :for="Ameniti.Ameniti">&nbsp;{{Ameniti.Ameniti}}</label>
+                <div v-for="Amenity in Amenities" :key="Amenity" class="flex items-center">
+                    <input type="checkbox" :id="Amenity.Amenity" v-model="Amenity.Checked" @change="handleSubmit"/>
+                    <label :for="Amenity.Amenity">&nbsp;{{Amenity.Amenity}}</label>
                 </div>
             </div>
         </div>
@@ -26,12 +26,12 @@ export default{
         return{
             toggle: true,
             Amenities: [
-                {Ameniti: 'Entertainment', Checked: false},
-                {Ameniti: 'Resturants', Checked: false},
-                {Ameniti: 'WiFi', Checked: false},
-                {Ameniti: 'Pool', Checked: false},
-                {Ameniti: 'Gym', Checked: false},
-                {Ameniti: 'KidClub', Checked: false},
+                {Amenity: 'Entertainment', Checked: false},
+                {Amenity: 'Resturants', Checked: false},
+                {Amenity: 'WiFi', Checked: false},
+                {Amenity: 'Pool', Checked: false},
+                {Amenity: 'Gym', Checked: false},
+                {Amenity: 'KidClub', Checked: false},
                 
             ],
         }
