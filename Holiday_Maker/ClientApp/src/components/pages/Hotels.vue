@@ -138,8 +138,8 @@ export default{
             }
         }
     },
-    created() {
-    this.$store.dispatch("getAccomodations");
-  },
+//     created() {
+//     this.$store.dispatch("getAccomodations");
+//   },
 }
 </script>

@@ -10,7 +10,7 @@
         <div class="w-4/6 overflow-hidden shadow-md rounded-md divide-y-2 divide-black bg-green-1">
 
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full">
-            <h1>Go back to list</h1>
+            <router-link to="/hotels">Back to list</router-link>
           </div>
 
           <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
-            <Rooms />
+            <Rooms :rooms="accomodation.rooms" />
           </div>
         </div>
 

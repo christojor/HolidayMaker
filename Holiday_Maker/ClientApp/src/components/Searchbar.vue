@@ -41,15 +41,20 @@
                         <output for="cityslider" :value="500 + ' m'">{{distanceToCity}} m</output>
                     </div>
                 </div>
+                <div style="width:100vw; text-align:center">
+            <input type="submit" value="Search" @click="search" class="w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"/>
+        </div>
             </form>
         </div>
-        <div style="width:100vw; text-align:center">
-            <button @click="search" class="rounded-full border-2" style="top:10px;width:20em;background-color:white;">Search</button>
-        </div>
+        
 </template>
 
 <script>
 export default {
+    created() {
+    this.$store.dispatch("getAccomodations");
+    },
+
     data()
     {
         return{
@@ -64,15 +69,39 @@ export default {
     methods:{
         async search()
         {
-            var presplit = this.destination
-            var splitted = presplit.split(" ")
-            console.log(splitted)
+            let allAccomodations = this.$store.state.accomodations
+            let queriedAccomodations = []
+            console.log(queriedAccomodations)
+            console.log(this.destination)
 
-            let rawResponse = await fetch('https://localhost:44323/api/Accomodations/search?country=' + splitted[0] + '&city=' + splitted[1])
-            let response = await rawResponse.json()
-            console.log(response)
+            if (this.destination.length){
+                allAccomodations.forEach(accomodation => {
+                if(accomodation.country == this.destination || accomodation.city == this.destination)
+                {
+                    queriedAccomodations.push(accomodation);
+                    console.log(accomodation)
+                }
+            });
+            } 
+            else {
+                queriedAccomodations = allAccomodations
+            }
+
+            this.updateAccomodations(queriedAccomodations)
+
+            this.$router.push({ name: "Hotels"}) //Ok
 
         },
+
+    getAccomodations() {
+      this.$store.dispatch("getAccomodations");
+    },
+    updateAccomodations(queriedAccomodations) {
+      this.$store.commit("updateAccomodations", queriedAccomodations);
+    },
+    filterList(filter){
+            this.$store.commit("updateFilter", filter)
+        }
     }
 }
 </script>

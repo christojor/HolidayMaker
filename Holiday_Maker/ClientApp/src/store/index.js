@@ -31,7 +31,11 @@ const store = createStore({
         },
         updateFilter (state, filter) {
             state.filter = filter
-        }
+        },
+        updateAccomodations (state, payload) {
+            console.log(payload)
+            state.accomodations = payload
+        },
    },
    getters: {
         filteredList(state){
@@ -52,6 +56,7 @@ const store = createStore({
 
             let response = await fetch('https://localhost:44323/api/accomodations');
             let json = await response.json();
+
             commit('getAccomodationsData', json);
         }
     }

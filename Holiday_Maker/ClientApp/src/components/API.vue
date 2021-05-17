@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!filteredList.length" style="width:100%">
+    <div v-if="!filteredList.length" :load="log(filteredList.length, filteredList)" style="width:100%">
       <h1 style="text-align:center;font-size:30px">Loading hotels...</h1>
     </div>
     
@@ -38,8 +38,11 @@ export default {
       this.$router.push({
         name: "Accommodation",
         params: { id: accommodationId },
-      });
-    },
+      })},
+
+    log(item) {
+      console.log(item)
+    }
   }
 }
 </script>

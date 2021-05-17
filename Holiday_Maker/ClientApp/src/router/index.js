@@ -7,6 +7,11 @@ import Favorite from '/src/components/FavoriteButton.vue'
 import Searchbar from '/src/components/Searchbar.vue'
 const routes = [
     {
+        path: '/',
+        name: '',
+        component: Searchbar,
+    },
+    {
         path: '/hotels',
         name: 'Hotels',
         component: Hotels,
