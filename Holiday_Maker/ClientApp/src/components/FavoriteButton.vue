@@ -1,6 +1,6 @@
 <template>
-  <font-awesome-icon :icon="['fas', IconType]" size="lg" @click="ChangeIcon(); DeleteFavorite();" :class="{show:Toggle}" class="favourite-button"/>
-  <font-awesome-icon :icon="['far', IconType]" size="lg" @click="ChangeIcon(); SetFavorite();" :class="{show:!Toggle}" class="favourite-button"/>
+  <font-awesome-icon :icon="['fas', IconType]" size="lg" @click="ChangeIcon(); DeleteFavorite();" :class="{show:Toggle}"/>
+  <font-awesome-icon :icon="['far', IconType]" size="lg" @click="ChangeIcon(); SetFavorite();" :class="{show:!Toggle}"/>
 </template>
 
 

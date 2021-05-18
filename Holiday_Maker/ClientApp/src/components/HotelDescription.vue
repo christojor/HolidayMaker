@@ -1,6 +1,6 @@
 <template>
     
-    <div class="hotel-item-desc-left">
+    <div class="hotel-item-desc-left" @click="goToAccommodation(accomodation.id)">
         <h1 style="font-size:20px;">{{accomodation.name}}</h1>
         <h2 style="font-size:16px; display:inline;">{{accomodation.country}}</h2>
         <h2 style="font-size:14px; display:inline;">, {{accomodation.city}}</h2>
@@ -21,24 +21,32 @@
     </div>
     <div class="hotel-item-desc-right">
     
-    <div v-for="stars in accomodation.starRating" :key="stars" style="display:inline-block; margin-bottom:5px">
-        <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
-    </div><br/>
+        <div v-for="stars in accomodation.starRating" :key="stars" style="display:inline-block; margin-bottom:5px">
+            <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
+        </div><br/>
     
-        <h2 style="font-size:20px; margin-top:115px">{{lowestRoom(accomodation.id)}}€</h2>
+        <FavoriteButton :accomodationObject="accomodation"/>
+
+        <p style="font-size:16px; margin-right:10px; margin-top:65px">From</p>
+        <h2 style="font-size:20px;">SEK {{lowestRoom(accomodation.id)}}:-</h2>
+        <p style="font-size:12px; margin-right:10px;">Per nigth</p>
     </div>
 </template>
 
 <script>
+import FavoriteButton from '/src/components/FavoriteButton.vue'
 import { mapGetters } from 'vuex'
 
 export default ({
     props: {
         accomodation: Object
     },
+    components:{
+        FavoriteButton,
+    },
     methods: {
-    lowestRoom(accomodationId){
-        if (!accomodationId) return accomodationId
+        lowestRoom(accomodationId){
+            if (!accomodationId) return accomodationId
     
             let hotel = this.filteredList.filter(item => item.id == accomodationId)
             let low = []
@@ -48,12 +56,18 @@ export default ({
             low = Math.min(...low)
 
             return low
+        },
+        goToAccommodation(accommodationId) {
+            this.$router.push({
+                name: "Accommodation",
+                params: { id: accommodationId },
+            });
         }
     },
-  computed:{ 
-      ...mapGetters([
-          'filteredList'
-      ])
-  }
+computed:{ 
+    ...mapGetters([
+        'filteredList'
+    ])
+}
 })
 </script>

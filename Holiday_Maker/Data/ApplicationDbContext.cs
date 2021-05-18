@@ -74,6 +74,9 @@ namespace Holiday_Maker.Models
                     .IsRequired()
                     .HasMaxLength(15);
 
+                entity.Property(e => e.ThemeType)
+                    .HasMaxLength(100);
+
                 entity.HasOne(d => d.AccomodationType)
                     .WithMany(p => p.Accomodations)
                     .HasForeignKey(d => d.AccomodationTypeId)
