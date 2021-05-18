@@ -25,20 +25,14 @@
         <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
     </div><br/>
     
-    <FavoriteButton :accomodationObject="accomodation" />
-    
         <h2 style="font-size:20px; margin-top:115px">{{lowestRoom(accomodation.id)}}€</h2>
     </div>
 </template>
 
 <script>
-import FavoriteButton from '/src/components/FavoriteButton.vue'
 import { mapGetters } from 'vuex'
 
 export default ({
-  components:{
-    FavoriteButton
-  },
     props: {
         accomodation: Object
     },

@@ -9,6 +9,9 @@
         <div class="hotel-item-desc" @click="goToAccommodation(accomodation.id)">
             <HotelDescription :accomodation="accomodation"/>
         </div>
+    
+    <FavoriteButton :accomodationObject="accomodation"/>
+    
     </div>
 </template>
 
