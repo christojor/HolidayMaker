@@ -231,7 +231,8 @@ h1 {
     outline: none;
 }
 .theme-item:hover{
-    background-color: #95D5B2
+    background-color: #95D5B2;
+    cursor: pointer;
 }
 .content {
     right: 20vw;
