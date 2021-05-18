@@ -2,23 +2,25 @@
         <div class="search-dest-box bg-contain" style="background-image: url(src/assets/images/front-bg.jpg)">
             <form>
                 <div class="rounded flex flex-row flex-wrap gap-3 mt-5">
-                    <div class="rounded bg-green-1 search-div">
+                    <div class="rounded bg-green-1 search-div shadow-xl">
                         <p>Destination</p>
+                        <font-awesome-icon :icon="['fas', 'map-marker-alt']" size="lg" style="color: #52B788;"/>
                         <input class="rounded search-input" v-model="destination" type="text" placeholder="Enter destination...">
                     </div>
                     
-                    <div class="rounded bg-green-1 search-div">
+                    <div class="rounded bg-green-1 search-div shadow-xl">
                         <p>Check-in Date</p>
                         <input class="rounded search-input" ref="check_in" v-model="check_in" type="date">
                     </div>
                     
-                    <div class="rounded bg-green-1 search-div">
+                    <div class="rounded bg-green-1 search-div shadow-xl">
                         <p>Check-out Date</p>
                         <input class="rounded search-input" ref="check_out" v-model="check_out" type="date">
                     </div>
                     
-                    <div class="rounded bg-green-1 search-div">
+                    <div class="rounded bg-green-1 search-div shadow-xl">
                         <p>Guests</p>
+                        <font-awesome-icon :icon="['fas', 'users']" size="lg" style="color: #52B788;"/>
                         <select class="rounded search-input" v-model="selected">
                             <option disabled value="">Number of Guests</option>
                             <option>1</option>
@@ -40,7 +42,7 @@
                     </div>
                 </div>
                 <div style="width:100vw; text-align:center">
-            <input type="submit" value="Search" @click="search" class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"/>
+            <input type="submit" value="Search" @click="search" class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl"/>
         </div>
             </form>
         </div>
