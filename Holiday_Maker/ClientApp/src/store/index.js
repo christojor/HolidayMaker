@@ -39,8 +39,8 @@ const store = createStore({
    },
    getters: {
         filteredList(state){
-            return getByExtras(getByAmenities(getByName(getByRating(getByStars(getByMaxPrice(getByMinPrice(state.accomodations, state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter)
-            //return getByRooms(state.accomodations, state.filter)
+            //return getByExtras(getByAmenities(getByName(getByRating(getByStars(getByMaxPrice(getByMinPrice(state.accomodations, state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter)
+            return getByRooms(state.accomodations, state.filter)
         }
    },
 

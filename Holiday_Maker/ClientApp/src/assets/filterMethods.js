@@ -97,25 +97,28 @@ export function getByRooms(list, filter) {
     if (!filter.PropRooms) return list
     var checkedRooms = filter.PropRooms.filter(item => item.Checked == true)
     var checkedRoomsNames = []
-    checkedRooms.filter(item => checkedRoomsNames.push(item.Extra))
+    checkedRooms.filter(item => checkedRoomsNames.push(item.Type))
     
     var roomslist = []
+    var returnlist = [] 
     list.filter(item => roomslist.push(item.rooms[0],item.rooms[1]))
 
     if(checkedRoomsNames.includes("Single") == true){
-        roomslist = roomslist.filter(r => r.single == true)
+        returnlist.push(roomslist.filter(r => r.roomTypeId == 1))
     }
     if(checkedRoomsNames.includes("Double") == true){
-        roomslist = roomslist.filter(r => r.double == true)
+        returnlist.push(roomslist.filter(r => r.roomTypeId == 2))
     }
     if(checkedRoomsNames.includes("Suite") == true){
-        roomslist = roomslist.filter(r => r.suite == true)
+        returnlist.push(roomslist.filter(r => r.roomTypeId == 3))
     }
     if(checkedRoomsNames.includes("Shared") == true){
-        roomslist = roomslist.filter(r => r.shared == true)
+        returnlist.push(roomslist.filter(r => r.roomTypeId == 4))
     }
 
-    console.log(roomslist)
+    returnlist = returnlist.flat()
 
-    return list.filter(item => roomslist.filter(r => r.accomodationId == item.id).length > 0)
+    if(!returnlist.length) return list
+
+    return list.filter(item => returnlist.filter(r => r.accomodationId == item.id).length > 0)
 }
