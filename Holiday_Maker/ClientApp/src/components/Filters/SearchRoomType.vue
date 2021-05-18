@@ -27,7 +27,7 @@ export default{
             toggle: true,
             RoomTypes: [
                 {Type: 'Single', Checked: false},
-                {Type: 'Doubble', Checked: false},
+                {Type: 'Double', Checked: false},
                 {Type: 'Suite', Checked: false},
                 {Type: 'Shared', Checked: false},
             ],

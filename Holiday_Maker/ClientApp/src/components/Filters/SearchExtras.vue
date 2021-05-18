@@ -27,8 +27,8 @@ export default{
             toggle: true,
             Extras: [
                 {Extra: 'Self-Catering', Checked: false},
-                {Extra: 'Halfboard', Checked: false},
-                {Extra: 'Fullboard', Checked: false},
+                {Extra: 'HalfBoard', Checked: false},
+                {Extra: 'FullBoard', Checked: false},
                 {Extra: 'All-Inclusive', Checked: false},
                 {Extra: 'Breakfast', Checked: false},
                 {Extra: 'ExtraBed', Checked: false},

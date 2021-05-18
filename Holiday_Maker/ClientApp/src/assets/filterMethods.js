@@ -35,7 +35,6 @@ export function getByAmenities(list, filter) {
     var checkedAmenities = filter.PropAmenities.filter(item => item.Checked == true)
     var checkedAmenitiesNames = []
     checkedAmenities.filter(item => checkedAmenitiesNames.push(item.Amenity))
-    console.log(checkedAmenitiesNames[0])
     
     var amenitieslist = []
     list.filter(item => amenitieslist.push(item.amenities[0]))
@@ -58,41 +57,65 @@ export function getByAmenities(list, filter) {
     if(checkedAmenitiesNames.includes("KidClub") == true){
         amenitieslist = amenitieslist.filter(a => a.kidClub == true)
     }
-    
-    console.log(amenitieslist)
 
     return list.filter(item => amenitieslist.filter(a => a.accomodationId == item.id).length > 0)
 }
 export function getByExtras(list, filter) {
-    if (!filter.PropAmenities) return list
-    var checkedAmenities = filter.PropAmenities.filter(item => item.Checked == true)
-    var checkedAmenitiesNames = []
-    checkedAmenities.filter(item => checkedAmenitiesNames.push(item.Amenity))
-    console.log(checkedAmenitiesNames[0])
+    if (!filter.PropExtras) return list
+    var checkedExtras = filter.PropExtras.filter(item => item.Checked == true)
+    var checkedExtrasNames = []
+    checkedExtras.filter(item => checkedExtrasNames.push(item.Extra))
     
-    var amenitieslist = []
-    list.filter(item => amenitieslist.push(item.amenities[0]))
+    var extraslist = []
+    list.filter(item => extraslist.push(item.extras[0]))
 
-    if(checkedAmenitiesNames.includes("Entertainment") == true){
-        amenitieslist = amenitieslist.filter(a => a.entertainment == true)
+    if(checkedExtrasNames.includes("Self-Catering") == true){
+        extraslist = extraslist.filter(e => e.selfCatering == true)
     }
-    if(checkedAmenitiesNames.includes("Resturants") == true){
-        amenitieslist = amenitieslist.filter(a => a.resturant == true)
+    if(checkedExtrasNames.includes("HalfBoard") == true){
+        extraslist = extraslist.filter(e => e.halfBoard == true)
     }
-    if(checkedAmenitiesNames.includes("WiFi") == true){
-        amenitieslist = amenitieslist.filter(a => a.wiFi == true)
+    if(checkedExtrasNames.includes("FullBoard") == true){
+        extraslist = extraslist.filter(e => e.fullBoard == true)
     }
-    if(checkedAmenitiesNames.includes("Pool") == true){
-        amenitieslist = amenitieslist.filter(a => a.pool == true)
+    if(checkedExtrasNames.includes("All-Inclusive") == true){
+        extraslist = extraslist.filter(e => e.allInclusive == true)
     }
-    if(checkedAmenitiesNames.includes("Gym") == true){
-        amenitieslist = amenitieslist.filter(a => a.gym == true)
+    if(checkedExtrasNames.includes("Breakfast") == true){
+        extraslist = extraslist.filter(e => e.breakfast == true)
     }
-    if(checkedAmenitiesNames.includes("KidClub") == true){
-        amenitieslist = amenitieslist.filter(a => a.kidClub == true)
+    if(checkedExtrasNames.includes("ExtraBed") == true){
+        extraslist = extraslist.filter(e => e.extraBed == true)
     }
+    if(checkedExtrasNames.includes("Crib") == true){
+        extraslist = extraslist.filter(e => e.crib == true)
+    }
+
+    return list.filter(item => extraslist.filter(e => e.accomodationId == item.id).length > 0)
+}
+export function getByRooms(list, filter) {
+    if (!filter.PropRooms) return list
+    var checkedRooms = filter.PropRooms.filter(item => item.Checked == true)
+    var checkedRoomsNames = []
+    checkedRooms.filter(item => checkedRoomsNames.push(item.Extra))
     
-    console.log(amenitieslist)
+    var roomslist = []
+    list.filter(item => roomslist.push(item.rooms[0],item.rooms[1]))
 
-    return list.filter(item => amenitieslist.filter(a => a.accomodationId == item.id).length > 0)
+    if(checkedRoomsNames.includes("Single") == true){
+        roomslist = roomslist.filter(r => r.single == true)
+    }
+    if(checkedRoomsNames.includes("Double") == true){
+        roomslist = roomslist.filter(r => r.double == true)
+    }
+    if(checkedRoomsNames.includes("Suite") == true){
+        roomslist = roomslist.filter(r => r.suite == true)
+    }
+    if(checkedRoomsNames.includes("Shared") == true){
+        roomslist = roomslist.filter(r => r.shared == true)
+    }
+
+    console.log(roomslist)
+
+    return list.filter(item => roomslist.filter(r => r.accomodationId == item.id).length > 0)
 }
