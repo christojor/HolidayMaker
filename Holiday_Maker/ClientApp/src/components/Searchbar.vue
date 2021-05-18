@@ -70,11 +70,26 @@ export default {
     methods:{
         async search()
         {
+            // Format destination input (Refactor later!)
+            if (this.destination.match(/\b\w+\b/g) > 1){
+            this.destination = this.destination.trim()
+            this.destination = this.destination.toLowerCase()
+            this.destination = this.destination.charAt(0).toUpperCase() + this.destination.slice(1)
+            }
+            else{
+            this.destination = this.destination.split(" ")[0]
+            this.destination = this.destination.trim()
+            this.destination = this.destination.toLowerCase()
+            this.destination = this.destination.charAt(0).toUpperCase() + this.destination.slice(1)
+            }
+
+            // Get current data from store
             let allAccomodations = this.$store.state.accomodations
             let queriedAccomodations = []
             console.log(queriedAccomodations)
             console.log(this.destination)
 
+            // Check country and city
             if (this.destination.length){
                 allAccomodations.forEach(accomodation => {
                 if(accomodation.country == this.destination || accomodation.city == this.destination)
