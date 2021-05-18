@@ -40,9 +40,17 @@ namespace Holiday_Maker.Controllers
 
         // GET: api/Accomodations
         [HttpGet]
-        public async Task<IEnumerable<Accomodation>> GetAccomodations()
+        public async Task<IEnumerable<Accomodation>> GetAccomodations(string? theme)
         {
-            return await _accomodationService.NestedAccomodations();
+            if (theme == "")
+            {
+                return await _accomodationService.NestedAccomodations();
+            }
+            else
+            {
+                return await _accomodationService.NestedAccomodationsByTheme(theme);
+            }
+            
         }
 
         // GET: api/Accomodations/5

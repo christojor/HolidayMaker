@@ -122,5 +122,37 @@ namespace Holiday_Maker.Services
             return accomodations;
         }
 
+        public async Task<IEnumerable<Accomodation>> NestedAccomodationsByTheme(string theme)
+        {
+            var accommodationList = await GetAllByTheme(theme);
+            var roomList = await _roomRepo.GetAll();
+            var roomTypes = await _roomTypeRepo.GetAll();
+            var amenityList = await _amenityRepo.GetAll();
+            var extrasList = await _extraRepo.GetAll();
+
+            foreach (var accommodation in accommodationList)
+            {
+                var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
+                var amenities = amenityList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+                var extras = extrasList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+
+                accommodation.Amenities.Add(amenities);
+                accommodation.Extras.Add(extras);
+
+                foreach (var room in rooms)
+                {
+                    room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
+                    accommodation.Rooms.Add(room);
+                }
+            }
+
+            return accommodationList;
+        }
+        public async Task<IEnumerable<Accomodation>> GetAllByTheme(string theme)
+        {
+            var accommodationList = await _accomodationRepo.GetAll();
+            return accommodationList.Where(a => a.ThemeType == theme);
+        }
+
     }
 }

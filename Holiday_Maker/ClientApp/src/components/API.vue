@@ -17,6 +17,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Themes from "/src/components/Themes.vue"
+console.log(Themes)
 
 export default {
   computed:{ 
