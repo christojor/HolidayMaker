@@ -7,6 +7,7 @@
         
         <router-link to="/hotels" style="margin-right:20px">View hotels</router-link> -->
         <Themes/>
+        <router-link to="/Login" style="font-size: 17px">Log in</router-link>
     </nav>
 </template>
 
