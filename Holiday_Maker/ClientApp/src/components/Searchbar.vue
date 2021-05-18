@@ -1,5 +1,5 @@
 <template>
-        <div class="search-dest-box bg-contain">
+        <div class="search-dest-box">
             <form>
                 <div class="rounded flex flex-row flex-wrap gap-3 mt-5">
                     <div class="rounded bg-green-1 search-div shadow-xl">
