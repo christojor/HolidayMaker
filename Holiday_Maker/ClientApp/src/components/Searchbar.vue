@@ -1,5 +1,5 @@
 <template>
-        <div class="search-dest-box bg-contain" style="background-image: url(src/assets/images/front-bg.jpg)">
+        <div class="search-dest-box bg-contain">
             <form>
                 <div class="rounded flex flex-row flex-wrap gap-3 mt-5">
                     <div class="rounded bg-green-1 search-div shadow-xl">
