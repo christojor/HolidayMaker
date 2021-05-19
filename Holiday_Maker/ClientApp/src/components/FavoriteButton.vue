@@ -24,9 +24,7 @@ export default {
   },
   methods: {
     ChangeIcon() {
-      console.log("Button clicked")
       this.Toggle = !this.Toggle
-
     },
     async SetFavorite(){
       let data = { userId: 1, accomodationId: this.accomodationObject.id, groupName: 'lulxd' };

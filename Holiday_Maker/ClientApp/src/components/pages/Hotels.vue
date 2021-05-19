@@ -137,7 +137,7 @@ export default{
                 PropStars: 5,
                 PropRating: 0,
                 PropMinPrice: 50,
-                PropMaxPrice: 3000,
+                PropMaxPrice: 2000,
                 PropExtras: [],
                 PropAmenities: [],
                 PropRooms: [],
