@@ -52,16 +52,15 @@ const store = createStore({
         setUserPassword(state, usrPassword){
             state.userPassword = usrPassword;
         },
-        },
         updateAccomodations (state, payload) {
             console.log(payload)
-            state.accomodations = payload
+            state.accomodations = payload;
         },
    },
    getters: {
         filteredList(state){
             return getByRooms(getByExtras(getByAmenities(getByName(getByRating(getByStars(getByMaxPrice(getByMinPrice(state.accomodations, state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter)
-        }
+        },
    },
 
    // Functions that call mutations asynchronously. Called by using dispatch (instead of state) in component.
@@ -87,7 +86,7 @@ const store = createStore({
             commit('setUserId', json.userId);
             commit('setLoggedInState', json.isLoggedIn)
             commit('setLoginAttemptMessage', json.loggedInMessage)
-        }
+        },
     }
 })
 
