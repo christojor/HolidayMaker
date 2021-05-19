@@ -125,6 +125,7 @@ aside{
     border: none;
     margin: 5px;
     font-size: 15px;
+    width: 50px;
 }
 .drop-box{
     border-radius: 7px;
