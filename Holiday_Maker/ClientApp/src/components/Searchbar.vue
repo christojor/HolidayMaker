@@ -1,48 +1,53 @@
 <template>
+<!-- Background image -->
         <div class="search-dest-box">
             <form>
-                <div class="rounded flex flex-row flex-wrap gap-3 mt-5">
-                    <div class="rounded bg-green-1 search-div shadow-xl">
-                        <p>Destination</p>
-                        <font-awesome-icon :icon="['fas', 'map-marker-alt']" size="lg" style="color: #52B788;"/>
-                        <input class="rounded search-input" v-model="destination" type="text" placeholder="Enter destination...">
+                <!-- Begin input fields -->
+                <div class="flex flex-row flex-wrap gap-3 mt-8">
+        <div class="rounded-t-md bg-green-1 search-div shadow-xl w-4/8">
+    <!-- Search Destination -->
+        <div class="text-green-500">
+        <font-awesome-icon :icon="['fas', 'map-marker-alt']" class="mt-3 mr-4 fa-2x float-left" style="color: #52B788;"/>
+        <input class="float-left border-2 border-green-500 bg-white h-10 px-5 mt-2 pr-20 rounded-lg text-lg focus:outline-none" 
+        id="destination" name="destination" v-model="destination" type="text" placeholder="Destination..." 
+        autocomplete="country-name, address-level1" spellcheck="false">
+      </div>
+            </div>
+                    <!-- Check-in -->
+                    <div class="rounded-t-md bg-green-1 search-div shadow-xl w-1/8">
+                    <div class="text-green-500">
+                    <p class="float-left mt-2 ml-2" style="font-size: 10pt; font-weight: bold;">Check-in</p>
+                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" ref="check_in" v-model="check_in" type="date">
+                    </div>
                     </div>
                     
-                    <div class="rounded bg-green-1 search-div shadow-xl">
-                        <p>Check-in Date</p>
-                        <input class="rounded search-input" ref="check_in" v-model="check_in" type="date">
+                    <!-- Check-out -->
+                    <div class="rounded-t-md bg-green-1 search-div shadow-xl w-1/8">
+                    <div class="text-green-500">
+                        <p class="float-left mt-2 ml-2" style="font-size: 10pt; font-weight: bold;">Check-out</p>
+                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" ref="check_out" v-model="check_out" type="date">
+                    </div>
                     </div>
                     
-                    <div class="rounded bg-green-1 search-div shadow-xl">
-                        <p>Check-out Date</p>
-                        <input class="rounded search-input" ref="check_out" v-model="check_out" type="date">
-                    </div>
-                    
-                    <div class="rounded bg-green-1 search-div shadow-xl">
-                        <p>Guests</p>
-                        <font-awesome-icon :icon="['fas', 'users']" size="lg" style="color: #52B788;"/>
-                        <select class="rounded search-input" v-model="selected">
-                            <option disabled value="">Number of Guests</option>
+                    <!-- Number of travellers -->
+                    <div class="rounded-t-md bg-green-1 search-div shadow-xl w-2/8">
+                    <div class="text-green-500">
+                        <font-awesome-icon :icon="['fas', 'users']" class="mt-3 mr-4 fa-2x float-left" style="color: #52B788;"/>
+                        <select class="float-left border-2 border-green-500 bg-white h-10 px-5 mt-2 pr-4 rounded-lg text-lg focus:outline-none" v-model="selected">
+                            <option disabled value="">Number of Travellers</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
+                            <option>4</option>
                         </select>
-                    </div>      
-                </div>
-                <div class="flex flex-row flex-wrap gap-2 mt-2" style="justify-content:center;padding:1em">
-                    <div class="border-2 border-green-5 rounded bg-green-1" style="padding-left:1em;padding-right:1em">
-                        <label for="beachslider" style="padding-right:1em">Distance to Beach</label>
-                        <input id="beechslider" type="range" min="50" v-model="distanceToBeech" max="1000" step="50" style="flex:1">
-                        <output for="beechslider" :value="500 + ' m'">{{distanceToBeech}} m</output>
                     </div>
-                    <div class="border-2 border-green-5 rounded bg-green-1" style="padding-left:1em;padding-right:1em">
-                        <label for="cityslider" style="padding-right:1em">Distance to City Center</label>
-                        <input id="cityslider" type="range" min="50" v-model="distanceToCity" max="1000" step="50" style="flex:1">
-                        <output for="cityslider" :value="500 + ' m'">{{distanceToCity}} m</output>
                     </div>
+                          <!-- End input fields -->
                 </div>
-                <div style="width:100vw; text-align:center">
-            <input type="submit" value="Search" @click="search" class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl"/>
+
+                <!-- Search Button -->
+                <div style="text-align:center">
+            <input type="submit" value="Search" @click="search" class="mt-6 w-2/6 bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full shadow-xl"/>
         </div>
             </form>
         </div>
