@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Holiday_Maker.Services;
 using Stripe;
+using Newtonsoft.Json;
 
 namespace Holiday_Maker.Controllers
 {
@@ -21,7 +22,8 @@ namespace Holiday_Maker.Controllers
         [HttpPost("PaymentIntent")]
         public async Task<string> PaymentIntent()
         {
-            return _paymentService.MakePayment().ToJson();
+            return _paymentService.CreatePaymentIntent().ToJson();
         }
+
     }
 }

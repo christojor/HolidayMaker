@@ -19,7 +19,7 @@ namespace Holiday_Maker.Services
             StripeConfiguration.ApiKey = JsonSerializer.Deserialize<Secret>(readText).Key;
         }
 
-        public PaymentIntent MakePayment()
+        public PaymentIntent CreatePaymentIntent()
         {
             var options = new PaymentIntentCreateOptions
             {
