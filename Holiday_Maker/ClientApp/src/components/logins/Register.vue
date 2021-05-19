@@ -1,37 +1,52 @@
 <template>
-    <form @submit.prevent="handleSubmit" style="text-align:right" :class="{show : toggle}">
-        <h1 class="form-head">Register</h1>
-
-        <input v-if="error != ''" class="error-box" v-model="error"> <br/>
-
-        <label for="Name" style="font-size:20px;">Full name:</label>
-        <input type="text" class="form-input" id="Name" v-model="Name"> <br/>
-
-        <label for="Email" style="font-size:20px">Email:</label>
-        <input type="text" class="form-input" id="Email" v-model="Email"> <br/>
-
-        <label for="PhoneNumber" style="font-size:20px">Phone number:</label>
-        <input type="number" class="form-input" id="PhoneNumber" v-model="PhoneNumber"> <br/>
-
-        <label for="Address" style="font-size:20px">Address:</label>
-        <input type="text" class="form-input" id="Address" v-model="Address"> <br/>
-
-        <label for="ZipCode" style="font-size:20px">ZipCode:</label>
-        <input type="text" class="form-input" id="ZipCode" v-model="ZipCode"> <br/>
-
-        <label for="Town" style="font-size:20px">Town:</label>
-        <input type="text" class="form-input" id="Town" v-model="Town"> <br/>
-
-        <label for="Country" style="font-size:20px">Country:</label>
-        <input type="text" class="form-input" id="Country" v-model="Country"> <br/>
-
-        <label for="Password" style="font-size:20px">Password:</label>
-        <input type="text" class="form-input" id="Password" v-model="Pwd"> <br/>
-
-        <label for="Password2" style="font-size:20px">Repeat password:</label>
-        <input type="text" class="form-input" id="Password2" v-model="Pwd2"> <br/>
-
-        <button class="form-button bg-green-5">Register</button>
+    <form @submit.prevent="handleSubmit" style="text-align:center;" :class="{show : toggle}">
+        <h2 class="form-head text-green-6">Register</h2>
+        
+        <table style="table-layout:fixed; width:70%; margin-left:15%">
+            <colgroup>
+                <col style="width: 100px">
+                <col style="width: 40%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td>Full name:</td>
+                <td><input type="text" class="form-input" id="Name" v-model="Name"></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" class="form-input" id="Email" v-model="Email"></td>
+            </tr>
+            <tr>
+                <td>Phone number:</td>
+                <td><input type="number" class="form-input" id="PhoneNumber" v-model="PhoneNumber"></td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td><input type="text" class="form-input" id="Address" v-model="Address"></td>
+            </tr>
+            <tr>
+                <td>ZipCode:</td>
+                <td><input type="text" class="form-input" id="ZipCode" v-model="ZipCode"></td>
+            </tr>
+            <tr>
+                <td>Town:</td>
+                <td><input type="text" class="form-input" id="Town" v-model="Town"></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td><input type="text" class="form-input" id="Country" v-model="Country"></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="text" class="form-input" id="Password" v-model="Pwd"></td>
+            </tr>
+            <tr>
+                <td>Repeat password:</td>
+                <td><input type="text" class="form-input" id="Password2" v-model="Pwd2"></td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Register</button>
         
         <p style="text-align:left">Already have an account?</p>
     </form>

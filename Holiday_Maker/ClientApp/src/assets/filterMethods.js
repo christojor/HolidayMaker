@@ -15,8 +15,8 @@ export function getByMinPrice(list, filter) {
     if(filter.PropMinPrice == 0){ 
         return list
     }
-    else if(filter.PropMinPrice == 3000){ 
-        return list.filter(item => item.rooms.filter(item => item.price > 3000).length > 0) 
+    else if(filter.PropMinPrice == 2000){ 
+        return list.filter(item => item.rooms.filter(item => item.price > 2000).length > 0) 
     }
     return list.filter(item => item.rooms.filter(item => item.price >= filter.PropMinPrice).length > 0)
 } 
@@ -25,7 +25,7 @@ export function getByMaxPrice(list, filter) {
     if(filter.PropMaxPrice == 0){ 
         return null 
     }
-    else if(filter.PropMaxPrice == 3000){ 
+    else if(filter.PropMaxPrice == 2000){ 
         return list.filter(item => item.rooms.filter(item => item.price > 0).length > 0) 
     }
     return list.filter(item => item.rooms.filter(item => item.price <= filter.PropMaxPrice).length > 0)

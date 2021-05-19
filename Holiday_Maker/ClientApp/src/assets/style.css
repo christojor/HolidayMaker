@@ -32,7 +32,7 @@ aside{
 /*----------Layout----------*/
 .container1{
     margin-left: 20vw;
-    width: 1150px;
+    width: 60vw;
     height: fit-content;
     min-height: 100%;
 }
@@ -55,36 +55,36 @@ aside{
 /*----------Hotel Items----------*/
 .hotel-item{
     background-color: white;
-    margin: 10px;
+    margin: 1%;
     height: 200px;
-    width: 762px;
+    width: 98%;
     border-radius: 7px;
 }
 .hotel-item-img{
     display: inline-block;
-    width: 250px;
+    width: 30%;
     height: 200px;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
 }
 .hotel-item-desc{
     display: inline-block;
-    width: 522;
+    width: 70%;
+    padding: 1%;
     vertical-align: top;
     font-size: 11px;
+    overflow: hidden;
 }
 .hotel-item-desc-left{
     display: inline-block;
-    width: 370px;
+    width: 80%;
     height: 180px;
-    margin: 10px;
     vertical-align: top;
 }
 .hotel-item-desc-right{
     display: inline-block;
-    width: 100px;
+    width: 20%;
     height: 180px;
-    margin: 10px;
     text-align: right;
     font-size: 13px;
     z-index: 0;
@@ -244,7 +244,8 @@ h1 {
     font-size: 17px;
 }
 /*----------------Seach Box---------------*/
-.search-input{
+.search-box{
+    width: 75%;
     margin: 10px;
     border: 1px solid black;
 }
@@ -271,7 +272,7 @@ h1 {
     border: 1px solid black;
     border-radius: 7px;
     margin: 10px;
-    width: 50%;
+    width: 100%;
     font-size: 20px;
 }
 .info-head{
@@ -284,13 +285,6 @@ h1 {
     padding: 10px;
     border-radius: 7px;
     border-left: 2px solid grey;
-}
-.form-button{
-    border: 1px solid black;
-    border-radius: 7px;
-    padding: 5px 50px 5px 50px;
-    margin: 10px;
-    font-weight: 600;
 }
 .error-box{
     margin: 10px;
