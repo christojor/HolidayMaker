@@ -99,6 +99,8 @@ export default{
             this.filter.PropExtras = filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
             this.filter.PropRooms = this.filter.PropRooms
+
+            this.filterList(this.filter)
         },
         filterAmenities(filter){
             this.filter.PropName = this.filter.PropName
@@ -121,6 +123,8 @@ export default{
             this.filter.PropExtras = this.filter.PropExtras
             this.filter.PropAmenities = this.filter.PropAmenities
             this.filter.PropRooms = filter.PropRooms
+
+            this.filterList(this.filter)
         },
         filterList(filter){
             this.$store.commit("updateFilter", filter)
@@ -133,15 +137,15 @@ export default{
                 PropStars: 5,
                 PropRating: 0,
                 PropMinPrice: 50,
-                PropMaxPrice: 3000,
+                PropMaxPrice: 2000,
                 PropExtras: [],
                 PropAmenities: [],
                 PropRooms: [],
             }
         }
     },
-    created() {
-    this.$store.dispatch("getAccomodations");
-  },
+//     created() {
+//     this.$store.dispatch("getAccomodations");
+//   },
 }
 </script>

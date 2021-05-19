@@ -40,9 +40,16 @@ namespace Holiday_Maker.Controllers
 
         // GET: api/Accomodations
         [HttpGet]
-        public async Task<IEnumerable<Accomodation>> GetAccomodations()
+        public async Task<IEnumerable<Accomodation>> GetAccomodations(string? theme)
         {
-            return await _accomodationService.NestedAccomodations();
+            if(theme == "" || theme == null) 
+            {
+                return await _accomodationService.NestedAccomodations();
+            }
+            else
+            {
+                return await _accomodationService.NestedAccomodationsByTheme(theme);
+            }
         }
 
         // GET: api/Accomodations/5
@@ -123,7 +130,7 @@ namespace Holiday_Maker.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Accomodation>>> Search(string country, string city)
+        public async Task<ActionResult<IEnumerable<Accomodation>>> Search(string country="", string city="")
         {
             var accomodation = _accomodationService.SearchAccomodationByCountryAndCity(country, city);
             if(accomodation !=null)
