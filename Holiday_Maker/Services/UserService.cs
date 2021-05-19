@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Holiday_Maker.Models;
 using Holiday_Maker.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Holiday_Maker.Helper;
 
 namespace Holiday_Maker.Services
 {
@@ -12,10 +13,12 @@ namespace Holiday_Maker.Services
     {
         private IGenericRepository<UserFavorite> _ufRepo;
         private IGenericRepository<Accomodation> _accomodationRepo;
+        private IGenericRepository<User> _userRepo;
         public UserService()
         {
             _ufRepo = new GenericRepository<UserFavorite>();
             _accomodationRepo = new GenericRepository<Accomodation>();
+            _userRepo = new GenericRepository<User>();
         }
         public async Task<ActionResult<IEnumerable<Accomodation>>> GetUserFavorites(int id)
         {
@@ -40,6 +43,8 @@ namespace Holiday_Maker.Services
             }
             return favoriteAccomodations;
         }
+
+
         public async Task<ActionResult> AddUserFavorite(UserFavorite userFavorite)
         {
             var getUserFavorites = await _ufRepo.GetAll();
@@ -70,6 +75,24 @@ namespace Holiday_Maker.Services
                 _ufRepo.Delete(favorite.Id);
             }
             return NotFound();
+        }
+
+
+        public void RegisterUser(User user)
+        {
+            _userRepo.Insert(user);
+        }
+        internal async Task<LoginHelper> Login(string username, string password)
+        {
+            var users = await _userRepo.GetAll();
+            var user = users.FirstOrDefault(u => u.Username.Equals(username) && u.Password.Equals(password));
+
+            if(user != null)
+            {
+                return new LoginHelper() { LoggedInMessage = "You logged in successfully!", IsLoggedIn = true, UserId = user.Id };
+            }
+
+            return new LoginHelper() { LoggedInMessage = "User not found!", IsLoggedIn = false };
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Holiday_Maker.Services;
+using Holiday_Maker.Helper;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,15 +30,6 @@ namespace Holiday_Maker.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-
         [HttpGet("favorites")]
         public async Task<ActionResult<IEnumerable<Accomodation>>> GetFavorites(int userId)
         {
@@ -45,13 +37,27 @@ namespace Holiday_Maker.Controllers
             return await _userService.GetUserFavorites(userId);
         }
 
-        // POST api/<UserController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+
+
+        //[HttpGet("login")]
+        //public async Task<LoginHelper> GetStuff(string username, string password)
+        //{
+        //    return await _userService.Login(username, password);
+        //}
+
+        [HttpPost("login")]
+        public async Task<LoginHelper> Login(string username, string password)
         {
+            return await _userService.Login(username, password);
         }
 
-        // PUT api/<UserController>/5
+        [HttpPost("register")]
+        public void PostRegister(User user)
+        {
+           _userService.RegisterUser(user);
+        }
+
+
         [HttpPost("favorites")]
         public async void PostFavorite(UserFavorite userFavorite)
         {

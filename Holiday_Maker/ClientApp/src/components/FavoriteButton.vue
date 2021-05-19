@@ -29,7 +29,7 @@ export default {
 
     },
     async SetFavorite(){
-      let data = { userId: 1, accomodationId: this.accomodationObject.id, groupName: 'lulxd' };
+      let data = { userId: this.$store.state.userId, accomodationId: this.accomodationObject.id, groupName: 'lulxd' };
       let rawResponse = await fetch('https://localhost:44323/api/User/favorites', {
        // tell the server we want to send/create data
       method: 'post',
@@ -40,7 +40,7 @@ export default {
 });
     },
     async DeleteFavorite(){
-      let data = { userId: 1, accomodationId: this.accomodationObject.id};
+      let data = { userId: this.$store.state.userId, accomodationId: this.accomodationObject.id};
       // let rawResponse = await fetch('https://localhost:44323/api/User/favorites?userId='+1+'&accomodationId='+this.accomodationObject.id, {
       let rawResponse = await fetch('https://localhost:44323/api/User/favorites', {
       // tell the server we want to send/create data
