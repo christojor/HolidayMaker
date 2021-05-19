@@ -6,12 +6,14 @@
   </div>
 
   <div class="flex flex-row w-full overflow-hidden">
-    <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
-    <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
+    
+    
   </div>
 
   <div class="w-full overflow-hidden">
-    <p><b>1,5/5 (Sucks)</b></p>
+      <div v-for="stars in accomodation.starRating" :key="stars" style="display:inline-block; margin-bottom:5px">
+        <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
+    </div><br/>
   </div>
 
 </div>
