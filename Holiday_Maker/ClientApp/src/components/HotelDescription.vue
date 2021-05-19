@@ -29,7 +29,7 @@
             <FavoriteButton :accomodationObject="accomodation"/>
         </div>
         <p style="font-size:14px;">From</p>
-        <h2 style="font-size:20px;">{{lowestRoom(accomodation.id)}}€</h2>
+        <h2 style="font-size:20px;">{{lowestRoom(accomodation.id)}}â‚¬</h2>
         <p style="font-size:12px;">per night</p>
     </div>
 </template>
