@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Holiday_Maker.Models;
 
 #nullable disable
 
@@ -21,8 +22,10 @@ namespace Holiday_Maker.Models
         public virtual DbSet<AccomodationType> AccomodationTypes { get; set; }
         public virtual DbSet<Amenity> Amenities { get; set; }
         public virtual DbSet<Extra> Extras { get; set; }
+        public virtual DbSet<MemberType> MemberTypes { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomType> RoomTypes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserFavorite> UserFavorites { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -70,6 +73,8 @@ namespace Holiday_Maker.Models
                     .IsRequired()
                     .HasMaxLength(255);
 
+                entity.Property(e => e.ThemeType).HasMaxLength(100);
+
                 entity.Property(e => e.Zip)
                     .IsRequired()
                     .HasMaxLength(15);
@@ -115,6 +120,16 @@ namespace Holiday_Maker.Models
                     .HasConstraintName("FK_Extra_Accomodation");
             });
 
+            modelBuilder.Entity<MemberType>(entity =>
+            {
+                entity.ToTable("MemberType");
+
+                entity.Property(e => e.MemberType1)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .HasColumnName("MemberType");
+            });
+
             modelBuilder.Entity<Room>(entity =>
             {
                 entity.ToTable("Room");
@@ -145,11 +160,46 @@ namespace Holiday_Maker.Models
                     .HasMaxLength(50);
             });
 
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("User");
+
+                entity.Property(e => e.City)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Country)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.StreetAddress)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
             modelBuilder.Entity<UserFavorite>(entity =>
             {
                 entity.ToTable("UserFavorite");
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.GroupName).HasMaxLength(50);
             });
