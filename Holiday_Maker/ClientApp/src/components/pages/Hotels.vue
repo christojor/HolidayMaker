@@ -13,8 +13,11 @@
             <DistanceCity @filter-search="filterCity"/>
         </div>
 
-        <div class="container3 shadow-md bg-green-1">
+        <div class="container3 shadow-md bg-green-1" v-if="this.$store.state.accomodations != null">
             <HotelList/>
+        </div>
+        <div class="container3 shadow-md bg-green-1" v-else>
+            <NoResults />
         </div>
 
     </div>
@@ -32,6 +35,7 @@ import Amenities from "/src/components/filters/SearchAmenities.vue"
 import RoomType from "/src/components/filters/SearchRoomType.vue"
 import DistanceBeach from "/src/components/filters/SearchDistanceBeach.vue"
 import DistanceCity from "/src/components/filters/SearchDistanceCity.vue"
+import NoResults from "/src/components/pages/NoResults.vue"
 
 export default{
     components: {
@@ -45,7 +49,8 @@ export default{
         Amenities,
         RoomType,
         DistanceBeach,
-        DistanceCity
+        DistanceCity,
+        NoResults
     },
     methods: {
         filterName(filter){
@@ -150,8 +155,5 @@ export default{
             }
         }
     },
-//     created() {
-//     this.$store.dispatch("getAccomodations");
-//   },
 }
 </script>

@@ -16,7 +16,8 @@ const store = createStore({
         isLoggedIn: false,
         userName: null,
         userPassword: null,
-        loginAttemptMessage: null
+        loginAttemptMessage: null,
+        destination: null
    },
 
    // Methods for changing states synchronously
@@ -52,8 +53,11 @@ const store = createStore({
         setUserPassword(state, usrPassword){
             state.userPassword = usrPassword;
         },
+        setDestination(state, searchQuery){
+            console.log(searchQuery)
+            state.destination = searchQuery;
+        },
         updateAccomodations (state, payload) {
-            console.log(payload)
             state.accomodations = payload;
         },
    },
@@ -86,6 +90,19 @@ const store = createStore({
             commit('setUserId', json.userId);
             commit('setLoggedInState', json.isLoggedIn)
             commit('setLoginAttemptMessage', json.loggedInMessage)
+        },
+        async getQueriedDestinations({commit}){
+
+            let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
+
+            if(response.status != (204))
+            {
+            let json = await response.json();
+            commit('updateAccomodations', json);
+            }
+            else {
+                commit('updateAccomodations', null);
+            }
         },
     }
 })

@@ -1,5 +1,6 @@
 ﻿using Holiday_Maker.Models;
 using Holiday_Maker.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,9 +37,10 @@ namespace Holiday_Maker.Services
 
             foreach (var accommodation in accommodationList)
             {
-                var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
                 var amenities = amenityList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
                 var extras = extrasList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+
+                var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
 
                 accommodation.Amenities.Add(amenities);
                 accommodation.Extras.Add(extras);
@@ -102,23 +104,26 @@ namespace Holiday_Maker.Services
             }
             return accomodations;
         }
-        public IQueryable<Accomodation> SearchAccomodationByCountryAndCity(string country, string city)
+        public IQueryable<Accomodation> SearchAccomodationByCountryAndCity(string searchQuery)
         {
             var accomodations = _accomodationRepo.GetAllRaw();
 
-            if (accomodations.Any(s => s.Country.Equals(country)))
+            if (accomodations.Any(s => s.Country.Equals(searchQuery)))
             {
-                accomodations = accomodations.Where(s => s.Country.Contains(country));
-
-                if (accomodations.Any(s => s.City.Equals(city)))
-                {
-                    accomodations = accomodations.Where(s => s.City.Contains(city));
-                }
+                accomodations = accomodations.Where(s => s.Country.Contains(searchQuery));
+                accomodations = NestChildren(accomodations);
             }
+
+            else if (accomodations.Any(s => s.City.Equals(searchQuery)))
+                {
+                    accomodations = accomodations.Where(s => s.City.Contains(searchQuery));
+                    accomodations = NestChildren(accomodations);
+                }
             else
             {
                 accomodations = null;
             }
+
             return accomodations;
         }
         public async Task<IEnumerable<Accomodation>> NestedAccomodationsByTheme(string theme)
@@ -151,6 +156,34 @@ namespace Holiday_Maker.Services
         {
             var accommodationList = await _accomodationRepo.GetAll();
             return accommodationList.Where(a => a.ThemeType == theme);
+        }
+
+        public IQueryable<Accomodation> NestChildren(IQueryable<Accomodation> accomodations)
+        {
+            var accommodationList = accomodations;
+            var roomList = _roomRepo.GetAllRaw();
+            var roomTypes = _roomTypeRepo.GetAllRaw();
+            var amenityList = _amenityRepo.GetAllRaw();
+            var extrasList = _extraRepo.GetAllRaw();
+
+            foreach (var accommodation in accommodationList)
+            {
+                var amenities = amenityList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+                var extras = extrasList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+
+                var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
+
+                accommodation.Amenities.Add(amenities);
+                accommodation.Extras.Add(extras);
+
+                foreach (var room in rooms)
+                {
+                    room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
+                    accommodation.Rooms.Add(room);
+                }
+            }
+
+            return accommodationList;
         }
 
     }

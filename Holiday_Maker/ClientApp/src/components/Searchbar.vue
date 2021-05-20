@@ -2,14 +2,16 @@
 <!-- Background image -->
         <div class="search-dest-box">
             <form>
+
                 <!-- Begin input fields -->
                 <div class="flex flex-row flex-wrap gap-3 mt-8">
         <div class="rounded-t-md bg-green-1 search-div shadow-xl w-4/8">
+
     <!-- Search Destination -->
         <div class="text-green-500">
         <font-awesome-icon :icon="['fas', 'map-marker-alt']" class="mt-3 mr-4 fa-2x float-left" style="color: #52B788;"/>
         <input class="float-left border-2 border-green-500 bg-white h-10 px-5 mt-2 pr-20 rounded-lg text-lg focus:outline-none" 
-        id="destination" name="destination" v-model="destination" type="text" placeholder="Destination..." 
+        v-model="destinationSearch" type="text" placeholder="Destination..." 
         autocomplete="country-name, address-level1" spellcheck="false">
       </div>
             </div>
@@ -56,16 +58,16 @@
 
 <script>
 export default {
-    created() {
-    this.$store.dispatch("getAccomodations");
-    },
+    // Component not loaded yet
+  beforeRouteEnter(to, from, next) {
+      
+      next();
+  },
 
     data()
     {
         return{
-            distanceToCity: 500,
-            distanceToBeech: 500,
-            destination: '',
+            destinationSearch: '',
             check_in: '',
             check_out: '',
             selected: '',
@@ -73,56 +75,51 @@ export default {
         }
     },
     methods:{
+        formatQuery(){
+            this.destinationSearch = this.destinationSearch.trim()
+            this.destinationSearch  = this.destinationSearch.toLowerCase()
+            this.destinationSearch  = this.destinationSearch.charAt(0).toUpperCase() + this.destinationSearch.slice(1)
+        },
         async search()
         {
-            // Format destination input (Refactor later!)
-            if (this.destination.match(/\b\w+\b/g) > 1){
-            this.destination = this.destination.trim()
-            this.destination = this.destination.toLowerCase()
-            this.destination = this.destination.charAt(0).toUpperCase() + this.destination.slice(1)
+            if(this.destinationSearch.length > 1)
+            {   // Format destinationSearch if more than one word
+                if (this.destinationSearch.match(/\b\w+\b/g) > 1){
+                    this.formatQuery()
+                    }
+                else{
+                        this.destinationSearch = this.destinationSearch.split(" ")[0]
+                        this.formatQuery()
+                        
+                        // Write formatted destination to state
+                        this.setDestination(this.destinationSearch)
+                        
+                        // Get accomodations from API and write to state
+                        this.getQueriedDestinations(this.$store.state.destination)
+                    }
             }
-            else{
-            this.destination = this.destination.split(" ")[0]
-            this.destination = this.destination.trim()
-            this.destination = this.destination.toLowerCase()
-            this.destination = this.destination.charAt(0).toUpperCase() + this.destination.slice(1)
-            }
-
-            // Get current data from store
-            let allAccomodations = this.$store.state.accomodations
-            let queriedAccomodations = []
-            console.log(queriedAccomodations)
-            console.log(this.destination)
-
-            // Check country and city
-            if (this.destination.length){
-                allAccomodations.forEach(accomodation => {
-                if(accomodation.country == this.destination || accomodation.city == this.destination)
-                {
-                    queriedAccomodations.push(accomodation);
-                    console.log(accomodation)
-                }
-            });
-            } 
             else {
-                queriedAccomodations = allAccomodations
+                 // Get all accommodations
+                this.$store.dispatch("getAccomodations");
             }
 
-            this.updateAccomodations(queriedAccomodations)
-
-            this.$router.push({ name: "Hotels"}) //Ok
+            // Route to results page
+            this.$router.push({ name: "Hotels"})
 
         },
 
+    // Set destination in state to formatted search parameter
+    setDestination(searchQuery) {
+      this.$store.commit("setDestination", searchQuery);
+    },
+    // Call API and update accomodations state based on destination state
+    getQueriedDestinations() {
+      this.$store.dispatch("getQueriedDestinations");
+    },
+    // Get all accommodations (no search query)
     getAccomodations() {
       this.$store.dispatch("getAccomodations");
     },
-    updateAccomodations(queriedAccomodations) {
-      this.$store.commit("updateAccomodations", queriedAccomodations);
-    },
-    filterList(filter){
-            this.$store.commit("updateFilter", filter)
-        }
-    }
+        },
 }
 </script>
