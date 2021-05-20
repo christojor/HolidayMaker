@@ -16,15 +16,16 @@
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type="text" class="form-input" id="Password" v-model="password"></td>
+                <td><input type="password" class="form-input" id="Password" v-model="Pwd"></td>
             </tr>
             </tbody>
         </table>
+        <!-----Only for testing------------->
         <p>UserId: {{userId}}</p>
         <p>loginAttempt: {{isLoggedIn}}</p>
         <p>Login message: {{loginMessage}}</p>        
         <button class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Log in</button>
-        
+        <!---------------------------------->
         <p style="text-align:left">Don't have an account?</p>
     </form>
 </template>
@@ -40,10 +41,7 @@ export default {
             Email: '',
             Address: '',
             Pwd: '',
-            Pwd2: '',
             error: '',
-            username: '',
-            password: '',
         }
     },
     computed:{
@@ -56,20 +54,17 @@ export default {
       loginMessage(){
         return this.$store.state.loginAttemptMessage;
       }
-
     },
     methods:{
-        handleSubmit(){
-            this.error = ''
-            
-            if(this.Pwd != 'Real Password'){
-                this.error = "Email or password incorrect"
-            }            
-        },
         loginAttempt(){
-        this.$store.state.userEmail = this.Email;
-        this.$store.state.userPassword = this.password;
-        this.$store.dispatch("getLoginAttempt");
+           this.error = '';
+
+           this.$store.state.userEmail = this.Email;
+           this.$store.state.userPassword = this.Pwd;
+           this.$store.dispatch("getLoginAttempt");
+           if(this.isLoggedIn === false){
+                this.error = this.loginMessage;
+            }         
         }
     },
 }
