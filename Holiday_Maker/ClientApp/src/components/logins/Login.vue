@@ -24,7 +24,8 @@
         <p>UserId: {{userId}}</p>
         <p>loginAttempt: {{isLoggedIn}}</p>
         <p>Login message: {{loginMessage}}</p>        
-        <button class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Log in</button>
+        <button type="submit" class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Log in</button>
+        
         <!---------------------------------->
         <p style="text-align:left">Don't have an account?</p>
     </form>
@@ -46,9 +47,17 @@ export default {
     },
     computed:{
      userId() {
+         var localUserId = localStorage.getItem('userId');
+         if(localUserId != null){
+             return localUserId;
+         }
       return this.$store.state.userId;
       },
       isLoggedIn(){
+          var localLoginStatus = localStorage.getItem('loggedIn');
+          if(localLoginStatus != null){
+              return localLoginStatus;
+          }
         return this.$store.state.isLoggedIn;
       },
       loginMessage(){
@@ -60,11 +69,14 @@ export default {
            this.$store.state.userEmail = this.Email;
            this.$store.state.userPassword = this.Pwd;
            this.$store.dispatch("getLoginAttempt");
-           if(this.isLoggedIn === false){
+           if(this.isLoggedIn == false){
                 this.error = this.loginMessage;
-            }else if(this.isLoggedIn === true){
-                this.error = '';
+            }else if(this.isLoggedIn == true){
+ 
             }     
+        },
+        logout(){
+            localStorage.clear();
         }
     },
 }

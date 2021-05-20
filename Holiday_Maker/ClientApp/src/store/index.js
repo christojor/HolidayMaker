@@ -12,8 +12,8 @@ const store = createStore({
         message: 'Hello Vuex',
         accomodations: [],
         filter: [],
-        userId: null,
-        isLoggedIn: false,
+        userId: localStorage.getItem('userId'),
+        isLoggedIn: localStorage.getItem('loggedIn'),
         userEmail: null,
         userPassword: null,
         loginAttemptMessage: null
@@ -86,6 +86,10 @@ const store = createStore({
             commit('setUserId', json.userId);
             commit('setLoggedInState', json.isLoggedIn)
             commit('setLoginAttemptMessage', json.loggedInMessage)
+            if(json.isLoggedIn === true){
+                localStorage.setItem('userId', this.state.userId);
+                localStorage.setItem('loggedIn', this.state.isLoggedIn);
+            }
         },
     }
 })
