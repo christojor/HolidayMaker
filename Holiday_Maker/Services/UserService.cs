@@ -82,10 +82,10 @@ namespace Holiday_Maker.Services
         {
             _userRepo.Insert(user);
         }
-        internal async Task<LoginHelper> Login(string username, string password)
+        internal async Task<LoginHelper> Login(string email, string password)
         {
             var users = await _userRepo.GetAll();
-            var user = users.FirstOrDefault(u => u.Username.Equals(username) && u.Password.Equals(password));
+            var user = users.FirstOrDefault(u => u.Email.Equals(email) && u.Password.Equals(password));
 
             if(user != null)
             {

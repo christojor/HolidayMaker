@@ -6,7 +6,7 @@
         <div class="w-1/6 overflow-hidden">
           <!-- Column Content -->
         </div>
-
+        
         <div class="w-4/6 overflow-hidden shadow-md rounded-md divide-y-2 divide-black bg-green-1">
 
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full">
@@ -51,7 +51,6 @@
         <div class="w-1/6 overflow-hidden">
           <!-- Column Content -->
         </div>
-
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ export function getByName(list, filter) {
 }
 export function getByStars(list, filter) {
     if (!filter.PropStars) return list
-    return list.filter(item => item.starRating <= filter.PropStars)
+    return list.filter(item => item.starRating >= filter.PropStars)
 }
 export function getByRating(list, filter) {
     if (!filter.PropRating) return list
@@ -122,3 +122,13 @@ export function getByRooms(list, filter) {
 
     return list.filter(item => returnlist.filter(r => r.accomodationId == item.id).length > 0)
 }
+export function getByBeach(list, filter) {
+    if (!filter.DistanceBeach) return list
+    if (filter.DistanceBeach == 0 || filter.DistanceBeach == 5000) return list
+    return list.filter(item => item.distanceToBeach <= filter.DistanceBeach)
+} 
+export function getByCity(list, filter) {
+    if (!filter.DistanceCity) return list
+    if (filter.DistanceCity == 0 || filter.DistanceCity == 5000) return list
+    return list.filter(item => item.distanceToCenter <= filter.DistanceCity)
+} 
