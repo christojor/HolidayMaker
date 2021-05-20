@@ -14,7 +14,7 @@ const store = createStore({
         filter: [],
         userId: null,
         isLoggedIn: false,
-        userName: null,
+        userEmail: null,
         userPassword: null,
         loginAttemptMessage: null
    },
@@ -46,8 +46,8 @@ const store = createStore({
         setLoginAttemptMessage(state, message){
             state.loginAttemptMessage = message;
         },
-        setUsername(state, usrName){
-            state.userName = usrName;
+        setUserEmail(state, usrEmail){
+            state.userEmail = usrEmail;
         },
         setUserPassword(state, usrPassword){
             state.userPassword = usrPassword;
@@ -79,7 +79,7 @@ const store = createStore({
             commit('getAccomodationsData', json);
         },
         async getLoginAttempt({commit}){
-            let response = await fetch('https://localhost:44323/api/User/login?username='+ this.state.userName + '&password=' + this.state.userPassword,{
+            let response = await fetch('https://localhost:44323/api/User/login?email='+ this.state.userEmail + '&password=' + this.state.userPassword,{
                 method:'post'
             })
             let json = await response.json();

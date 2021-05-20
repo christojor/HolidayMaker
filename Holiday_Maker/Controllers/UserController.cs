@@ -46,9 +46,9 @@ namespace Holiday_Maker.Controllers
         //}
 
         [HttpPost("login")]
-        public async Task<LoginHelper> Login(string username, string password)
+        public async Task<LoginHelper> Login(string email, string password)
         {
-            return await _userService.Login(username, password);
+            return await _userService.Login(email, password);
         }
 
         [HttpPost("register")]
