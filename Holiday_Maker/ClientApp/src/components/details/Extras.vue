@@ -1,6 +1,7 @@
 
 <template>
   <div v-for="extra in extras" :key="extra">
+  
     <h2><b>EXTRAS</b></h2>
 
     <div class="space-x-4 space-y-4">
@@ -52,7 +53,7 @@
       >
         <font-awesome-icon icon="baby" />
         Crib
-      </div>
+    </div>
     </div>
   </div>
 </template>
