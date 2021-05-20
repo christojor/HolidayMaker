@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="handleSubmit" style="text-align:center; " :class="{show : toggle}">
+    <form @submit.prevent="loginAttempt" style="text-align:center; " :class="{show : toggle}">
         <h2 class="form-head text-green-6">Log in</h2>
 
         <input v-if="error != ''" class="error-box" v-model="error"> <br/>
@@ -16,13 +16,17 @@
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type="text" class="form-input" id="Password" v-model="Pwd"></td>
+                <td><input type="password" class="form-input" id="Password" v-model="Pwd"></td>
             </tr>
             </tbody>
         </table>
+        <!-----Only for testing------------->
+        <p>UserId: {{userId}}</p>
+        <p>loginAttempt: {{isLoggedIn}}</p>
+        <p>Login message: {{loginMessage}}</p>        
+        <button type="submit" class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Log in</button>
         
-        <button class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Log in</button>
-        
+        <!---------------------------------->
         <p style="text-align:left">Don't have an account?</p>
     </form>
 </template>
@@ -38,18 +42,42 @@ export default {
             Email: '',
             Address: '',
             Pwd: '',
-            Pwd2: '',
             error: '',
         }
     },
+    computed:{
+     userId() {
+         var localUserId = localStorage.getItem('userId');
+         if(localUserId != null){
+             return localUserId;
+         }
+      return this.$store.state.userId;
+      },
+      isLoggedIn(){
+          var localLoginStatus = localStorage.getItem('loggedIn');
+          if(localLoginStatus != null){
+              return localLoginStatus;
+          }
+        return this.$store.state.isLoggedIn;
+      },
+      loginMessage(){
+        return this.$store.state.loginAttemptMessage;
+      }
+    },
     methods:{
-        handleSubmit(){
-            this.error = ''
-            
-            if(this.Pwd != 'Real Password'){
-                this.error = "Email or password incorrect"
-            }            
+        loginAttempt(){
+           this.$store.state.userEmail = this.Email;
+           this.$store.state.userPassword = this.Pwd;
+           this.$store.dispatch("getLoginAttempt");
+           if(this.isLoggedIn == false){
+                this.error = this.loginMessage;
+            }else if(this.isLoggedIn == true){
+ 
+            }     
+        },
+        logout(){
+            localStorage.clear();
         }
-    }
+    },
 }
 </script>

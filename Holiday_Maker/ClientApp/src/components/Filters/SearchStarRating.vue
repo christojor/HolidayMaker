@@ -6,7 +6,7 @@
         <input type="range" min="1" max="5" class="search-box" v-model="PropStars" @click="handleSubmit">
         <p class="slider-text">5</p>
         
-        <h4 v-if="PropStars > 1" class="slider-stars">1 - {{PropStars}} stars</h4>
+        <h4 v-if="PropStars < 5" class="slider-stars">{{PropStars}} - 5stars</h4>
         <h4 v-else class="slider-stars">{{PropStars}} star</h4>
     </div>
 </template>
@@ -15,7 +15,7 @@
 export default{
     data() {
         return {
-            PropStars: 5
+            PropStars: 1
         }
     },
     methods: {

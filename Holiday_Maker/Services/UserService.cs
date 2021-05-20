@@ -20,6 +20,21 @@ namespace Holiday_Maker.Services
             _accomodationRepo = new GenericRepository<Accomodation>();
             _userRepo = new GenericRepository<User>();
         }
+
+        public async Task<ActionResult<User>> GetUserById(int id)
+        {
+
+            var user = await _userRepo.GetById(id);
+            if(user != null)
+            {
+                user.Password = "fuck of you cant hack me xDLUL BITCH";
+                return user;
+            }
+            return NotFound();
+        }
+
+
+
         public async Task<ActionResult<IEnumerable<Accomodation>>> GetUserFavorites(int id)
         {
             var userFavorites = await _ufRepo.GetAll();
@@ -82,10 +97,10 @@ namespace Holiday_Maker.Services
         {
             _userRepo.Insert(user);
         }
-        internal async Task<LoginHelper> Login(string username, string password)
+        internal async Task<LoginHelper> Login(string email, string password)
         {
             var users = await _userRepo.GetAll();
-            var user = users.FirstOrDefault(u => u.Username.Equals(username) && u.Password.Equals(password));
+            var user = users.FirstOrDefault(u => u.Email.Equals(email) && u.Password.Equals(password));
 
             if(user != null)
             {

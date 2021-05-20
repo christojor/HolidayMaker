@@ -38,11 +38,11 @@
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type="text" class="form-input" id="Password" v-model="Pwd"></td>
+                <td><input type="password" class="form-input" id="Password" v-model="Pwd"></td>
             </tr>
             <tr>
                 <td>Repeat password:</td>
-                <td><input type="text" class="form-input" id="Password2" v-model="Pwd2"></td>
+                <td><input type="password" class="form-input" id="Password2" v-model="Pwd2"></td>
             </tr>
             </tbody>
         </table>
