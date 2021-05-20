@@ -8,7 +8,7 @@
             <Login :toggle="!toggle"/>
             <Register :toggle="toggle"/>
 
-            <a v-if="!toggle == false" @click="toggleForm" class="text-green-500 hover:text-green-800 hover:underline" href="#">register</a>
+            <a v-if="!toggle == false" @click="toggleForm" class="text-green-500 hover:text-green-800 hover:underline" href="#">Register</a>
             <a v-else @click="toggleForm" class="text-green-500 hover:text-green-800 hover:underline" href="#">Login</a>
         </div>
     </div>
