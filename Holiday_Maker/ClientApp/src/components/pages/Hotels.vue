@@ -9,6 +9,8 @@
             <Extras @filter-search="filterExtras"/>
             <Amenities @filter-search="filterAmenities"/>
             <RoomType @filter-search="filterRooms"/>
+            <DistanceBeach @filter-search="filterBeach"/>
+            <DistanceCity @filter-search="filterCity"/>
         </div>
 
         <div class="container3 shadow-md bg-green-1">
@@ -28,6 +30,8 @@ import Extras from "/src/components/filters/SearchExtras.vue"
 import Themes from "/src/components/Themes.vue"
 import Amenities from "/src/components/filters/SearchAmenities.vue"
 import RoomType from "/src/components/filters/SearchRoomType.vue"
+import DistanceBeach from "/src/components/filters/SearchDistanceBeach.vue"
+import DistanceCity from "/src/components/filters/SearchDistanceCity.vue"
 
 export default{
     components: {
@@ -40,6 +44,8 @@ export default{
         Extras,
         Amenities,
         RoomType,
+        DistanceBeach,
+        DistanceCity
     },
     methods: {
         filterName(filter){

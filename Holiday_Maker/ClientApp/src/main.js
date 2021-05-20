@@ -12,6 +12,7 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 library.add(fas, fab, far);
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
+
 createApp(App)
 .use(store)
 .use(router)

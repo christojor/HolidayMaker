@@ -11,7 +11,12 @@ const store = createStore({
         information: "This is just some random text.",
         message: 'Hello Vuex',
         accomodations: [],
-        filter: []
+        filter: [],
+        userId: null,
+        isLoggedIn: false,
+        userName: null,
+        userPassword: null,
+        loginAttemptMessage: null
    },
 
    // Methods for changing states synchronously
@@ -32,15 +37,30 @@ const store = createStore({
         updateFilter (state, filter) {
             state.filter = filter
         },
+        setUserId(state, id){
+            state.userId = id;
+        },
+        setLoggedInState(state, bool){
+            state.isLoggedIn = bool;
+        },
+        setLoginAttemptMessage(state, message){
+            state.loginAttemptMessage = message;
+        },
+        setUsername(state, usrName){
+            state.userName = usrName;
+        },
+        setUserPassword(state, usrPassword){
+            state.userPassword = usrPassword;
+        },
         updateAccomodations (state, payload) {
             console.log(payload)
-            state.accomodations = payload
+            state.accomodations = payload;
         },
    },
    getters: {
         filteredList(state){
             return getByRooms(getByExtras(getByAmenities(getByName(getByRating(getByStars(getByMaxPrice(getByMinPrice(state.accomodations, state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter)
-        }
+        },
    },
 
    // Functions that call mutations asynchronously. Called by using dispatch (instead of state) in component.
@@ -57,7 +77,16 @@ const store = createStore({
             let json = await response.json();
 
             commit('getAccomodationsData', json);
-        }
+        },
+        async getLoginAttempt({commit}){
+            let response = await fetch('https://localhost:44323/api/User/login?username='+ this.state.userName + '&password=' + this.state.userPassword,{
+                method:'post'
+            })
+            let json = await response.json();
+            commit('setUserId', json.userId);
+            commit('setLoggedInState', json.isLoggedIn)
+            commit('setLoginAttemptMessage', json.loggedInMessage)
+        },
     }
 })
 
