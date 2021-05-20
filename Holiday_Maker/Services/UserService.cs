@@ -20,6 +20,21 @@ namespace Holiday_Maker.Services
             _accomodationRepo = new GenericRepository<Accomodation>();
             _userRepo = new GenericRepository<User>();
         }
+
+        public async Task<ActionResult<User>> GetUserById(int id)
+        {
+
+            var user = await _userRepo.GetById(id);
+            if(user != null)
+            {
+                user.Password = "fuck of you cant hack me xDLUL BITCH";
+                return user;
+            }
+            return NotFound();
+        }
+
+
+
         public async Task<ActionResult<IEnumerable<Accomodation>>> GetUserFavorites(int id)
         {
             var userFavorites = await _ufRepo.GetAll();
