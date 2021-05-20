@@ -189,8 +189,8 @@ export default{
                 PropExtras: [],
                 PropAmenities: [],
                 PropRooms: [],
-                DistanceBeach: 2500,
-                DistanceCity: 2500,
+                DistanceBeach: 5000,
+                DistanceCity: 5000,
             }
         }
     },

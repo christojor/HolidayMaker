@@ -124,11 +124,11 @@ export function getByRooms(list, filter) {
 }
 export function getByBeach(list, filter) {
     if (!filter.DistanceBeach) return list
-    if (filter.DistanceBeach == 0) return list
-    return list.filter(item => item.distanceToBeach >= filter.DistanceBeach)
+    if (filter.DistanceBeach == 0 || filter.DistanceBeach == 5000) return list
+    return list.filter(item => item.distanceToBeach <= filter.DistanceBeach)
 } 
 export function getByCity(list, filter) {
     if (!filter.DistanceCity) return list
-    if (filter.DistanceCity == 0) return list
-    return list.filter(item => item.distanceToCenter >= filter.DistanceCity)
+    if (filter.DistanceCity == 0 || filter.DistanceCity == 5000) return list
+    return list.filter(item => item.distanceToCenter <= filter.DistanceCity)
 } 
