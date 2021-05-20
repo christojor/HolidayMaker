@@ -8,7 +8,7 @@
 <script>
 export default {
   created(){
-    this.$store.commit("setDestination", null);
+    // this.$store.commit("setDestination", null);
   },
 }
 </script>

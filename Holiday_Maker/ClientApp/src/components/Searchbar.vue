@@ -58,12 +58,6 @@
 
 <script>
 export default {
-    // Component not loaded yet
-  beforeRouteEnter(to, from, next) {
-      
-      next();
-  },
-
     data()
     {
         return{

@@ -97,6 +97,7 @@ const store = createStore({
         },
         async getQueriedDestinations({commit}){
 
+            console.log(this.state.destination)
             let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
 
             if(response.status != (204))
