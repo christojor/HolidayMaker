@@ -57,14 +57,14 @@ export default {
     },
     methods:{
         loginAttempt(){
-           this.error = '';
-
            this.$store.state.userEmail = this.Email;
            this.$store.state.userPassword = this.Pwd;
            this.$store.dispatch("getLoginAttempt");
            if(this.isLoggedIn === false){
                 this.error = this.loginMessage;
-            }         
+            }else if(this.isLoggedIn === true){
+                this.error = '';
+            }     
         }
     },
 }
