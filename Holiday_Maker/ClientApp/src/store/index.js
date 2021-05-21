@@ -1,5 +1,6 @@
 import { createStore } from "vuex" 
 import { getByName, getByStars, getByRating , getByMaxPrice, getByMinPrice, getByAmenities, getByExtras, getByRooms, getByBeach, getByCity} from "../assets/filterMethods.js"
+import enums from "../assets/enums.js";
 
 const store = createStore({
 
@@ -17,7 +18,8 @@ const store = createStore({
         userEmail: null,
         userPassword: null,
         loginAttemptMessage: null,
-        destination: null
+        destination: null,
+        apiState: enums.init
    },
 
    // Methods for changing states synchronously
@@ -31,6 +33,7 @@ const store = createStore({
         getAccomodationsData(state, payload) {
             state.accomodations = payload;
             state.filteredAccomodations = payload;
+            state.apiState = enums.loaded;
         },
         updateMessage (state, message) {
             state.message = message
@@ -59,7 +62,18 @@ const store = createStore({
         },
         updateAccomodations (state, payload) {
             state.accomodations = payload;
+            state.apiState = enums.loaded;
+            console.log("UpdateAccomodationsState: " + this.state.apiState)
         },
+        setAccomodationsNull (state, payload){
+            state.accomodations = payload;
+            state.apiState = enums.init;
+            console.log("UpdateAccomodationsState: " + this.state.apiState)
+        },
+        setApiState (state, apiState) {
+            state.apiState = apiState;
+            console.log(apiState)
+    },
    },
    getters: {
         filteredList(state){

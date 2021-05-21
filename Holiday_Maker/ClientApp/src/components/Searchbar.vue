@@ -57,7 +57,13 @@
 </template>
 
 <script>
+import enums from "../assets/enums.js";
+
 export default {
+    mounted(){
+        this.setApiState(enums.init)
+        console.log("ApiStateMounted:" + this.$store.state.apiState)
+    },
     data()
     {
         return{
@@ -105,6 +111,9 @@ export default {
     // Set destination in state to formatted search parameter
     setDestination(searchQuery) {
       this.$store.commit("setDestination", searchQuery);
+    },
+    setApiState(newState) {
+      this.$store.commit("setApiState", newState);
     },
     // Call API and update accomodations state based on destination state
     getQueriedDestinations() {
