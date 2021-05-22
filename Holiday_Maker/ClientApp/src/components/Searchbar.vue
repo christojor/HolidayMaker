@@ -10,9 +10,7 @@
     <!-- Search Destination -->
         <div class="text-green-500">
         <font-awesome-icon :icon="['fas', 'map-marker-alt']" class="mt-3 mr-4 fa-2x float-left" style="color: #52B788;"/>
-        <input class="float-left border-2 border-green-500 bg-white h-10 px-5 mt-2 pr-20 rounded-lg text-lg focus:outline-none" 
-        v-model="destinationSearch" type="text" placeholder="Destination..." 
-        autocomplete="country-name, address-level1" spellcheck="false">
+        <AutoComplete />
       </div>
             </div>
                     <!-- Check-in -->
@@ -58,6 +56,7 @@
 
 <script>
 import enums from "../assets/enums.js";
+import AutoComplete from "../components/search/AutoComplete.vue";
 
 export default {
     mounted(){
@@ -73,6 +72,9 @@ export default {
             selected: '',
             image: "./assets/images/front-bg.jpg",
         }
+    },
+    components:{
+        AutoComplete,
     },
     methods:{
         formatQuery(){

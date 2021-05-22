@@ -7,6 +7,7 @@ import Favorite from '/src/components/FavoriteButton.vue'
 import Searchbar from '/src/components/Searchbar.vue'
 import LoginRegister from '/src/components/pages/LoginRegister.vue'
 import Logout from '/src/components/logins/Logout.vue'
+import AutoComplete from '/src/components/search/AutoComplete.vue'
 const routes = [
     {
         path: '/',
@@ -52,6 +53,11 @@ const routes = [
         path: '/Logout',
         name: 'Logout',
         component: Logout,
+    },
+    {
+        path: '/Auto',
+        name: 'AutoComplete',
+        component: AutoComplete,
     }
 ]
 const router = createRouter({
