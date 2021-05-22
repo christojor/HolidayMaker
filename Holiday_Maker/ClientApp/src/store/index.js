@@ -1,6 +1,7 @@
 import { createStore } from "vuex" 
 import { getByName, getByStars, getByRating , getByMaxPrice, getByMinPrice, getByAmenities, getByExtras, getByRooms, getByBeach, getByCity} from "../assets/filterMethods.js"
 import enums from "../assets/enums.js";
+import countries from "../assets/countries.js";
 
 const store = createStore({
 
@@ -19,7 +20,8 @@ const store = createStore({
         userPassword: null,
         loginAttemptMessage: null,
         destination: null,
-        apiState: enums.init
+        apiState: enums.init,
+        countries: countries.data
    },
 
    // Methods for changing states synchronously
