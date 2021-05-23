@@ -1,8 +1,9 @@
 <template>
     <div v-for="accomodation in accomodations" :key="accomodation">
         <div v-for="room in accomodation.rooms" :key="room">
-                      <div v-if="id == room.id">
-                          <h2 class="text-lg text-green-6">Just a mock-up. Don't panic!</h2>
+            <div v-if="id == room.id">
+                
+               <h2 class="text-lg text-green-6">Just a mock-up. Don't panic!</h2>
 
 <div class="flex flex-wrap overflow-hidden mt-3 mb-3">
 
@@ -25,7 +26,7 @@
     </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
-    <RoomDetails />
+    <RoomDetails :accomodation="accomodation" />
   </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
@@ -47,7 +48,7 @@
 
   <div class="my-1 px-1 w-full overflow-hidden">
     <!-- Hotel Summary -->
-    <HotelDetails />
+    <HotelDetails :accomodation="accomodation" />
   </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">

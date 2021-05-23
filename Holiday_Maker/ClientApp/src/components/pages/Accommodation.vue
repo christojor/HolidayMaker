@@ -72,7 +72,6 @@ export default {
 
     computed: {
     accomodations() {
-      console.log(this.$store.state.accomodations)
       return this.$store.state.accomodations;
     },
   },
