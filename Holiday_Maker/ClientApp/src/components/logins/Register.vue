@@ -91,6 +91,7 @@ export default {
                 Password: this.Pwd,
                 MemberTypeId: 1,
             }
+            
             let rawResponse = await fetch('https://localhost:44323/api/User/register', {
             // tell the server we want to send/create data
             method: 'post',
