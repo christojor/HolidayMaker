@@ -132,3 +132,10 @@ export function getByCity(list, filter) {
     if (filter.DistanceCity == 0 || filter.DistanceCity == 5000) return list
     return list.filter(item => item.distanceToCenter <= filter.DistanceCity)
 } 
+export function getByWifi(list, filter) {
+    if (!filter.PropWifi) return list
+
+    console.log("1")
+
+    return list
+}

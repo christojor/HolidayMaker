@@ -1,5 +1,5 @@
 import { createStore } from "vuex" 
-import { getByName, getByStars, getByRating , getByMaxPrice, getByMinPrice, getByAmenities, getByExtras, getByRooms, getByBeach, getByCity} from "../assets/filterMethods.js"
+import { getByName, getByStars, getByRating , getByMaxPrice, getByMinPrice, getByAmenities, getByExtras, getByRooms, getByBeach, getByCity, getByWifi} from "../assets/filterMethods.js"
 import enums from "../assets/enums.js";
 import countries from "../assets/countries.js";
 
@@ -8,10 +8,7 @@ const store = createStore({
     // Properties
    state:{
 
-        text: "Unchanged",
         headline: "Welcome to our awesome website!",
-        information: "This is just some random text.",
-        message: 'Hello Vuex',
         accomodations: [],
         filter: [],
         userId: localStorage.getItem('userId'),
@@ -26,19 +23,10 @@ const store = createStore({
 
    // Methods for changing states synchronously
    mutations:{
-       setName(state, x){
-           state.name = x
-        },
-        changeText(state, value){
-            state.text = value;
-        },
         getAccomodationsData(state, payload) {
             state.accomodations = payload;
             state.filteredAccomodations = payload;
             state.apiState = enums.loaded;
-        },
-        updateMessage (state, message) {
-            state.message = message
         },
         updateFilter (state, filter) {
             state.filter = filter
@@ -75,16 +63,17 @@ const store = createStore({
         setApiState (state, apiState) {
             state.apiState = apiState;
             console.log(apiState)
-    },
-   },
-   getters: {
-        filteredList(state){
-            return getByCity(getByBeach(getByRooms(getByExtras(getByAmenities(getByName(getByRating(getByStars(getByMaxPrice(getByMinPrice(state.accomodations, state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter)
         },
-   },
+    },
+    getters: {
+        filteredList(state){
+            //return getByCity(getByBeach(getByRooms(getByExtras(getByAmenities(getByName(getByRating(getByStars(getByMaxPrice(getByMinPrice(state.accomodations, state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter), state.filter)
+            return getByWifi(state.accomodations, state.filter)
+        },
+    },
 
-   // Functions that call mutations asynchronously. Called by using dispatch (instead of state) in component.
-   actions:{
+    // Functions that call mutations asynchronously. Called by using dispatch (instead of state) in component.
+    actions:{
 
         // In-argumentet commit här nedan ska omslutas av måsvingar. Detta kallas för destructuring. 
         // Länk finns längre ner på sidan. Via commit kan du komma åt alla dina mutationer ovan.

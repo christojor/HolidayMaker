@@ -11,6 +11,7 @@
             <RoomType @filter-search="filterRooms"/>
             <DistanceBeach @filter-search="filterBeach"/>
             <DistanceCity @filter-search="filterCity"/>
+            <Wifi @filter-search="filterWifi"/>
         </div>
 
         <div class="container3 shadow-md bg-green-1" v-if="this.$store.state.accomodations != null">
@@ -35,6 +36,7 @@ import Amenities from "/src/components/filters/SearchAmenities.vue"
 import RoomType from "/src/components/filters/SearchRoomType.vue"
 import DistanceBeach from "/src/components/filters/SearchDistanceBeach.vue"
 import DistanceCity from "/src/components/filters/SearchDistanceCity.vue"
+import Wifi from "/src/components/filters/SearchWifi.vue"
 import NoResults from "/src/components/pages/NoResults.vue"
 
 export default{
@@ -50,6 +52,7 @@ export default{
         RoomType,
         DistanceBeach,
         DistanceCity,
+        Wifi,
         NoResults
     },
     methods: {
@@ -64,6 +67,7 @@ export default{
             this.filter.PropRooms = this.filter.PropRooms
             this.filter.DistanceBeach = this.filter.DistanceBeach
             this.filter.DistanceCity = this.filter.DistanceCity
+            this.filter.PropWifi = this.filter.PropWifi
 
             this.filterList(this.filter)
         },
@@ -78,6 +82,7 @@ export default{
             this.filter.PropRooms = this.filter.PropRooms
             this.filter.DistanceBeach = this.filter.DistanceBeach
             this.filter.DistanceCity = this.filter.DistanceCity
+            this.filter.PropWifi = this.filter.PropWifi
 
             this.filterList(this.filter)
         },
@@ -92,6 +97,7 @@ export default{
             this.filter.PropRooms = this.filter.PropRooms
             this.filter.DistanceBeach = this.filter.DistanceBeach
             this.filter.DistanceCity = this.filter.DistanceCity
+            this.filter.PropWifi = this.filter.PropWifi
 
             this.filterList(this.filter)
         },
@@ -106,6 +112,7 @@ export default{
             this.filter.PropRooms = this.filter.PropRooms
             this.filter.DistanceBeach = this.filter.DistanceBeach
             this.filter.DistanceCity = this.filter.DistanceCity
+            this.filter.PropWifi = this.filter.PropWifi
 
             this.filterList(this.filter)
         },
@@ -120,6 +127,7 @@ export default{
             this.filter.PropRooms = this.filter.PropRooms
             this.filter.DistanceBeach = this.filter.DistanceBeach
             this.filter.DistanceCity = this.filter.DistanceCity
+            this.filter.PropWifi = this.filter.PropWifi
 
             this.filterList(this.filter)
         },
@@ -134,6 +142,7 @@ export default{
             this.filter.PropRooms = this.filter.PropRooms
             this.filter.DistanceBeach = this.filter.DistanceBeach
             this.filter.DistanceCity = this.filter.DistanceCity
+            this.filter.PropWifi = this.filter.PropWifi
 
             this.filterList(this.filter)
         },
@@ -148,6 +157,7 @@ export default{
             this.filter.PropRooms = filter.PropRooms
             this.filter.DistanceBeach = this.filter.DistanceBeach
             this.filter.DistanceCity = this.filter.DistanceCity
+            this.filter.PropWifi = this.filter.PropWifi
 
             this.filterList(this.filter)
         },
@@ -162,6 +172,7 @@ export default{
             this.filter.PropRooms = this.filter.PropRooms
             this.filter.DistanceBeach = filter.DistanceBeach
             this.filter.DistanceCity = this.filter.DistanceCity
+            this.filter.PropWifi = this.filter.PropWifi
 
             this.filterList(this.filter)
         },
@@ -176,6 +187,22 @@ export default{
             this.filter.PropRooms = this.filter.PropRooms
             this.filter.DistanceBeach = this.filter.DistanceBeach
             this.filter.DistanceCity = filter.DistanceCity
+            this.filter.PropWifi = this.filter.PropWifi
+
+            this.filterList(this.filter)
+        },
+        filterWifi(filter){
+            this.filter.PropName = this.filter.PropName
+            this.filter.PropStars = this.filter.PropStars
+            this.filter.PropRating = this.filter.PropRating
+            this.filter.PropMinPrice = this.filter.PropMinPrice
+            this.filter.PropMaxPrice = this.filter.PropMaxPrice
+            this.filter.PropExtras = this.filter.PropExtras
+            this.filter.PropAmenities = this.filter.PropAmenities
+            this.filter.PropRooms = this.filter.PropRooms
+            this.filter.DistanceBeach = this.filter.DistanceBeach
+            this.filter.DistanceCity = this.filter.DistanceCity
+            this.filter.PropWifi = filter.PropWifi
 
             this.filterList(this.filter)
         },
@@ -196,6 +223,7 @@ export default{
                 PropRooms: [],
                 DistanceBeach: 5000,
                 DistanceCity: 5000,
+                PropWifi: 1,
             }
         }
     },
