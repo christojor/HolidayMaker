@@ -16,6 +16,7 @@ namespace Holiday_Maker.Services
         private readonly IGenericRepository<Amenity> _amenityRepo = null;
         private readonly IGenericRepository<Extra> _extraRepo = null;
         private readonly IGenericRepository<AccomodationType> _accomodationTypeRepo = null;
+        private readonly IGenericRepository<WifiQuality> _wifiQualityRepo = null;
 
         public AccomodationService()
         {
@@ -25,6 +26,7 @@ namespace Holiday_Maker.Services
             _amenityRepo = new GenericRepository<Amenity>();
             _extraRepo = new GenericRepository<Extra>();
             _accomodationTypeRepo = new GenericRepository<AccomodationType>();
+            _wifiQualityRepo = new GenericRepository<WifiQuality>();
         }
 
         public async Task<IEnumerable<Accomodation>> NestedAccomodations()
@@ -34,6 +36,13 @@ namespace Holiday_Maker.Services
             var roomTypes = await _roomTypeRepo.GetAll();
             var amenityList = await _amenityRepo.GetAll();
             var extrasList = await _extraRepo.GetAll();
+            var wifiquality = await _wifiQualityRepo.GetAll();
+
+            foreach (var amenity in amenityList)
+            {
+                amenity.WifiQualities.Add(wifiquality.FirstOrDefault(a => a.AmenityId == amenity.Id));
+            }
+
 
             foreach (var accommodation in accommodationList)
             {
@@ -50,6 +59,10 @@ namespace Holiday_Maker.Services
                     room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
                     accommodation.Rooms.Add(room);
                 }
+
+
+
+
             }
 
             return accommodationList;
@@ -64,16 +77,28 @@ namespace Holiday_Maker.Services
 
             var amenities = await _amenityRepo.GetAll();
             var extras = await _extraRepo.GetAll();
+            var wifiquality = await _wifiQualityRepo.GetAll();
+
+            foreach (var amenity in amenities)
+            {
+                amenity.WifiQualities.Add(wifiquality.FirstOrDefault(a => a.AmenityId == amenity.Id));
+            }
+
+
             accommodation.Amenities.Add(amenities.FirstOrDefault(a => a.AccomodationId == accommodation.Id));
             accommodation.Extras.Add(extras.FirstOrDefault(a => a.AccomodationId == accommodation.Id));
+
+            
 
             foreach (var room in rooms)
             {
                 room.RoomType = await _roomTypeRepo.GetById(room.RoomTypeId);
                 accommodation.Rooms.Add(room);
             }
+           
 
-            return accommodation;
+
+                return accommodation;
 
         }
         public IQueryable<Accomodation> SearchAccomodationById(int Id)
