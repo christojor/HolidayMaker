@@ -25,6 +25,10 @@
     <Rewards />
     </div>
 
+    <div class="my-1 px-1 w-full overflow-hidden">
+    <PersonalDetails />
+    </div>
+
   <div class="my-1 px-1 w-full overflow-hidden">
     <RoomDetails :accomodation="accomodation" />
   </div>
@@ -78,6 +82,7 @@ import HotelDetails from '/src/components/bookings/HotelDetails.vue'
 import PaymentDetails from '/src/components/bookings/PaymentDetails.vue'
 import Rewards from '/src/components/bookings/Rewards.vue'
 import RoomDetails from '/src/components/bookings/RoomDetails.vue'
+import PersonalDetails from '/src/components/bookings/PersonalDetails.vue'
 
 export default {
     props: ["id"],
@@ -89,6 +94,7 @@ export default {
         PaymentDetails,
         Rewards,
         RoomDetails,
+        PersonalDetails,
     },
 
     computed: {

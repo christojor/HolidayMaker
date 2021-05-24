@@ -7,8 +7,9 @@
 
   <div class="w-full overflow-hidden">
     <img :src="accomodation.imgSrc" class="img-fluid rounded-md mt-2" style="width: 300px; height: auto" />
+    <h1>{{ accomodation.street }}, {{ accomodation.zip }}, {{ accomodation.city }}, {{ accomodation.country }}</h1>
     <h1>{{ accomodation.starRating }}/5 stars.</h1>
-    <h1>Guests rated this property {{ accomodation.guestRating }}/5.</h1>
+    <h1>Guests rated this property {{ accomodation.guestRating }}/10.</h1>
   </div>
 
 </div>
