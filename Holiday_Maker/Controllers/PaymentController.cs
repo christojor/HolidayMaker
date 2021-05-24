@@ -36,37 +36,31 @@ namespace Holiday_Maker.Controllers
             public string PaymentIntentId { get; set; }
         }
 
-        [HttpGet("{PaymentMethodId}")]
-        public IActionResult Index(string PaymentMethodId)
+        [HttpPost("Pay")]
+        public IActionResult Index(ConfirmPaymentRequest request)
         {
             var paymentIntentService = new PaymentIntentService();
             PaymentIntent paymentIntent = null;
+
             try
             {
-                if (PaymentMethodId != null)
+                if (request.PaymentMethodId != null)
                 {
-                    // Create the PaymentIntent
                     var createOptions = new PaymentIntentCreateOptions
                     {
-                        PaymentMethod = PaymentMethodId,
-                        Amount = 1099,
+                        PaymentMethod = request.PaymentMethodId,
+                        Amount = 250,
                         Currency = "usd",
                         ConfirmationMethod = "manual",
                         Confirm = true,
                     };
                     paymentIntent = paymentIntentService.Create(createOptions);
                 }
-                //Denna här under förstör allt???? Ovan skapas en ny paymentintent med nytt ID, betalningen går in på stripe och på dashboarden där är allt ok
-                //Men sen här under så refererar den till request.paymentintentid av någon anledning, och i och med att den inte har någon paymentmethod
-                // så skiter den på sig? Vet fan inte vad som är fel, men nedan kod refererar till en annan paymentintentid än den som skapas ovan, jag fattar inte.
-                /*if (request.PaymentIntentId != null)
+                if(request.PaymentIntentId != null)
                 {
                     var confirmOptions = new PaymentIntentConfirmOptions { };
-                    paymentIntent = paymentIntentService.Confirm(
-                        request.PaymentIntentId,
-                        confirmOptions
-                    );
-                }*/
+                    paymentIntent = paymentIntentService.Confirm(request.PaymentIntentId, confirmOptions);
+                }
             }
             catch (StripeException e)
             {
