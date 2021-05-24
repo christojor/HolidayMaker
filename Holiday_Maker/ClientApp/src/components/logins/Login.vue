@@ -65,19 +65,41 @@ export default {
       }
     },
     methods:{
-        loginAttempt(){
-           this.$store.state.userEmail = this.Email;
-           this.$store.state.userPassword = this.Pwd;
-           this.$store.dispatch("getLoginAttempt");
+        async loginAttempt(){
+
+        //Old code, keep if needed in future or changes
+        //    this.$store.state.userEmail = this.Email;
+        //    this.$store.state.userPassword = this.Pwd;
+        //    this.$store.dispatch("getLoginAttempt");
+           
+           let userLogin = {
+               Email: this.Email,
+               Password: this.Pwd
+           }
+
+            let response = await fetch('https://localhost:44323/api/User/login',{
+                method:'post',
+
+                headers: {'Content-Type': 'application/json'},
+
+                body: JSON.stringify(userLogin)
+            }) 
+            let json = await response.json();
+
+            if(json.isLoggedIn === true)
+            {
+                this.$store.state.userId = json.userId;
+                this.$store.state.isLoggedIn = json.isLoggedIn;
+                localStorage.setItem('userId', this.userId);
+                localStorage.setItem('loggedIn', this.isLoggedIn);
+                console.log(json.isLoggedIn);
+                this.$router.push('/');
+            }
+
            if(this.isLoggedIn == false){
                 this.error = this.loginMessage;
-            }else if(this.isLoggedIn == true){
- 
-            }     
+            }
         },
-        logout(){
-            localStorage.clear();
-        }
     },
 }
 </script>

@@ -25,9 +25,9 @@ namespace Holiday_Maker.Services
         {
 
             var user = await _userRepo.GetById(id);
-            if(user != null)
+            if (user != null)
             {
-                user.Password = "fuck of you cant hack me xDLUL BITCH";
+                user.Password = null;
                 return user;
             }
             return NotFound();
@@ -93,9 +93,14 @@ namespace Holiday_Maker.Services
         }
 
 
-        public void RegisterUser(User user)
+        public string RegisterUser(User user)
         {
-            _userRepo.Insert(user);
+            if (user != null)
+            {
+                _userRepo.Insert(user);
+                return "User succesfully added!";
+            }
+            return "Could not add the user!";
         }
         internal async Task<LoginHelper> Login(string email, string password)
         {

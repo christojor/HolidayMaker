@@ -12,6 +12,7 @@ export default {
         logout(){
             localStorage.clear();
             this.$store.state.isLoggedIn = false;
+            this.$store.state.userId = 0;
         }
     }
 }

@@ -12,7 +12,7 @@ import Booking from '/src/components/pages/Booking.vue'
 const routes = [
     {
         path: '/',
-        name: 'Searchbar',
+        name: 'Home',
         component: Searchbar,
     },
     {

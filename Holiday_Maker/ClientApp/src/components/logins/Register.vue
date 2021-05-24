@@ -9,20 +9,20 @@
             </colgroup>
             <tbody>
             <tr>
-                <td>Full name:</td>
-                <td><input type="text" class="form-input" id="Name" v-model="Name"></td>
+                <td>First name:</td>
+                <td><input type="text" class="form-input" id="Name" v-model="FirstName"></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td><input type="text" class="form-input" id="Name" v-model="LastName"></td>
             </tr>
             <tr>
                 <td>Email:</td>
                 <td><input type="text" class="form-input" id="Email" v-model="Email"></td>
             </tr>
             <tr>
-                <td>Phone number:</td>
-                <td><input type="number" class="form-input" id="PhoneNumber" v-model="PhoneNumber"></td>
-            </tr>
-            <tr>
                 <td>Address:</td>
-                <td><input type="text" class="form-input" id="Address" v-model="Address"></td>
+                <td><input type="text" class="form-input" id="Address" v-model="StreetAddress"></td>
             </tr>
             <tr>
                 <td>ZipCode:</td>
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td>Town:</td>
-                <td><input type="text" class="form-input" id="Town" v-model="Town"></td>
+                <td><input type="text" class="form-input" id="Town" v-model="City"></td>
             </tr>
             <tr>
                 <td>Country:</td>
@@ -59,12 +59,13 @@ export default {
     },
     data(){
         return{
-            Name: '',
+            FirstName: '',
+            LastName: '',
             Email: '',
-            Address: '',
+            StreetAddress: '',
             PhoneNumber: '',
             ZipCode: '',
-            Town: '',
+            City: '',
             Country: '',
             Pwd: '',
             Pwd2: '',
@@ -72,7 +73,7 @@ export default {
         }
     },
     methods:{
-        handleSubmit(){
+        async handleSubmit(){
             this.error = ''
 
             if(this.Pwd != this.Pwd2){
@@ -80,16 +81,26 @@ export default {
             }
 
             let newUser = {
-                Name: this.Name,
+                FirstName: this.FirstName,
+                LastName: this.LastName,
                 Email: this.Email,
-                PhoneNumber: this.PhoneNumber,
                 ZipCode: this.ZipCode,
-                Town: this.Town,
+                City: this.City,
                 Country: this.Country,
-                Address: this.Address,
+                StreetAddress: this.StreetAddress,
                 Password: this.Pwd,
+                MemberTypeId: 1,
             }
             
+            let rawResponse = await fetch('https://localhost:44323/api/User/register', {
+            // tell the server we want to send/create data
+            method: 'post',
+            // and that we will send data json formatted
+            headers: { 'Content-Type': 'application/json' },
+            // the data encoded as json
+            body: JSON.stringify(newUser)
+            });
+            let response = await rawResponse.json();
         }
     }
 }

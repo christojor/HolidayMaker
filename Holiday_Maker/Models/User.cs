@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -10,7 +9,6 @@ namespace Holiday_Maker.Models
     {
         public int Id { get; set; }
         public string Username { get; set; }
-        [JsonIgnore]
         public string Password { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
@@ -21,5 +19,7 @@ namespace Holiday_Maker.Models
         public int ZipCode { get; set; }
         public int MemberTypeId { get; set; }
         public long? CreditCard { get; set; }
+
+        public virtual Booking Booking { get; set; }
     }
 }

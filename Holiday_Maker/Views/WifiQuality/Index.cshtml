@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Holiday_Maker.Models.Amenity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Entertainment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KidClub)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gym)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pool)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WiFi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resturant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accomodation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entertainment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KidClub)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gym)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pool)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WiFi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resturant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accomodation.City)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
