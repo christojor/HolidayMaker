@@ -56,6 +56,22 @@ export default {
         .then(function(result)
         {
           console.log(result);
+          if(result.error)
+          {
+            console.log("error");
+          }
+          else
+          {
+            let rawResponse = fetch("Api/Payment/Pay", {
+              method: "POST",
+              headers: {"Content-Type": "application/json" },
+              body: JSON.stringify({
+                payment_method_id: result.payment_method_id,
+              }),
+            })
+            console.log("API call executed")
+            console.log(rawResponse)
+          }
         });
     });
   },
@@ -91,34 +107,3 @@ export default {
   },
 };
 </script>
-
-<!--<script>
-export default {
-  methods: {
-    changeText() {
-      // Två in-argument här, den första avser den mutationen man vill utföra i store,
-      // OBS - Måste vara en sträng som har samma namn som mutationen i store.
-      // Det andra argumentet är själva "the payload" - nya värdet man vill skicka med som kommer
-      // att användas när mutationen updaterar data-variablen i state. Den kan vara av vilken datatyp som helst,
-      // men den måste ju stämma överens med den avsedda data-variablen i state.
-
-      this.$store.commit("changeText", "Changed"); // Commit used for calling mutations in store
-    },
-    lolgsomeshit(){
-      console.log("fucker");
-    },
-    getAccomodations() {
-      this.$store.dispatch("getAccomodations"); // Dispatch used for calling actions in store
-    },
-    goToAccommodation(accommodationId) {
-      this.$router.push({
-        name: "Accommodation",
-        params: { id: accommodationId },
-      });
-    },
-    getRooms() {
-      this.$store.dispatch("getRooms");
-    },
-  },
-};
-</script>-->
