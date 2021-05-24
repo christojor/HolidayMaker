@@ -20,6 +20,21 @@ namespace Holiday_Maker.Services
             _accomodationRepo = new GenericRepository<Accomodation>();
             _userRepo = new GenericRepository<User>();
         }
+
+        public async Task<ActionResult<User>> GetUserById(int id)
+        {
+
+            var user = await _userRepo.GetById(id);
+            if (user != null)
+            {
+                user.Password = null;
+                return user;
+            }
+            return NotFound();
+        }
+
+
+
         public async Task<ActionResult<IEnumerable<Accomodation>>> GetUserFavorites(int id)
         {
             var userFavorites = await _ufRepo.GetAll();
@@ -78,9 +93,14 @@ namespace Holiday_Maker.Services
         }
 
 
-        public void RegisterUser(User user)
+        public string RegisterUser(User user)
         {
-            _userRepo.Insert(user);
+            if (user != null)
+            {
+                _userRepo.Insert(user);
+                return "User succesfully added!";
+            }
+            return "Could not add the user!";
         }
         internal async Task<LoginHelper> Login(string email, string password)
         {

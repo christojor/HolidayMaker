@@ -25,10 +25,10 @@ namespace Holiday_Maker.Controllers
             _userService = new UserService();
         }
         // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(int id)
         {
-            return new string[] { "value1", "value2" };
+            return await _userService.GetUserById(id);
         }
         [HttpGet("favorites")]
         public async Task<ActionResult<IEnumerable<Accomodation>>> GetFavorites(int userId)
@@ -37,24 +37,16 @@ namespace Holiday_Maker.Controllers
             return await _userService.GetUserFavorites(userId);
         }
 
-
-
-        //[HttpGet("login")]
-        //public async Task<LoginHelper> GetStuff(string username, string password)
-        //{
-        //    return await _userService.Login(username, password);
-        //}
-
         [HttpPost("login")]
-        public async Task<LoginHelper> Login(string email, string password)
+        public async Task<LoginHelper> Login(User user)
         {
-            return await _userService.Login(email, password);
+            return await _userService.Login(user.Email, user.Password);
         }
 
         [HttpPost("register")]
-        public void PostRegister(User user)
+        public string PostRegister(User user)
         {
-           _userService.RegisterUser(user);
+           return _userService.RegisterUser(user);
         }
 
 

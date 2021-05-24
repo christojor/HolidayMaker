@@ -10,7 +10,7 @@
   <div class="w-1/2 overflow-hidden p-4">
   <b>{{ room.roomType.name }}</b><br>
     <b>Price:</b> {{ room.price }}€
-    <button class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+    <button class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" @click="goToBooking(room.id)">
       Book Room
   </button>
   </div>
@@ -28,7 +28,15 @@ export default {
             type: Object,
             required: true,
         }
-    }
+    },
+      methods: {
+        goToBooking(roomId) {
+            this.$router.push({
+                name: "Booking",
+                params: { id: roomId },
+            });
+        }
+}
     
 }
 </script>

@@ -5,12 +5,21 @@
                 <!-- Begin input fields -->
                 <div class="flex flex-row flex-wrap gap-3 mt-8">
         <div class="rounded-t-md bg-green-1 search-div shadow-xl w-4/8">
+        
     <!-- Search Destination -->
         <div class="text-green-500">
         <font-awesome-icon :icon="['fas', 'map-marker-alt']" class="mt-3 mr-4 fa-2x float-left" style="color: #52B788;"/>
-        <input class="float-left border-2 border-green-500 bg-white h-10 px-5 mt-2 pr-20 rounded-lg text-lg focus:outline-none" 
-        id="destination" name="destination" v-model="destination" type="text" placeholder="Destination..." 
-        autocomplete="country-name, address-level1" spellcheck="false">
+
+        <AutoComplete
+            v-model="destinationSearch"
+            :suggestions="filteredCountries" 
+            @complete="searchCountry($event)"
+            @item-select="setInput($event)"
+            field="name" 
+            class="float-left border-2 border-green-500 bg-white h-10 px-5 mt-2 pr-20 rounded-lg text-lg"
+            placeholder="Destination..."
+        />
+
       </div>
             </div>
                     <!-- Check-in -->
@@ -43,8 +52,52 @@
                     </div>
                     </div>
                           <!-- End input fields -->
+                          
                 </div>
+                <!-- End input fields container -->
 
+                <!-- Begin Tabs -->
+                    <div class="flex flex-row flex-wrap gap-3">
+        <div class="nav-div w-4/8">
+        
+    <!-- Accommodation and Flight Tabs-->
+        <div>
+<ul class="flex items-stretch">
+<li class="w-1/2">
+    <a class="flex border rounded-b-lg border-green-500 rounded py-2 px-4 bg-green-1 text-green-500 font-bold" href="#">
+        <font-awesome-icon :icon="['fas', 'home']" class="mt-1 mr-4 float-left" style="color: #52B788;"/>
+        Accommodations</a>
+  </li>
+  <li class="w-1/2">
+    <a class="flex border rounded-b-lg border-green-500 hover:border-green-100 bg-green-500 text-green-100 py-2 px-4" href="#">
+        <font-awesome-icon :icon="['fas', 'plane']" class="mt-1 mr-4 float-left" style="color: #D8F3DC;"/>
+        Flights</a>
+  </li>
+</ul>
+      </div>
+            </div>
+                    <!-- Filler container -->
+                    <div class="nav-div w-1/8">
+                    <div>
+                    </div>
+                    </div>
+                    
+                    <!-- Filler container-->
+                    <div class="nav-div w-1/8">
+                    <div>
+                      
+                    </div>
+                    </div>
+                    
+                    <!-- Filler container -->
+                    <div class="nav-div w-2/8">
+                    <div>
+
+                    </div>
+                    </div>
+                          
+                </div>
+                
                 <!-- Search Button -->
                 <div style="text-align:center">
             <input type="submit" value="Search" @click="search" class="mt-6 w-2/6 bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full shadow-xl"/>
@@ -55,74 +108,114 @@
 </template>
 
 <script>
-export default {
-    created() {
-    this.$store.dispatch("getAccomodations");
-    },
+import enums from "../assets/enums.js";
 
+export default {
+    mounted(){
+        this.setApiState(enums.init)
+        console.log("ApiStateMounted:" + this.$store.state.apiState)
+    },
     data()
     {
         return{
-            distanceToCity: 500,
-            distanceToBeech: 500,
-            destination: '',
+            destinationSearch: '',
             check_in: '',
             check_out: '',
             selected: '',
             image: "./assets/images/front-bg.jpg",
+
+            //Autocomplete Data
+            countries: this.$store.state.countries,
+            selectedCountry: null,
+            selectedCity: null,
+            filteredCities: null,
+            filteredCountries: null,
+            selectedCountries: [],
         }
     },
+
     methods:{
-        async search()
-        {
-            // Format destination input (Refactor later!)
-            if (this.destination.match(/\b\w+\b/g) > 1){
-            this.destination = this.destination.trim()
-            this.destination = this.destination.toLowerCase()
-            this.destination = this.destination.charAt(0).toUpperCase() + this.destination.slice(1)
-            }
-            else{
-            this.destination = this.destination.split(" ")[0]
-            this.destination = this.destination.trim()
-            this.destination = this.destination.toLowerCase()
-            this.destination = this.destination.charAt(0).toUpperCase() + this.destination.slice(1)
-            }
-
-            // Get current data from store
-            let allAccomodations = this.$store.state.accomodations
-            let queriedAccomodations = []
-            console.log(queriedAccomodations)
-            console.log(this.destination)
-
-            // Check country and city
-            if (this.destination.length){
-                allAccomodations.forEach(accomodation => {
-                if(accomodation.country == this.destination || accomodation.city == this.destination)
-                {
-                    queriedAccomodations.push(accomodation);
-                    console.log(accomodation)
-                }
-            });
-            } 
-            else {
-                queriedAccomodations = allAccomodations
-            }
-
-            this.updateAccomodations(queriedAccomodations)
-
-            this.$router.push({ name: "Hotels"}) //Ok
-
+        formatQuery(){
+            this.destinationSearch = this.destinationSearch.trim()
+            this.destinationSearch  = this.destinationSearch.toLowerCase()
+            this.destinationSearch  = this.destinationSearch.charAt(0).toUpperCase() + this.destinationSearch.slice(1)
         },
 
+        async search()
+        {
+            if(this.destinationSearch.length > 1)
+            {   // Format destinationSearch if more than one word
+                if (this.destinationSearch.match(/\b\w+\b/g) > 1){
+                    this.formatQuery()
+                    }
+                else{
+                        this.destinationSearch = this.destinationSearch.split(" ")[0]
+                        this.formatQuery()
+                        
+                        // Write formatted destination to state
+                        this.setDestination(this.destinationSearch)
+                        
+                        // Get accomodations from API and write to state
+                        this.getQueriedDestinations(this.$store.state.destination)
+                    }
+            }
+            else {
+                 // Get all accommodations
+                this.$store.dispatch("getAccomodations");
+            }
+
+            // Route to results page
+            this.$router.push({ name: "Hotels"})
+
+        },
+        // Autocomplete events
+        searchCountry(event) {
+            setTimeout(() => {
+                if (!event.query.trim().length) {
+                    this.filteredCountries = [...this.countries];
+                }
+                else {
+                    this.filteredCountries = this.countries.filter((country) => {
+                        return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+                    });
+                }
+            }, 250);
+            console.log(this.destinationSearch)
+            console.log(this.filteredCountries)
+        },
+        searchCity(event) {
+            let query = event.query;
+            let filteredCities = [];
+
+            for (let country of this.groupedCities) {
+                let filteredItems = FilterService.filter(country.items, ['label'], query, FilterMatchMode.CONTAINS);
+                if (filteredItems && filteredItems.length) {
+                    filteredCities.push({...country, ...{items: filteredItems}});
+                }
+            }
+
+            this.filteredCities = filteredCities;
+        },
+        setInput(event) {
+            this.destinationSearch = event.value.name
+            console.log(event.value.name)
+        },
+
+    // Set destination in state to formatted search parameter
+    setDestination(searchQuery) {
+      this.$store.commit("setDestination", searchQuery);
+    },
+    setApiState(newState) {
+      this.$store.commit("setApiState", newState);
+    },
+    // Call API and update accomodations state based on destination state
+    getQueriedDestinations() {
+      this.$store.dispatch("getQueriedDestinations");
+    },
+    // Get all accommodations (no search query)
     getAccomodations() {
       this.$store.dispatch("getAccomodations");
     },
-    updateAccomodations(queriedAccomodations) {
-      this.$store.commit("updateAccomodations", queriedAccomodations);
-    },
-    filterList(filter){
-            this.$store.commit("updateFilter", filter)
-        }
-    }
+        },
 }
 </script>

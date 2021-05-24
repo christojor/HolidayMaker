@@ -85,5 +85,5 @@ Navbar,
 Rating,
 Rooms,
   },
-};
+}
 </script>

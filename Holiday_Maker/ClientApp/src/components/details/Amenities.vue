@@ -29,13 +29,14 @@
       >
         <font-awesome-icon icon="swimming-pool" />Pool
       </div>
-
+    <div v-for="wifi in WifiQuality" :key="wifi">
       <div
         class="inline-block box-border h-10 p-1 border-2 border-green-500 rounded-md"
         v-if="amenity.wiFi == true"
       >
         <font-awesome-icon icon="wifi" />WiFi
       </div>
+    </div>
 
       <div
         class="inline-block box-border h-10 p-1 border-2 border-green-500 rounded-md"

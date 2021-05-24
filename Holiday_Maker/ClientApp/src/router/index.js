@@ -6,10 +6,13 @@ import NotFound from '/src/components/pages/NotFound.vue'
 import Favorite from '/src/components/FavoriteButton.vue'
 import Searchbar from '/src/components/Searchbar.vue'
 import LoginRegister from '/src/components/pages/LoginRegister.vue'
+import Logout from '/src/components/logins/Logout.vue'
+import Booking from '/src/components/pages/Booking.vue'
+
 const routes = [
     {
         path: '/',
-        name: '',
+        name: 'Home',
         component: Searchbar,
     },
     {
@@ -23,19 +26,20 @@ const routes = [
         component: StoreTest,
     },
     {
-        path: "/accommodation/:id",  // <-- notice the colon
+        path: "/accommodation/:id",
         name: "Accommodation",
         component: Accommodation,
         props: true,
     },
     {
-        path: "/:catchAll(.*)",
-        component: NotFound,
+        path: "/booking/:id",
+        name: "Booking",
+        component: Booking,
+        props: true,
     },
     {
-        path: '/searchbar',
-        name: 'Searchbar',
-        component: Searchbar,
+        path: "/:catchAll(.*)",
+        component: NotFound,
     },
     {
         path: '/Favorite',
@@ -46,7 +50,12 @@ const routes = [
         path: '/Login',
         name: 'LoginRegister',
         component: LoginRegister,
-    }
+    },
+    {
+        path: '/Logout',
+        name: 'Logout',
+        component: Logout,
+    },
 ]
 const router = createRouter({
     history: createWebHistory(),
