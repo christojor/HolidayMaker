@@ -223,7 +223,7 @@ export default{
                 PropRooms: [],
                 DistanceBeach: 5000,
                 DistanceCity: 5000,
-                PropWifi: 1,
+                PropWifi: 0,
             }
         }
     },

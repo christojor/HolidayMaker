@@ -5,7 +5,7 @@
     
     <div v v-else v-for="accomodation in filteredList" :key="accomodation" class="hotel-item shadow-md">
 
-            <img :src="accomodation.imgSrc" alt="" class="hotel-item-img" @click="goToAccommodation(accomodation.id)">
+        <img :src="accomodation.imgSrc" alt="" class="hotel-item-img" @click="goToAccommodation(accomodation.id)">
         
         <div class="hotel-item-desc">
             <HotelDescription :accomodation="accomodation"/>

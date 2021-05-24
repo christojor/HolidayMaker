@@ -133,9 +133,9 @@ export function getByCity(list, filter) {
     return list.filter(item => item.distanceToCenter <= filter.DistanceCity)
 } 
 export function getByWifi(list, filter) {
-    if (!filter.PropWifi) return list
+    if (!filter.PropWifi || filter.PropWifi == 0) return list
 
-    console.log("1")
+    var wifiHotels = list.filter(item => item.amenities.filter(a => a.wiFi == true).length > 0)
 
-    return list
+    return wifiHotels.filter(item => item.amenities.filter(a => a.wifiQualities.filter(w => w.wifiRating >= filter.PropWifi).length > 0).length > 0)
 }

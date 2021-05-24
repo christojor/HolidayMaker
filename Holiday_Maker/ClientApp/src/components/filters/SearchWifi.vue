@@ -7,7 +7,7 @@
         <p class="slider-text">5</p>
         
         <h4 v-if="PropWifi == 5" class="slider-stars"><font-awesome-icon :icon="['fas', 'poo']" size="10x" style="color: #52B788;"/></h4>
-        
+
         <h4 v-if="PropWifi == 4" class="slider-stars"><font-awesome-icon :icon="['fas', 'poo']" size="3x" style="color: #52B788;"/>
         - <font-awesome-icon :icon="['fas', 'poo']" size="4x" style="color: #52B788;"/></h4>
 
@@ -30,7 +30,7 @@
 export default{
     data() {
         return {
-            PropWifi: 1
+            PropWifi: 0
         }
     },
     methods: {
