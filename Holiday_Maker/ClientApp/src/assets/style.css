@@ -239,7 +239,7 @@ h1 {
 .content-link{
     font-size: 17px;
 }
-/*----------------Seach Box---------------*/
+/*----------------Search Bar---------------*/
 .search-box{
     width: 75%;
     margin: 10px;
@@ -251,6 +251,10 @@ h1 {
     flex: 1;
     padding: 10px;
 }
+.nav-div{
+    text-align: center;
+    flex: 1;
+}
 .search-dest-box{
     background-image: url('src/assets/images/front-bg.jpg');
     background-size: 100vw 500px;
@@ -258,6 +262,35 @@ h1 {
     padding: 10px;
     height: 500px;
 }
+.p-autocomplete{
+    width: auto;
+    height: 100%;
+    color: #52B788;
+}
+.p-autocomplete-panel{
+    background-color:white;
+    border-radius: 0px 0px 5px 5px;
+    border-width: 2px;
+    border-color: #52B788;
+}
+.p-autocomplete-items{
+    min-width: 250px;
+}
+.p-autocomplete-item{
+    color:#52B788;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.p-autocomplete-item:hover{
+    background-color: #95D5B2;
+    color: white;
+    font-weight: bold;
+}
+
+*:focus {
+    outline: none;
+   }
 /*-------------Login Form--------------*/
 .form-head{
     text-align: center;

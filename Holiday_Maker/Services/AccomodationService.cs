@@ -1,5 +1,6 @@
 ﻿using Holiday_Maker.Models;
 using Holiday_Maker.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Holiday_Maker.Services
         private readonly IGenericRepository<Amenity> _amenityRepo = null;
         private readonly IGenericRepository<Extra> _extraRepo = null;
         private readonly IGenericRepository<AccomodationType> _accomodationTypeRepo = null;
+        private readonly IGenericRepository<WifiQuality> _wifiQualityRepo = null;
 
         public AccomodationService()
         {
@@ -24,6 +26,7 @@ namespace Holiday_Maker.Services
             _amenityRepo = new GenericRepository<Amenity>();
             _extraRepo = new GenericRepository<Extra>();
             _accomodationTypeRepo = new GenericRepository<AccomodationType>();
+            _wifiQualityRepo = new GenericRepository<WifiQuality>();
         }
 
         public async Task<IEnumerable<Accomodation>> NestedAccomodations()
@@ -33,12 +36,20 @@ namespace Holiday_Maker.Services
             var roomTypes = await _roomTypeRepo.GetAll();
             var amenityList = await _amenityRepo.GetAll();
             var extrasList = await _extraRepo.GetAll();
+            var wifiquality = await _wifiQualityRepo.GetAll();
+
+            foreach (var amenity in amenityList)
+            {
+                amenity.WifiQualities.Add(wifiquality.FirstOrDefault(a => a.AmenityId == amenity.Id));
+            }
+
 
             foreach (var accommodation in accommodationList)
             {
-                var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
                 var amenities = amenityList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
                 var extras = extrasList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+
+                var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
 
                 accommodation.Amenities.Add(amenities);
                 accommodation.Extras.Add(extras);
@@ -48,6 +59,10 @@ namespace Holiday_Maker.Services
                     room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
                     accommodation.Rooms.Add(room);
                 }
+
+
+
+
             }
 
             return accommodationList;
@@ -62,16 +77,28 @@ namespace Holiday_Maker.Services
 
             var amenities = await _amenityRepo.GetAll();
             var extras = await _extraRepo.GetAll();
+            var wifiquality = await _wifiQualityRepo.GetAll();
+
+            foreach (var amenity in amenities)
+            {
+                amenity.WifiQualities.Add(wifiquality.FirstOrDefault(a => a.AmenityId == amenity.Id));
+            }
+
+
             accommodation.Amenities.Add(amenities.FirstOrDefault(a => a.AccomodationId == accommodation.Id));
             accommodation.Extras.Add(extras.FirstOrDefault(a => a.AccomodationId == accommodation.Id));
+
+            
 
             foreach (var room in rooms)
             {
                 room.RoomType = await _roomTypeRepo.GetById(room.RoomTypeId);
                 accommodation.Rooms.Add(room);
             }
+           
 
-            return accommodation;
+
+                return accommodation;
 
         }
         public IQueryable<Accomodation> SearchAccomodationById(int Id)
@@ -102,23 +129,26 @@ namespace Holiday_Maker.Services
             }
             return accomodations;
         }
-        public IQueryable<Accomodation> SearchAccomodationByCountryAndCity(string country, string city)
+        public IQueryable<Accomodation> SearchAccomodationByCountryAndCity(string searchQuery)
         {
             var accomodations = _accomodationRepo.GetAllRaw();
 
-            if (accomodations.Any(s => s.Country.Equals(country)))
+            if (accomodations.Any(s => s.Country.Equals(searchQuery)))
             {
-                accomodations = accomodations.Where(s => s.Country.Contains(country));
-
-                if (accomodations.Any(s => s.City.Equals(city)))
-                {
-                    accomodations = accomodations.Where(s => s.City.Contains(city));
-                }
+                accomodations = accomodations.Where(s => s.Country.Contains(searchQuery));
+                accomodations = NestChildren(accomodations);
             }
+
+            else if (accomodations.Any(s => s.City.Equals(searchQuery)))
+                {
+                    accomodations = accomodations.Where(s => s.City.Contains(searchQuery));
+                    accomodations = NestChildren(accomodations);
+                }
             else
             {
                 accomodations = null;
             }
+
             return accomodations;
         }
         public async Task<IEnumerable<Accomodation>> NestedAccomodationsByTheme(string theme)
@@ -151,6 +181,34 @@ namespace Holiday_Maker.Services
         {
             var accommodationList = await _accomodationRepo.GetAll();
             return accommodationList.Where(a => a.ThemeType == theme);
+        }
+
+        public IQueryable<Accomodation> NestChildren(IQueryable<Accomodation> accomodations)
+        {
+            var accommodationList = accomodations;
+            var roomList = _roomRepo.GetAllRaw();
+            var roomTypes = _roomTypeRepo.GetAllRaw();
+            var amenityList = _amenityRepo.GetAllRaw();
+            var extrasList = _extraRepo.GetAllRaw();
+
+            foreach (var accommodation in accommodationList)
+            {
+                var amenities = amenityList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+                var extras = extrasList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+
+                var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
+
+                accommodation.Amenities.Add(amenities);
+                accommodation.Extras.Add(extras);
+
+                foreach (var room in rooms)
+                {
+                    room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
+                    accommodation.Rooms.Add(room);
+                }
+            }
+
+            return accommodationList;
         }
 
     }

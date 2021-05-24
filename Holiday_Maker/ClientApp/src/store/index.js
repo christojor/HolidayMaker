@@ -1,5 +1,7 @@
 import { createStore } from "vuex" 
 import { getByName, getByStars, getByRating , getByMaxPrice, getByMinPrice, getByAmenities, getByExtras, getByRooms, getByBeach, getByCity} from "../assets/filterMethods.js"
+import enums from "../assets/enums.js";
+import countries from "../assets/countries.js";
 
 const store = createStore({
 
@@ -16,7 +18,10 @@ const store = createStore({
         isLoggedIn: localStorage.getItem('loggedIn'),
         userEmail: null,
         userPassword: null,
-        loginAttemptMessage: null
+        loginAttemptMessage: null,
+        destination: null,
+        apiState: enums.init,
+        countries: countries.data
    },
 
    // Methods for changing states synchronously
@@ -30,6 +35,7 @@ const store = createStore({
         getAccomodationsData(state, payload) {
             state.accomodations = payload;
             state.filteredAccomodations = payload;
+            state.apiState = enums.loaded;
         },
         updateMessage (state, message) {
             state.message = message
@@ -52,10 +58,24 @@ const store = createStore({
         setUserPassword(state, usrPassword){
             state.userPassword = usrPassword;
         },
-        updateAccomodations (state, payload) {
-            console.log(payload)
-            state.accomodations = payload;
+        setDestination(state, searchQuery){
+            console.log(searchQuery)
+            state.destination = searchQuery;
         },
+        updateAccomodations (state, payload) {
+            state.accomodations = payload;
+            state.apiState = enums.loaded;
+            console.log("UpdateAccomodationsState: " + this.state.apiState)
+        },
+        setAccomodationsNull (state, payload){
+            state.accomodations = payload;
+            state.apiState = enums.init;
+            console.log("UpdateAccomodationsState: " + this.state.apiState)
+        },
+        setApiState (state, apiState) {
+            state.apiState = apiState;
+            console.log(apiState)
+    },
    },
    getters: {
         filteredList(state){
@@ -89,6 +109,20 @@ const store = createStore({
             if(json.isLoggedIn === true){
                 localStorage.setItem('userId', this.state.userId);
                 localStorage.setItem('loggedIn', this.state.isLoggedIn);
+            }
+        },
+        async getQueriedDestinations({commit}){
+
+            console.log(this.state.destination)
+            let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
+
+            if(response.status != (204))
+            {
+            let json = await response.json();
+            commit('updateAccomodations', json);
+            }
+            else {
+                commit('updateAccomodations', null);
             }
         },
     }
