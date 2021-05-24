@@ -15,8 +15,6 @@
 <script>
 export default {
   mounted: function () {
-    console.log("lmao");
-    this.logToConsole;
     //Building payment form starts here
     var stripe = Stripe(
       "pk_test_51IsjoPK0RxPPVgejwsizP9ghkzrEOEAho8VjGbz0Rtn2i31J5t5zr6NGp04eZD0ZHF5TwIzvCZf2XFmZR4syWqiY00ldbn6Luv"
@@ -41,9 +39,11 @@ export default {
     cardElement.mount("#card-element");
     //Payment for ends here
     //PaymentMethod starts here
-
+    
+    var self = this;
     var form = document.getElementById("payment-form");
     form.addEventListener("submit", function (event) {
+      self.lolgsomeshit();
       event.preventDefault();
       stripe
         .createPaymentMethod({
@@ -55,22 +55,24 @@ export default {
         })
         .then(function(result)
         {
+
           console.log(result);
           if(result.error)
           {
             console.log("error");
+            self.lolgsomeshit();
+
           }
           else
           {
-            let rawResponse = fetch("Api/Payment/Pay", {
-              method: "POST",
-              headers: {"Content-Type": "application/json" },
-              body: JSON.stringify({
-                payment_method_id: result.payment_method_id,
-              }),
-            })
-            console.log("API call executed")
+            //let rawResponse = fetch("api/Payment/" + result.payment_method_id);
+            //let response = await rawResponse.json();
+            //console.log(response);
+            console.log("https://localhost:44323/api/Payment/" + result.paymentMethod.id)
+            let rawResponse = fetch("https://localhost:44323/api/Payment/" + result.paymentMethod.id);
             console.log(rawResponse)
+
+
           }
         });
     });

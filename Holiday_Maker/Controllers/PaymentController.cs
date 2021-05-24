@@ -36,19 +36,19 @@ namespace Holiday_Maker.Controllers
             public string PaymentIntentId { get; set; }
         }
 
-        [HttpPost("Pay")]
-        public IActionResult Index( ConfirmPaymentRequest request)
+        [HttpGet("{PaymentMethodId}")]
+        public IActionResult Index(string PaymentMethodId)
         {
             var paymentIntentService = new PaymentIntentService();
             PaymentIntent paymentIntent = null;
             try
             {
-                if (request.PaymentMethodId != null)
+                if (PaymentMethodId != null)
                 {
                     // Create the PaymentIntent
                     var createOptions = new PaymentIntentCreateOptions
                     {
-                        PaymentMethod = request.PaymentMethodId,
+                        PaymentMethod = PaymentMethodId,
                         Amount = 1099,
                         Currency = "usd",
                         ConfirmationMethod = "manual",
