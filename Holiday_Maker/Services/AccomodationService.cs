@@ -59,10 +59,6 @@ namespace Holiday_Maker.Services
                     room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
                     accommodation.Rooms.Add(room);
                 }
-
-
-
-
             }
 
             return accommodationList;
