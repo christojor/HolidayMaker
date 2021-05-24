@@ -44,9 +44,9 @@ namespace Holiday_Maker.Controllers
         }
 
         [HttpPost("register")]
-        public void PostRegister(User user)
+        public string PostRegister(User user)
         {
-           _userService.RegisterUser(user);
+           return _userService.RegisterUser(user);
         }
 
 

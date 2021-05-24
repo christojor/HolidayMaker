@@ -10,7 +10,7 @@ import Logout from '/src/components/logins/Logout.vue'
 const routes = [
     {
         path: '/',
-        name: '',
+        name: 'Home',
         component: Searchbar,
     },
     {
