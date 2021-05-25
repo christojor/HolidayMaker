@@ -21,7 +21,11 @@ const store = createStore({
         loginAttemptMessage: null,
         destination: null,
         apiState: enums.init,
-        countries: countries.data
+        countries: countries.data,
+
+        // Booking States
+        bookedRooms: [],
+        bookingParams: null,
    },
 
    // Methods for changing states synchronously
@@ -59,23 +63,25 @@ const store = createStore({
             state.userPassword = usrPassword;
         },
         setDestination(state, searchQuery){
-            console.log(searchQuery)
             state.destination = searchQuery;
+        },
+        setBookingParameters (state, payload) {
+            state.bookingParams = payload;
         },
         updateAccomodations (state, payload) {
             state.accomodations = payload;
             state.apiState = enums.loaded;
-            console.log("UpdateAccomodationsState: " + this.state.apiState)
         },
         setAccomodationsNull (state, payload){
             state.accomodations = payload;
             state.apiState = enums.init;
-            console.log("UpdateAccomodationsState: " + this.state.apiState)
         },
         setApiState (state, apiState) {
             state.apiState = apiState;
-            console.log(apiState)
-    },
+        },
+        setBookedRooms (state, payload) {
+            state.bookedRooms = payload;
+        },
    },
    getters: {
         filteredList(state){
@@ -115,7 +121,6 @@ const store = createStore({
         // },
         async getQueriedDestinations({commit}){
 
-            console.log(this.state.destination)
             let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
 
             if(response.status != (204))

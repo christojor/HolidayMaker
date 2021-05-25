@@ -30,7 +30,7 @@
     </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
-    <RoomDetails :accomodation="accomodation" />
+    <RoomDetails :roomDetails="roomDetails" />
   </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
@@ -85,6 +85,20 @@ import RoomDetails from '/src/components/bookings/RoomDetails.vue'
 import PersonalDetails from '/src/components/bookings/PersonalDetails.vue'
 
 export default {
+    created(){
+        this.roomDetailsObjects.bookingInfo = this.bookingParams;
+        this.roomDetailsObjects.roomInfo = this.bookedRooms;
+    },
+
+    data(){
+        return {
+            roomDetailsObjects: {
+                bookingInfo: this.bookingParams, 
+                roomInfo: this.bookedRooms,
+                }
+        }
+    },
+
     props: ["id"],
 
     components:{
@@ -98,9 +112,19 @@ export default {
     },
 
     computed: {
-    accomodations() {
-      return this.$store.state.accomodations;
-    },
-  },
+        accomodations() {
+            return this.$store.state.accomodations;
+            },
+        bookedRooms() {
+            return this.$store.state.bookedRooms;
+            },
+        bookingParams() {
+            return this.$store.state.bookingParams;
+            },
+        roomDetails() {
+            console.log(this.roomDetailsObjects)
+            return this.roomDetailsObjects;
+            },
+        }
 }
 </script>
