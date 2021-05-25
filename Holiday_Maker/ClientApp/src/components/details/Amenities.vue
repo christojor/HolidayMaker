@@ -27,6 +27,7 @@
         <font-awesome-icon icon="swimming-pool" />Pool
       </div>
       <div
+        :title="wifiTitle(amenity)"
         class="inline-block box-border h-10 p-1 border-2 border-green-500 rounded-md"
         v-if="amenity.wiFi == true"
       >
@@ -51,5 +52,13 @@ export default {
       required: true,
     },
   },
+
+  methods:{
+    wifiTitle(amenity){
+      
+      return amenity.wifiQualities[0].wifiRating + ' stars';
+    }
+  }
+
 };
 </script>
