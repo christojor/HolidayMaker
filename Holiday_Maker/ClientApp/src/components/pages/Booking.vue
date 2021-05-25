@@ -2,8 +2,6 @@
     <div v-for="accomodation in accomodations" :key="accomodation">
         <div v-for="room in accomodation.rooms" :key="room">
             <div v-if="id == room.id">
-                
-               <h2 class="text-lg text-green-6">Just a mock-up. Don't panic!</h2>
 
 <div class="flex flex-wrap overflow-hidden mt-3 mb-3">
 
@@ -93,8 +91,8 @@ export default {
     data(){
         return {
             roomDetailsObjects: {
-                bookingInfo: this.bookingParams, 
-                roomInfo: this.bookedRooms,
+                bookingInfo: null, 
+                roomInfo: null,
                 }
         }
     },
