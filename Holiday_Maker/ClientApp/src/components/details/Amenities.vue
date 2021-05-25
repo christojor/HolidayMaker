@@ -30,7 +30,7 @@
         :title="wifiTitle(amenity)"
         class="inline-block box-border h-10 p-1 border-2 border-green-500 rounded-md"
         v-if="amenity.wiFi == true"
-      >
+      >{{ amenity.wifiQualities[0].mbps  }}p/s
         <font-awesome-icon icon="wifi" />WiFi
       </div>
 
