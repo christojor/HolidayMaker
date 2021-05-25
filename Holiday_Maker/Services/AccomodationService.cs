@@ -36,11 +36,16 @@ namespace Holiday_Maker.Services
             var roomTypes = await _roomTypeRepo.GetAll();
             var amenityList = await _amenityRepo.GetAll();
             var extrasList = await _extraRepo.GetAll();
-            var wifiquality = await _wifiQualityRepo.GetAll();
+            var wifiQualities = await _wifiQualityRepo.GetAll();
 
             foreach (var amenity in amenityList)
             {
-                amenity.WifiQualities.Add(wifiquality.FirstOrDefault(a => a.AmenityId == amenity.Id));
+                var wifi = wifiQualities.FirstOrDefault(a => a.AmenityId == amenity.Id);
+                if (wifi != null)
+                {
+                    amenity.WifiQualities.Add(wifi);
+                }
+                
             }
 
 
@@ -73,11 +78,15 @@ namespace Holiday_Maker.Services
 
             var amenities = await _amenityRepo.GetAll();
             var extras = await _extraRepo.GetAll();
-            var wifiquality = await _wifiQualityRepo.GetAll();
+            var wifiQuality = await _wifiQualityRepo.GetAll();
 
             foreach (var amenity in amenities)
             {
-                amenity.WifiQualities.Add(wifiquality.FirstOrDefault(a => a.AmenityId == amenity.Id));
+                var wifi = wifiQuality.FirstOrDefault(a => a.AmenityId == amenity.Id);
+                if (wifi != null)
+                {
+                    amenity.WifiQualities.Add(wifi);
+                }
             }
 
 
