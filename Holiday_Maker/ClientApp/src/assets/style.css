@@ -325,9 +325,8 @@ h1 {
 
 /*-------------MyBookings button--------------*/
 
-.myBookings-button{
+.myButton{
     border: 1px;
-    width: 60%;
     border-radius: 7px;
     font-family: inherit;
     font-size: 16px;
@@ -336,6 +335,8 @@ h1 {
     color: white;
     font-weight: bold;
     margin-left: 50px;
+    margin-top: 10px;
+    display: block;
 }
 
 /*-------------MyBookings page--------------*/

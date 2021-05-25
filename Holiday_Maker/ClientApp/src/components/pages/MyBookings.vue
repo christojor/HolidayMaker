@@ -19,7 +19,7 @@
         </tr>
     </table>  
         <div class="container2 bg-green-1 shadow-md" style="height:70px">
-            <router-link to="/MyPage" class="myBookings-button bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl">My Page</router-link>
+            <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl">My Page</router-link>
         </div>
 </template>
 

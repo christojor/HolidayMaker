@@ -1,8 +1,5 @@
 <template>
     <h2 class="header bg-green-2">My Page</h2>
-    <div class="container2 bg-green-1 shadow-md" style="height:70px">
-        <router-link to="/MyBookings" class="myBookings-button bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl">My Bookings</router-link>
-    </div>
         <table>
         <tr class="bg-green-1">
             <th class="headerElements">Title</th>
@@ -19,6 +16,11 @@
             <td class="bookingElements">crisscross@loosypants.com</td>
             <td class="bookingElements">1564784321</td>
             <td class="bookingElements">Golden fever</td>
+            <td><button class="editButton">Edit</button></td>
+            <td><button class="editButton">Cancel</button></td>
         </tr>
     </table> 
+    <div class="container2 bg-green-1 shadow-md" style="height:70px">
+        <router-link to="/MyBookings" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl">My Bookings</router-link>
+    </div>
 </template>
