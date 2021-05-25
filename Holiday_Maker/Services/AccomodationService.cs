@@ -89,11 +89,8 @@ namespace Holiday_Maker.Services
                 }
             }
 
-
             accommodation.Amenities.Add(amenities.FirstOrDefault(a => a.AccomodationId == accommodation.Id));
             accommodation.Extras.Add(extras.FirstOrDefault(a => a.AccomodationId == accommodation.Id));
-
-            
 
             foreach (var room in rooms)
             {
@@ -101,10 +98,7 @@ namespace Holiday_Maker.Services
                 accommodation.Rooms.Add(room);
             }
            
-
-
                 return accommodation;
-
         }
         public IQueryable<Accomodation> SearchAccomodationById(int Id)
         {

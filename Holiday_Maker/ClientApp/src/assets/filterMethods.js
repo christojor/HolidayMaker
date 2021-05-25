@@ -101,7 +101,7 @@ export function getByRooms(list, filter) {
     
     var roomslist = []
     var returnlist = [] 
-    list.filter(item => roomslist.push(item.rooms[0],item.rooms[1]))
+    list.filter(item => roomslist.push(...item.rooms))
 
     if(checkedRoomsNames.includes("Single") == true){
         returnlist.push(roomslist.filter(r => r.roomTypeId == 1))
@@ -132,3 +132,10 @@ export function getByCity(list, filter) {
     if (filter.DistanceCity == 0 || filter.DistanceCity == 5000) return list
     return list.filter(item => item.distanceToCenter <= filter.DistanceCity)
 } 
+export function getByWifi(list, filter) {
+    if (!filter.PropWifi || filter.PropWifi == 0) return list
+
+    var wifiHotels = list.filter(item => item.amenities.filter(a => a.wiFi == true).length > 0)
+
+    return wifiHotels.filter(item => item.amenities.filter(a => a.wifiQualities.filter(w => w.wifiRating >= filter.PropWifi).length > 0).length > 0)
+}

@@ -35,7 +35,7 @@ namespace Holiday_Maker.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=holidaymakerz.database.windows.net;Initial Catalog=HolidayMaker;User ID=storapappa;Password=grupp4123!!;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                 optionsBuilder.UseSqlServer("Data Source=holidaymakerz.database.windows.net;Initial Catalog=HolidayMaker;User ID=storapappa;Password=grupp4123!!;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -189,12 +189,6 @@ namespace Holiday_Maker.Models
                     .HasForeignKey(d => d.AccomodationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Room_Accomodation");
-
-                entity.HasOne(d => d.RoomType)
-                    .WithMany(p => p.Rooms)
-                    .HasForeignKey(d => d.RoomTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Room_RoomType");
             });
 
             modelBuilder.Entity<RoomType>(entity =>
@@ -252,7 +246,7 @@ namespace Holiday_Maker.Models
             {
                 entity.ToTable("WifiQuality");
 
-                entity.Property(e => e.Mbps).HasColumnType("decimal(3, 1)");
+                entity.Property(e => e.Mbps).HasColumnType("decimal(4, 1)");
 
                 entity.HasOne(d => d.Amenity)
                     .WithMany(p => p.WifiQualities)
