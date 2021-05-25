@@ -5,17 +5,27 @@
 
   <div class="w-1/2 overflow-hidden p-2">
     <img class="rounded-md" :src="room.imgSrc">
-</div>
+   </div>
 
-  <div class="w-1/2 overflow-hidden p-4">
-  <b>{{ room.roomType.name }}</b><br>
-    <b>Price:</b> {{ room.price }}€
-    <button class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" @click="goToBooking(room.id)">
+   <div class="w-1/2 overflow-hidden p-4">     
+     <button class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" @click="goToBooking(room.id)">
       Book Room
-  </button>
-  </div>
+     </button> 
+     <div>
+     <b>Room Type:</b> {{ room.roomType.name }}<br>
+     <b>Number of Guests: </b> {{ room.nbrOfGuests }}<br>
+     <b>Number of Extra Beds:</b> {{ room.nbrOfExtraBeds }}<br>
+     <b>Price:</b> {{ room.price }}€ <br>
+     <div v-if="room.isRefundable==true">
+       <b>Refund:</b> Yes<br>
+       </div>
+     <div v-if="room.isRefundable==false">
+     <b>Refund:</b> No<br>
+     </div>
+     <b>Description:</b> {{room.description}}<br>
     </div>
-
+    </div>
+</div>
 </div>
     
 </template>
