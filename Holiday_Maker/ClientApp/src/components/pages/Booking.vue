@@ -2,8 +2,6 @@
     <div v-for="accomodation in accomodations" :key="accomodation">
         <div v-for="room in accomodation.rooms" :key="room">
             <div v-if="id == room.id">
-                
-               <h2 class="text-lg text-green-6">Just a mock-up. Don't panic!</h2>
 
 <div class="flex flex-wrap overflow-hidden mt-3 mb-3">
 
@@ -25,8 +23,12 @@
     <Rewards />
     </div>
 
+    <div class="my-1 px-1 w-full overflow-hidden">
+    <PersonalDetails />
+    </div>
+
   <div class="my-1 px-1 w-full overflow-hidden">
-    <RoomDetails :accomodation="accomodation" />
+    <RoomDetails :roomDetails="roomDetails" />
   </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
@@ -78,8 +80,23 @@ import HotelDetails from '/src/components/bookings/HotelDetails.vue'
 import PaymentDetails from '/src/components/bookings/PaymentDetails.vue'
 import Rewards from '/src/components/bookings/Rewards.vue'
 import RoomDetails from '/src/components/bookings/RoomDetails.vue'
+import PersonalDetails from '/src/components/bookings/PersonalDetails.vue'
 
 export default {
+    created(){
+        this.roomDetailsObjects.bookingInfo = this.bookingParams;
+        this.roomDetailsObjects.roomInfo = this.bookedRooms;
+    },
+
+    data(){
+        return {
+            roomDetailsObjects: {
+                bookingInfo: null, 
+                roomInfo: null,
+                }
+        }
+    },
+
     props: ["id"],
 
     components:{
@@ -89,12 +106,23 @@ export default {
         PaymentDetails,
         Rewards,
         RoomDetails,
+        PersonalDetails,
     },
 
     computed: {
-    accomodations() {
-      return this.$store.state.accomodations;
-    },
-  },
+        accomodations() {
+            return this.$store.state.accomodations;
+            },
+        bookedRooms() {
+            return this.$store.state.bookedRooms;
+            },
+        bookingParams() {
+            return this.$store.state.bookingParams;
+            },
+        roomDetails() {
+            console.log(this.roomDetailsObjects)
+            return this.roomDetailsObjects;
+            },
+        }
 }
 </script>

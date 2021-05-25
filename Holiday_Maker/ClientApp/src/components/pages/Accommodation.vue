@@ -45,6 +45,9 @@
         </div>
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
             <Rooms :rooms="accomodation.rooms" />
+            <button class="float-right bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-7 rounded-full" @click="goToBooking(accomodation.id)">
+              Book Rooms
+            </button>
           </div>
         </div>
 
@@ -85,5 +88,13 @@ Navbar,
 Rating,
 Rooms,
   },
+  methods:{
+    goToBooking(accomodationId) {
+            this.$router.push({
+                name: "Booking",
+                params: { id: accomodationId },
+            });
+        },
+  }
 }
 </script>

@@ -10,8 +10,8 @@
   <div class="w-1/2 overflow-hidden p-4">
   <b>{{ room.roomType.name }}</b><br>
     <b>Price:</b> {{ room.price }}€
-    <button class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" @click="goToBooking(room.id)">
-      Book Room
+    <button class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" @click="addToBooking(room)">
+      Add Room
   </button>
   </div>
     </div>
@@ -30,11 +30,17 @@ export default {
         }
     },
       methods: {
-        goToBooking(roomId) {
-            this.$router.push({
-                name: "Booking",
-                params: { id: roomId },
-            });
+        // goToBooking(roomId) {
+        //   console.log(roomId)
+        //     this.$router.push({
+        //         name: "Booking",
+        //         params: { id: roomId },
+        //     });
+        // },
+        addToBooking(room) {
+          console.log(room)
+          this.$store.state.bookedRooms.push(room)
+          console.log(this.$store.state.bookedRooms)
         }
 }
     
