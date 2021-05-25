@@ -8,57 +8,69 @@ import Searchbar from '/src/components/Searchbar.vue'
 import LoginRegister from '/src/components/pages/LoginRegister.vue'
 import Logout from '/src/components/logins/Logout.vue'
 import Booking from '/src/components/pages/Booking.vue'
+import MyBookings from '/src/components/pages/MyBookings.vue'
+import MyPage from '/src/components/pages/MyPage.vue'
 
 const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: Searchbar,
-    },
-    {
-        path: '/hotels',
-        name: 'Hotels',
-        component: Hotels,
-    },
-    {
-        path: '/storetest',
-        name: 'StoreTest',
-        component: StoreTest,
-    },
-    {
-        path: "/accommodation/:id",
-        name: "Accommodation",
-        component: Accommodation,
-        props: true,
-    },
-    {
-        path: "/booking/:id",
-        name: "Booking",
-        component: Booking,
-        props: true,
-    },
-    {
-        path: "/:catchAll(.*)",
-        component: NotFound,
-    },
-    {
-        path: '/Favorite',
-        name: 'Favorite',
-        component: Favorite,
-    },
-    {
-        path: '/Login',
-        name: 'LoginRegister',
-        component: LoginRegister,
-    },
-    {
-        path: '/Logout',
-        name: 'Logout',
-        component: Logout,
-    },
+  {
+    path: '/',
+    name: 'Home',
+    component: Searchbar
+  },
+  {
+    path: '/hotels',
+    name: 'Hotels',
+    component: Hotels
+  },
+  {
+    path: '/storetest',
+    name: 'StoreTest',
+    component: StoreTest
+  },
+  {
+    path: '/accommodation/:id',
+    name: 'Accommodation',
+    component: Accommodation,
+    props: true
+  },
+  {
+    path: '/booking/:id',
+    name: 'Booking',
+    component: Booking,
+    props: true
+  },
+  {
+    path: '/:catchAll(.*)',
+    component: NotFound
+  },
+  {
+    path: '/Favorite',
+    name: 'Favorite',
+    component: Favorite
+  },
+  {
+    path: '/Login',
+    name: 'LoginRegister',
+    component: LoginRegister
+  },
+  {
+    path: '/Logout',
+    name: 'Logout',
+    component: Logout
+  },
+  {
+    path: '/MyBookings',
+    name: 'MyBookings',
+    component: MyBookings
+  },
+  {
+    path: '/MyPage',
+    name: 'MyPage',
+    component: MyPage
+  }
 ]
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
+  history: createWebHistory(),
+  routes
 })
 export default router

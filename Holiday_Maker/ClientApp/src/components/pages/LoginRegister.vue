@@ -11,6 +11,9 @@
             <a v-if="!toggle == false" @click="toggleForm" class="text-green-500 hover:text-green-800 hover:underline" href="#">Register</a>
             <a v-else @click="toggleForm" class="text-green-500 hover:text-green-800 hover:underline" href="#">Login</a>
         </div>
+        <div class="container2 bg-green-1 shadow-md" style="height:70px">
+            <router-link to="/MyPage" class="myBookings-button bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl">My Page</router-link>
+        </div>
     </div>
 </template>
 
@@ -18,12 +21,14 @@
 import Login from '/src/components/logins/Login.vue'
 import Register from '/src/components/logins/Register.vue'
 import Info from '/src/components/logins/Info.vue'
+import MyPage from '/src/components/pages/MyPage.vue'
 
 export default({
     components:{
         Login,
         Info,
         Register,
+        MyPage,
     },
     data(){
         return{
