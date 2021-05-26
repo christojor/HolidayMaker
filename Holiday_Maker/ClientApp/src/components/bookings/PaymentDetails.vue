@@ -1,20 +1,32 @@
 <template>
-  <div class="border-2 rounded-md border-black shadow-md p-4 bg-green-1 divide-y-2 divide-gray-300 border-2">
-
+  <div class="overflow-hidden border-2 rounded-md border-black shadow-md p-4 bg-green-1 divide-y-2 divide-gray-300 border-2">
     <form  id="payment-form">
+    <div>
       <label>
         <div class="w-full overflow-hidden">
             <h2 class="text-xl text-green-6">Payment Details</h2>
         </div>
         </label>
-        <div id="card-element" class="mt-2 mb-2"></div>
-      <button type="submit">Submit payment</button>
-    </form>
+            <h2 class="text-m text-green-6">Credit Card</h2>
+            <div id="card-element" class="mt-2 mb-2 border-2 border-gray-300"></div>
+
     <div id="SuccessMessage" class="alert" style="display:none">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-      <strong>Payment done!</strong> 
+      <strong>Booking Confirmed!</strong>
     </div>
   </div>
+
+  <div class="flex flex-wrap overflow-hidden bg-green-1 mt-2">
+
+  <div class="w-full overflow-hidden">
+    <button type="submit" class="bg-green-500 w-1/2 hover:bg-green-700 text-white font-bold py-2 px-2 mt-2 rounded-full" @click="sendBooking()">
+      Buy Now
+  </button>
+  
+  </div>
+</div>
+    </form>
+</div>
 </template>
 
 <style>
@@ -41,7 +53,8 @@
 
 <script>
 export default {
-  mounted: function () {
+
+  mounted() {
     //Building payment form starts here
     var stripe = Stripe(
       "pk_test_51IsjoPK0RxPPVgejwsizP9ghkzrEOEAho8VjGbz0Rtn2i31J5t5zr6NGp04eZD0ZHF5TwIzvCZf2XFmZR4syWqiY00ldbn6Luv"
@@ -83,7 +96,19 @@ export default {
         .then(self.stripePaymentMethodHandler);
     });
   },
+
+  props: {
+        makeBooking: {
+            type: Object,
+            required: true,
+        }
+    },
+
   methods: {
+    sendBooking() {
+      this.$store.commit("setBooking", this.makeBooking);
+    },
+
     stripePaymentMethodHandler(result) {
       var self = this;
       console.log("Hello this is the payment method handler greeting you!");
@@ -107,6 +132,7 @@ export default {
         });
       }
     },
+
     handleServerResponse(response){
       if(response.error){
         //Show error from server on payment form
@@ -124,6 +150,7 @@ export default {
         console.log("show success message")
       }
     },
+
     handleStripeJsResult(result)
     {
       if(result.error){
@@ -152,4 +179,5 @@ export default {
     }
   },
 };
+
 </script>

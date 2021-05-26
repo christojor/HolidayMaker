@@ -7,8 +7,9 @@
   </div>
 
   <div class="w-full overflow-hidden">
-    <h1>First Name Last Name</h1>
+    <h1>FirstName LastName</h1>
     <h1>E-mail</h1>
+    <h1>Address</h1>
   </div>
 
 </div>

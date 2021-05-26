@@ -30,14 +30,6 @@
     <RoomDetails :roomDetails="roomDetails" />
   </div>
 
-  <div class="my-1 px-1 w-full overflow-hidden">
-    <PaymentDetails />
-  </div>
-
-  <div class="my-1 px-1 w-full overflow-hidden">
-    <BuyNow :makeBooking="bookingDetails" />
-  </div>
-
 </div>
 
   </div>
@@ -53,7 +45,11 @@
   </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
-    <PriceDetails :priceDetails="roomDetails" />
+    <PriceDetails :roomPrices="bookedRooms" />
+  </div>
+
+   <div class="my-1 px-1 w-full overflow-hidden">
+    <PaymentDetails :makeBooking="bookingDetails" />
   </div>
 
 </div>
@@ -67,14 +63,14 @@
 </div>                 
 <!-- End Design Divs -->
     </div>
-    UserId: {{ this.$store.state.booking.UserId }}<br>
+    <!-- UserId: {{ this.$store.state.booking.UserId }}<br>
     AccomodationId: {{ this.$store.state.booking.AccomodationId }}<br>
     NbrOfAdults: {{ this.$store.state.booking.NbrOfAdults }}<br>
     NbrOfChildren: {{ this.$store.state.booking.NbrOfChildren }}<br>
     CheckOutDate: {{ this.$store.state.booking.CheckOutDate }}<br>
     CheckInDate: {{ this.$store.state.booking.CheckInDate }}<br>
     PaymentDate: {{ this.$store.state.booking.PaymentDate }}<br>
-    RoomIds: {{ this.$store.state.booking.RoomIds }}
+    RoomIds: {{ this.$store.state.booking.RoomIds }} -->
   </div>
   <!-- End Logic Divs -->
 </template>
@@ -131,6 +127,7 @@ export default {
             return this.$store.state.accomodations;
         },
         bookedRooms() {
+          console.log("BookedRooms: " + this.$store.state.bookedRooms)
             return this.$store.state.bookedRooms;
         },
         bookingParams() {
