@@ -18,7 +18,7 @@ import Themes from '/src/components/Themes.vue'
 
 export default{
     components: {
-        Themes
+        Themes,
     },
 }
 </script>
