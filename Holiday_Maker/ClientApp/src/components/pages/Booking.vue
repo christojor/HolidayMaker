@@ -77,7 +77,6 @@
 
 <script>
 import PriceDetails from '/src/components/bookings/PriceDetails.vue'
-import BuyNow from '/src/components/bookings/BuyNow.vue'
 import HotelDetails from '/src/components/bookings/HotelDetails.vue'
 import PaymentDetails from '/src/components/bookings/PaymentDetails.vue'
 import Rewards from '/src/components/bookings/Rewards.vue'
@@ -114,7 +113,6 @@ export default {
 
     components:{
         PriceDetails,
-        BuyNow,
         HotelDetails,
         PaymentDetails,
         Rewards,
