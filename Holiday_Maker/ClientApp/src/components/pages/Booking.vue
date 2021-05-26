@@ -1,7 +1,6 @@
 <template>
     <div v-for="accomodation in accomodations" :key="accomodation">
-        <div v-for="room in accomodation.rooms" :key="room">
-            <div v-if="id == room.id">
+            <div v-if="id == accomodation.id">
 
 <div class="flex flex-wrap overflow-hidden mt-3 mb-3">
 
@@ -54,7 +53,7 @@
   </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
-    <PriceDetails />
+    <PriceDetails :priceDetails="roomDetails" />
   </div>
 
 </div>
@@ -67,7 +66,6 @@
   </div>
 </div>                 
 <!-- End Design Divs -->
-      </div>
     </div>
   </div>
   <!-- End Logic Divs -->
