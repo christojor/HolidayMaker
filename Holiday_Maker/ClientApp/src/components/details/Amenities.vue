@@ -18,27 +18,27 @@
         class="inline-block box-border h-10 p-1 border-2 border-green-500 rounded-md"
         v-if="amenity.gym == true"
       >
-        <font-awesome-icon icon="dumbbell" />Gym
+        <font-awesome-icon icon="dumbbell" /> Gym
       </div>
       <div
         class="inline-block box-border h-10 p-1 border-2 border-green-500 rounded-md"
         v-if="amenity.pool == true"
       >
-        <font-awesome-icon icon="swimming-pool" />Pool
+        <font-awesome-icon icon="swimming-pool" /> Pool
       </div>
       <div
         :title="amenity.wifiQualities[0].wifiRating + ' stars'"
         class="inline-block box-border h-10 p-1 border-2 border-green-500 rounded-md"
         v-if="amenity.wiFi == true"
-      >{{ amenity.wifiQualities[0].mbps  }}p/s
-        <font-awesome-icon icon="wifi" />WiFi
+      >
+        <font-awesome-icon icon="wifi" /> WiFi - {{ amenity.wifiQualities[0].mbps  }} Mbps
       </div>
 
       <div
         class="inline-block box-border h-10 p-1 border-2 border-green-500 rounded-md"
         v-if="amenity.resturant == true"
       >
-        <font-awesome-icon icon="utensils" />Resturant
+        <font-awesome-icon icon="utensils" /> Restaurant
       </div>
     </div>
   </div>
