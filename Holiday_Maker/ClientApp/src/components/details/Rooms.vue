@@ -40,11 +40,17 @@ export default {
         }
     },
       methods: {
-        goToBooking(roomId) {
-            this.$router.push({
-                name: "Booking",
-                params: { id: roomId },
-            });
+        // goToBooking(roomId) {
+        //   console.log(roomId)
+        //     this.$router.push({
+        //         name: "Booking",
+        //         params: { id: roomId },
+        //     });
+        // },
+        addToBooking(room) {
+          console.log(room)
+          this.$store.state.bookedRooms.push(room)
+          console.log(this.$store.state.bookedRooms)
         }
 }
     

@@ -101,7 +101,7 @@ export function getByRooms(list, filter) {
     
     var roomslist = []
     var returnlist = [] 
-    list.filter(item => roomslist.push(item.rooms[0],item.rooms[1]))
+    list.filter(item => roomslist.push(...item.rooms))
 
     if(checkedRoomsNames.includes("Single") == true){
         returnlist.push(roomslist.filter(r => r.roomTypeId == 1))

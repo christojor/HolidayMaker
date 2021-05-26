@@ -36,11 +36,16 @@ namespace Holiday_Maker.Services
             var roomTypes = await _roomTypeRepo.GetAll();
             var amenityList = await _amenityRepo.GetAll();
             var extrasList = await _extraRepo.GetAll();
-            var wifiquality = await _wifiQualityRepo.GetAll();
+            var wifiQualities = await _wifiQualityRepo.GetAll();
 
             foreach (var amenity in amenityList)
             {
-                amenity.WifiQualities.Add(wifiquality.FirstOrDefault(a => a.AmenityId == amenity.Id));
+                var wifi = wifiQualities.FirstOrDefault(a => a.AmenityId == amenity.Id);
+                if (wifi != null)
+                {
+                    amenity.WifiQualities.Add(wifi);
+                }
+                
             }
 
 
@@ -73,11 +78,15 @@ namespace Holiday_Maker.Services
 
             var amenities = await _amenityRepo.GetAll();
             var extras = await _extraRepo.GetAll();
-            var wifiquality = await _wifiQualityRepo.GetAll();
+            var wifiQuality = await _wifiQualityRepo.GetAll();
 
             foreach (var amenity in amenities)
             {
-                amenity.WifiQualities.Add(wifiquality.FirstOrDefault(a => a.AmenityId == amenity.Id));
+                var wifi = wifiQuality.FirstOrDefault(a => a.AmenityId == amenity.Id);
+                if (wifi != null)
+                {
+                    amenity.WifiQualities.Add(wifi);
+                }
             }
 
             accommodation.Amenities.Add(amenities.FirstOrDefault(a => a.AccomodationId == accommodation.Id));
@@ -180,6 +189,17 @@ namespace Holiday_Maker.Services
             var roomTypes = _roomTypeRepo.GetAllRaw();
             var amenityList = _amenityRepo.GetAllRaw();
             var extrasList = _extraRepo.GetAllRaw();
+            var wifiQualities = _wifiQualityRepo.GetAllRaw();
+
+            foreach (var amenity in amenityList)
+            {
+                var wifi = wifiQualities.FirstOrDefault(a => a.AmenityId == amenity.Id);
+                if (wifi != null)
+                {
+                    amenity.WifiQualities.Add(wifi);
+                }
+
+            }
 
             foreach (var accommodation in accommodationList)
             {
