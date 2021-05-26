@@ -7,6 +7,11 @@ namespace Holiday_Maker.Models
 {
     public partial class Amenity
     {
+        public Amenity()
+        {
+            WifiQualities = new HashSet<WifiQuality>();
+        }
+
         public int Id { get; set; }
         public int AccomodationId { get; set; }
         public bool Entertainment { get; set; }
@@ -17,5 +22,6 @@ namespace Holiday_Maker.Models
         public bool Resturant { get; set; }
 
         public virtual Accomodation Accomodation { get; set; }
+        public virtual ICollection<WifiQuality> WifiQualities { get; set; }
     }
 }

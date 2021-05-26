@@ -1,48 +1,111 @@
 <template>
+<!-- Background image -->
         <div class="search-dest-box">
             <form>
-                <div class="rounded flex flex-row flex-wrap gap-3 mt-5">
-                    <div class="rounded bg-green-1 search-div shadow-xl">
-                        <p>Destination</p>
-                        <font-awesome-icon :icon="['fas', 'map-marker-alt']" size="lg" style="color: #52B788;"/>
-                        <input class="rounded search-input" v-model="destination" type="text" placeholder="Enter destination...">
+                <!-- Begin input fields -->
+                <div class="flex flex-row flex-wrap gap-3 mt-8">
+        <div class="rounded-t-md bg-green-1 search-div shadow-xl w-4/8">
+        
+    <!-- Search Destination -->
+        <div class="text-green-500">
+        <font-awesome-icon :icon="['fas', 'map-marker-alt']" class="mt-3 mr-4 fa-2x float-left" style="color: #52B788;"/>
+
+        <AutoComplete
+            v-model="destinationSearch"
+            :suggestions="filteredCountries" 
+            @complete="searchCountry($event)"
+            @item-select="setInput($event)"
+            field="name" 
+            class="float-left border-2 border-green-500 bg-white h-10 px-5 mt-2 pr-20 rounded-lg text-lg"
+            placeholder="Destination..."
+        />
+
+      </div>
+            </div>
+                    <!-- Check-in -->
+                    <div class="rounded-t-md bg-green-1 search-div shadow-xl w-1/8">
+                    <div class="text-green-500">
+                    <p class="float-left mt-2 ml-2" style="font-size: 10pt; font-weight: bold;">Check-in</p>
+                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" ref="checkOut" v-model="bookingParams.checkIn" type="date">
+                    </div>
                     </div>
                     
-                    <div class="rounded bg-green-1 search-div shadow-xl">
-                        <p>Check-in Date</p>
-                        <input class="rounded search-input" ref="check_in" v-model="check_in" type="date">
+                    <!-- Check-out -->
+                    <div class="rounded-t-md bg-green-1 search-div shadow-xl w-1/8">
+                    <div class="text-green-500">
+                        <p class="float-left mt-2 ml-2" style="font-size: 10pt; font-weight: bold;">Check-out</p>
+                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" ref="checkOut" v-model="bookingParams.checkOut" type="date">
+                    </div>
                     </div>
                     
-                    <div class="rounded bg-green-1 search-div shadow-xl">
-                        <p>Check-out Date</p>
-                        <input class="rounded search-input" ref="check_out" v-model="check_out" type="date">
-                    </div>
-                    
-                    <div class="rounded bg-green-1 search-div shadow-xl">
-                        <p>Guests</p>
-                        <font-awesome-icon :icon="['fas', 'users']" size="lg" style="color: #52B788;"/>
-                        <select class="rounded search-input" v-model="selected">
-                            <option disabled value="">Number of Guests</option>
+                    <!-- Number of travellers -->
+                    <div class="rounded-t-md bg-green-1 search-div shadow-xl w-2/8">
+                    <div class="text-green-500">
+                        <font-awesome-icon :icon="['fas', 'users']" class="mt-3 mr-4 fa-2x float-left" style="color: #52B788;"/>
+                        <select class="float-left border-2 border-green-500 bg-white h-10 w-40 px-5 mt-2 pr-4 rounded-lg text-lg focus:outline-none" v-model="bookingParams.travellersAdults">
+                            <option disabled selected value="">Adults</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
                         </select>
-                    </div>      
-                </div>
-                <div class="flex flex-row flex-wrap gap-2 mt-2" style="justify-content:center;padding:1em">
-                    <div class="border-2 border-green-5 rounded bg-green-1" style="padding-left:1em;padding-right:1em">
-                        <label for="beachslider" style="padding-right:1em">Distance to Beach</label>
-                        <input id="beechslider" type="range" min="50" v-model="distanceToBeech" max="1000" step="50" style="flex:1">
-                        <output for="beechslider" :value="500 + ' m'">{{distanceToBeech}} m</output>
+                        <select class="float-left border-2 border-green-500 bg-white h-10 w-40 px-5 mt-2 ml-2 pr-4 rounded-lg text-lg focus:outline-none" v-model="bookingParams.travellersChildren">
+                            <option disabled selected value="">Children</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
                     </div>
-                    <div class="border-2 border-green-5 rounded bg-green-1" style="padding-left:1em;padding-right:1em">
-                        <label for="cityslider" style="padding-right:1em">Distance to City Center</label>
-                        <input id="cityslider" type="range" min="50" v-model="distanceToCity" max="1000" step="50" style="flex:1">
-                        <output for="cityslider" :value="500 + ' m'">{{distanceToCity}} m</output>
                     </div>
+                          <!-- End input fields -->
+                          
                 </div>
-                <div style="width:100vw; text-align:center">
-            <input type="submit" value="Search" @click="search" class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl"/>
+                <!-- End input fields container -->
+
+                <!-- Begin Tabs -->
+                    <div class="flex flex-row flex-wrap gap-3">
+        <div class="nav-div w-4/8">
+        
+    <!-- Accommodation and Flight Tabs-->
+        <div>
+<ul class="flex items-stretch">
+<li class="w-1/2">
+    <a class="flex border rounded-b-lg border-green-500 rounded py-2 px-4 bg-green-1 text-green-500 font-bold" href="#">
+        <font-awesome-icon :icon="['fas', 'home']" class="mt-1 mr-4 float-left" style="color: #52B788;"/>
+        Accommodations</a>
+  </li>
+  <li class="w-1/2">
+    <a class="flex border rounded-b-lg border-green-500 hover:border-green-100 bg-green-500 text-green-100 py-2 px-4" href="#">
+        <font-awesome-icon :icon="['fas', 'plane']" class="mt-1 mr-4 float-left" style="color: #D8F3DC;"/>
+        Flights</a>
+  </li>
+</ul>
+      </div>
+            </div>
+                    <!-- Filler container -->
+                    <div class="nav-div w-1/8">
+                    <div>
+                    </div>
+                    </div>
+                    
+                    <!-- Filler container-->
+                    <div class="nav-div w-1/8">
+                    <div>
+                      
+                    </div>
+                    </div>
+                    
+                    <!-- Filler container -->
+                    <div class="nav-div w-2/8">
+                    <div>
+
+                    </div>
+                    </div>
+                          
+                </div>
+                
+                <!-- Search Button -->
+                <div style="text-align:center">
+            <input type="submit" value="Search" @click="search" class="mt-6 w-2/6 bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full shadow-xl"/>
         </div>
             </form>
         </div>
@@ -50,74 +113,126 @@
 </template>
 
 <script>
-export default {
-    created() {
-    this.$store.dispatch("getAccomodations");
-    },
+import enums from "../assets/enums.js";
 
+export default {
+    mounted(){
+        this.setApiState(enums.init)
+        console.log("ApiStateMounted:" + this.$store.state.apiState)
+    },
     data()
     {
         return{
-            distanceToCity: 500,
-            distanceToBeech: 500,
-            destination: '',
-            check_in: '',
-            check_out: '',
-            selected: '',
+            destinationSearch: '',
+            bookingParams:{
+                checkIn: '',
+                checkOut: '',
+                travellersAdults: '',
+                travellersChildren: '',
+            },
             image: "./assets/images/front-bg.jpg",
+
+            //Autocomplete Data
+            countries: this.$store.state.countries,
+            selectedCountry: null,
+            selectedCity: null,
+            filteredCities: null,
+            filteredCountries: null,
+            selectedCountries: [],
         }
     },
+
     methods:{
-        async search()
-        {
-            // Format destination input (Refactor later!)
-            if (this.destination.match(/\b\w+\b/g) > 1){
-            this.destination = this.destination.trim()
-            this.destination = this.destination.toLowerCase()
-            this.destination = this.destination.charAt(0).toUpperCase() + this.destination.slice(1)
-            }
-            else{
-            this.destination = this.destination.split(" ")[0]
-            this.destination = this.destination.trim()
-            this.destination = this.destination.toLowerCase()
-            this.destination = this.destination.charAt(0).toUpperCase() + this.destination.slice(1)
-            }
-
-            // Get current data from store
-            let allAccomodations = this.$store.state.accomodations
-            let queriedAccomodations = []
-            console.log(queriedAccomodations)
-            console.log(this.destination)
-
-            // Check country and city
-            if (this.destination.length){
-                allAccomodations.forEach(accomodation => {
-                if(accomodation.country == this.destination || accomodation.city == this.destination)
-                {
-                    queriedAccomodations.push(accomodation);
-                    console.log(accomodation)
-                }
-            });
-            } 
-            else {
-                queriedAccomodations = allAccomodations
-            }
-
-            this.updateAccomodations(queriedAccomodations)
-
-            this.$router.push({ name: "Hotels"}) //Ok
-
+        formatQuery(){
+            this.destinationSearch = this.destinationSearch.trim()
+            this.destinationSearch  = this.destinationSearch.toLowerCase()
+            this.destinationSearch  = this.destinationSearch.charAt(0).toUpperCase() + this.destinationSearch.slice(1)
         },
 
+        async search()
+        {
+            if(this.destinationSearch.length > 1)
+            {   // Format destinationSearch if more than one word
+                if (this.destinationSearch.match(/\b\w+\b/g) > 1){
+                    this.formatQuery()
+                    }
+                else{
+                        this.destinationSearch = this.destinationSearch.split(" ")[0]
+                        this.formatQuery()
+                        
+                        // Write formatted destination to state
+                        this.setDestination(this.destinationSearch)
+
+                        // Write checkIn, checkOut, adults and children to state
+                        this.setBookingParameters(this.bookingParams)
+                        
+                        // Get accomodations from API and write to state
+                        this.getQueriedDestinations(this.$store.state.destination)
+                    }
+            }
+            else {
+                // Write checkIn, checkOut, adults and children to state
+                        this.setBookingParameters(this.bookingParams)
+                        
+                 // Get all accommodations
+                this.$store.dispatch("getAccomodations");
+            }
+
+            // Route to results page
+            this.$router.push({ name: "Hotels"})
+
+        },
+        // Autocomplete events
+        searchCountry(event) {
+            setTimeout(() => {
+                if (!event.query.trim().length) {
+                    this.filteredCountries = [...this.countries];
+                }
+                else {
+                    this.filteredCountries = this.countries.filter((country) => {
+                        return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+                    });
+                }
+            }, 250);
+            console.log(this.destinationSearch)
+            console.log(this.filteredCountries)
+        },
+        searchCity(event) {
+            let query = event.query;
+            let filteredCities = [];
+
+            for (let country of this.groupedCities) {
+                let filteredItems = FilterService.filter(country.items, ['label'], query, FilterMatchMode.CONTAINS);
+                if (filteredItems && filteredItems.length) {
+                    filteredCities.push({...country, ...{items: filteredItems}});
+                }
+            }
+
+            this.filteredCities = filteredCities;
+        },
+        setInput(event) {
+            this.destinationSearch = event.value.name
+            console.log(event.value.name)
+        },
+
+    // Set destination in state to formatted search parameter
+    setDestination(searchQuery) {
+      this.$store.commit("setDestination", searchQuery);
+    },
+    setBookingParameters(payload) {
+      this.$store.commit("setBookingParameters", payload);
+    },
+    setApiState(newState) {
+      this.$store.commit("setApiState", newState);
+    },
+    // Call API and update accomodations state based on destination state
+    getQueriedDestinations() {
+      this.$store.dispatch("getQueriedDestinations");
+    },
+    // Get all accommodations (no search query)
     getAccomodations() {
       this.$store.dispatch("getAccomodations");
     },
-    updateAccomodations(queriedAccomodations) {
-      this.$store.commit("updateAccomodations", queriedAccomodations);
-    },
-    filterList(filter){
-            this.$store.commit("updateFilter", filter)
-        }
-    }
+        },
 }
 </script>

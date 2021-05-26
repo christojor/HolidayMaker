@@ -1,10 +1,10 @@
 <template>
     
-    <div class="hotel-item-desc-left" @click="goToAccommodation(accomodation.id)">
+    <div class="hotel-item-desc-left"  @click="goToAccommodation(accomodation.id)">
         <h1 style="font-size:20px;">{{accomodation.name}}</h1>
         <h2 style="font-size:16px; display:inline;">{{accomodation.country}}</h2>
         <h2 style="font-size:14px; display:inline;">, {{accomodation.city}}</h2>
-        <p style="height: 100px">{{accomodation.description}}</p>
+        <p style="height: 100px; overflow: hidden">{{accomodation.description}}</p>
 
         <div v-if="accomodation.guestRating <= 2">
             <h2 style="font-size:16px;"><font-awesome-icon :icon="['fas', 'poop']" size="lg" style="color: #52B788;"/> {{accomodation.guestRating}}</h2>
@@ -21,15 +21,16 @@
     </div>
     <div class="hotel-item-desc-right">
     
-        <div v-for="stars in accomodation.starRating" :key="stars" style="display:inline-block; margin-bottom:5px">
-            <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
-        </div><br/>
-    
-        <FavoriteButton :accomodationObject="accomodation"/>
-
-        <p style="font-size:16px; margin-right:10px; margin-top:65px">From</p>
-        <h2 style="font-size:20px;">SEK {{lowestRoom(accomodation.id)}}:-</h2>
-        <p style="font-size:12px; margin-right:10px;">Per nigth</p>
+        <div style="height: 120px">
+            <div v-for="stars in accomodation.starRating" :key="stars" style="display:inline-block; margin-bottom:5px;">
+                <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
+            </div><br/>
+        
+            <FavoriteButton :accomodationObject="accomodation"/>
+        </div>
+        <p style="font-size:14px;">From</p>
+        <h2 style="font-size:20px;">{{lowestRoom(accomodation.id)}}€</h2>
+        <p style="font-size:12px;">per night</p>
     </div>
 </template>
 
@@ -64,10 +65,10 @@ export default ({
             });
         }
     },
-computed:{ 
-    ...mapGetters([
-        'filteredList'
-    ])
-}
+    computed:{ 
+        ...mapGetters([
+            'filteredList'
+        ])
+    }
 })
 </script>

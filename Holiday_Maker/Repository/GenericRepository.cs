@@ -34,7 +34,6 @@ namespace Holiday_Maker.Repository
         {
             return await table.FindAsync(id);
         }
-
         public async Task<T> GetById(string id)
         {
             return await table.FindAsync(id);
@@ -60,5 +59,6 @@ namespace Holiday_Maker.Repository
         {
             _context.SaveChangesAsync();
         }
+       
     }
 }

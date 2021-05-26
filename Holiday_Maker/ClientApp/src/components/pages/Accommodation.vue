@@ -6,7 +6,7 @@
         <div class="w-1/6 overflow-hidden">
           <!-- Column Content -->
         </div>
-
+        
         <div class="w-4/6 overflow-hidden shadow-md rounded-md divide-y-2 divide-black bg-green-1">
 
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full">
@@ -45,13 +45,15 @@
         </div>
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
             <Rooms :rooms="accomodation.rooms" />
+            <button class="float-right bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-7 rounded-full" @click="goToBooking(accomodation.id)">
+              Book Rooms
+            </button>
           </div>
         </div>
 
         <div class="w-1/6 overflow-hidden">
           <!-- Column Content -->
         </div>
-
       </div>
     </div>
   </div>
@@ -86,5 +88,13 @@ Navbar,
 Rating,
 Rooms,
   },
-};
+  methods:{
+    goToBooking(accomodationId) {
+            this.$router.push({
+                name: "Booking",
+                params: { id: accomodationId },
+            });
+        },
+  }
+}
 </script>

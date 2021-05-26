@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Holiday_Maker.Services;
+using Holiday_Maker.Helper;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,34 +25,31 @@ namespace Holiday_Maker.Controllers
             _userService = new UserService();
         }
         // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
-            return "value";
+            return await _userService.GetUserById(id);
         }
-
-
         [HttpGet("favorites")]
         public async Task<ActionResult<IEnumerable<Accomodation>>> GetFavorites(int userId)
         {
 
             return await _userService.GetUserFavorites(userId);
         }
-
-        // POST api/<UserController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        
+        [HttpPost("login")]
+        public async Task<LoginHelper> Login(User user)
         {
+            return await _userService.Login(user.Email, user.Password);
         }
 
-        // PUT api/<UserController>/5
+        [HttpPost("register")]
+        public string PostRegister(User user)
+        {
+           return _userService.RegisterUser(user);
+        }
+
+
         [HttpPost("favorites")]
         public async void PostFavorite(UserFavorite userFavorite)
         {
@@ -62,6 +60,12 @@ namespace Holiday_Maker.Controllers
         public async void Delete(UserFavorite userFavorite)
         {
             await _userService.RemoveUserFavorite(userFavorite);
+        }
+
+        [HttpDelete("{id}")]
+        public void RemoveUser(int id)
+        {
+            _userService.RemoveUser(id);
         }
     }
 }

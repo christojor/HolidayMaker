@@ -5,12 +5,16 @@ import Accommodation from '/src/components/pages/Accommodation.vue'
 import NotFound from '/src/components/pages/NotFound.vue'
 import Favorite from '/src/components/FavoriteButton.vue'
 import Searchbar from '/src/components/Searchbar.vue'
+import LoginRegister from '/src/components/pages/LoginRegister.vue'
+import Logout from '/src/components/logins/Logout.vue'
+import Booking from '/src/components/pages/Booking.vue'
+
 import PayUpSucka from '/src/components/pages/PayUpSucka.vue'
 
 const routes = [
     {
         path: '/',
-        name: '',
+        name: 'Home',
         component: Searchbar,
     },
     {
@@ -24,9 +28,15 @@ const routes = [
         component: StoreTest,
     },
     {
-        path: "/accommodation/:id",  // <-- notice the colon
+        path: "/accommodation/:id",
         name: "Accommodation",
         component: Accommodation,
+        props: true,
+    },
+    {
+        path: "/accommodation/booking/:id",
+        name: "Booking",
+        component: Booking,
         props: true,
     },
     {
@@ -34,14 +44,20 @@ const routes = [
         component: NotFound,
     },
     {
-        path: '/searchbar',
-        name: 'Searchbar',
-        component: Searchbar,
-    },
-    {
         path: '/Favorite',
         name: 'Favorite',
         component: Favorite,
+    },
+    {
+        path: '/Login',
+        name: 'LoginRegister',
+        component: LoginRegister,
+    },
+    {
+        path: '/Logout',
+        name: 'Logout',
+        component: Logout,
+    },
     },
     {
         path: '/PayUpSucka',
