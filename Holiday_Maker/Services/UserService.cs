@@ -33,6 +33,11 @@ namespace Holiday_Maker.Services
             return NotFound();
         }
 
+        public void RemoveUser(int id)
+        {
+            _userRepo.Delete(id);
+        }
+
 
 
         public async Task<ActionResult<IEnumerable<Accomodation>>> GetUserFavorites(int id)
@@ -74,7 +79,7 @@ namespace Holiday_Maker.Services
             }
 
             var result = userFavorites.Exists(u => u.AccomodationId.Equals(userFavorite.AccomodationId));
-            if(!result)
+            if (!result)
             {
                 _ufRepo.Insert(userFavorite);
             }
@@ -107,7 +112,7 @@ namespace Holiday_Maker.Services
             var users = await _userRepo.GetAll();
             var user = users.FirstOrDefault(u => u.Email.Equals(email) && u.Password.Equals(password));
 
-            if(user != null)
+            if (user != null)
             {
                 return new LoginHelper() { LoggedInMessage = "You logged in successfully!", IsLoggedIn = true, UserId = user.Id };
             }
