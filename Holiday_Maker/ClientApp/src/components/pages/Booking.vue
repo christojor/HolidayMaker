@@ -35,7 +35,7 @@
   </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
-    <BuyNow />
+    <BuyNow :makeBooking="bookingDetails" />
   </div>
 
 </div>
@@ -91,7 +91,18 @@ export default {
             roomDetailsObjects: {
                 bookingInfo: null, 
                 roomInfo: null,
-                }
+                },
+
+            booking: {
+              UserId: this.$store.state.userId,
+              AccomodationId: null,
+              NbrOfAdults: null,
+              NbrOfChildren: null,
+              CheckOutDate: null,
+              CheckInDate: null,
+              PaymentDate: null,
+              RoomIds: []
+            },
         }
     },
 
@@ -110,17 +121,27 @@ export default {
     computed: {
         accomodations() {
             return this.$store.state.accomodations;
-            },
+        },
         bookedRooms() {
             return this.$store.state.bookedRooms;
-            },
+        },
         bookingParams() {
             return this.$store.state.bookingParams;
-            },
+        },
         roomDetails() {
             console.log(this.roomDetailsObjects)
             return this.roomDetailsObjects;
-            },
+        },
+        bookingDetails() {
+        this.booking.AccomodationId = 1;
+        this.booking.NbrOfAdults = this.bookingParams.travellersAdults;
+        this.booking.NbrOfChildren = this.bookingParams.travellersChildren;
+        this.booking.CheckOutDate = this.bookingParams.checkIn;
+        this.booking.CheckInDate = this.bookingParams.checkOut;
+        this.booking.RoomIds = this.bookedRooms;
+          console.log("Booking:" + this.booking)
+          return this.booking;
         }
+      }
 }
 </script>

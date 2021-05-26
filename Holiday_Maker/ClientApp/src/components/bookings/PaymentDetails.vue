@@ -1,14 +1,15 @@
 <template>
-  <div style="max-width:30em">
+  <div class="border-2 rounded-md border-black shadow-md p-4 bg-green-1 divide-y-2 divide-gray-300 border-2">
+
     <form  id="payment-form">
       <label>
-        Card details
-        <!-- placeholder for elements -->
-        <div id="card-element"></div>
-      </label>
+        <div class="w-full overflow-hidden">
+            <h2 class="text-xl text-green-6">Payment Details</h2>
+        </div>
+        </label>
+        <div id="card-element" class="mt-2 mb-2"></div>
       <button type="submit">Submit payment</button>
     </form>
-    <p>Click on the "x" symbol to close the alert message.</p>
     <div id="SuccessMessage" class="alert" style="display:none">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
       <strong>Payment done!</strong> 
@@ -57,8 +58,8 @@ export default {
         },
       },
       invalid: {
-        color: "#fa755a",
-        iconColor: "#fa755a",
+        color: "#000000",
+        iconColor: "#000000",
       },
     };
     var cardElement = elements.create("card", { style: style });

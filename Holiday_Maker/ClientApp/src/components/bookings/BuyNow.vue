@@ -12,6 +12,12 @@
 
 <script>
 export default {
+  props: {
+        makeBooking: {
+            type: Object,
+            required: true,
+        }
+    },
     
 }
 </script>
