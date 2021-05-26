@@ -36,7 +36,7 @@ namespace Holiday_Maker.Controllers
 
             return await _userService.GetUserFavorites(userId);
         }
-
+        
         [HttpPost("login")]
         public async Task<LoginHelper> Login(User user)
         {
@@ -60,6 +60,12 @@ namespace Holiday_Maker.Controllers
         public async void Delete(UserFavorite userFavorite)
         {
             await _userService.RemoveUserFavorite(userFavorite);
+        }
+
+        [HttpDelete("{id}")]
+        public void RemoveUser(int id)
+        {
+            _userService.RemoveUser(id);
         }
     }
 }
