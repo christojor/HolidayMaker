@@ -6,7 +6,7 @@
   </div>
 
   <div class="w-full overflow-hidden">
-    <h1>Rewards, bonus points 'n' shit...</h1>
+    <h1>NOT IMPLEMENTED.</h1>
   </div>
     </div>
 </template>

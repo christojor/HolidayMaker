@@ -23,6 +23,16 @@ const store = createStore({
         // Booking States
         bookedRooms: [],
         bookingParams: null,
+        booking: {
+            UserId: null,
+            AccomodationId: null,
+            NbrOfAdults: null,
+            NbrOfChildren: null,
+            CheckOutDate: null,
+            CheckInDate: null,
+            PaymentDate: null,
+            RoomIds: []
+        },
    },
 
    // Methods for changing states synchronously
@@ -69,6 +79,9 @@ const store = createStore({
         },
         setBookedRooms (state, payload) {
             state.bookedRooms = payload;
+        },
+        setBooking (state, payload) {
+            state.booking = payload;
         },
    },
    getters: {

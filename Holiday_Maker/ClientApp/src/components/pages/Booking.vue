@@ -1,7 +1,6 @@
 <template>
     <div v-for="accomodation in accomodations" :key="accomodation">
-        <div v-for="room in accomodation.rooms" :key="room">
-            <div v-if="id == room.id">
+            <div v-if="id == accomodation.id">
 
 <div class="flex flex-wrap overflow-hidden mt-3 mb-3">
 
@@ -31,14 +30,6 @@
     <RoomDetails :roomDetails="roomDetails" />
   </div>
 
-  <div class="my-1 px-1 w-full overflow-hidden">
-    <PaymentDetails />
-  </div>
-
-  <div class="my-1 px-1 w-full overflow-hidden">
-    <BuyNow />
-  </div>
-
 </div>
 
   </div>
@@ -54,7 +45,11 @@
   </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
-    <PriceDetails />
+    <PriceDetails :roomPrices="bookedRooms" />
+  </div>
+
+   <div class="my-1 px-1 w-full overflow-hidden">
+    <PaymentDetails :makeBooking="bookingDetails" />
   </div>
 
 </div>
@@ -67,15 +62,21 @@
   </div>
 </div>                 
 <!-- End Design Divs -->
-      </div>
     </div>
+    <!-- UserId: {{ this.$store.state.booking.UserId }}<br>
+    AccomodationId: {{ this.$store.state.booking.AccomodationId }}<br>
+    NbrOfAdults: {{ this.$store.state.booking.NbrOfAdults }}<br>
+    NbrOfChildren: {{ this.$store.state.booking.NbrOfChildren }}<br>
+    CheckOutDate: {{ this.$store.state.booking.CheckOutDate }}<br>
+    CheckInDate: {{ this.$store.state.booking.CheckInDate }}<br>
+    PaymentDate: {{ this.$store.state.booking.PaymentDate }}<br>
+    RoomIds: {{ this.$store.state.booking.RoomIds }} -->
   </div>
   <!-- End Logic Divs -->
 </template>
 
 <script>
 import PriceDetails from '/src/components/bookings/PriceDetails.vue'
-import BuyNow from '/src/components/bookings/BuyNow.vue'
 import HotelDetails from '/src/components/bookings/HotelDetails.vue'
 import PaymentDetails from '/src/components/bookings/PaymentDetails.vue'
 import Rewards from '/src/components/bookings/Rewards.vue'
@@ -93,7 +94,18 @@ export default {
             roomDetailsObjects: {
                 bookingInfo: null, 
                 roomInfo: null,
-                }
+                },
+
+            booking: {
+              UserId: null,
+              AccomodationId: null,
+              NbrOfAdults: null,
+              NbrOfChildren: null,
+              CheckOutDate: null,
+              CheckInDate: null,
+              PaymentDate: null,
+              RoomIds: []
+            },
         }
     },
 
@@ -101,7 +113,6 @@ export default {
 
     components:{
         PriceDetails,
-        BuyNow,
         HotelDetails,
         PaymentDetails,
         Rewards,
@@ -112,17 +123,31 @@ export default {
     computed: {
         accomodations() {
             return this.$store.state.accomodations;
-            },
+        },
         bookedRooms() {
+          console.log("BookedRooms: " + this.$store.state.bookedRooms)
             return this.$store.state.bookedRooms;
-            },
+        },
         bookingParams() {
             return this.$store.state.bookingParams;
-            },
+        },
         roomDetails() {
             console.log(this.roomDetailsObjects)
             return this.roomDetailsObjects;
-            },
+        },
+        bookingDetails() {
+            this.booking.UserId = this.$store.state.userId;
+            this.booking.AccomodationId = this.id;
+            this.booking.NbrOfAdults = this.bookingParams.travellersAdults;
+            this.booking.NbrOfChildren = this.bookingParams.travellersChildren;
+            this.booking.CheckOutDate = this.bookingParams.checkIn;
+            this.booking.CheckInDate = this.bookingParams.checkOut;
+            
+            this.bookedRooms.forEach(room => {
+              this.booking.RoomIds.push(room.id)
+            });
+            return this.booking;
         }
+      }
 }
 </script>
