@@ -236,6 +236,10 @@ h1 {
     width: 200px;
     text-align: center;
 }
+
+.contentMargin{
+    margin-right: 195px;
+}
 .content-link{
     font-size: 17px;
 }
@@ -382,4 +386,8 @@ h1 {
     font-weight: bold;
     margin-top: 10px;
     display: inline-block;
+}
+
+.navbarMyProfileButton:hover{
+    color: white;
 }

@@ -9,7 +9,7 @@
     <button class="theme-button">
         <span>TRIP THEMES</span>
     </button>
-    	<ul class="bg-green-1 dropdown-content absolute hidden text-gray-700 pt-1 content">
+    	<ul :class="{contentMargin:this.$store.state.isLoggedIn}" class="dropdown-content absolute hidden text-gray-700 pt-1 content">
 		<li><router-link class="theme-item bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap content-link" @click="searchHunting" to="/hotels">Hunting trips</router-link></li>
 		<li><router-link class="theme-item bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap content-link" @click="searchFitness" to="/hotels">Fitness trips</router-link></li>
 		<li><router-link class="theme-item bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap content-link" @click="searchParty" to="/hotels">Party trips</router-link></li>
