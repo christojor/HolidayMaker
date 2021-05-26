@@ -189,6 +189,17 @@ namespace Holiday_Maker.Services
             var roomTypes = _roomTypeRepo.GetAllRaw();
             var amenityList = _amenityRepo.GetAllRaw();
             var extrasList = _extraRepo.GetAllRaw();
+            var wifiQualities = _wifiQualityRepo.GetAllRaw();
+
+            foreach (var amenity in amenityList)
+            {
+                var wifi = wifiQualities.FirstOrDefault(a => a.AmenityId == amenity.Id);
+                if (wifi != null)
+                {
+                    amenity.WifiQualities.Add(wifi);
+                }
+
+            }
 
             foreach (var accommodation in accommodationList)
             {

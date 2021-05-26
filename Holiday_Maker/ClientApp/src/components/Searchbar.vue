@@ -26,7 +26,7 @@
                     <div class="rounded-t-md bg-green-1 search-div shadow-xl w-1/8">
                     <div class="text-green-500">
                     <p class="float-left mt-2 ml-2" style="font-size: 10pt; font-weight: bold;">Check-in</p>
-                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" ref="check_in" v-model="bookingParams.checkIn" type="date">
+                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" ref="checkOut" v-model="bookingParams.checkIn" type="date">
                     </div>
                     </div>
                     
@@ -34,7 +34,7 @@
                     <div class="rounded-t-md bg-green-1 search-div shadow-xl w-1/8">
                     <div class="text-green-500">
                         <p class="float-left mt-2 ml-2" style="font-size: 10pt; font-weight: bold;">Check-out</p>
-                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" ref="check_out" v-model="bookingParams.checkOut" type="date">
+                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" ref="checkOut" v-model="bookingParams.checkOut" type="date">
                     </div>
                     </div>
                     
@@ -43,22 +43,16 @@
                     <div class="text-green-500">
                         <font-awesome-icon :icon="['fas', 'users']" class="mt-3 mr-4 fa-2x float-left" style="color: #52B788;"/>
                         <select class="float-left border-2 border-green-500 bg-white h-10 w-40 px-5 mt-2 pr-4 rounded-lg text-lg focus:outline-none" v-model="bookingParams.travellersAdults">
-                            <option selected="selected">Adults</option>
+                            <option disabled selected value="">Adults</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
                         </select>
                         <select class="float-left border-2 border-green-500 bg-white h-10 w-40 px-5 mt-2 ml-2 pr-4 rounded-lg text-lg focus:outline-none" v-model="bookingParams.travellersChildren">
-                            <option selected="selected">Children</option>
+                            <option disabled selected value="">Children</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
                         </select>
                     </div>
                     </div>
@@ -129,12 +123,13 @@ export default {
     data()
     {
         return{
-            destinationSearch: null,
-            bookingParams:
-                {checkIn: null,
-                checkOut: null,
-                travellersAdults: null,
-                travellersChildren: null},
+            destinationSearch: '',
+            bookingParams:{
+                checkIn: '',
+                checkOut: '',
+                travellersAdults: '',
+                travellersChildren: '',
+            },
             image: "./assets/images/front-bg.jpg",
 
             //Autocomplete Data
@@ -167,15 +162,18 @@ export default {
                         
                         // Write formatted destination to state
                         this.setDestination(this.destinationSearch)
-                        
+
                         // Write checkIn, checkOut, adults and children to state
                         this.setBookingParameters(this.bookingParams)
-
+                        
                         // Get accomodations from API and write to state
                         this.getQueriedDestinations(this.$store.state.destination)
                     }
             }
             else {
+                // Write checkIn, checkOut, adults and children to state
+                        this.setBookingParameters(this.bookingParams)
+                        
                  // Get all accommodations
                 this.$store.dispatch("getAccomodations");
             }
@@ -221,8 +219,8 @@ export default {
     setDestination(searchQuery) {
       this.$store.commit("setDestination", searchQuery);
     },
-    setBookingParameters(payloadObject) {
-      this.$store.commit("setBookingParameters", payloadObject);
+    setBookingParameters(payload) {
+      this.$store.commit("setBookingParameters", payload);
     },
     setApiState(newState) {
       this.$store.commit("setApiState", newState);
