@@ -15,8 +15,7 @@ namespace Holiday_Maker.Services
 
         public PaymentService()
         {
-            string readText = System.IO.File.ReadAllText(@".\secrets.json");
-            StripeConfiguration.ApiKey = JsonSerializer.Deserialize<Secret>(readText).Key;
+
         }
 
         public PaymentIntent CreatePaymentIntent()

@@ -23,16 +23,16 @@ const store = createStore({
         // Booking States
         bookedRooms: [],
         bookingParams: null,
-        booking: [{
-            UserId: 1,
-            AccomodationId: 1,
-            NbrOfAdults: 2,
-            NbrOfChildren: 1,
-            CheckOutDate: "2021-05-26",
-            CheckInDate: "2021-06-28",
-            PaymentDate: "2021-05-26",
-            RoomIds: [1, 2]
-        }],
+        booking: {
+            UserId: null,
+            AccomodationId: null,
+            NbrOfAdults: null,
+            NbrOfChildren: null,
+            CheckOutDate: null,
+            CheckInDate: null,
+            PaymentDate: null,
+            RoomIds: []
+        },
    },
 
    // Methods for changing states synchronously

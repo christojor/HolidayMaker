@@ -67,6 +67,14 @@
 </div>                 
 <!-- End Design Divs -->
     </div>
+    UserId: {{ this.$store.state.booking.UserId }}<br>
+    AccomodationId: {{ this.$store.state.booking.AccomodationId }}<br>
+    NbrOfAdults: {{ this.$store.state.booking.NbrOfAdults }}<br>
+    NbrOfChildren: {{ this.$store.state.booking.NbrOfChildren }}<br>
+    CheckOutDate: {{ this.$store.state.booking.CheckOutDate }}<br>
+    CheckInDate: {{ this.$store.state.booking.CheckInDate }}<br>
+    PaymentDate: {{ this.$store.state.booking.PaymentDate }}<br>
+    RoomIds: {{ this.$store.state.booking.RoomIds }}
   </div>
   <!-- End Logic Divs -->
 </template>
@@ -94,7 +102,7 @@ export default {
                 },
 
             booking: {
-              UserId: this.$store.state.userId,
+              UserId: null,
               AccomodationId: null,
               NbrOfAdults: null,
               NbrOfChildren: null,
@@ -133,14 +141,17 @@ export default {
             return this.roomDetailsObjects;
         },
         bookingDetails() {
-        this.booking.AccomodationId = 1;
-        this.booking.NbrOfAdults = this.bookingParams.travellersAdults;
-        this.booking.NbrOfChildren = this.bookingParams.travellersChildren;
-        this.booking.CheckOutDate = this.bookingParams.checkIn;
-        this.booking.CheckInDate = this.bookingParams.checkOut;
-        this.booking.RoomIds = this.bookedRooms;
-          console.log("Booking:" + this.booking)
-          return this.booking;
+            this.booking.UserId = this.$store.state.userId;
+            this.booking.AccomodationId = this.id;
+            this.booking.NbrOfAdults = this.bookingParams.travellersAdults;
+            this.booking.NbrOfChildren = this.bookingParams.travellersChildren;
+            this.booking.CheckOutDate = this.bookingParams.checkIn;
+            this.booking.CheckInDate = this.bookingParams.checkOut;
+            
+            this.bookedRooms.forEach(room => {
+              this.booking.RoomIds.push(room.id)
+            });
+            return this.booking;
         }
       }
 }
