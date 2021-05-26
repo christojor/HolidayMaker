@@ -11,9 +11,6 @@
             <a v-if="!toggle == false" @click="toggleForm" class="text-green-500 hover:text-green-800 hover:underline" href="#">Register</a>
             <a v-else @click="toggleForm" class="text-green-500 hover:text-green-800 hover:underline" href="#">Login</a>
         </div>
-        <div class="container2 bg-green-1 shadow-md" style="height:70px">
-            <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 rounded-full shadow-xl" style="margin-left:40px; width:60%">My Page</router-link>
-        </div>
     </div>
 </template>
 

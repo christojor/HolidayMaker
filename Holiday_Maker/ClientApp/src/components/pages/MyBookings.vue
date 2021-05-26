@@ -1,5 +1,5 @@
 <template>
-    <h2 class="header bg-green-2">My Bookings</h2>
+    <h2 class="header bg-green-2" style="width:190px; padding-left:35px">My Bookings</h2>
     <br><br>
     <table>
         <tr class="bg-green-1">
@@ -19,10 +19,10 @@
             <td><button class="editButton">Cancel</button></td>
         </tr>
     </table>  
-    <br>
-        <div class="container2 bg-green-1 shadow-md" style="height:70px">
-            <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl">My Page</router-link>
-        </div>
+    <!--<br>
+        <div class="container2 bg-green-1 shadow-md" style="height:70px; width:190px; padding-left:20px">
+            <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Profile</router-link>
+        </div>-->
 </template>
 
 
