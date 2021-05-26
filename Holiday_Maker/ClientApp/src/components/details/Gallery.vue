@@ -1,7 +1,7 @@
 <template>
-    <img :src="accomodation.imgSrc"
+<img :src="accomodation.imgSrc"
           class="img-fluid rounded-md"
-          style="width: 300px; height: auto"/>
+          style="width: 500px; height: 500px"/>
 </template>
 
 <script>

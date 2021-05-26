@@ -4,7 +4,7 @@
 <div class="flex flex-wrap overflow-hidden border-black border-2 p-1 m-1">
 
   <div class="w-1/2 overflow-hidden p-2">
-    <img class="rounded-md" :src="room.imgSrc">
+    <img class="rounded-md roomImg" :src="room.imgSrc">
    </div>
 
    <div class="w-1/2 overflow-hidden p-4">     

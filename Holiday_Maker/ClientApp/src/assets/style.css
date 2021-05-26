@@ -322,3 +322,7 @@ h1 {
     color: red;
     background-color: transparent;
 }
+.roomImg{
+    width: 100%;
+    max-height: 450px;
+}

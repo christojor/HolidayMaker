@@ -6,22 +6,22 @@
   <!-- <div class="text-green-500 hover:text-green-800 hover:underline"> -->
   <li class="mr-6">
     <div ref="overview">
-    <a class="overview-button text-green-500 hover:text-green-800 hover:underline" @click="scrollPageTo('overview')">Overview</a>
+    <a style=cursor:pointer class="overview-button text-green-500 hover:text-green-800 hover:underline" @click="scrollPageTo('overview')">Overview</a>
     </div>
   </li>
   <li class="mr-6">
     <div ref="amenities">
-      <a class="amenities-button text-green-500 hover:text-green-800 hover:underline" @click="scrollPageTo('amenities')">Amenities</a>
+      <a style=cursor:pointer class="amenities-button text-green-500 hover:text-green-800 hover:underline" @click="scrollPageTo('amenities')">Amenities</a>
   </div>
   </li>
   <li class="mr-6">
 <div ref="extras">
-    <a class="rooms-button text-green-500 hover:text-green-800 hover:underline" @click="scrollPageTo('extras')">Extras</a>
+    <a style=cursor:pointer class="rooms-button text-green-500 hover:text-green-800 hover:underline" @click="scrollPageTo('extras')">Extras</a>
     </div>  
     </li>
   <li class="mr-6">
     <div ref="rooms">
-    <a class="rooms-button text-green-500 hover:text-green-800 hover:underline" @click="scrollPageTo('rooms')">Available Rooms</a>
+    <a style=cursor:pointer class="rooms-button text-green-500 hover:text-green-800 hover:underline" @click="scrollPageTo('rooms')">Available Rooms</a>
     </div>
   </li>
   <!-- </div> -->
