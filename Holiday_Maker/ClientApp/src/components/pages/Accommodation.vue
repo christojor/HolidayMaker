@@ -10,7 +10,7 @@
         <div class="w-4/6 overflow-hidden shadow-md rounded-md divide-y-2 divide-black bg-green-1">
 
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full">
-            <router-link to="/hotels">Back to list</router-link>
+            <router-link to="/hotels" style=cursor:pointer class="overview-button text-green-500 hover:text-green-800 hover:underline">Back to list</router-link>
           </div>
 
           <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">

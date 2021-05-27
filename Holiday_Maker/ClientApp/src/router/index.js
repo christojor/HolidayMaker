@@ -8,7 +8,7 @@ import Searchbar from '/src/components/Searchbar.vue'
 import LoginRegister from '/src/components/pages/LoginRegister.vue'
 import Logout from '/src/components/logins/Logout.vue'
 import Booking from '/src/components/pages/Booking.vue'
-import PayUpSucka from '/src/components/pages/PayUpSucka.vue'
+
 import UserRemoval from '/src/components/logins/RemoveUser.vue'
 
 const routes = [
@@ -58,11 +58,7 @@ const routes = [
         name: 'Logout',
         component: Logout,
     },
-    {
-        path: '/PayUpSucka',
-        name: 'PayUppp',
-        component: PayUpSucka,
-    },
+
     {
         path: '/UserRemoval',
         name: 'User Removed',

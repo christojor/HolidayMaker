@@ -7,12 +7,13 @@ const store = createStore({
 
     // Properties
    state:{
-
+        
         headline: "Welcome to our awesome website!",
         accomodations: [],
         filter: [],
         userId: localStorage.getItem('userId'),
         isLoggedIn: localStorage.getItem('loggedIn'),
+        user: null,
         userEmail: null,
         userPassword: null,
         loginAttemptMessage: null,
@@ -23,6 +24,16 @@ const store = createStore({
         // Booking States
         bookedRooms: [],
         bookingParams: null,
+        nbrOfNights: 1,
+        booking: {
+            UserId: null,
+            AccomodationId: null,
+            NbrOfAdults: null,
+            NbrOfChildren: null,
+            CheckOutDate: null,
+            CheckInDate: null,
+            PaymentDate: null,
+        },
    },
 
    // Methods for changing states synchronously
@@ -70,6 +81,16 @@ const store = createStore({
         setBookedRooms (state, payload) {
             state.bookedRooms = payload;
         },
+        setBooking (state, payload) {
+            state.booking = payload;
+        },
+        setNbrOfNights (state, payload) {
+            state.nbrOfNights = payload;
+            console.log("NbrOfNights: " + state.nbrOfNights)
+        },
+        setUser (state, payload) {
+            state.user = payload;
+        },
    },
    getters: {
         filteredList(state){
@@ -93,21 +114,21 @@ const store = createStore({
             commit('getAccomodationsData', json);
         },
 
-        //Old code, but keep for science and if needed to change back
-        // async getLoginAttempt({commit}){
-        //     let response = await fetch('https://localhost:44323/api/User/login?email='+ this.state.userEmail + '&password=' + this.state.userPassword,{
-        //         method:'post'
-        //     })
-        //     let json = await response.json();
-        //     commit('setUserId', json.userId);
-        //     commit('setLoggedInState', json.isLoggedIn)
-        //     commit('setLoginAttemptMessage', json.loggedInMessage)
-        //     if(json.isLoggedIn === true){
-        //         localStorage.setItem('userId', this.state.userId);
-        //         localStorage.setItem('loggedIn', this.state.isLoggedIn);
-        //     }
-        // },
         async getQueriedDestinations({commit}){
+
+            let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
+
+            if(response.status != (204))
+            {
+            let json = await response.json();
+            commit('updateAccomodations', json);
+            }
+            else {
+                commit('updateAccomodations', null);
+            }
+        },
+
+        async getUser({commit}){
 
             let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
 

@@ -10,7 +10,6 @@ namespace Holiday_Maker.Models
         public Accomodation()
         {
             Amenities = new HashSet<Amenity>();
-            Bookings = new HashSet<Booking>();
             Extras = new HashSet<Extra>();
             Rooms = new HashSet<Room>();
         }
@@ -32,7 +31,6 @@ namespace Holiday_Maker.Models
 
         public virtual AccomodationType AccomodationType { get; set; }
         public virtual ICollection<Amenity> Amenities { get; set; }
-        public virtual ICollection<Booking> Bookings { get; set; }
         public virtual ICollection<Extra> Extras { get; set; }
         public virtual ICollection<Room> Rooms { get; set; }
     }

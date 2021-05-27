@@ -1,19 +1,32 @@
 <template>
-  <div style="max-width:30em">
+  <div class="overflow-hidden border-2 rounded-md border-black shadow-md p-4 bg-green-1 divide-y-2 divide-gray-300 border-2">
     <form  id="payment-form">
+    <div>
       <label>
-        Card details
-        <!-- placeholder for elements -->
-        <div id="card-element"></div>
-      </label>
-      <button type="submit">Submit payment</button>
-    </form>
-    <p>Click on the "x" symbol to close the alert message.</p>
+        <div class="w-full overflow-hidden">
+            <h2 class="text-xl text-green-6">Payment Details</h2>
+        </div>
+        </label>
+            <h2 class="text-m text-green-6">Credit Card</h2>
+            <div id="card-element" class="mt-2 mb-2 border-2 border-gray-300"></div>
+
     <div id="SuccessMessage" class="alert" style="display:none">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-      <strong>Payment done!</strong> 
+      <strong>Booking Confirmed!</strong>
     </div>
   </div>
+
+  <div class="flex flex-wrap overflow-hidden bg-green-1 mt-2">
+
+  <div class="w-full overflow-hidden">
+    <button type="submit" class="bg-green-500 w-1/2 hover:bg-green-700 text-white font-bold py-2 px-2 mt-2 rounded-full" @click="sendBooking()">
+      Buy Now
+  </button>
+  
+  </div>
+</div>
+    </form>
+</div>
 </template>
 
 <style>
@@ -40,7 +53,8 @@
 
 <script>
 export default {
-  mounted: function () {
+
+  mounted() {
     //Building payment form starts here
     var stripe = Stripe(
       "pk_test_51IsjoPK0RxPPVgejwsizP9ghkzrEOEAho8VjGbz0Rtn2i31J5t5zr6NGp04eZD0ZHF5TwIzvCZf2XFmZR4syWqiY00ldbn6Luv"
@@ -57,8 +71,8 @@ export default {
         },
       },
       invalid: {
-        color: "#fa755a",
-        iconColor: "#fa755a",
+        color: "#000000",
+        iconColor: "#000000",
       },
     };
     var cardElement = elements.create("card", { style: style });
@@ -82,7 +96,43 @@ export default {
         .then(self.stripePaymentMethodHandler);
     });
   },
+
+  props: {
+        makeBooking: {
+            type: Object,
+            required: true,
+        }
+    },
+
   methods: {
+    async sendBooking() {
+      this.$store.commit("setBooking", this.makeBooking);
+
+      let createBooking = {
+          booking:{
+          },
+            bookedRoom: [
+            ]
+        }
+        createBooking.booking = this.$store.state.booking;
+        createBooking.bookedRoom = this.$store.state.bookedRooms;
+
+        for (var i = 0; i < createBooking.bookedRoom.length; i++){
+            createBooking.bookedRoom[i].roomId = createBooking.bookedRoom[i].id;
+        }
+
+      let sendData = await fetch('https://localhost:44323/api/Booking/CreateBooking', {
+        method: 'post',
+
+        headers: {'Content-Type': 'application/json'},
+
+        body: JSON.stringify(createBooking)
+      });
+
+
+
+    },
+
     stripePaymentMethodHandler(result) {
       var self = this;
       console.log("Hello this is the payment method handler greeting you!");
@@ -106,6 +156,7 @@ export default {
         });
       }
     },
+
     handleServerResponse(response){
       if(response.error){
         //Show error from server on payment form
@@ -123,6 +174,7 @@ export default {
         console.log("show success message")
       }
     },
+
     handleStripeJsResult(result)
     {
       if(result.error){
@@ -151,4 +203,5 @@ export default {
     }
   },
 };
+
 </script>

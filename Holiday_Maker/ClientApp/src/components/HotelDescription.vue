@@ -1,7 +1,7 @@
 <template>
     
     <div class="hotel-item-desc-left"  @click="goToAccommodation(accomodation.id)">
-        <h1 style="font-size:20px;">{{accomodation.name}}</h1>
+        <h1 style="font-size:20px; height: 25px; overflow: hidden">{{accomodation.name}}</h1>
         <h2 style="font-size:16px; display:inline;">{{accomodation.country}}</h2>
         <h2 style="font-size:14px; display:inline;">, {{accomodation.city}}</h2>
         <p style="height: 100px; overflow: hidden">{{accomodation.description}}</p>

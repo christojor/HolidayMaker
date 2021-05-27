@@ -12,6 +12,5 @@ namespace Holiday_Maker.Models
         public int RoomId { get; set; }
 
         public virtual Booking Booking { get; set; }
-        public virtual Room Room { get; set; }
     }
 }
