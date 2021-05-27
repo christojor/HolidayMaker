@@ -7,7 +7,7 @@ const store = createStore({
 
     // Properties
    state:{
-
+        
         headline: "Welcome to our awesome website!",
         accomodations: [],
         filter: [],
@@ -33,7 +33,6 @@ const store = createStore({
             CheckOutDate: null,
             CheckInDate: null,
             PaymentDate: null,
-            RoomIds: []
         },
    },
 
@@ -115,20 +114,6 @@ const store = createStore({
             commit('getAccomodationsData', json);
         },
 
-        //Old code, but keep for science and if needed to change back
-        // async getLoginAttempt({commit}){
-        //     let response = await fetch('https://localhost:44323/api/User/login?email='+ this.state.userEmail + '&password=' + this.state.userPassword,{
-        //         method:'post'
-        //     })
-        //     let json = await response.json();
-        //     commit('setUserId', json.userId);
-        //     commit('setLoggedInState', json.isLoggedIn)
-        //     commit('setLoginAttemptMessage', json.loggedInMessage)
-        //     if(json.isLoggedIn === true){
-        //         localStorage.setItem('userId', this.state.userId);
-        //         localStorage.setItem('loggedIn', this.state.isLoggedIn);
-        //     }
-        // },
         async getQueriedDestinations({commit}){
 
             let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
