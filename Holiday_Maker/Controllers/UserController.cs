@@ -63,9 +63,9 @@ namespace Holiday_Maker.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void RemoveUser(int id)
+        public async Task<bool> RemoveUser(int id)
         {
-            _userService.RemoveUser(id);
+            return await _userService.RemoveUser(id);
         }
     }
 }

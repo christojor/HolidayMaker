@@ -9,6 +9,8 @@ import LoginRegister from '/src/components/pages/LoginRegister.vue'
 import Logout from '/src/components/logins/Logout.vue'
 import Booking from '/src/components/pages/Booking.vue'
 
+import UserRemoval from '/src/components/logins/RemoveUser.vue'
+
 const routes = [
     {
         path: '/',
@@ -55,6 +57,12 @@ const routes = [
         path: '/Logout',
         name: 'Logout',
         component: Logout,
+    },
+
+    {
+        path: '/UserRemoval',
+        name: 'User Removed',
+        component: UserRemoval,
     },
 ]
 const router = createRouter({

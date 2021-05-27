@@ -35,7 +35,8 @@ namespace Holiday_Maker.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                 optionsBuilder.UseSqlServer("Data Source=holidaymakerz.database.windows.net;Initial Catalog=HolidayMaker;User ID=storapappa;Password=grupp4123!!;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=holidaymakerz.database.windows.net;Initial Catalog=HolidayMaker;User ID=storapappa;Password=grupp4123!!;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -118,19 +119,11 @@ namespace Holiday_Maker.Models
                     .HasForeignKey(d => d.BookingId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_BookedRoom_Booking");
-
-                entity.HasOne(d => d.Room)
-                    .WithMany(p => p.BookedRooms)
-                    .HasForeignKey(d => d.RoomId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_BookedRoom_Room");
             });
 
             modelBuilder.Entity<Booking>(entity =>
             {
                 entity.ToTable("Booking");
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.BookingDate).HasColumnType("datetime");
 
@@ -141,18 +134,6 @@ namespace Holiday_Maker.Models
                 entity.Property(e => e.CheckOutDate).HasColumnType("datetime");
 
                 entity.Property(e => e.PaymentDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Accomodation)
-                    .WithMany(p => p.Bookings)
-                    .HasForeignKey(d => d.AccomodationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Booking_Accomodation");
-
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.Booking)
-                    .HasForeignKey<Booking>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Booking_User");
             });
 
             modelBuilder.Entity<Extra>(entity =>
@@ -189,6 +170,12 @@ namespace Holiday_Maker.Models
                     .HasForeignKey(d => d.AccomodationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Room_Accomodation");
+
+                entity.HasOne(d => d.RoomType)
+                    .WithMany(p => p.Rooms)
+                    .HasForeignKey(d => d.RoomTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Room_RoomType");
             });
 
             modelBuilder.Entity<RoomType>(entity =>

@@ -109,13 +109,14 @@
         </div>
             </form>
         </div>
-        
+
 </template>
 
 <script>
 import enums from "../assets/enums.js";
 
 export default {
+
     mounted(){
         this.setApiState(enums.init)
         console.log("ApiStateMounted:" + this.$store.state.apiState)

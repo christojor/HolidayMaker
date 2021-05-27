@@ -11,9 +11,9 @@ namespace Holiday_Maker.Repository
         IQueryable<T> GetAllRaw();
         Task<T> GetById(int id);
         Task<T> GetById(string id);
-        void Insert(T obj);
-        void Update(T obj);
-        void Delete(int id);
-        void Save();
+        Task Insert(T obj);
+        Task Update(T obj);
+        Task Delete(int id);
+        Task Save();
     }
 }

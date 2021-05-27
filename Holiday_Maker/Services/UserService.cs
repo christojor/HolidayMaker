@@ -33,9 +33,15 @@ namespace Holiday_Maker.Services
             return NotFound();
         }
 
-        public void RemoveUser(int id)
+        public async Task<bool> RemoveUser(int id)
         {
+            var user = await _userRepo.GetById(id);
+            if (user == null)
+            {
+                return false;
+            }
             _userRepo.Delete(id);
+            return true;
         }
 
 
