@@ -109,22 +109,14 @@
         </div>
             </form>
         </div>
-        
-        <div>
-            <RemoveUserButton/>
-        </div>
-
 
 </template>
 
 <script>
 import enums from "../assets/enums.js";
-import RemoveUserButton from '/src/components/RemoveUserButton.vue'
 
 export default {
-    components:{
-        RemoveUserButton,
-    },
+
     mounted(){
         this.setApiState(enums.init)
         console.log("ApiStateMounted:" + this.$store.state.apiState)
