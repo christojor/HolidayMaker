@@ -105,8 +105,32 @@ export default {
     },
 
   methods: {
-    sendBooking() {
+    async sendBooking() {
       this.$store.commit("setBooking", this.makeBooking);
+
+      let createBooking = {
+          booking:{
+          },
+            bookedRoom: [
+            ]
+        }
+        createBooking.booking = this.$store.state.booking;
+        createBooking.bookedRoom = this.$store.state.bookedRooms;
+
+        for (var i = 0; i < createBooking.bookedRoom.length; i++){
+            createBooking.bookedRoom[i].roomId = createBooking.bookedRoom[i].id;
+        }
+
+      let sendData = await fetch('https://localhost:44323/api/Booking/CreateBooking', {
+        method: 'post',
+
+        headers: {'Content-Type': 'application/json'},
+
+        body: JSON.stringify(createBooking)
+      });
+
+
+
     },
 
     stripePaymentMethodHandler(result) {
