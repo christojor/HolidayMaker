@@ -13,8 +13,8 @@
             </div>
             
             <div class="w-full overflow-hidden ml-2">
-                <h1>{{ rooms.roomType.name }}</h1>
-                <h1>{{ rooms.nbrOfGuests }} bed(s).</h1> 
+                <h1>{{ rooms.roomType.name }} - {{ rooms.nbrOfGuests }} bed(s).</h1>
+                <h1>{{ rooms.price }}€ / night</h1>
                 <h1>{{ booking.travellersAdults }} Adults + {{ booking.travellersChildren }} Child</h1>
                 <h1>Check-in: {{ booking.checkIn }}</h1>
                 <h1>Check-out: {{ booking.checkOut }}</h1>
@@ -29,6 +29,7 @@
 import DeleteButton from '/src/components/bookings/elements/deleteBtn.vue'
 
 export default {
+
     components:{
         DeleteButton
     },
@@ -53,7 +54,10 @@ export default {
 
         deleteRoom: function(index){
             this.roomDetails.roomInfo.splice(index, 1);
-        }
+        },
+        setNbrOfNights(payload) {
+            this.$store.commit("setNbrOfNights", payload);
+        },
     },
     computed: {
         nbrOfNights(){
@@ -61,9 +65,10 @@ export default {
             var date2 = new Date(this.booking.checkOut);
             var dateDifference = date2 - date1;
             var daysBetween = dateDifference / (1000 * 3600 * 24);
-            console.log(daysBetween)
+            console.log("daysBetween: " + daysBetween)
+            this.setNbrOfNights(daysBetween)
             return daysBetween
-        }
+        },
     }
 }
 </script>

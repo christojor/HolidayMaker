@@ -13,6 +13,7 @@ const store = createStore({
         filter: [],
         userId: localStorage.getItem('userId'),
         isLoggedIn: localStorage.getItem('loggedIn'),
+        user: null,
         userEmail: null,
         userPassword: null,
         loginAttemptMessage: null,
@@ -23,6 +24,7 @@ const store = createStore({
         // Booking States
         bookedRooms: [],
         bookingParams: null,
+        nbrOfNights: 1,
         booking: {
             UserId: null,
             AccomodationId: null,
@@ -83,6 +85,13 @@ const store = createStore({
         setBooking (state, payload) {
             state.booking = payload;
         },
+        setNbrOfNights (state, payload) {
+            state.nbrOfNights = payload;
+            console.log("NbrOfNights: " + state.nbrOfNights)
+        },
+        setUser (state, payload) {
+            state.user = payload;
+        },
    },
    getters: {
         filteredList(state){
@@ -121,6 +130,20 @@ const store = createStore({
         //     }
         // },
         async getQueriedDestinations({commit}){
+
+            let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
+
+            if(response.status != (204))
+            {
+            let json = await response.json();
+            commit('updateAccomodations', json);
+            }
+            else {
+                commit('updateAccomodations', null);
+            }
+        },
+
+        async getUser({commit}){
 
             let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
 

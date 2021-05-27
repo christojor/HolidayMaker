@@ -6,8 +6,9 @@
   </div>
 
   <div class="w-full overflow-hidden">
+    <h1>{{ nbrOfNights }} nights x {{ price }}€</h1>
     <h1>Price: {{ totalPrice }}€</h1>
-    <h1>Tax: {{ priceTax }}€</h1>
+    <h1>Tax (20%): {{ priceTax }}€</h1>
     <h1><b>Total: {{ totalPriceInclTax }}€</b></h1>
   </div>
 
@@ -29,21 +30,29 @@ export default {
     },
   
   computed:{
-      totalPrice(){
+    price(){
         return this.roomPrices.reduce((sum, room) => {
             return sum += room.price;
         }, 0);
     },
+      totalPrice(){
+        return this.roomPrices.reduce((sum, room) => {
+            return sum += room.price * this.nbrOfNights;
+        }, 0);
+    },
     totalPriceInclTax(){
         return this.roomPrices.reduce((sum, room) => {
-            return sum += room.price * 1.2;
+            return sum += (room.price * this.nbrOfNights) * 1.2;
         }, 0);
     },
     priceTax(){
         return this.roomPrices.reduce((sum, room) => {
-            return sum += room.price * 0.2;
+            return sum += (room.price * this.nbrOfNights) * 0.2;
         }, 0);
     },
+    nbrOfNights(){
+      return this.$store.state.nbrOfNights
+    }
 
   }
     
