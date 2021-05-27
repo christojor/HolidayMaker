@@ -91,6 +91,7 @@ const store = createStore({
         },
         setUser (state, payload) {
             state.user = payload;
+            console.log("User: " + state.user)
         },
    },
    getters: {
@@ -145,16 +146,10 @@ const store = createStore({
 
         async getUser({commit}){
 
-            let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
-
-            if(response.status != (204))
-            {
+            let response = await fetch('https://localhost:44323/api/User/' + this.state.userId)
             let json = await response.json();
-            commit('updateAccomodations', json);
-            }
-            else {
-                commit('updateAccomodations', null);
-            }
+
+            commit('setUser', json);
         },
     }
 })

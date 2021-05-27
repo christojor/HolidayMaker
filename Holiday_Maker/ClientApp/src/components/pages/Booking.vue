@@ -147,6 +147,12 @@ export default {
               this.booking.RoomIds.push(room.id)
             });
             return this.booking;
+        },
+
+        methods:{
+          getUser() {
+            this.$store.dispatch("getUser");
+            },
         }
       }
 }
