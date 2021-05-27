@@ -1,12 +1,12 @@
 <template>
     <div :class="{show:Toggle}">
-        <button @click="approveRemoval" class="mt-6 w-1/2 bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">Remove User</button>
+        <button @click="approveRemoval" class="mt-6 bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">Remove User</button>
         <br>
         Press this button if you would like to remove your account and all your personal data.
     </div>
     <div :class="{show:!Toggle}">
-        <button @click="removeUser" class="mt-6 w-1/2 bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">Yes</button>
-        <button @click="approveRemoval" class="mt-6 w-1/2 bg-gray-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">No</button>
+        <button @click="removeUser" class="mt-6 bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">Yes</button>
+        <button @click="approveRemoval" class="mt-6 bg-gray-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">No</button>
         <br>
         Are you sure?
     </div>
