@@ -38,26 +38,26 @@ namespace Holiday_Maker.Repository
         {
             return await table.FindAsync(id);
         }
-        public void Insert(T obj)
+        public async Task Insert(T obj)
         {
             table.Add(obj);
-            Save();
+            await Save();
         }
-        public void Update(T obj)
+        public async Task Update(T obj)
         {
             table.Attach(obj);
             _context.Entry(obj).State = EntityState.Modified;
-            Save();
+            await Save();
         }
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             T existing = table.Find(id);
             table.Remove(existing);
-            Save();
+            await Save();
         }
-        public void Save()
+        public async Task Save()
         {
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
        
     }

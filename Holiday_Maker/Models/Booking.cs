@@ -23,8 +23,6 @@ namespace Holiday_Maker.Models
         public DateTime? PaymentDate { get; set; }
         public DateTime? CancellationDate { get; set; }
 
-        public virtual Accomodation Accomodation { get; set; }
-        public virtual User IdNavigation { get; set; }
         public virtual ICollection<BookedRoom> BookedRooms { get; set; }
     }
 }

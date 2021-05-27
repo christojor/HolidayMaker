@@ -19,7 +19,6 @@ namespace Holiday_Maker.Models
         public int ZipCode { get; set; }
         public int MemberTypeId { get; set; }
         public long? CreditCard { get; set; }
-
-        public virtual Booking Booking { get; set; }
+        public int? MemberPoints { get; set; }
     }
 }
