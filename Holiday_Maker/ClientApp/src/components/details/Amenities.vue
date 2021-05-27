@@ -31,9 +31,10 @@
         class="inline-block box-border h-10 p-1 border-2 border-green-500 rounded-md"
         v-if="amenity.wiFi == true"
       >
-        <font-awesome-icon icon="wifi" /> WiFi - {{ amenity.wifiQualities[0].mbps  }} Mbps
+        <font-awesome-icon icon="wifi" /> WiFi -
+        {{ amenity.wifiQualities[0].mbps }} Mbps
+        <span v-if="amenity.wifiQualities[0].isFree"><b>FREE</b></span>
       </div>
-
       <div
         class="inline-block box-border h-10 p-1 border-2 border-green-500 rounded-md"
         v-if="amenity.resturant == true"
