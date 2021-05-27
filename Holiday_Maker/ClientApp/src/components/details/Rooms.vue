@@ -41,9 +41,7 @@ export default {
     },
       methods: {
         addToBooking(room) {
-          console.log(room)
           this.$store.state.bookedRooms.push(room)
-          console.log(this.$store.state.bookedRooms)
         }
 }
     

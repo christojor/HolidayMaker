@@ -65,7 +65,6 @@ export default {
             var date2 = new Date(this.booking.checkOut);
             var dateDifference = date2 - date1;
             var daysBetween = dateDifference / (1000 * 3600 * 24);
-            console.log("daysBetween: " + daysBetween)
             this.setNbrOfNights(daysBetween)
             return daysBetween
         },

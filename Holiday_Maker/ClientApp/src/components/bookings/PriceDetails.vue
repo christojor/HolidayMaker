@@ -35,7 +35,7 @@ export default {
             return sum += room.price;
         }, 0);
     },
-      totalPrice(){
+    totalPrice(){
         return this.roomPrices.reduce((sum, room) => {
             return sum += room.price * this.nbrOfNights;
         }, 0);
@@ -53,8 +53,7 @@ export default {
     nbrOfNights(){
       return this.$store.state.nbrOfNights
     }
-
-  }
-    
+  }  
 }
+
 </script>

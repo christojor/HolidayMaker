@@ -19,13 +19,12 @@
   <div class="flex flex-wrap overflow-hidden bg-green-1 mt-2">
 
   <div class="w-full overflow-hidden">
-
-  </div>
-</div>
-    </form>
     <button type="submit" class="bg-green-500 w-1/2 hover:bg-green-700 text-white font-bold py-2 px-2 mt-2 rounded-full" @click="sendBooking()">
       Buy Now
   </button>
+  </div>
+</div>
+    </form>
 </div>
 </template>
 
@@ -109,7 +108,7 @@ export default {
     sendBooking() {
       this.$store.commit("setBooking", this.makeBooking);
 
-      // Code here for waiting for payment response
+      // Code here for waiting for payment response.
 
       this.$store.dispatch("sendBooking");
 

@@ -63,14 +63,6 @@
 </div>                 
 <!-- End Design Divs -->
     </div>
-    <!-- UserId: {{ this.$store.state.booking.UserId }}<br>
-    AccomodationId: {{ this.$store.state.booking.AccomodationId }}<br>
-    NbrOfAdults: {{ this.$store.state.booking.NbrOfAdults }}<br>
-    NbrOfChildren: {{ this.$store.state.booking.NbrOfChildren }}<br>
-    CheckOutDate: {{ this.$store.state.booking.CheckOutDate }}<br>
-    CheckInDate: {{ this.$store.state.booking.CheckInDate }}<br>
-    PaymentDate: {{ this.$store.state.booking.PaymentDate }}<br>
-    RoomIds: {{ this.$store.state.booking.RoomIds }} -->
   </div>
   <!-- End Logic Divs -->
 </template>
@@ -127,7 +119,6 @@ export default {
             return this.$store.state.accomodations;
         },
         bookedRooms() {
-          console.log("BookedRooms: " + this.$store.state.bookedRooms)
             return this.$store.state.bookedRooms;
         },
         bookingParams() {
@@ -142,14 +133,13 @@ export default {
             this.bookingObject.booking.AccomodationId = this.id;
             this.bookingObject.booking.NbrOfAdults = this.bookingParams.travellersAdults;
             this.bookingObject.booking.NbrOfChildren = this.bookingParams.travellersChildren;
-            this.bookingObject.booking.CheckOutDate = this.bookingParams.checkIn;
-            this.bookingObject.booking.CheckInDate = this.bookingParams.checkOut;
+            this.bookingObject.booking.CheckInDate = this.bookingParams.checkIn;
+            this.bookingObject.booking.CheckOutDate = this.bookingParams.checkOut;
             this.bookingObject.bookedRoom = this.bookedRooms
 
             for (var i = 0; i < this.bookingObject.bookedRoom.length; i++){
             this.bookingObject.bookedRoom[i].roomId = this.bookingObject.bookedRoom[i].id;}
 
-            console.log("bookingObject" + this.bookingObject.bookedRoom)
             return this.bookingObject;
         },
 
