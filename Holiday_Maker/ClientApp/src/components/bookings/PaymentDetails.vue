@@ -11,7 +11,7 @@
             <div id="card-element" class="mt-2 mb-2 border-2 border-gray-300"></div>
 
     <div id="SuccessMessage" class="alert" style="display:none">
-      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
       <strong>Booking Confirmed!</strong>
     </div>
   </div>
@@ -19,13 +19,13 @@
   <div class="flex flex-wrap overflow-hidden bg-green-1 mt-2">
 
   <div class="w-full overflow-hidden">
-    <button type="submit" class="bg-green-500 w-1/2 hover:bg-green-700 text-white font-bold py-2 px-2 mt-2 rounded-full" @click="sendBooking()">
-      Buy Now
-  </button>
-  
+
   </div>
 </div>
     </form>
+    <button type="submit" class="bg-green-500 w-1/2 hover:bg-green-700 text-white font-bold py-2 px-2 mt-2 rounded-full" @click="sendBooking()">
+      Buy Now
+  </button>
 </div>
 </template>
 
@@ -79,7 +79,7 @@ export default {
     cardElement.mount("#card-element");
     //Payment for ends here
     //PaymentMethod starts here
-    
+
     var self = this;
     var form = document.getElementById("payment-form");
     form.addEventListener("submit", function (event) {
@@ -105,33 +105,16 @@ export default {
     },
 
   methods: {
-    async sendBooking() {
+    
+    sendBooking() {
       this.$store.commit("setBooking", this.makeBooking);
 
-      let createBooking = {
-          booking:{
-          },
-            bookedRoom: [
-            ]
-        }
-        createBooking.booking = this.$store.state.booking;
-        createBooking.bookedRoom = this.$store.state.bookedRooms;
+      // Code here for waiting for payment response
 
-        for (var i = 0; i < createBooking.bookedRoom.length; i++){
-            createBooking.bookedRoom[i].roomId = createBooking.bookedRoom[i].id;
-        }
+      this.$store.dispatch("sendBooking");
 
-      let sendData = await fetch('https://localhost:44323/api/Booking/CreateBooking', {
-        method: 'post',
-
-        headers: {'Content-Type': 'application/json'},
-
-        body: JSON.stringify(createBooking)
-      });
-
-
-
-    },
+      // Code here for displaying booking confirmation modal.
+      },
 
     stripePaymentMethodHandler(result) {
       var self = this;

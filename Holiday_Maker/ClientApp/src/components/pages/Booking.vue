@@ -96,15 +96,17 @@ export default {
                 roomInfo: null,
                 },
 
-            booking: {
-              UserId: null,
-              AccomodationId: null,
-              NbrOfAdults: null,
-              NbrOfChildren: null,
-              CheckOutDate: null,
-              CheckInDate: null,
-              PaymentDate: null,
-              RoomIds: []
+            bookingObject: {
+              booking: {
+                UserId: null,
+                AccomodationId: null,
+                NbrOfAdults: null,
+                NbrOfChildren: null,
+                CheckOutDate: null,
+                CheckInDate: null,
+                PaymentDate: null,
+              },
+              bookedRoom: []
             },
         }
     },
@@ -136,17 +138,19 @@ export default {
             return this.roomDetailsObjects;
         },
         bookingDetails() {
-            this.booking.UserId = this.$store.state.userId;
-            this.booking.AccomodationId = this.id;
-            this.booking.NbrOfAdults = this.bookingParams.travellersAdults;
-            this.booking.NbrOfChildren = this.bookingParams.travellersChildren;
-            this.booking.CheckOutDate = this.bookingParams.checkIn;
-            this.booking.CheckInDate = this.bookingParams.checkOut;
-            
-            this.bookedRooms.forEach(room => {
-              this.booking.RoomIds.push(room.id)
-            });
-            return this.booking;
+            this.bookingObject.booking.UserId = this.$store.state.userId;
+            this.bookingObject.booking.AccomodationId = this.id;
+            this.bookingObject.booking.NbrOfAdults = this.bookingParams.travellersAdults;
+            this.bookingObject.booking.NbrOfChildren = this.bookingParams.travellersChildren;
+            this.bookingObject.booking.CheckOutDate = this.bookingParams.checkIn;
+            this.bookingObject.booking.CheckInDate = this.bookingParams.checkOut;
+            this.bookingObject.bookedRoom = this.bookedRooms
+
+            for (var i = 0; i < this.bookingObject.bookedRoom.length; i++){
+            this.bookingObject.bookedRoom[i].roomId = this.bookingObject.bookedRoom[i].id;}
+
+            console.log("bookingObject" + this.bookingObject.bookedRoom)
+            return this.bookingObject;
         },
 
         methods:{

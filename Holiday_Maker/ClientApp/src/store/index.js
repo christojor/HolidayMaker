@@ -25,15 +25,10 @@ const store = createStore({
         bookedRooms: [],
         bookingParams: null,
         nbrOfNights: 1,
-        booking: {
-            UserId: null,
-            AccomodationId: null,
-            NbrOfAdults: null,
-            NbrOfChildren: null,
-            CheckOutDate: null,
-            CheckInDate: null,
-            PaymentDate: null,
-        },
+        bookingObject: {
+            booking:{},
+            bookedRoom: []
+              }
    },
 
    // Methods for changing states synchronously
@@ -82,7 +77,7 @@ const store = createStore({
             state.bookedRooms = payload;
         },
         setBooking (state, payload) {
-            state.booking = payload;
+            state.bookingObject = payload;
         },
         setNbrOfNights (state, payload) {
             state.nbrOfNights = payload;
@@ -121,8 +116,8 @@ const store = createStore({
 
             if(response.status != (204))
             {
-            let json = await response.json();
-            commit('updateAccomodations', json);
+                let json = await response.json();
+                commit('updateAccomodations', json);
             }
             else {
                 commit('updateAccomodations', null);
@@ -130,12 +125,19 @@ const store = createStore({
         },
 
         async getUser({commit}){
-
             let response = await fetch('https://localhost:44323/api/User/' + this.state.userId)
             let json = await response.json();
 
             commit('setUser', json);
         },
+
+        async sendBooking(){
+            await fetch('https://localhost:44323/api/Booking/CreateBooking', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(this.state.bookingObject)
+            });
+          }
     }
 })
 
