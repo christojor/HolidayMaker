@@ -1,6 +1,6 @@
 <template>
     <div class="filter-box">
-        <h3 style="margin:7px"> Wifi quality </h3>
+        <h3 style="margin:7px"> Wifi Quality </h3>
 
         <p class="slider-text">0</p> 
         <input type="range" min="0" max="5" class="search-box" v-model="PropWifi" @click="handleSubmit">

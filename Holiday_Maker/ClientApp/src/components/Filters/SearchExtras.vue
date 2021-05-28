@@ -3,7 +3,7 @@
         <div class="multipleSelection drop-box">
             <div class="selectBox" @click="toggledisplay">
                     <select>
-                        <option>Select extras</option>
+                        <option>Select Extras</option>
                     </select>
                     <div class="overSelect"></div>
             </div>
