@@ -6,7 +6,7 @@
     <h2 class="text-xl text-green-6">Personal Details</h2>
   </div>
 
-  <div class="w-full overflow-hidden">
+  <div class="w-full overflow-hidden" v-if="userDetails">
     <h1 class="mt-2"><b>Full Name</b></h1>
     <h1>{{ userDetails.firstName }} {{ userDetails.lastName }}</h1>
     <h1 class="mt-2"><b>E-mail</b></h1>

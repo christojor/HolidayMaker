@@ -22,8 +22,12 @@
     <Rewards />
     </div>
 
-    <div class="my-1 px-1 w-full overflow-hidden">
+    <div class="my-1 px-1 w-full overflow-hidden" v-if="isLoggedIn">
     <PersonalDetails :userDetails="currentUser" />
+    </div>
+
+    <div class="my-1 px-1 w-full overflow-hidden" v-else>
+    <h1><b>You must be logged in to complete your booking.</b></h1>
     </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
@@ -80,7 +84,7 @@ export default {
         this.roomDetailsObjects.bookingInfo = this.bookingParams;
         this.roomDetailsObjects.roomInfo = this.bookedRooms;
 
-        if (this.$store.state.user == null){
+        if (this.isLoggedIn && this.$store.state.user == null){
           this.$store.dispatch("getUser");
         }
     },
@@ -145,10 +149,12 @@ export default {
 
             return this.bookingObject;
         },
-        
         currentUser() {
-          return this.$store.state.user;
-          },
+            return this.$store.state.user;
         },
-      }
+        isLoggedIn(){
+          return this.$store.state.isLoggedIn;
+        }
+    },
+  }
 </script>

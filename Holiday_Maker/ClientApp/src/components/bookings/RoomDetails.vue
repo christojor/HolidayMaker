@@ -15,7 +15,8 @@
             <div class="w-full overflow-hidden ml-2">
                 <h1>{{ rooms.roomType.name }} - {{ rooms.nbrOfGuests }} bed(s).</h1>
                 <h1>{{ rooms.price }}€ / night</h1>
-                <h1>{{ booking.travellersAdults }} Adults + {{ booking.travellersChildren }} Child</h1>
+                <h1 v-if="booking.travellersChildren">{{ booking.travellersAdults }} Adult(s) + {{ booking.travellersChildren }} Child(ren)</h1>
+                <h1 v-else>{{ booking.travellersAdults }} Adult(s)</h1>
                 <h1>Check-in: {{ booking.checkIn }}</h1>
                 <h1>Check-out: {{ booking.checkOut }}</h1>
                 <h1>Staying {{ nbrOfNights }} nights</h1>
