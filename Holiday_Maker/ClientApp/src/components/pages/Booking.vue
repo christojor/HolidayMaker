@@ -23,7 +23,7 @@
     </div>
 
     <div class="my-1 px-1 w-full overflow-hidden">
-    <PersonalDetails />
+    <PersonalDetails :userDetails="currentUser" />
     </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
@@ -79,6 +79,10 @@ export default {
     created(){
         this.roomDetailsObjects.bookingInfo = this.bookingParams;
         this.roomDetailsObjects.roomInfo = this.bookedRooms;
+
+        if (this.$store.state.user == null){
+          this.$store.dispatch("getUser");
+        }
     },
 
     data(){
@@ -125,7 +129,6 @@ export default {
             return this.$store.state.bookingParams;
         },
         roomDetails() {
-            console.log(this.roomDetailsObjects)
             return this.roomDetailsObjects;
         },
         bookingDetails() {
@@ -142,12 +145,10 @@ export default {
 
             return this.bookingObject;
         },
-
-        methods:{
-          getUser() {
-            this.$store.dispatch("getUser");
-            },
-        }
+        
+        currentUser() {
+          return this.$store.state.user;
+          },
+        },
       }
-}
 </script>

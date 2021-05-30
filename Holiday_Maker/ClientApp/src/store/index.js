@@ -79,11 +79,9 @@ const store = createStore({
         },
         setNbrOfNights (state, payload) {
             state.nbrOfNights = payload;
-            console.log("NbrOfNights: " + state.nbrOfNights)
         },
         setUser (state, payload) {
             state.user = payload;
-            console.log("User: " + state.user)
         },
    },
    getters: {
