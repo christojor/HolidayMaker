@@ -104,13 +104,6 @@ export default {
     }
   },
 
-  data(){
-    return{
-      userFirstName: '',
-      userLastName: '',
-    }
-  },
-
   props: {
         makeBooking: {
             type: Object,
