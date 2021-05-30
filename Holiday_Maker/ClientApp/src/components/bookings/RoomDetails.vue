@@ -35,7 +35,7 @@ export default {
         DeleteButton
     },
 
-    data: function () {
+    data() {
         return {
             booking: this.roomDetails.bookingInfo,
         }

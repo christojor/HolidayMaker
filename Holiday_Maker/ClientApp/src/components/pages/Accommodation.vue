@@ -90,10 +90,16 @@ Rooms,
   },
   methods:{
     goToBooking(accomodationId) {
+      if (this.$store.state.bookedRooms.length)
+      {
             this.$router.push({
                 name: "Booking",
                 params: { id: accomodationId },
             });
+      }
+      else{
+        window.alert('You must choose a room before proceeding to payment.')
+      }
         },
   }
 }

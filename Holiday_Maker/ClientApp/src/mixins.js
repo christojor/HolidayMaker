@@ -1,15 +1,7 @@
 export default {
-    data () {
-       msg: "Hello World"
-    },
-    created: function () {
-       console.log("Printing from the Mixin")
-    },
-    methods: {
-       displayMessage: function () {
-          console.log("Now printing from a mixin function")
-       },
 
+    methods: {
+       
        currentDate(incrementDay) {
         const current = new Date();
 
@@ -33,6 +25,10 @@ export default {
         const dateTime = date + " " + time
         
         return dateTime;
-      }
+      },
+
+      isLoggedIn(){
+         return this.$store.state.isLoggedIn;
+       }
     }
  }

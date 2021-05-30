@@ -118,12 +118,6 @@ import mixin from "../mixins.js"
 
 export default {
     mixins: [mixin],
-    
-    created() {
-        // Mixin example
-        console.log(this.$data)
-        this.displayMessage()
-   },
 
     mounted(){
         this.setApiState(enums.init)

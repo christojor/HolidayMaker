@@ -19,11 +19,11 @@
     <div class="flex flex-wrap overflow-hidden">
 
     <div class="my-1 px-1 w-full overflow-hidden">
-    <Rewards />
+      <Rewards />
     </div>
 
-    <div class="my-1 px-1 w-full overflow-hidden" v-if="isLoggedIn">
-    <PersonalDetails :userDetails="currentUser" />
+    <div class="my-1 px-1 w-full overflow-hidden" v-if="this.isLoggedIn()">
+      <PersonalDetails :userDetails="currentUser" />
     </div>
 
     <div class="my-1 px-1 w-full overflow-hidden" v-else>
@@ -78,15 +78,35 @@ import PaymentDetails from '/src/components/bookings/PaymentDetails.vue'
 import Rewards from '/src/components/bookings/Rewards.vue'
 import RoomDetails from '/src/components/bookings/RoomDetails.vue'
 import PersonalDetails from '/src/components/bookings/PersonalDetails.vue'
+import mixin from '/src/mixins.js'
 
 export default {
+    mixins: [mixin],
+
+    beforeRouteLeave (to, from , next) {
+        const answer = window.confirm('Your booking will be cancelled if you leave this page. Are you sure?')
+
+        if (answer) {
+          next()
+        } 
+        else {
+          next(false)
+        }
+    },
+
     created(){
         this.roomDetailsObjects.bookingInfo = this.bookingParams;
         this.roomDetailsObjects.roomInfo = this.bookedRooms;
 
+        // Check if user is logged in, but user state is null then get user
         if (this.isLoggedIn && this.$store.state.user == null){
           this.$store.dispatch("getUser");
         }
+    },
+
+    beforeUnmount() {
+      this.setBookedRooms([]);
+      console.log(this.$store.state.bookedRooms);
     },
 
     data(){
@@ -152,9 +172,11 @@ export default {
         currentUser() {
             return this.$store.state.user;
         },
-        isLoggedIn(){
-          return this.$store.state.isLoggedIn;
-        }
+    },
+    methods:{
+      setBookedRooms(payload){
+        this.$store.commit("setBookedRooms", payload)
+      },
     },
   }
 </script>
