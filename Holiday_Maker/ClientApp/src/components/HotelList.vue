@@ -22,9 +22,7 @@ import enums from "../assets/enums.js";
 
 export default {
   mounted(){
-
     if (this.accomodations == null){
-      this.apiState = enums.init
       this.updateAccomodations();
     }
   },
@@ -32,7 +30,7 @@ export default {
     HotelDescription
   },
   computed:{ 
-      ...mapGetters([
+    ...mapGetters([
           'filteredList'
       ]),
     ...mapState({

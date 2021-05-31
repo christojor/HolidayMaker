@@ -121,7 +121,6 @@ export default {
 
     mounted(){
         this.setApiState(enums.init)
-        console.log("ApiStateMounted:" + this.$store.state.apiState)
     },
 
     data()
