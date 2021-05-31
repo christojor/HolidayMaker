@@ -1,9 +1,9 @@
 <template>
-    <div v-if="!filteredList.length || apiState.loaded" style="width:100%">
+    <div v-if="!filteredList.length" style="width:100%">
         <h1 style="text-align:center;font-size:30px">Loading hotels...</h1>
     </div>
     
-    <div v v-else v-for="accomodation in filteredList" :key="accomodation" class="hotel-item shadow-md">
+    <div v-else v-for="accomodation in filteredList" :key="accomodation" class="hotel-item shadow-md">
 
         <img :src="accomodation.imgSrc" alt="" class="hotel-item-img" @click="goToAccommodation(accomodation.id)">
         
@@ -21,6 +21,13 @@ import { mapState } from 'vuex'
 import enums from "../assets/enums.js";
 
 export default {
+  mounted(){
+
+    if (this.accomodations == null){
+      this.apiState = enums.init
+      this.updateAccomodations();
+    }
+  },
   components:{
     HotelDescription
   },
@@ -35,7 +42,6 @@ export default {
       return this.apiState === enums.loaded;
     },
     apiStateLoading() {
-        console.log(this.apiState)
       return this.apiState === enums.loaded || this.apiState === enums.init;
     },
     apiStateError() {
@@ -49,6 +55,9 @@ export default {
                 name: "Accommodation",
                 params: { id: accommodationId },
             });
+        },
+        updateAccomodations(){
+          this.$store.commit("updateAccomodations", JSON.parse(sessionStorage.getItem("accomodations")));
         }
     }
 }
