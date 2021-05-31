@@ -9,9 +9,10 @@
       <h1>Every 1€ spent is converted to 1 point</h1>
       <h1 style="font-size:10px">(tax not included)</h1>
       <h1>Reward Points earned: {{totalPoints}}</h1>
+      <h1 style="font-size:12px">Currrent Points: {{this.$store.state.user.memberPoints}}</h1>
     </div>
 
-    <div v-if="this.$store.state.isLoggedIn" class="w-full overflow-hidden">
+    <div v-else class="w-full overflow-hidden">
       <h1>Log in to get Reward Points</h1>
     </div>
   </div>

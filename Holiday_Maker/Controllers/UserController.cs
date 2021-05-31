@@ -67,5 +67,11 @@ namespace Holiday_Maker.Controllers
         {
             return await _userService.RemoveUser(id);
         }
+
+        [HttpPost("UpdateMemberPoints")]
+        public async Task<ActionResult<User>> UpdateMemberPoints(User user)
+        {
+            return await _userService.UpdateMemberPoints(user.Id, user.MemberPoints);
+        }
     }
 }
