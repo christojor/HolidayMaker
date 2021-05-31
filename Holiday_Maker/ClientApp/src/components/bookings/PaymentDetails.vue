@@ -153,7 +153,12 @@ export default {
 
       // Code here for displaying booking confirmation modal.
 
-      this.$store.commit("setMemberPoints", this.totalPoints);
+      if(this.$store.state.user.memberTypeId == 1){
+        this.$store.commit("setMemberPoints", this.totalPoints);
+      }
+      else if(this.$store.state.user.memberTypeId == 2){
+        this.$store.commit("setMemberPoints", this.totalPoints * 1.25);
+      }
       this.$store.dispatch("updateMemberPoints");
       },
 
