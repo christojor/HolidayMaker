@@ -1,14 +1,20 @@
 <template>
-  <div class="overflow-hidden border-2 rounded-md border-black shadow-md p-4 bg-green-1 divide-y-2 divide-gray-300 border-2">
-    <form  id="payment-form">
+
+<div class="overflow-hidden border-2 rounded-md border-black shadow-md p-4 bg-green-1 divide-y-2 divide-gray-300 border-2">
+  <form  id="payment-form">
     <div>
       <label>
         <div class="w-full overflow-hidden">
-            <h2 class="text-xl text-green-6">Payment Details</h2>
+          <h2 class="text-xl text-green-6">Payment Details</h2>
         </div>
-        </label>
-            <h2 class="text-m text-green-6">Credit Card</h2>
-            <div id="card-element" class="mt-2 mb-2 border-2 border-gray-300"></div>
+      </label>
+
+      <h2 class="text-m text-green-6">Credit Card</h2>
+      <div id="card-element" class="mt-2 mb-2 border-2 border-gray-300" v-if="this.isLoggedIn()">
+      </div>
+      <div v-else>
+        <h1><b>Log in to submit payment.</b></h1>
+      </div>
 
     <div id="SuccessMessage" class="alert" style="display:none">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -17,15 +23,21 @@
   </div>
 
   <div class="flex flex-wrap overflow-hidden bg-green-1 mt-2">
-
-  <div class="w-full overflow-hidden">
-    <button type="submit" class="bg-green-500 w-1/2 hover:bg-green-700 text-white font-bold py-2 px-2 mt-2 rounded-full" @click="sendBooking()">
+    
+    <div class="w-full overflow-hidden" v-if="this.isLoggedIn()">
+      <button type="submit" class="bg-green-500 w-1/2 hover:bg-green-700 text-white font-bold py-2 px-2 mt-2 rounded-full" @click="sendBooking()">
       Buy Now
-  </button>
+      </button>
+    </div>
+    <div class="w-full overflow-hidden" v-else>
+      <button type="button" class="bg-gray-500 w-1/2 text-white font-bold py-2 px-2 mt-2 rounded-full">
+      Buy Now
+    </button>
   </div>
+  </div>
+  </form>
 </div>
-    </form>
-</div>
+
 </template>
 
 <style>
@@ -51,10 +63,14 @@
 
 
 <script>
+import mixin from '/src/mixins.js'
+
 export default {
+    mixins: [mixin],
 
   mounted() {
     //Building payment form starts here
+    if(this.isLoggedIn()){
     var stripe = Stripe(
       "pk_test_51IsjoPK0RxPPVgejwsizP9ghkzrEOEAho8VjGbz0Rtn2i31J5t5zr6NGp04eZD0ZHF5TwIzvCZf2XFmZR4syWqiY00ldbn6Luv"
     );
@@ -89,11 +105,12 @@ export default {
           card: cardElement,
           billing_details: {
             //Placeholder name
-            name: "Johan Rova",
+            name: this.fullName,
           },
         })
         .then(self.stripePaymentMethodHandler);
     });
+    }
   },
 
   props: {
@@ -101,6 +118,16 @@ export default {
             type: Object,
             required: true,
         }
+    },
+
+    computed:{
+      fullName(){
+        if (this.isLoggedIn() && this.$store.state.user)
+        {
+          return this.$store.state.user.firstName + " " + this.$store.state.user.lastName
+        }
+        return ""
+      },
     },
 
   methods: {

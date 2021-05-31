@@ -114,20 +114,25 @@
 
 <script>
 import enums from "../assets/enums.js";
+import mixin from "../mixins.js"
 
 export default {
+    mixins: [mixin],
 
     mounted(){
         this.setApiState(enums.init)
         console.log("ApiStateMounted:" + this.$store.state.apiState)
     },
+
     data()
     {
         return{
             destinationSearch: '',
+
+            // Booking parameters with default values
             bookingParams:{
-                checkIn: '',
-                checkOut: '',
+                checkIn: this.currentDate(0),
+                checkOut: this.currentDate(1),
                 travellersAdults: '',
                 travellersChildren: '',
             },
@@ -150,8 +155,24 @@ export default {
             this.destinationSearch  = this.destinationSearch.charAt(0).toUpperCase() + this.destinationSearch.slice(1)
         },
 
-        async search()
+        checkBookingParams(){
+            if (this.bookingParams.checkIn == ''){
+                this.bookingParams.checkIn = this.currentDate(0)
+            }
+                
+            if (this.bookingParams.checkOut == ''){
+                this.bookingParams.checkOut = this.currentDate(1)
+            }
+            
+            if (this.bookingParams.travellersAdults == ''){
+                this.bookingParams.travellersAdults = 1
+            }
+        },
+
+        async search(e)
         {
+            e.preventDefault()
+
             if(this.destinationSearch.length > 1)
             {   // Format destinationSearch if more than one word
                 if (this.destinationSearch.match(/\b\w+\b/g) > 1){
@@ -166,6 +187,8 @@ export default {
 
                         // Write checkIn, checkOut, adults and children to state
                         this.setBookingParameters(this.bookingParams)
+
+                        this.checkBookingParams()
                         
                         // Get accomodations from API and write to state
                         this.getQueriedDestinations(this.$store.state.destination)
@@ -173,7 +196,9 @@ export default {
             }
             else {
                 // Write checkIn, checkOut, adults and children to state
-                        this.setBookingParameters(this.bookingParams)
+                this.setBookingParameters(this.bookingParams)
+
+                this.checkBookingParams()
                         
                  // Get all accommodations
                 this.$store.dispatch("getAccomodations");
@@ -195,25 +220,10 @@ export default {
                     });
                 }
             }, 250);
-            console.log(this.destinationSearch)
-            console.log(this.filteredCountries)
         },
-        searchCity(event) {
-            let query = event.query;
-            let filteredCities = [];
 
-            for (let country of this.groupedCities) {
-                let filteredItems = FilterService.filter(country.items, ['label'], query, FilterMatchMode.CONTAINS);
-                if (filteredItems && filteredItems.length) {
-                    filteredCities.push({...country, ...{items: filteredItems}});
-                }
-            }
-
-            this.filteredCities = filteredCities;
-        },
         setInput(event) {
             this.destinationSearch = event.value.name
-            console.log(event.value.name)
         },
 
     // Set destination in state to formatted search parameter

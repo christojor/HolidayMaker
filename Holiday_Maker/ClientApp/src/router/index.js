@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Hotels from '/src/components/pages/Hotels.vue'
-import StoreTest from '/src/components/pages/StoreTest.vue'
 import Accommodation from '/src/components/pages/Accommodation.vue'
 import NotFound from '/src/components/pages/NotFound.vue'
 import Favorite from '/src/components/FavoriteButton.vue'
@@ -8,7 +7,6 @@ import Searchbar from '/src/components/Searchbar.vue'
 import LoginRegister from '/src/components/pages/LoginRegister.vue'
 import Logout from '/src/components/logins/Logout.vue'
 import Booking from '/src/components/pages/Booking.vue'
-
 import UserRemoval from '/src/components/logins/RemoveUser.vue'
 
 const routes = [
@@ -21,11 +19,6 @@ const routes = [
         path: '/hotels',
         name: 'Hotels',
         component: Hotels,
-    },
-    {
-        path: '/storetest',
-        name: 'StoreTest',
-        component: StoreTest,
     },
     {
         path: "/accommodation/:id",

@@ -7,8 +7,6 @@ const store = createStore({
 
     // Properties
    state:{
-        
-        headline: "Welcome to our awesome website!",
         accomodations: [],
         filter: [],
         userId: localStorage.getItem('userId'),
@@ -28,7 +26,7 @@ const store = createStore({
         bookingObject: {
             booking:{},
             bookedRoom: []
-              }
+              },
    },
 
    // Methods for changing states synchronously
@@ -81,11 +79,9 @@ const store = createStore({
         },
         setNbrOfNights (state, payload) {
             state.nbrOfNights = payload;
-            console.log("NbrOfNights: " + state.nbrOfNights)
         },
         setUser (state, payload) {
             state.user = payload;
-            console.log("User: " + state.user)
         },
    },
    getters: {
@@ -96,11 +92,6 @@ const store = createStore({
 
     // Functions that call mutations asynchronously. Called by using dispatch (instead of state) in component.
     actions:{
-
-        // In-argumentet commit här nedan ska omslutas av måsvingar. Detta kallas för destructuring. 
-        // Länk finns längre ner på sidan. Via commit kan du komma åt alla dina mutationer ovan.
-        // Syntaxen är viktig. commit följt av paranteser där det första in-argumentet är en sträng med önskad 
-        // mutationnamn och "the payload" som andra argument.
 
         async getAccomodations({ commit }) {
 

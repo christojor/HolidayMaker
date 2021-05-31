@@ -22,8 +22,12 @@
     <Rewards :roomPrices="bookedRooms"/>
     </div>
 
-    <div class="my-1 px-1 w-full overflow-hidden">
-    <PersonalDetails />
+    <div class="my-1 px-1 w-full overflow-hidden" v-if="this.isLoggedIn()">
+      <PersonalDetails :userDetails="currentUser" />
+    </div>
+
+    <div class="my-1 px-1 w-full overflow-hidden" v-else>
+    <h1><b>You must be logged in to complete your booking.</b></h1>
     </div>
 
   <div class="my-1 px-1 w-full overflow-hidden">
@@ -74,11 +78,35 @@ import PaymentDetails from '/src/components/bookings/PaymentDetails.vue'
 import Rewards from '/src/components/bookings/Rewards.vue'
 import RoomDetails from '/src/components/bookings/RoomDetails.vue'
 import PersonalDetails from '/src/components/bookings/PersonalDetails.vue'
+import mixin from '/src/mixins.js'
 
 export default {
+    mixins: [mixin],
+
+    beforeRouteLeave (to, from , next) {
+        const answer = window.confirm('Your booking will be cancelled if you leave this page. Are you sure?')
+
+        if (answer) {
+          next()
+        } 
+        else {
+          next(false)
+        }
+    },
+
     created(){
         this.roomDetailsObjects.bookingInfo = this.bookingParams;
         this.roomDetailsObjects.roomInfo = this.bookedRooms;
+
+        // Check if user is logged in, but user state is null then get user
+        if (this.isLoggedIn && this.$store.state.user == null){
+          this.$store.dispatch("getUser");
+        }
+    },
+
+    beforeUnmount() {
+      this.setBookedRooms([]);
+      console.log(this.$store.state.bookedRooms);
     },
 
     data(){
@@ -125,7 +153,6 @@ export default {
             return this.$store.state.bookingParams;
         },
         roomDetails() {
-            console.log(this.roomDetailsObjects)
             return this.roomDetailsObjects;
         },
         bookingDetails() {
@@ -142,12 +169,14 @@ export default {
 
             return this.bookingObject;
         },
-
-        methods:{
-          getUser() {
-            this.$store.dispatch("getUser");
-            },
-        }
-      }
-}
+        currentUser() {
+            return this.$store.state.user;
+        },
+    },
+    methods:{
+      setBookedRooms(payload){
+        this.$store.commit("setBookedRooms", payload)
+      },
+    },
+  }
 </script>
