@@ -93,7 +93,7 @@ export default {
                 localStorage.setItem('userId', this.userId);
                 localStorage.setItem('loggedIn', this.isLoggedIn);
                 console.log(json.isLoggedIn);
-                this.$store.dispatch("setUserData");
+                this.$store.dispatch("getUser");
                 this.$router.push('/');
             }
 
