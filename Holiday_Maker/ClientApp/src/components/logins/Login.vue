@@ -92,8 +92,8 @@ export default {
                 this.$store.state.isLoggedIn = json.isLoggedIn;
                 localStorage.setItem('userId', this.userId);
                 localStorage.setItem('loggedIn', this.isLoggedIn);
-                this.$store.dispatch("getUser");
                 console.log(json.isLoggedIn);
+                this.$store.dispatch("setUserData");
                 this.$router.push('/');
             }
 

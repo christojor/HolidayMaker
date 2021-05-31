@@ -11,7 +11,19 @@ const store = createStore({
         filter: [],
         userId: localStorage.getItem('userId'),
         isLoggedIn: localStorage.getItem('loggedIn'),
-        user: null,
+        user:{
+            userName: null,
+            email: null,
+            firstName: null,
+            lastName: null,
+            country: null,
+            city: null,
+            streetAddress: null,
+            zipCode: null,
+            memberTypeId: null,
+            creditCard: null,
+            memberPoints: null
+        },
         userEmail: null,
         userPassword: null,
         loginAttemptMessage: null,
@@ -81,7 +93,16 @@ const store = createStore({
             state.nbrOfNights = payload;
         },
         setUser (state, payload) {
-            state.user = payload;
+            state.user.userName = payload.userName;
+            state.user.email = payload.email;
+            state.user.firstName = payload.firstName;
+            state.user.lastName = payload.lastName;
+            state.user.country = payload.country;
+            state.user.city = payload.city;
+            state.user.streetAddress = payload.streetAddress;
+            state.user.zipCode = payload.zipCode;
+            state.user.memberTypeId = payload.memberTypeId;
+            state.user.memberPoints = payload.memberPoints;
         },
    },
    getters: {
@@ -115,7 +136,7 @@ const store = createStore({
             }
         },
 
-        async getUser({commit}){
+        async setUserData({commit}){
             let response = await fetch('https://localhost:44323/api/User/' + this.state.userId)
             let json = await response.json();
 
