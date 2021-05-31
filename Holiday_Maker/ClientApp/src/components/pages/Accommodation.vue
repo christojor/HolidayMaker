@@ -1,4 +1,5 @@
 <template>
+
   <div v-for="accomodation in accomodations" :key="accomodation">
     <div v-if="id == accomodation.id">
       <div class="flex flex-wrap overflow-hidden mt-3">
