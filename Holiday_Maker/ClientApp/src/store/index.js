@@ -119,6 +119,7 @@ const store = createStore({
             let response = await fetch('https://localhost:44323/api/accomodations');
             let json = await response.json();
 
+            sessionStorage.setItem('accomodations', JSON.stringify(json))
             commit('getAccomodationsData', json);
         },
 
@@ -129,9 +130,12 @@ const store = createStore({
             if(response.status != (204))
             {
                 let json = await response.json();
+
+                sessionStorage.setItem('accomodations', JSON.stringify(json))
                 commit('updateAccomodations', json);
             }
             else {
+                sessionStorage.clear()
                 commit('updateAccomodations', null);
             }
         },

@@ -99,7 +99,7 @@ export default {
         this.roomDetailsObjects.roomInfo = this.bookedRooms;
 
         // Check if user is logged in, but user state is null then get user
-        if (this.isLoggedIn && this.$store.state.user == null){
+        if (this.isLoggedIn == true && this.$store.state.user == null){
           this.$store.dispatch("getUser");
         }
     },

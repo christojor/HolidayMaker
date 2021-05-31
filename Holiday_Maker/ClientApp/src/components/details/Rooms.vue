@@ -9,7 +9,7 @@
 
    <div class="w-1/2 overflow-hidden p-4">     
      <button class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" @click="addToBooking(room)">
-      Book Room
+      Add Room
      </button> 
      <div>
      <b>Room Type:</b> {{ room.roomType.name }}<br>
@@ -33,17 +33,17 @@
 <script>
 
 export default {
-    props: {
-        rooms: {
-            type: Object,
-            required: true,
-        }
-    },
-      methods: {
-        addToBooking(room) {
-          this.$store.state.bookedRooms.push(room)
-        }
-}
-    
+  props: {
+    rooms: {
+      type: Object,
+      required: true,
+    }
+  },
+  
+  methods: {
+    addToBooking(room) {
+      this.$store.state.bookedRooms.push(room)
+    }
+  } 
 }
 </script>
