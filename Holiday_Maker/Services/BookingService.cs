@@ -24,6 +24,7 @@ namespace Holiday_Maker.Services
         public async Task<bool> CreateBooking(BookingHelper bookingHelper)
         {
             bookingHelper.Booking.BookingDate = DateTime.Now;
+            bookingHelper.Booking.PaymentDate = DateTime.Now;
             await _bookingRepository.Insert(bookingHelper.Booking);
 
             foreach (var bookedRoom in bookingHelper.BookedRoom)
