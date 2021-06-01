@@ -6,13 +6,19 @@
     </div>
 
     <div v-if="this.$store.state.isLoggedIn" class="w-full overflow-hidden">
-      <h1>Every 1€ spent is converted to 1 point</h1>
+      <h1 class="mt-2"><b>Every 1€ spent is converted to 1 point</b></h1>
       <h1 style="font-size:10px">(tax not included)</h1>
       <h1 style="font-size:10px">(Premium Members recieve extra 25%)</h1>
-      <h1 v-if="this.$store.state.user.memberTypeId == 1">Reward Points earned: {{totalPoints}}</h1>
-      <h1 v-if="this.$store.state.user.memberTypeId == 2">Reward Points earned: {{totalPoints}} + {{totalPoints * 0.25}}</h1>
+
+      <h1 v-if="this.$store.state.user.memberTypeId == 1" class="mt-2"><b>Reward Points earned: </b>{</h1>
+      <h1 v-if="this.$store.state.user.memberTypeId == 1" class="mt-2">{{totalPoints}}</h1>
+
+      <h1 v-if="this.$store.state.user.memberTypeId == 2" class="mt-2"><b>Reward Points earned: </b></h1>
+      <h1 v-if="this.$store.state.user.memberTypeId == 2">{{totalPoints}} + {{totalPoints * 0.25}}</h1>
       <h1 v-if="this.$store.state.user.memberTypeId == 2" style="font-size:12px">Thank you for being a Premium Member</h1>
-      <h1>Currrent Points: {{this.$store.state.user.memberPoints}}</h1>
+
+      <h1 class="mt-2"><b>Currrent Points: </b></h1>
+      <h1>{{this.$store.state.user.memberPoints}}</h1>
     </div>
 
     <div v-else class="w-full overflow-hidden">
