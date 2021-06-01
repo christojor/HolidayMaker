@@ -145,6 +145,7 @@ export default {
       } else {
         //otherwise send paymentMethod.id to your server
         console.log(result);
+        this.$emit('emitToggle', this.toggleModal)
         fetch("https://localhost:44323/api/Payment/Pay", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -205,6 +206,11 @@ export default {
       lol.style.display = "block";
     }
   },
+  data(){
+    return{
+      toggleModal: true
+    }
+  }
 };
 
 </script>

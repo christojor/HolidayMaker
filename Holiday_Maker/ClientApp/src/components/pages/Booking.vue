@@ -1,4 +1,5 @@
 <template>
+    <PaymentModal :toggleModal="toggleModal" @emitToggle="toggleModalMethod"/>
     <div v-for="accomodation in accomodations" :key="accomodation">
             <div v-if="id == accomodation.id">
 
@@ -53,7 +54,7 @@
   </div>
 
    <div class="my-1 px-1 w-full overflow-hidden">
-    <PaymentDetails :makeBooking="bookingDetails" />
+    <PaymentDetails :makeBooking="bookingDetails" @emitToggle="toggleModalMethod" />
   </div>
 
 </div>
@@ -78,6 +79,7 @@ import PaymentDetails from '/src/components/bookings/PaymentDetails.vue'
 import Rewards from '/src/components/bookings/Rewards.vue'
 import RoomDetails from '/src/components/bookings/RoomDetails.vue'
 import PersonalDetails from '/src/components/bookings/PersonalDetails.vue'
+import PaymentModal from '/src/components/bookings/elements/PaymentModal.vue'
 
 export default {
     created(){
@@ -108,6 +110,7 @@ export default {
               },
               bookedRoom: []
             },
+            toggleModal: false
         }
     },
 
@@ -120,6 +123,7 @@ export default {
         Rewards,
         RoomDetails,
         PersonalDetails,
+        PaymentModal,
     },
 
     computed: {
@@ -156,5 +160,10 @@ export default {
           return this.$store.state.isLoggedIn;
         }
     },
+    methods: {
+      toggleModalMethod(toggleModal){
+        this.toggleModal = toggleModal
+      }
+    }
   }
 </script>
