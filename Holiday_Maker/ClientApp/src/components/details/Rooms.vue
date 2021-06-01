@@ -24,7 +24,7 @@
           <b>Extras at extra price: </b>
           <div class="rounded-t-md bg-green-1 search-div shadow-xl w-2/8">
             <div class="text-green-500">
-               <div class="selectBox" @click="toggledisplay">
+               <div class="selectBox" @click="toggledisplay" @mouseover="sortExtras">
                     <select>
                         <option>Select Extras</option>
                     </select>
@@ -60,20 +60,12 @@
 
 
 <script>
-import extrasPrices from "/src/assets/extrasPrices.json";
+
 export default {
   data() {
     return {
       toggle: true,
-      Extras: [
-        { Extra: "Self-Catering", Checked: false, Price: 5},
-        { Extra: "HalfBoard", Checked: false, Price: 10},
-        { Extra: "FullBoard", Checked: false, Price: 15},
-        { Extra: "All-Inclusive", Checked: false, Price: 20},
-        { Extra: "Breakfast", Checked: false, Price: 5 },
-        { Extra: "ExtraBed", Checked: false, Price: 10},
-        { Extra: "Crib", Checked: false, Price: 10},
-      ],
+      Extras: [],
     };
   },
   props: {
@@ -81,21 +73,46 @@ export default {
       type: Object,
       required: true,
     },
+    extrasList: Object
   },
   methods: {
     addToBooking(room) {
       this.$store.state.bookedRooms.push(room);
     },
     toggledisplay(){
-            this.toggle=!this.toggle
-            console.log("hej")
-        },
+      this.toggle=!this.toggle
+    },
     handleSubmit(){
-            let filter = {
-                PropExtras: this.Extras
-            }
-        },
+      let filter = {
+        PropExtras: this.Extras
+      }
+    },
+    sortExtras(){
+      this.Extras = [];
+
+      if(this.extrasList[0].selfCatering){
+        this.Extras.push({ Extra: "Self-Catering", Checked: false, Price: 5})
+      }
+      if(this.extrasList[0].halfBoard){
+        this.Extras.push({ Extra: "Half-Board", Checked: false, Price: 10})
+      }
+      if(this.extrasList[0].fullBoard){
+        this.Extras.push({ Extra: "Full-board", Checked: false, Price: 15})
+      }
+      if(this.extrasList[0].extraBed){
+        this.Extras.push({ Extra: "Extra bed", Checked: false, Price: 5})
+      }
+      if(this.extrasList[0].crib){
+        this.Extras.push({ Extra: "Crib", Checked: false, Price: 5})
+      }
+      if(this.extrasList[0].allInclusive){
+        this.Extras.push({ Extra: "Self-Catering", Checked: false, Price: 20})
+      }
+      if(this.extrasList[0].breakfast){
+        this.Extras.push({ Extra: "Breakfast", Checked: false, Price: 5})
+      }
 
     }
+  }
 };
 </script>
