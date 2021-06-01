@@ -147,6 +147,7 @@ const store = createStore({
 
         // This method fetches a user with an API GET. Name should be getUser. The mutation sets the data.
         // Name change also broke my code, so I changed it back. /CJ
+        // Fuck you, eat shit. Best regards, GR
         async getUser({commit}){
             let response = await fetch('https://localhost:44323/api/User/' + this.state.userId)
             let json = await response.json();

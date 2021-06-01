@@ -74,20 +74,12 @@ namespace Holiday_Maker.Services
         public async Task<ActionResult> AddUserFavorite(UserFavorite userFavorite)
         {
             var getUserFavorites = await _ufRepo.GetAll();
-            var userFavorites = new List<UserFavorite>();
-
-            foreach (var favorite in getUserFavorites)
-            {
-                if (favorite.UserId == userFavorite.UserId)
-                {
-                    userFavorites.Add(favorite);
-                }
-            }
+            var userFavorites = getUserFavorites.Where(favorite => favorite.UserId == userFavorite.UserId).ToList();
 
             var result = userFavorites.Exists(u => u.AccomodationId.Equals(userFavorite.AccomodationId));
             if (!result)
             {
-                _ufRepo.Insert(userFavorite);
+                await _ufRepo.Insert(userFavorite);
             }
             return NotFound();
         }
@@ -98,19 +90,22 @@ namespace Holiday_Maker.Services
             var favorite = favorites.FirstOrDefault(f => f.UserId.Equals(userFavorite.UserId) && f.AccomodationId.Equals(userFavorite.AccomodationId));
             if (favorite != null)
             {
-                _ufRepo.Delete(favorite.Id);
+                await _ufRepo.Delete(favorite.Id);
             }
             return NotFound();
         }
 
 
-        public string RegisterUser(User user)
+        public async Task<string> RegisterUser(User user)
         {
-            if (user != null)
+            var checkUserList = await _userRepo.GetAll();
+
+            if (checkUserList.Any(checkUser => checkUser.Email != user.Email))
             {
-                _userRepo.Insert(user);
-                return "User succesfully added!";
+                await _userRepo.Insert(user);
+                return "User successfully added!";
             }
+
             return "Could not add the user!";
         }
         internal async Task<LoginHelper> Login(string email, string password)
