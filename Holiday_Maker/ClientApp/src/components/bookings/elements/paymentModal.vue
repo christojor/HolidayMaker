@@ -20,7 +20,7 @@
 
           <span class="text-center"
             >Thank you, your payment has been succesful. A confirmation email
-            has been sent to unknown@gmail.com</span
+            has been sent to {{GetUserEmail}}</span
           >
           <button
             class="rounded bg-green-500 text-white px-6 mt-1 py-2 w-3/12 m-auto mb-3 shadow-lg hover:bg-green-400 outline-none active:outline-none focus:outline-none"
@@ -45,6 +45,12 @@
 export default {
   props: {
     toggleModal: Boolean,
+  },
+
+  computed:{
+    GetUserEmail(){
+      return this.$store.state.user.email;
+    }
   },
   methods: {
     toggleModalMethod() {
