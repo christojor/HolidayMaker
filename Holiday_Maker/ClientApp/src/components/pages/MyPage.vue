@@ -15,23 +15,44 @@
             <th class="headerElements">Credit card</th>
         </tr>
         <tr>
-            <td class="bookingElements">admin@expoodia.se</td>
-            <td class="bookingElements">Admin</td>
-            <td class="bookingElements">Adminsson</td>
-            <td class="bookingElements">Adminstreet 12</td>
-            <td class="bookingElements">12345</td>
-            <td class="bookingElements">AdminCity</td>
-            <td class="bookingElements">Adminlandet</td>
-            <td class="bookingElements">2</td>
-            <td class="bookingElements">725</td>
-            <td class="bookingElements"></td>
+            <td class="bookingElements">{{GetUser.email}}</td>
+            <td class="bookingElements">{{GetUser.firstName}}</td>
+            <td class="bookingElements">{{GetUser.lastName}}</td>
+            <td class="bookingElements">{{GetUser.streetAddress}}</td>
+            <td class="bookingElements">{{GetUser.zipCode}}</td>
+            <td class="bookingElements">{{GetUser.city}}</td>
+            <td class="bookingElements">{{GetUser.country}}</td>
+            <td class="bookingElements">{{GetMemberType}}</td>
+            <td class="bookingElements">{{GetUser.memberPoints}}</td>
+            <td class="bookingElements">{{GetUser.creditCard}}</td>
             <td><button class="editButton">Edit</button></td>
         </tr>
     </table> 
     <br>
+    <RemoveUserButton/>
     <div class="container2 bg-green-1 shadow-md" style="height:70px; width:190px; padding-left:20px">
         <router-link to="/MyBookings" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Bookings</router-link>
+        
     </div>
-
-    
 </template>
+
+<script>
+import RemoveUserButton from '/src/components/RemoveUserButton.vue'
+export default {
+    components:{
+        RemoveUserButton
+    },
+    computed:{
+        GetUser(){
+            return this.$store.state.user;
+        },
+        GetMemberType(){
+            if(this.GetUser.memberTypeId == 1){
+                return 'Standard';
+            }else if(this.GetUser.memberTypeId == 2){
+                return 'Premium';
+            }
+        }
+    }
+}
+</script>

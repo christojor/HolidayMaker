@@ -24,7 +24,7 @@
             <td class="bookingElements">Yesterday</td>
             <td class="bookingElements"></td>
             <td><button class="editButton">Edit</button></td>
-            <td><button class="editButton">Cancel</button></td>
+            <td><CancelButton/></td>
         </tr>
     </table>  
     <!--<br>
@@ -37,11 +37,13 @@
 <script>
 import Booking from '/src/components/pages/Booking.vue'
 import MyPage from '/src/components/pages/MyPage.vue'
+import CancelButton from '/src/components/CancelBookingButton.vue'
 
 export default {
     components:{
         Booking,
         MyPage,
+        CancelButton
     },
 }
 </script>
