@@ -84,6 +84,8 @@ export default {
     mixins: [mixin],
 
     beforeRouteLeave (to, from , next) {
+      if (!this.$store.state.bookingObject.booking.length){
+        console.log(this.$store.state.bookingObject.booking.length)
         const answer = window.confirm('Your booking will be cancelled if you leave this page. Are you sure?')
 
         if (answer) {
@@ -92,6 +94,10 @@ export default {
         else {
           next(false)
         }
+      }
+      else{
+        this.$router.push("/")
+      }
     },
 
     created(){
