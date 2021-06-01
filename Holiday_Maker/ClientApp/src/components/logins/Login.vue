@@ -94,7 +94,9 @@ export default {
                 localStorage.setItem('loggedIn', this.isLoggedIn);
                 console.log(json.isLoggedIn);
                 this.$store.dispatch("getUser");
+                this.$store.dispatch('getUserFavorites');
                 this.$router.push('/');
+
             }
 
            if(this.isLoggedIn == false){

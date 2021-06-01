@@ -41,7 +41,6 @@ import { mapGetters } from 'vuex'
 export default ({
     props: {
         accomodation: Object,
-        userFavorite: Object
     },
     components:{
         FavoriteButton,

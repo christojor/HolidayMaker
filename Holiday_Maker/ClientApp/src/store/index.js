@@ -28,7 +28,7 @@ const store = createStore({
         },
         userEmail: null,
         userPassword: null,
-        userFavorites: [],
+        userFavorites: null,
         addedMemberPoints: null,
         loginAttemptMessage: null,
         destination: null,
@@ -127,7 +127,9 @@ const store = createStore({
     // Functions that call mutations asynchronously. Called by using dispatch (instead of state) in component.
     actions:{
         async getUserFavorites({commit}){
-            let response = await fetch('https://localhost:44323/api/user/favorites');
+            let response = await fetch('https://localhost:44323/api/User/favorites?userId=' + this.state.userId);
+            let json = await response.json();
+            commit('setUserFavorites', json);
         },
 
         
