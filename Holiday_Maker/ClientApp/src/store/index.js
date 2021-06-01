@@ -27,6 +27,7 @@ const store = createStore({
         },
         userEmail: null,
         userPassword: null,
+        addedMemberPoints: null,
         loginAttemptMessage: null,
         destination: null,
         apiState: enums.init,
@@ -106,6 +107,9 @@ const store = createStore({
             state.user.memberPoints = payload.memberPoints;
             console.log("user email: " + email)
         },
+        setMemberPoints (state, payload){
+            state.user.memberPoints += payload;
+        },
         setTotalPrice(state, payload){
             state.totalPrice = payload;
         }
@@ -161,7 +165,18 @@ const store = createStore({
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(this.state.bookingObject)
             });
-          }
+        },
+
+        async updateMemberPoints({commit}){
+            let response = await fetch('https://localhost:44323/api/User/UpdateMemberPoints', { 
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.state.user)
+            });
+            let json = await response.json();
+
+            commit('setUser', json);
+        }
     }
 })
 
