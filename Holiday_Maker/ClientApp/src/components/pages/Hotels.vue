@@ -1,6 +1,6 @@
 <template>
     <div class="container1">
-
+        
         <div class="container2 shadow-md bg-green-1">
             <Name @filter-search="filterName"/>
             <StarRating @filter-search="filterStars"/>
