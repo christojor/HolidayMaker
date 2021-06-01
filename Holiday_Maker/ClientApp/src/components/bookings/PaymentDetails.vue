@@ -107,6 +107,7 @@ export default {
           billing_details: {
             //Placeholder name
             name: self.$store.state.user.firstName + " " + self.$store.state.user.lastName,
+            email: self.$store.state.user.email,
           },
         })
         .then(self.stripePaymentMethodHandler);
