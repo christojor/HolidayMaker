@@ -110,21 +110,16 @@
             </form>
         </div>
 
-        <CancelButton :bookingId="87"/>
+        <FavList/>
 
 </template>
 
 <script>
 import enums from "../assets/enums.js";
 import mixin from "../mixins.js"
-import CancelButton from "/src/components/CancelBookingButton.vue"
 
 export default {
     mixins: [mixin],
-
-    components:{
-        CancelButton
-    },
 
     mounted(){
         this.setApiState(enums.init)
