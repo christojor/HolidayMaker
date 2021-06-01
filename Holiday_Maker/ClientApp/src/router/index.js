@@ -7,6 +7,8 @@ import Searchbar from '/src/components/Searchbar.vue'
 import LoginRegister from '/src/components/pages/LoginRegister.vue'
 import Logout from '/src/components/logins/Logout.vue'
 import Booking from '/src/components/pages/Booking.vue'
+import MyBookings from '/src/components/pages/MyBookings.vue'
+import MyPage from '/src/components/pages/MyPage.vue'
 import UserRemoval from '/src/components/logins/RemoveUser.vue'
 
 const routes = [
@@ -57,9 +59,20 @@ const routes = [
         name: 'User Removed',
         component: UserRemoval,
     },
+
+  {
+    path: '/MyBookings',
+    name: 'MyBookings',
+    component: MyBookings
+  },
+  {
+    path: '/MyPage',
+    name: 'MyPage',
+    component: MyPage
+  }
 ]
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
+  history: createWebHistory(),
+  routes
 })
 export default router

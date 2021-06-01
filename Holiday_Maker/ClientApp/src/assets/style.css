@@ -212,7 +212,7 @@ h1 {
     background-color: #ffffff;
 }
 /*-----------------Theme Button---------------*/
-  .theme-button{
+.theme-button{
     border: 1px;
     width: 200px;
     border-radius: 7px;
@@ -237,6 +237,10 @@ h1 {
     margin-right: 60px;
     width: 200px;
     text-align: center;
+}
+
+.contentMargin{
+    margin-right: 195px;
 }
 .content-link{
     font-size: 17px;
@@ -328,3 +332,87 @@ h1 {
     width: 100%;
     max-height: 450px;
 }
+}
+
+/*-------------MyBookings button--------------*/
+
+.myButton{
+    border: 1px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+/*-------------MyBookings page--------------*/
+
+.header{
+    padding: 5px;
+    margin-left: 20vw;
+    width: 20vw;
+    height: fit-content;
+    min-height: 100%;
+    display: inline-block;
+    margin: 1%;
+    vertical-align: top;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.headerElements{
+    padding-left: 16px;
+}
+
+.bookingElements{
+    padding-left: 20px;
+    text-align: right;
+}
+
+.editButton{
+    padding-left:20px; 
+    padding-right:5px; 
+    font-weight: bold;
+    text-align: center;
+}
+
+.navbarMyProfileButton{
+    margin-right: 15px;
+    width: 140px;
+    border: 1px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.navbarMyProfileButton:hover{
+    color: white;
+}
+
+.navbarThemesButton{
+    margin-right: 15px;
+    width: 150px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.navbarThemesButton:hover{
+    color: white;
+}
+
