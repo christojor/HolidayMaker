@@ -40,7 +40,7 @@ namespace Holiday_Maker.Services
             {
                 return false;
             }
-            _userRepo.Delete(id);
+            await _userRepo.Delete(id);
             return true;
         }
 
@@ -53,7 +53,7 @@ namespace Holiday_Maker.Services
             }
             getUser.MemberPoints = memberPoints;
 
-            _userRepo.Update(getUser);
+            await _userRepo.Update(getUser);
 
             return getUser;
         }
