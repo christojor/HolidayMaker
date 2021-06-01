@@ -10,39 +10,39 @@
             <tbody>
             <tr>
                 <td>First name:</td>
-                <td><input type="text" class="form-input" id="Name" v-model="FirstName"></td>
+                <td><input required type="text" class="form-input" id="Name" v-model="FirstName"></td>
             </tr>
             <tr>
                 <td>Last name:</td>
-                <td><input type="text" class="form-input" id="Name" v-model="LastName"></td>
+                <td><input required type="text" class="form-input" id="Name" v-model="LastName"></td>
             </tr>
             <tr>
                 <td>Email:</td>
-                <td><input type="text" class="form-input" id="Email" v-model="Email"></td>
+                <td><input required type="text" class="form-input" id="Email" v-model="Email"></td>
             </tr>
             <tr>
                 <td>Address:</td>
-                <td><input type="text" class="form-input" id="Address" v-model="StreetAddress"></td>
+                <td><input required type="text" class="form-input" id="Address" v-model="StreetAddress"></td>
             </tr>
             <tr>
                 <td>ZipCode:</td>
-                <td><input type="text" class="form-input" id="ZipCode" v-model="ZipCode"></td>
+                <td><input required type="text" class="form-input" id="ZipCode" v-model="ZipCode"></td>
             </tr>
             <tr>
-                <td>Town:</td>
-                <td><input type="text" class="form-input" id="Town" v-model="City"></td>
+                <td>City:</td>
+                <td><input required type="text" class="form-input" id="Town" v-model="City"></td>
             </tr>
             <tr>
                 <td>Country:</td>
-                <td><input type="text" class="form-input" id="Country" v-model="Country"></td>
+                <td><input required type="text" class="form-input" id="Country" v-model="Country"></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type="password" class="form-input" id="Password" v-model="Pwd"></td>
+                <td><input required type="password" class="form-input" id="Password" v-model="Pwd"></td>
             </tr>
             <tr>
                 <td>Repeat password:</td>
-                <td><input type="password" class="form-input" id="Password2" v-model="Pwd2"></td>
+                <td><input required type="password" class="form-input" id="Password2" v-model="Pwd2"></td>
             </tr>
             </tbody>
         </table>

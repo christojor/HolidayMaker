@@ -22,11 +22,19 @@ namespace Holiday_Maker.Controllers
             _bookingService = new BookingService();
         }
 
-
+        //Creates a booking
         [HttpPost("CreateBooking")]
         public async Task<bool> CreateBooking(BookingHelper booking)
         {
             return await _bookingService.CreateBooking(booking);
         }
+
+        //"Cancels" a booking, sets the Cancellation date to the current date.
+        [HttpPut("CancelBooking/{id}")]
+        public async Task<bool> CancelBooking(int id)
+        {
+            return await _bookingService.CancelBooking(id);
+        }
+        
     }
 }
