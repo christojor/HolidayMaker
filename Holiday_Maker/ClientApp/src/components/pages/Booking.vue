@@ -177,15 +177,14 @@ export default {
             return this.$store.state.user;
         },
     },
-    methods:{
-      setBookedRooms(payload){
-        this.$store.commit("setBookedRooms", payload)
-      },
-    },
     methods: {
+      setBookedRooms(payload){
+        this.$store.commit("setBookedRooms", payload);
+      },
       toggleModalMethod(toggleModal){
         this.toggleModal = toggleModal
-      }
+      },
+      
     }
   }
 </script>
