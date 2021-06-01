@@ -13,6 +13,7 @@ const store = createStore({
         userId: localStorage.getItem('userId'),
         isLoggedIn: localStorage.getItem('loggedIn'),
         user:{
+            id: localStorage.getItem('userId'),
             userName: null,
             email: null,
             firstName: null,
@@ -27,12 +28,12 @@ const store = createStore({
         },
         userEmail: null,
         userPassword: null,
+        userFavorites: null,
         addedMemberPoints: null,
         loginAttemptMessage: null,
         destination: null,
         apiState: enums.init,
         countries: countries.data,
-
         // Booking States
         bookedRooms: [],
         bookingParams: null,
@@ -95,6 +96,7 @@ const store = createStore({
             state.nbrOfNights = payload;
         },
         setUser (state, payload) {
+            state.user.id = payload.Id
             state.user.userName = payload.userName;
             state.user.email = payload.email;
             state.user.firstName = payload.firstName;
@@ -111,6 +113,9 @@ const store = createStore({
         },
         setTotalPrice(state, payload){
             state.totalPrice = payload;
+        },
+        setUserFavorites(state, payload){
+            state.userFavorites = payload;
         }
    },
    getters: {
@@ -121,6 +126,13 @@ const store = createStore({
 
     // Functions that call mutations asynchronously. Called by using dispatch (instead of state) in component.
     actions:{
+        async getUserFavorites({commit}){
+            let response = await fetch('https://localhost:44323/api/User/favorites?userId=' + this.state.userId);
+            let json = await response.json();
+            commit('setUserFavorites', json);
+        },
+
+        
 
         async getAccomodations({ commit }) {
 
@@ -167,15 +179,14 @@ const store = createStore({
             });
         },
 
-        async updateMemberPoints({commit}){
-            let response = await fetch('https://localhost:44323/api/User/UpdateMemberPoints', { 
+        async updateMemberPoints(){
+                this.state.user.id = this.state.userId;
+
+                await fetch('https://localhost:44323/api/User/UpdateMemberPoints', { 
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(this.state.user)
             });
-            let json = await response.json();
-
-            commit('setUser', json);
         }
     }
 })

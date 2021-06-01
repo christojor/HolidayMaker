@@ -2,30 +2,46 @@
   <font-awesome-icon :icon="['fas', IconType]" size="lg" @click="ChangeIcon(); DeleteFavorite();" :class="{show:Toggle}" style="cursor:pointer;"/>
   <font-awesome-icon :icon="['far', IconType]" size="lg" @click="ChangeIcon(); SetFavorite();" :class="{show:!Toggle}" style="cursor:pointer;"/>
 </template>
-
-
 <script>
 
 export default {
 
-  created(){
+  mounted(){
+    this.GetUserFavorites();
   },
 
   data() {
     return {
       Toggle: true,
-      IconType: 'heart'
+      IconType: 'heart',
     }
   },
   props:{
     accomodationObject:{
       type: Object,
+    },
+  },
+
+  computed:{
+    UserFavorites(){
+      return this.$store.state.userFavorites;
     }
   },
+
   methods: {
     ChangeIcon() {
       this.Toggle = !this.Toggle
     },
+    GetUserFavorites(){
+        if(this.UserFavorites != null){
+           for(var i = 0; i < this.UserFavorites.length; i++){
+              if(this.accomodationObject.id == this.UserFavorites[i].id){
+                 this.Toggle = !this.Toggle;
+                }
+            }
+         }
+    },
+
     async SetFavorite(){
       let data = { userId: this.$store.state.userId, accomodationId: this.accomodationObject.id, groupName: 'lulxd' };
       let rawResponse = await fetch('https://localhost:44323/api/User/favorites', {

@@ -40,7 +40,7 @@ import { mapGetters } from 'vuex'
 
 export default ({
     props: {
-        accomodation: Object
+        accomodation: Object,
     },
     components:{
         FavoriteButton,
