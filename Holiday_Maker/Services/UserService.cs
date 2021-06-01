@@ -44,7 +44,19 @@ namespace Holiday_Maker.Services
             return true;
         }
 
+        public async Task<ActionResult<User>> UpdateMemberPoints(int id, int? memberPoints)
+        {
+            var getUser = await _userRepo.GetById(id);
+            if (getUser == null)
+            {
+                return NotFound();
+            }
+            getUser.MemberPoints = memberPoints;
 
+            _userRepo.Update(getUser);
+
+            return getUser;
+        }
 
         public async Task<ActionResult<IEnumerable<Accomodation>>> GetUserFavorites(int id)
         {
@@ -108,6 +120,7 @@ namespace Holiday_Maker.Services
         {
             if (user != null)
             {
+                user.MemberPoints = 100;
                 _userRepo.Insert(user);
                 return "User succesfully added!";
             }

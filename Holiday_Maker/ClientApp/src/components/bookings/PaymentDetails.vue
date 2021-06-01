@@ -114,10 +114,14 @@ export default {
   },
 
   props: {
-        makeBooking: {
-            type: Object,
-            required: true,
-        }
+      makeBooking: {
+        type: Object,
+        required: true,
+      },
+      roomPrices: {
+        type: Object,
+        required: true,
+      }
     },
 
     computed:{
@@ -128,6 +132,14 @@ export default {
         }
         return ""
       },
+      totalPoints(){
+        return this.roomPrices.reduce((sum, room) => {
+            return sum += room.price * this.nbrOfNights;
+        }, 0);
+      },
+      nbrOfNights(){
+        return this.$store.state.nbrOfNights
+      }
     },
 
   methods: {
@@ -140,6 +152,14 @@ export default {
       this.$store.dispatch("sendBooking");
 
       // Code here for displaying booking confirmation modal.
+
+      if(this.$store.state.user.memberTypeId == 1){
+        this.$store.commit("setMemberPoints", this.totalPoints);
+      }
+      else if(this.$store.state.user.memberTypeId == 2){
+        this.$store.commit("setMemberPoints", this.totalPoints * 1.25);
+      }
+      this.$store.dispatch("updateMemberPoints");
       },
 
     stripePaymentMethodHandler(result) {

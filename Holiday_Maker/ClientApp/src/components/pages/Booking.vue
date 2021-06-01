@@ -19,7 +19,7 @@
     <div class="flex flex-wrap overflow-hidden">
 
     <div class="my-1 px-1 w-full overflow-hidden">
-      <Rewards />
+      <Rewards :roomPrices="bookedRooms"/>
     </div>
 
     <div class="my-1 px-1 w-full overflow-hidden" v-if="this.isLoggedIn()">
@@ -53,7 +53,7 @@
   </div>
 
    <div class="my-1 px-1 w-full overflow-hidden">
-    <PaymentDetails :makeBooking="bookingDetails" />
+    <PaymentDetails :makeBooking="bookingDetails" :roomPrices="bookedRooms"/>
   </div>
 
 </div>
