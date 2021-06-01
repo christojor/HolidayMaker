@@ -146,7 +146,7 @@ export default {
 
   methods: {
     
-    sendBooking() {
+    async sendBooking() {
       this.$store.commit("setBooking", this.makeBooking);
 
       // Code here for waiting for payment response.
@@ -164,7 +164,7 @@ export default {
       this.$store.dispatch("updateMemberPoints");
       },
 
-    stripePaymentMethodHandler(result) {
+    async stripePaymentMethodHandler(result) {
       var self = this;
       console.log("Hello this is the payment method handler greeting you!");
       if (result.error) {
@@ -176,7 +176,7 @@ export default {
         
         console.log(result);
         this.$emit('emitToggle', this.toggleModal)
-        fetch("https://localhost:44323/api/Payment/Pay", {
+        await fetch("https://localhost:44323/api/Payment/Pay", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -210,14 +210,14 @@ export default {
       }
     },
 
-    handleStripeJsResult(result)
+    async handleStripeJsResult(result)
     {
       if(result.error){
         //Show error in payment form
       } else {
         //The card action has been handled
         //The paymentIntent can be confirmed again on the server
-        fetch("https://localhost:44323/api/Payment/Pay", {
+        await fetch("https://localhost:44323/api/Payment/Pay", {
           method: 'POST',
           headers: {'Content-Type': 'application/json' },
           body: JSON.stringify({ paymentIntentId: result.paymentIntent.id })
