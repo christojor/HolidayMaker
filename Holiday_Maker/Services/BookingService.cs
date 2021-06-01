@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Holiday_Maker.Helper;
 using Holiday_Maker.Models;
 using Holiday_Maker.Repository;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Holiday_Maker.Services
 {
