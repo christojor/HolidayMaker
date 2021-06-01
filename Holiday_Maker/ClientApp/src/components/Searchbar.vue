@@ -166,6 +166,10 @@ export default {
             if (this.bookingParams.travellersAdults == ''){
                 this.bookingParams.travellersAdults = 1
             }
+
+            if (this.bookingParams.travellersChildren == ''){
+                this.bookingParams.travellersChildren = 1
+            }
         },
 
         async search(e)
