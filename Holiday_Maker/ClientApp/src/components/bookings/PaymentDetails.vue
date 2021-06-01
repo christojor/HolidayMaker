@@ -74,6 +74,7 @@ export default {
     var stripe = Stripe(
       "pk_test_51IsjoPK0RxPPVgejwsizP9ghkzrEOEAho8VjGbz0Rtn2i31J5t5zr6NGp04eZD0ZHF5TwIzvCZf2XFmZR4syWqiY00ldbn6Luv"
     );
+    console.log(this.$store.state.user.firstName + " " + this.$store.state.user.lastName)
     var elements = stripe.elements();
     var style = {
       base: {
@@ -105,7 +106,7 @@ export default {
           card: cardElement,
           billing_details: {
             //Placeholder name
-            name: this.fullName,
+            name: self.$store.state.user.firstName + " " + self.$store.state.user.lastName,
           },
         })
         .then(self.stripePaymentMethodHandler);
@@ -156,6 +157,7 @@ export default {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             PaymentMethodId: result.paymentMethod.id,
+            totalPrice: this.$store.state.totalPrice,
           }),
         }).then(function (result) {
           //handle server response step 4

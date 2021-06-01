@@ -7,6 +7,7 @@ const store = createStore({
 
     // Properties
    state:{
+        totalPrice: 0,
         accomodations: [],
         filter: [],
         userId: localStorage.getItem('userId'),
@@ -103,7 +104,11 @@ const store = createStore({
             state.user.zipCode = payload.zipCode;
             state.user.memberTypeId = payload.memberTypeId;
             state.user.memberPoints = payload.memberPoints;
+            console.log("user email: " + email)
         },
+        setTotalPrice(state, payload){
+            state.totalPrice = payload;
+        }
    },
    getters: {
         filteredList(state){
