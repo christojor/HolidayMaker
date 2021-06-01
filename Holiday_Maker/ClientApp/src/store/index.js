@@ -105,7 +105,6 @@ const store = createStore({
             state.user.zipCode = payload.zipCode;
             state.user.memberTypeId = payload.memberTypeId;
             state.user.memberPoints = payload.memberPoints;
-            console.log("user email: " + email)
         },
         setMemberPoints (state, payload){
             state.user.memberPoints += payload;
