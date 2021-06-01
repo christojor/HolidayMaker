@@ -168,7 +168,7 @@ export default {
             }
 
             if (this.bookingParams.travellersChildren == ''){
-                this.bookingParams.travellersChildren = 1
+                this.bookingParams.travellersChildren = 0
             }
         },
 
