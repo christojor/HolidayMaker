@@ -44,9 +44,9 @@ namespace Holiday_Maker.Controllers
         }
 
         [HttpPost("register")]
-        public string PostRegister(User user)
+        public async Task<string> PostRegister(User user)
         {
-           return _userService.RegisterUser(user);
+           return await _userService.RegisterUser(user);
         }
 
 

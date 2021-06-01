@@ -119,7 +119,7 @@ namespace Holiday_Maker.Services
                 return "User successfully added!";
             }
 
-            return "Could not add the user!";
+            return "A user with this Email already exists! Try to login instead!";
         }
         internal async Task<LoginHelper> Login(string email, string password)
         {
