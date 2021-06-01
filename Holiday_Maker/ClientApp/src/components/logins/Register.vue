@@ -46,6 +46,14 @@
             </tr>
             </tbody>
         </table>
+        <div id="SuccessMessage" class="alert" style="display:none">
+             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+             <strong>Your account have been registered!</strong>
+        </div>
+        <div id="ErrorMessage" class="alert" style="display:none">
+             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+             <strong>A user with that email already exists!</strong>
+        </div>
         <button class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Register</button>
         
         <p style="text-align:left">Already have an account?</p>
@@ -73,6 +81,17 @@ export default {
         }
     },
     methods:{
+        showSuccess(){
+            var lol = document.getElementById("SuccessMessage");
+            lol.style.display = "block";
+        },
+        showError(){
+            var lol = document.getElementById("ErrorMessage");
+            lol.style.display = "block";
+
+        },
+
+
         async handleSubmit(){
             this.error = ''
 
@@ -101,6 +120,12 @@ export default {
             body: JSON.stringify(newUser)
             });
             let response = await rawResponse.json();
+
+            if(response){
+                this.showSuccess();
+            }else if(!response){
+                this.showError();
+            }
         }
     }
 }

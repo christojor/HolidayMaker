@@ -47,7 +47,7 @@ namespace Holiday_Maker.Controllers
 
         //Registers a new user, with a user object.
         [HttpPost("register")]
-        public async Task<string> PostRegister(User user)
+        public async Task<bool> PostRegister(User user)
         {
            return await _userService.RegisterUser(user);
         }

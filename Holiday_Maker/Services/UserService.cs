@@ -107,18 +107,21 @@ namespace Holiday_Maker.Services
         }
 
 
-        public async Task<string> RegisterUser(User user)
+        public async Task<bool> RegisterUser(User user)
         {
-            var checkUserList = await _userRepo.GetAll();
 
-            if (checkUserList.Any(checkUser => checkUser.Email != user.Email))
+            var checkUser = _userRepo.GetAll().Result.FirstOrDefault(u => u.Email.Equals(user.Email));
+
+
+            if (checkUser == null)
             {
-                user.MemberPoints = 100;
-                await _userRepo.Insert(user);
-                return "User successfully added!";
+                    user.MemberPoints = 100;
+                    await _userRepo.Insert(user);
+                    return true;
             }
+            
 
-            return "A user with this Email already exists! Try to login instead!";
+            return false;
         }
         internal async Task<LoginHelper> Login(string email, string password)
         {
