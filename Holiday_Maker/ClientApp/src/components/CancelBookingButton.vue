@@ -33,6 +33,7 @@ export default {
             })
             if(response)
             {
+                this.Toggle = true;
                 return "The booking have been cancelled!"
             } 
         },
