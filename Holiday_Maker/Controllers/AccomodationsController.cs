@@ -16,9 +16,6 @@ namespace Holiday_Maker.Controllers
     public class AccomodationsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly IGenericRepository<Accomodation> _accomodationRepo;
-        private readonly IGenericRepository<Room> _roomRepo;
-        private readonly IGenericRepository<RoomType> _roomTypeRepo;
 
         private readonly AccomodationService _accomodationService;
         private readonly RoomService _roomService;
@@ -26,11 +23,6 @@ namespace Holiday_Maker.Controllers
         public AccomodationsController(ApplicationDbContext context)
         {
             _context = context;
-
-            // Repos
-            _accomodationRepo = new GenericRepository<Accomodation>();
-            _roomRepo = new GenericRepository<Room>();
-            _roomTypeRepo = new GenericRepository<RoomType>();
 
             // Services
             _accomodationService = new AccomodationService();
