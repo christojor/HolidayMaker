@@ -212,35 +212,15 @@ h1 {
     background-color: #ffffff;
 }
 /*-----------------Theme Button---------------*/
-.theme-button{
-    border: 1px;
-    width: 200px;
-    border-radius: 7px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: 18px;
-    margin: 15px;
-    margin-bottom: 0;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid black;
-}
-.theme-button:focus{
-    outline: none;
-}
-.theme-item:hover{
-    background-color: #95D5B2;
-    cursor: pointer;
-}
 .content {
     right: 20vw;
     margin-right: 60px;
-    width: 200px;
+    width: 150px;
     text-align: center;
 }
 
 .contentMargin{
-    margin-right: 195px;
+    margin-right: 222.5px;
 }
 .content-link{
     font-size: 17px;
@@ -338,44 +318,40 @@ h1 {
 .myButton{
     border: 1px;
     border-radius: 7px;
-    font-family: inherit;
     font-size: 16px;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
     color: white;
     font-weight: bold;
-    margin-top: 10px;
-    display: block;
+    margin: 10px;
+    display: inline-block;
 }
 
 /*-------------MyBookings page--------------*/
 
 .header{
-    padding: 5px;
-    margin-left: 20vw;
-    width: 20vw;
-    height: fit-content;
-    min-height: 100%;
+    padding: 10px;
+    margin: 10px;
+    width: 190px;
+    height: 80%;
     display: inline-block;
-    margin: 1%;
-    vertical-align: top;
     border-radius: 7px;
     font-weight: bold;
     font-size: 20px;
+    text-align: center;
 }
 
 .headerElements{
-    padding-left: 16px;
+    padding: 7px;
 }
 
 .bookingElements{
-    padding-left: 20px;
-    text-align: right;
+    padding: 7px;
+    text-align: center;
 }
 
 .editButton{
-    padding-left:20px; 
-    padding-right:5px; 
+    width: 100%;
     font-weight: bold;
     text-align: center;
 }
