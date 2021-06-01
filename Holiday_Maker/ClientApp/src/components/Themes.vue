@@ -6,7 +6,7 @@
 
 <template>
 <div class="dropdown inline">
-    <button class="theme-button">
+    <button class="navbarThemesButton bg-green-2 hover:bg-green-500 py-3 rounded-full">
         <span>TRIP THEMES</span>
     </button>
     	<ul :class="{contentMargin:this.$store.state.isLoggedIn}" class="dropdown-content absolute hidden text-gray-700 pt-1 content">

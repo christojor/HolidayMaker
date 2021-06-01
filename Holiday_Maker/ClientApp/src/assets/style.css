@@ -376,7 +376,7 @@ h1 {
 
 .navbarMyProfileButton{
     margin-right: 15px;
-    width: 110px;
+    width: 140px;
     border: 1px;
     border-radius: 7px;
     font-family: inherit;
@@ -391,3 +391,21 @@ h1 {
 .navbarMyProfileButton:hover{
     color: white;
 }
+
+.navbarThemesButton{
+    margin-right: 15px;
+    width: 150px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.navbarThemesButton:hover{
+    color: white;
+}
+

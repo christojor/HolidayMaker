@@ -7,7 +7,7 @@
         
         <router-link to="/hotels" style="margin-right:20px">View hotels</router-link> -->
         <Themes/>
-        <router-link v-if="this.$store.state.isLoggedIn" to="/MyPage" class="navbarMyProfileButton bg-green-2 hover:bg-green-500 py-3 rounded-full">My Profile</router-link>
+        <router-link v-if="this.$store.state.isLoggedIn" to="/MyPage" class="navbarMyProfileButton bg-green-2 hover:bg-green-500 py-3 rounded-full">MY PROFILE</router-link>
         <router-link v-if="!this.$store.state.isLoggedIn" to="/Login" style="font-size: 17px">Log in</router-link>
         <!-- <router-link v-if="this.$store.state.isLoggedIn" to="#" style="font-size: 17px">My profile  |</router-link> -->
         <router-link v-if="this.$store.state.isLoggedIn" to="/Logout" style="font-size: 17px">Logout</router-link>
