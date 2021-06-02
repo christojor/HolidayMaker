@@ -1,19 +1,32 @@
 <template>
-    <h2 class="header bg-green-2" style="width:190px; padding-left:35px">My Bookings</h2>
-    <br><br>
+    <div class="container1" style="padding-top:10px">
+        <div class="bg-green-1 shadow-md" style=" width:100% ; padding-left:20px">
+            <h2 class="header bg-green-2">My Bookings</h2>
+            <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Profile</router-link>
+        </div>
+        
+        <div class="bg-green-2" style="width:98%; margin:1%; display:inline-block">
     <table>
         <tr class="bg-green-1">
             <th class="headerElements">Booking Id</th>
             <th class="headerElements">Accommodation</th>
-            <th class="headerElements">Number of adults</th>
-            <th class="headerElements">Number of children</th>
-            <th class="headerElements">Check in Date</th>
-            <th class="headerElements">Check out Date</th>
-            <th class="headerElements">Booking date</th>
-            <th class="headerElements">Payment date</th>
+            <th class="headerElements">Adults</th>
+            <th class="headerElements">Cildren</th>
+            <th class="headerElements">Check-in Date</th>
+            <th class="headerElements">Check-out Date</th>
+            <th class="headerElements">Booking Date</th>
+            <th class="headerElements">Payment Date</th>
             <th class="headerElements">Cancellation Date</th>
+            <th class="headerElements"></th>
         </tr>
-        <tr v-for="Booking in Bookings" :key="Booking.id">
+
+        <tr v-if="!Bookings.length">
+            <th class="bookingElements">
+                No Bookings Made
+            </th>
+        </tr>
+
+        <tr v-else v-for="Booking in Bookings" :key="Booking.id">
             <td class="bookingElements">{{Booking.id}}</td>
             <td class="bookingElements">{{Booking.accomodationId}}</td>
             <td class="bookingElements">{{Booking.nbrOfAdults}}</td>
@@ -26,11 +39,9 @@
             <td><button class="editButton">Edit</button></td>
             <td><CancelButton/></td>
         </tr>
-    </table>  
-    <!--<br>
-        <div class="container2 bg-green-1 shadow-md" style="height:70px; width:190px; padding-left:20px">
-            <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Profile</router-link>
-        </div>-->
+    </table> 
+        </div> 
+    </div>
 </template>
 
 

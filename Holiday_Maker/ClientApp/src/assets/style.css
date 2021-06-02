@@ -316,32 +316,28 @@ h1 {
 /*-------------MyBookings button--------------*/
 
 .myButton{
-    border: 1px;
     border-radius: 7px;
-    font-family: inherit;
     font-size: 16px;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
     color: white;
     font-weight: bold;
-    margin-top: 10px;
-    display: block;
+    margin: 10px;
+    display: inline-block;
 }
 
 /*-------------MyBookings page--------------*/
 
 .header{
-    padding: 5px;
-    margin-left: 20vw;
-    width: 20vw;
-    height: fit-content;
-    min-height: 100%;
+    padding: 10px;
+    margin: 10px;
+    width: 190px;
+    height: 80%;
     display: inline-block;
-    margin: 1%;
-    vertical-align: top;
     border-radius: 7px;
     font-weight: bold;
     font-size: 20px;
+    text-align: center;
 }
 
 .headerElements{
