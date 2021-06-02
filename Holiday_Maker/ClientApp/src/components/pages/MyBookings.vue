@@ -15,14 +15,14 @@
         </tr>
         <tr v-for="Booking in Bookings" :key="Booking.id">
             <td class="bookingElements">{{Booking.id}}</td>
-            <td class="bookingElements">Hotel</td>
-            <td class="bookingElements">1</td>
-            <td class="bookingElements">1</td>
-            <td class="bookingElements">Today</td>
-            <td class="bookingElements">Tomorrow</td>
-            <td class="bookingElements">Yesterday</td>
-            <td class="bookingElements">Yesterday</td>
-            <td class="bookingElements"></td>
+            <td class="bookingElements">{{Booking.accomodationId}}</td>
+            <td class="bookingElements">{{Booking.nbrOfAdults}}</td>
+            <td class="bookingElements">{{Booking.nbrOfChildren}}</td>
+            <td class="bookingElements">{{Booking.checkInDate}}</td>
+            <td class="bookingElements">{{Booking.checkOutDate}}</td>
+            <td class="bookingElements">{{Booking.bookingDate}}</td>
+            <td class="bookingElements">{{Booking.paymentDate}}</td>
+            <td class="bookingElements">{{Booking.cancellationDate}}</td>
             <td><button class="editButton">Edit</button></td>
             <td><CancelButton/></td>
         </tr>
