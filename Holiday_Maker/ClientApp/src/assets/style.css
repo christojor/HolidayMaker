@@ -231,6 +231,8 @@ h1 {
 .theme-item:hover{
     background-color: #95D5B2;
     cursor: pointer;
+    color: white;
+    font-weight: bold;
 }
 .content {
     right: 20vw;
@@ -413,5 +415,13 @@ h1 {
 
 .navbarThemesButton:hover{
     color: white;
+}
+
+.navbarThemesButton:focus{
+    outline: none;
+}
+
+.loginButton:focus{
+    outline: none;
 }
 

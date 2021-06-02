@@ -15,7 +15,7 @@
             <th class="headerElements">Credit card</th>
         </tr>
         <tr>
-            <td class="bookingElements">admin@expoodia.se</td>
+            <td class="bookingElements">User e-mail</td>
             <td class="bookingElements">Admin</td>
             <td class="bookingElements">Adminsson</td>
             <td class="bookingElements">Adminstreet 12</td>
@@ -33,5 +33,22 @@
         <router-link to="/MyBookings" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Bookings</router-link>
     </div>
 
-    
+    <div>
+        <article v-for="user in users" :key="user.id">
+            <h2>User name</h2>
+            <h2>{{ user.Username }}</h2>
+        </article>
+    </div>
+   
 </template>
+
+<script>
+export default {
+    computed:{
+        users(){
+            return this.$store.state.users
+        }
+    }
+}
+</script>
+
