@@ -28,7 +28,7 @@ namespace Holiday_Maker.Models
         public int? StarRating { get; set; }
         public string ImgSrc { get; set; }
         public string ThemeType { get; set; }
-        public decimal TotalRates { get; set; }
+        public int TotalRates { get; set; }
 
         public virtual AccomodationType AccomodationType { get; set; }
         public virtual ICollection<Amenity> Amenities { get; set; }

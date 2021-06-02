@@ -79,7 +79,7 @@ namespace Holiday_Maker.Models
 
                 entity.Property(e => e.ThemeType).HasMaxLength(100);
 
-                entity.Property(e => e.TotalRates).HasColumnType("decimal(10, 5)");
+                entity.Property(e => e.TotalRates).HasColumnType("int");
 
                 entity.Property(e => e.Zip)
                     .IsRequired()
