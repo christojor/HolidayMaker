@@ -13,8 +13,8 @@
             <th class="headerElements">Payment date</th>
             <th class="headerElements">Cancellation Date</th>
         </tr>
-        <tr>
-            <td class="bookingElements">1234</td>
+        <tr v-for="Booking in Bookings" :key="Booking.id">
+            <td class="bookingElements">{{Booking.id}}</td>
             <td class="bookingElements">Hotel</td>
             <td class="bookingElements">1</td>
             <td class="bookingElements">1</td>
@@ -40,11 +40,32 @@ import MyPage from '/src/components/pages/MyPage.vue'
 import CancelButton from '/src/components/CancelBookingButton.vue'
 
 export default {
+    
+    mounted(){
+        this.SetUserBookings();
+    },
     components:{
         Booking,
         MyPage,
         CancelButton
     },
+
+    computed:{
+        GetUserId(){
+            return this.$store.state.userId;
+        },
+        Bookings(){
+            return this.$store.state.userBookings;
+        }
+    },
+
+    methods:{
+        async SetUserBookings(){
+            let response = await fetch('https://localhost:44323/api/Booking?userId=' + this.GetUserId);
+            let bookings = await response.json();
+            this.$store.commit('setUserBookings', bookings);
+        }
+    }
 }
 </script>
 
