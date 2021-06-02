@@ -1,5 +1,5 @@
 <template>
-    <div class="container1" style="padding-top:10px">
+    <div :key="componentkey" class="container1" style="padding-top:10px" >
         <div class="bg-green-1 shadow-md" style=" width:100% ; padding-left:20px">
             <h2 class="header bg-green-2">My Bookings</h2>
             <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Profile</router-link>
@@ -18,6 +18,7 @@
             <th class="headerElements">Payment Date</th>
             <th class="headerElements">Cancellation Date</th>
             <th class="headerElements"></th>
+            <th class="headerElements"></th>
         </tr>
 
         <tr v-if="!Bookings.length">
@@ -27,17 +28,18 @@
         </tr>
 
         <tr v-else v-for="Booking in Bookings" :key="Booking.id">
-            <td class="bookingElements">{{Booking.id}}</td>
-            <td class="bookingElements">{{Booking.accomodationId}}</td>
-            <td class="bookingElements">{{Booking.nbrOfAdults}}</td>
-            <td class="bookingElements">{{Booking.nbrOfChildren}}</td>
-            <td class="bookingElements">{{Booking.checkInDate}}</td>
-            <td class="bookingElements">{{Booking.checkOutDate}}</td>
-            <td class="bookingElements">{{Booking.bookingDate}}</td>
-            <td class="bookingElements">{{Booking.paymentDate}}</td>
-            <td class="bookingElements">{{Booking.cancellationDate}}</td>
-            <td><button class="editButton">Edit</button></td>
-            <td><CancelButton/></td>
+                <td class="bookingElements">{{Booking.id}}</td>
+                <td class="bookingElements">{{Booking.accomodationId}}</td>
+                <td class="bookingElements">{{Booking.nbrOfAdults}}</td>
+                <td class="bookingElements">{{Booking.nbrOfChildren}}</td>
+                <td class="bookingElements">{{Booking.checkInDate}}</td>
+                <td class="bookingElements">{{Booking.checkOutDate}}</td>
+                <td class="bookingElements">{{Booking.bookingDate}}</td>
+                <td class="bookingElements">{{Booking.paymentDate}}</td>
+                <td v-if="Booking.cancellationDate != null" style="background: #FFCCCB" class="bookingElements">{{Booking.cancellationDate}}</td>
+                <td v-if="Booking.cancellationDate == null" class="bookingElements">{{Booking.cancellationDate}}</td>
+                <td><button v-if="Booking.cancellationDate == null" class="editButton">Edit</button></td>
+            <td><CancelButton v-if="Booking.cancellationDate == null" :bookingId="Booking.id"/></td>
         </tr>
     </table> 
         </div> 
@@ -52,6 +54,12 @@ import CancelButton from '/src/components/CancelBookingButton.vue'
 
 export default {
     
+    data(){
+        return{
+            componentkey: 0,
+        };
+    },
+
     mounted(){
         this.SetUserBookings();
     },
@@ -71,10 +79,15 @@ export default {
     },
 
     methods:{
+        forceRerender(){
+            this.componentkey += 1;
+        },
+
         async SetUserBookings(){
             let response = await fetch('https://localhost:44323/api/Booking?userId=' + this.GetUserId);
             let bookings = await response.json();
             this.$store.commit('setUserBookings', bookings);
+            this.forceRerender();
         }
     }
 }
