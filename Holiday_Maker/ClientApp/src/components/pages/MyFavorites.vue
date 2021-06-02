@@ -26,7 +26,7 @@
             <h2 style="cursor: pointer" class=" hover:text-green-800 hover:underline" @click="goToAccommodation(closestCityId)">{{closestCity}}</h2>
             <br/>
             
-            <h1 v-if="FavList != null">Closest to city: </h1>
+            <h1 v-if="FavList != null">Closest to beach: </h1>
             <h2 style="cursor: pointer" class=" hover:text-green-800 hover:underline" @click="goToAccommodation(closestBeachId)">{{closestBeach}}</h2>
         </div>
 
