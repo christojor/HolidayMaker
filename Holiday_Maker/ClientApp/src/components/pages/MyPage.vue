@@ -3,7 +3,7 @@
         <div class="bg-green-1 shadow-md" style="width:100%; border-radius:7px">
             <h2 class="header bg-green-2">My Profile</h2>
             <router-link to="/MyBookings" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Bookings</router-link>
-            <router-link to="/MyFavorites" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Favorites</router-link>
+            <router-link @load="GetUserFavorites" to="/MyFavorites" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Favorites</router-link>
          </div>
         
         <div class="bg-green-2" style="width:48%; margin:1%; display:inline-block">
@@ -105,7 +105,10 @@ export default {
             }else if(this.GetUser.memberTypeId == 2){
                 return 'Premium';
             }
-        }
+        },
+        GetUserFavorites(){
+            this.$store.dispatch('getUserFavorites');
+        },
     }
 }
 </script>
