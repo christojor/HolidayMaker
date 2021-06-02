@@ -13,8 +13,8 @@
             <th class="headerElements">Payment date</th>
             <th class="headerElements">Cancellation Date</th>
         </tr>
-        <tr :v-for="booking in testbooking" :key="booking">
-            <td class="bookingElements">{{ booking.id }}</td>
+        <tr v-for="Booking in Bookings" :key="Booking.id">
+            <td class="bookingElements">{{Booking.id}}</td>
             <td class="bookingElements">Hotel</td>
             <td class="bookingElements">1</td>
             <td class="bookingElements">1</td>
@@ -41,16 +41,8 @@ import MyPage from '/src/components/pages/MyPage.vue'
 export default {
     
     mounted(){
-        this.GetBookingsByUser();
-        console.log(this.GetBookingsByUser());
+        this.SetUserBookings();
     },
-
-    data(){
-        return {
-            testbooking: this.GetBookingsByUser(),
-        }
-    },
-
     components:{
         Booking,
         MyPage,
@@ -61,15 +53,15 @@ export default {
             return this.$store.state.userId;
         },
         Bookings(){
-            return this.GetBookingsByUser();
+            return this.$store.state.userBookings;
         }
     },
 
     methods:{
-        async GetBookingsByUser(){
-            var response = await fetch('https://localhost:44323/api/Booking?userId=' + this.GetUserId);
+        async SetUserBookings(){
+            let response = await fetch('https://localhost:44323/api/Booking?userId=' + this.GetUserId);
             let bookings = await response.json();
-            return bookings;
+            this.$store.commit('setUserBookings', bookings);
         }
     }
 }

@@ -35,6 +35,8 @@ const store = createStore({
         apiState: enums.init,
         countries: countries.data,
         // Booking States
+
+        userBookings: [],
         bookedRooms: [],
         bookingParams: null,
         nbrOfNights: 1,
@@ -116,6 +118,9 @@ const store = createStore({
         },
         setUserFavorites(state, payload){
             state.userFavorites = payload;
+        },
+        setUserBookings(state, payload){
+            state.userBookings = payload;
         }
    },
    getters: {
