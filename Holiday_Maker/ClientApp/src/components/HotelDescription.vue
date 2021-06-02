@@ -28,9 +28,15 @@
         
             <FavoriteButton :accomodationObject="accomodation"/>
         </div>
-        <p style="font-size:14px;">From</p>
-        <h2 style="font-size:20px;">{{lowestRoom(accomodation.id)}}€</h2>
-        <p style="font-size:12px;">per night</p>
+        <div v-if="lowestRoom(accomodation.id) == Infinity">
+            <p style="font-size:14px;">Go to hotel</p>
+            <p style="font-size:12px;">To see prices</p>
+        </div>
+        <div v-else>
+            <p style="font-size:14px;">From</p>
+            <h2 style="font-size:20px;">{{lowestRoom(accomodation.id)}}€</h2>
+            <p style="font-size:12px;">per night</p>
+        </div>
     </div>
 </template>
 

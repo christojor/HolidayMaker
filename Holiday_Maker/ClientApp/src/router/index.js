@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Hotels from '/src/components/pages/Hotels.vue'
 import Accommodation from '/src/components/pages/Accommodation.vue'
 import NotFound from '/src/components/pages/NotFound.vue'
-import Favorite from '/src/components/FavoriteButton.vue'
+import MyFavorites from '/src/components/pages/MyFavorites.vue'
 import Searchbar from '/src/components/Searchbar.vue'
 import LoginRegister from '/src/components/pages/LoginRegister.vue'
 import Logout from '/src/components/logins/Logout.vue'
@@ -39,9 +39,9 @@ const routes = [
         component: NotFound,
     },
     {
-        path: '/Favorite',
-        name: 'Favorite',
-        component: Favorite,
+        path: '/MyFavorites',
+        name: 'MyFavorites',
+        component: MyFavorites,
     },
     {
         path: '/Login',

@@ -1,9 +1,10 @@
 <template>
     <div class="container1" style="padding-top:10px">
-        <div class="bg-green-1 shadow-md" style=" width:100% ; padding-left:20px">
+        <div class="bg-green-1 shadow-md" style="width:100%; border-radius:7px">
             <h2 class="header bg-green-2">My Profile</h2>
             <router-link to="/MyBookings" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Bookings</router-link>
-        </div>
+            <router-link to="/MyFavorites" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Favorites</router-link>
+         </div>
         
         <div class="bg-green-2" style="width:48%; margin:1%; display:inline-block">
             <table style="width:100%">
