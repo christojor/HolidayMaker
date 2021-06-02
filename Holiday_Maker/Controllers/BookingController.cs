@@ -35,6 +35,13 @@ namespace Holiday_Maker.Controllers
         {
             return await _bookingService.CancelBooking(id);
         }
-        
+
+        [HttpGet]
+        public async Task<IEnumerable<Booking>> GetBookingsById(int userId)
+        {
+            return await _bookingService.GetBookingsById(userId);
+        }
+
+
     }
 }

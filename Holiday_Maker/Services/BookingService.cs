@@ -73,5 +73,18 @@ namespace Holiday_Maker.Services
             return false;
         }
 
+        public async Task<IEnumerable<Booking>> GetBookingsById(int userId)
+        {
+            var bookings = await _bookingRepository.GetAll();
+            var bookingsByUser = new List<Booking>();
+            foreach (var booking in bookings)
+            {
+                if (booking.UserId == userId)
+                {
+                    bookingsByUser.Add(booking);
+                }
+            }
+            return bookingsByUser;
+        } 
     }
 }
