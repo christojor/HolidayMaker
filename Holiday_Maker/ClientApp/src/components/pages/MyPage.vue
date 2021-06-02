@@ -66,16 +66,6 @@
                     <td class="bookingElements">{{this.$store.state.user.memberPoints}}</td>
                 </tr>
             </table>
-            <table style="width:100%">
-                <tr class="bg-green-1">
-                    <th class="headerElements">E-mail</th>
-                </tr>
-                <tr>
-                    <td class="bookingElements">{{this.$store.state.user.email}}</td>
-                </tr>
-            </table>
-
-            <br/>
 
             <table style="width:100%">
                 <tr class="bg-green-1">
@@ -83,6 +73,16 @@
                 </tr>
                 <tr>
                     <td class="bookingElements">You Poor</td>
+                </tr>
+            </table>
+
+            <br/>
+            
+            <table style="width:100%">
+                <tr>
+                    <th class="bg-green-1">
+                        <button class="headerElements editButton">Remove Account</button>
+                    </th>
                 </tr>
             </table>
         </div>
