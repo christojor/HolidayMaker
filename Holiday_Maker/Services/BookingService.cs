@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Holiday_Maker.Helper;
 using Holiday_Maker.Models;
@@ -70,5 +71,18 @@ namespace Holiday_Maker.Services
             return false;
         }
 
+        public async Task<IEnumerable<Booking>> GetBookingsById(int userId)
+        {
+            var bookings = await _bookingRepository.GetAll();
+            var bookingsByUser = new List<Booking>();
+            foreach (var booking in bookings)
+            {
+                if (booking.UserId == userId)
+                {
+                    bookingsByUser.Add(booking);
+                }
+            }
+            return bookingsByUser;
+        } 
     }
 }

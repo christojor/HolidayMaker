@@ -21,7 +21,7 @@ export default {
             Toggle: false,
         }
     },
-
+    
     props:{
         bookingId: null
     },
@@ -34,7 +34,7 @@ export default {
             if(response)
             {
                 this.Toggle = true;
-                return "The booking have been cancelled!"
+                this.$router.go();
             } 
         },
         approveCancellation(){
@@ -43,7 +43,7 @@ export default {
             }else{
                 this.Toggle = true;
             }
-        }
+        },
     },
 }
 </script>
