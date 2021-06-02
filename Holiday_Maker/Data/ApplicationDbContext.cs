@@ -35,6 +35,7 @@ namespace Holiday_Maker.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Data Source=holidaymakerz.database.windows.net;Initial Catalog=HolidayMaker;User ID=storapappa;Password=grupp4123!!;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
@@ -62,7 +63,7 @@ namespace Holiday_Maker.Models
                     .IsRequired()
                     .HasMaxLength(500);
 
-                entity.Property(e => e.GuestRating).HasColumnType("decimal(10, 1)");
+                entity.Property(e => e.GuestRating).HasColumnType("decimal(10, 5)");
 
                 entity.Property(e => e.ImgSrc)
                     .IsRequired()
@@ -77,6 +78,8 @@ namespace Holiday_Maker.Models
                     .HasMaxLength(255);
 
                 entity.Property(e => e.ThemeType).HasMaxLength(100);
+
+                entity.Property(e => e.TotalRates).HasColumnType("decimal(10, 5)");
 
                 entity.Property(e => e.Zip)
                     .IsRequired()
