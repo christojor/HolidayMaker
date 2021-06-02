@@ -24,7 +24,7 @@
           <b>Extras at extra price: </b>
           <div class="rounded-t-md bg-green-1 search-div shadow-xl w-2/8">
             <div class="text-green-500">
-               <div class="selectBox" @click="toggledisplay" @mouseover="sortExtras">
+               <div class="selectBox" v-bind="Extras" @click="toggledisplay">
                     <select>
                         <option>Select Extras</option>
                     </select>
@@ -35,17 +35,20 @@
                 id="checkboxes"
                 @click="handleSubmit"
               >
+
                 <div
                   v-for="Extra in Extras"
                   :key="Extra"
                   class="flex items-center"
                 >
+                  <label :for="Extra.Extra">&nbsp;{{ Extra.Extra }}, price: {{Extra.Price}}</label>
                   <input
                     type="checkbox"
                     :id="Extra.Extra"
                     v-model="Extra.Checked"
+                  
                   />
-                  <label :for="Extra.Extra">&nbsp;{{ Extra.Extra }}, price: {{Extra.Price}}</label>
+                  
                 </div>
               </div>
             </div>
@@ -54,8 +57,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <extrasPrices class="extra"></extrasPrices> -->
 </template>
 
 
@@ -65,7 +66,16 @@ export default {
   data() {
     return {
       toggle: true,
-      Extras: [],
+      Extras: [
+        { Extra: "Self-Catering", Checked: false, Price: 5},
+        { Extra: "Half-Board",  Checked: false, Price: 10},
+        { Extra: "Full-board",  Checked: false, Price: 15},
+        { Extra: "Extra bed",  Checked: false, Price: 5},
+        { Extra: "Crib", Checked: false, Price: 5},
+        { Extra: "Self-Catering", Checked: false, Price: 20},
+        { Extra: "Breakfast", Checked: false, Price: 5}
+      ],
+      // Rooms: []
     };
   },
   props: {
@@ -82,11 +92,11 @@ export default {
     toggledisplay(){
       this.toggle=!this.toggle
     },
-    handleSubmit(){
-      let filter = {
-        PropExtras: this.Extras
-      }
-    },
+    // handleSubmit(){
+    //   let filter = {
+    //     PropExtras: this.Extras
+    //   }
+    // },
     sortExtras(){
       this.Extras = [];
 
@@ -112,7 +122,17 @@ export default {
         this.Extras.push({ Extra: "Breakfast", Checked: false, Price: 5})
       }
 
-    }
+    },
+    // createExtrasPerRoomList(){
+    //   this.Rooms=[];
+      
+    //   foreach(Room in Rooms)
+    //   Extras = [];
+    //     foreach(Extra in Extras)
+    //     extrasPerRoomList=this.sortExtras(extrasList)
+        
+    // } 
+    
   }
 };
 </script>
