@@ -134,8 +134,12 @@ namespace Holiday_Maker.Services
         }
         public IQueryable<Accomodation> SearchAccomodationByCountryAndCity(string searchQuery, DateTime checkInDate, DateTime checkOutDate)
         {
+            // Get all accommodations and a list of available rooms within chosen date span
+
             var accomodations = _accomodationRepo.GetAllRaw();
             var availableRoomIds = _roomService.GetAvailbleRoomIds(checkInDate, checkOutDate);
+
+            // Check if city or country and nest all related objects accordingly based on destination
 
             if (accomodations.Any(s => s.Country.Equals(searchQuery)))
             {
@@ -152,6 +156,8 @@ namespace Holiday_Maker.Services
             {
                 accomodations = null;
             }
+
+            // Check if any rooms are unavailable at the destination and remove them from the list
 
             foreach(var accomodation in accomodations)
             {
