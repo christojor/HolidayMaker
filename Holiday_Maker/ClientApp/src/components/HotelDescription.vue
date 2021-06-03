@@ -1,10 +1,10 @@
 <template>
     
     <div class="hotel-item-desc-left"  @click="goToAccommodation(accomodation.id)">
-        <h1 style="font-size:20px; height: 25px; overflow: hidden">{{accomodation.name}}</h1>
+        <h1 style="font-size:20px; height: 30px; overflow: hidden">{{accomodation.name}}</h1>
         <h2 style="font-size:16px; display:inline;">{{accomodation.country}}</h2>
         <h2 style="font-size:14px; display:inline;">, {{accomodation.city}}</h2>
-        <p style="height: 100px; overflow: hidden">{{accomodation.description}}</p>
+        <p style="height: 100px; margin-top: 5px; overflow: hidden; border-top: 1px solid green">{{accomodation.description}}</p>
 
         <div v-if="accomodation.guestRating <= 2">
             <h2 style="font-size:16px;"><font-awesome-icon :icon="['fas', 'poop']" size="lg" style="color: #52B788;"/> {{accomodation.guestRating}}</h2>
@@ -28,9 +28,15 @@
         
             <FavoriteButton :accomodationObject="accomodation"/>
         </div>
-        <p style="font-size:14px;">From</p>
-        <h2 style="font-size:20px;">{{lowestRoom(accomodation.id)}}€</h2>
-        <p style="font-size:12px;">per night</p>
+        <div v-if="lowestRoom(accomodation.id) == Infinity">
+            <p style="font-size:14px;">Go to hotel</p>
+            <p style="font-size:12px;">To see prices</p>
+        </div>
+        <div v-else>
+            <p style="font-size:14px;">From</p>
+            <h2 style="font-size:20px;">{{lowestRoom(accomodation.id)}}€</h2>
+            <p style="font-size:12px;">per night</p>
+        </div>
     </div>
 </template>
 
@@ -40,7 +46,7 @@ import { mapGetters } from 'vuex'
 
 export default ({
     props: {
-        accomodation: Object
+        accomodation: Object,
     },
     components:{
         FavoriteButton,

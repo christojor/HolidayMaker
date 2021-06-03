@@ -13,6 +13,7 @@ export default {
             localStorage.clear();
             this.$store.state.isLoggedIn = false;
             this.$store.state.userId = 0;
+            this.$store.state.userFavorites = null;
         }
     }
 }

@@ -1,4 +1,5 @@
 <template>
+    <PaymentModal :toggleModal="toggleModal" @emitToggle="toggleModalMethod"/>
     <div v-for="accomodation in accomodations" :key="accomodation">
             <div v-if="id == accomodation.id">
 
@@ -19,7 +20,7 @@
     <div class="flex flex-wrap overflow-hidden">
 
     <div class="my-1 px-1 w-full overflow-hidden">
-      <Rewards />
+      <Rewards :roomPrices="bookedRooms"/>
     </div>
 
     <div class="my-1 px-1 w-full overflow-hidden" v-if="this.isLoggedIn()">
@@ -53,7 +54,7 @@
   </div>
 
    <div class="my-1 px-1 w-full overflow-hidden">
-    <PaymentDetails :makeBooking="bookingDetails" />
+    <PaymentDetails :makeBooking="bookingDetails" @emitToggle="toggleModalMethod" :roomPrices="bookedRooms"/>
   </div>
 
 </div>
@@ -78,6 +79,7 @@ import PaymentDetails from '/src/components/bookings/PaymentDetails.vue'
 import Rewards from '/src/components/bookings/Rewards.vue'
 import RoomDetails from '/src/components/bookings/RoomDetails.vue'
 import PersonalDetails from '/src/components/bookings/PersonalDetails.vue'
+import PaymentModal from '/src/components/bookings/elements/PaymentModal.vue'
 import mixin from '/src/mixins.js'
 
 export default {
@@ -99,7 +101,7 @@ export default {
         this.roomDetailsObjects.roomInfo = this.bookedRooms;
 
         // Check if user is logged in, but user state is null then get user
-        if (this.isLoggedIn && this.$store.state.user == null){
+        if (this.isLoggedIn == true && this.$store.state.user == null){
           this.$store.dispatch("getUser");
         }
     },
@@ -128,6 +130,7 @@ export default {
               },
               bookedRoom: []
             },
+            toggleModal: false
         }
     },
 
@@ -140,6 +143,7 @@ export default {
         Rewards,
         RoomDetails,
         PersonalDetails,
+        PaymentModal,
     },
 
     computed: {
@@ -173,10 +177,14 @@ export default {
             return this.$store.state.user;
         },
     },
-    methods:{
+    methods: {
       setBookedRooms(payload){
-        this.$store.commit("setBookedRooms", payload)
+        this.$store.commit("setBookedRooms", payload);
       },
-    },
+      toggleModalMethod(toggleModal){
+        this.toggleModal = toggleModal
+      },
+      
+    }
   }
 </script>

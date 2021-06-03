@@ -20,13 +20,8 @@
             </tr>
             </tbody>
         </table>
-        <!-----Only for testing------------->
-        <p>UserId: {{userId}}</p>
-        <p>loginAttempt: {{isLoggedIn}}</p>
-        <p>Login message: {{loginMessage}}</p>        
-        <button type="submit" class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Log in</button>
-        
-        <!---------------------------------->
+        <button type="submit" class="loginButton mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Log in</button>
+
         <p style="text-align:left">Don't have an account?</p>
     </form>
 </template>
@@ -93,8 +88,10 @@ export default {
                 localStorage.setItem('userId', this.userId);
                 localStorage.setItem('loggedIn', this.isLoggedIn);
                 console.log(json.isLoggedIn);
-                this.$store.dispatch("setUserData");
+                this.$store.dispatch("getUser");
+                this.$store.dispatch('getUserFavorites');
                 this.$router.push('/');
+
             }
 
            if(this.isLoggedIn == false){

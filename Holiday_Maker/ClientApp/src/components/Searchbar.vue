@@ -3,7 +3,7 @@
         <div class="search-dest-box">
             <form>
                 <!-- Begin input fields -->
-                <div class="flex flex-row flex-wrap gap-3 mt-8">
+                <div class="flex flex-row flex-wrap gap-3 mt-8 op70">
         <div class="rounded-t-md bg-green-1 search-div shadow-xl w-4/8">
         
     <!-- Search Destination -->
@@ -67,7 +67,7 @@
         
     <!-- Accommodation and Flight Tabs-->
         <div>
-<ul class="flex items-stretch">
+<ul class="flex items-stretch op70">
 <li class="w-1/2">
     <a class="flex border rounded-b-lg border-green-500 rounded py-2 px-4 bg-green-1 text-green-500 font-bold" href="#">
         <font-awesome-icon :icon="['fas', 'home']" class="mt-1 mr-4 float-left" style="color: #52B788;"/>
@@ -104,8 +104,8 @@
                 </div>
                 
                 <!-- Search Button -->
-                <div style="text-align:center">
-            <input type="submit" value="Search" @click="search" class="mt-6 w-2/6 bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full shadow-xl"/>
+                <div class="op70" style="text-align:center">
+            <input type="submit" value="SEARCH" @click="search" class="mt-6 w-2/6 bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full shadow-xl"/>
         </div>
             </form>
         </div>
@@ -121,7 +121,6 @@ export default {
 
     mounted(){
         this.setApiState(enums.init)
-        console.log("ApiStateMounted:" + this.$store.state.apiState)
     },
 
     data()
@@ -166,6 +165,10 @@ export default {
             
             if (this.bookingParams.travellersAdults == ''){
                 this.bookingParams.travellersAdults = 1
+            }
+
+            if (this.bookingParams.travellersChildren == ''){
+                this.bookingParams.travellersChildren = 0
             }
         },
 

@@ -34,6 +34,9 @@ namespace Holiday_Maker.Controllers
 
             [JsonProperty("payment_intent_id")]
             public string PaymentIntentId { get; set; }
+
+            [JsonProperty("total_price")]
+            public int TotalPrice { get; set; }
         }
 
         [HttpPost("Pay")]
@@ -49,7 +52,7 @@ namespace Holiday_Maker.Controllers
                     var createOptions = new PaymentIntentCreateOptions
                     {
                         PaymentMethod = request.PaymentMethodId,
-                        Amount = 250,
+                        Amount = request.TotalPrice * 10,
                         Currency = "usd",
                         ConfirmationMethod = "manual",
                         Confirm = true,

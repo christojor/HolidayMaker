@@ -29,6 +29,7 @@ namespace Holiday_Maker.Models
         public virtual DbSet<RoomType> RoomTypes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserFavorite> UserFavorites { get; set; }
+        public virtual DbSet<UserRating> UserRatings { get; set; }
         public virtual DbSet<WifiQuality> WifiQualities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -63,7 +64,7 @@ namespace Holiday_Maker.Models
                     .IsRequired()
                     .HasMaxLength(500);
 
-                entity.Property(e => e.GuestRating).HasColumnType("decimal(10, 1)");
+                entity.Property(e => e.GuestRating).HasColumnType("decimal(10, 5)");
 
                 entity.Property(e => e.ImgSrc)
                     .IsRequired()
@@ -227,6 +228,27 @@ namespace Holiday_Maker.Models
                 entity.ToTable("UserFavorite");
 
                 entity.Property(e => e.GroupName).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<UserRating>(entity =>
+            {
+                entity.ToTable("UserRating");
+
+                entity.Property(e => e.AccomodationId).HasColumnName("AccomodationID");
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.Accomodation)
+                    .WithMany(p => p.UserRatings)
+                    .HasForeignKey(d => d.AccomodationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserRating_Accomodation");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserRatings)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserRating_User1");
             });
 
             modelBuilder.Entity<WifiQuality>(entity =>

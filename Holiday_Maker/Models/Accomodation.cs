@@ -12,6 +12,7 @@ namespace Holiday_Maker.Models
             Amenities = new HashSet<Amenity>();
             Extras = new HashSet<Extra>();
             Rooms = new HashSet<Room>();
+            UserRatings = new HashSet<UserRating>();
         }
 
         public int Id { get; set; }
@@ -33,5 +34,6 @@ namespace Holiday_Maker.Models
         public virtual ICollection<Amenity> Amenities { get; set; }
         public virtual ICollection<Extra> Extras { get; set; }
         public virtual ICollection<Room> Rooms { get; set; }
+        public virtual ICollection<UserRating> UserRatings { get; set; }
     }
 }

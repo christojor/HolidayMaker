@@ -16,20 +16,21 @@ namespace Holiday_Maker.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IGenericRepository<UserFavorite> _uRepo;
-        private UserService _userService;
+        private readonly UserService _userService;
 
         public UserController()
         {
-            _uRepo = new GenericRepository<UserFavorite>();
             _userService = new UserService();
         }
-        // GET: api/<UserController>
+
+        //Gets a user with a specific user id.
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             return await _userService.GetUserById(id);
         }
+
+        //Gets a user favorite with a specific Id.
         [HttpGet("favorites")]
         public async Task<ActionResult<IEnumerable<Accomodation>>> GetFavorites(int userId)
         {
@@ -37,35 +38,45 @@ namespace Holiday_Maker.Controllers
             return await _userService.GetUserFavorites(userId);
         }
         
+        //Login method to login the user. Takes a user object.
         [HttpPost("login")]
         public async Task<LoginHelper> Login(User user)
         {
             return await _userService.Login(user.Email, user.Password);
         }
 
+        //Registers a new user, with a user object.
         [HttpPost("register")]
-        public string PostRegister(User user)
+        public async Task<bool> PostRegister(User user)
         {
-           return _userService.RegisterUser(user);
+           return await _userService.RegisterUser(user);
         }
 
-
+        //Adds a user favorite to the Db, with a favorite object.
         [HttpPost("favorites")]
         public async void PostFavorite(UserFavorite userFavorite)
         {
             await _userService.AddUserFavorite(userFavorite);
         }
-        // DELETE api/<UserController>/5
+
+        //Deletes a user favorite..
         [HttpDelete("favorites")]
         public async void Delete(UserFavorite userFavorite)
         {
             await _userService.RemoveUserFavorite(userFavorite);
         }
 
+        //Deletes user from db with a specific userId..
         [HttpDelete("{id}")]
         public async Task<bool> RemoveUser(int id)
         {
             return await _userService.RemoveUser(id);
+        }
+
+        [HttpPost("UpdateMemberPoints")]
+        public async Task<ActionResult<User>> UpdateMemberPoints(User user)
+        {
+            return await _userService.UpdateMemberPoints(user.Id, user.MemberPoints);
         }
     }
 }

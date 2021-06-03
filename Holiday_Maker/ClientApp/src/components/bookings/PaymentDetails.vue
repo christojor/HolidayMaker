@@ -25,7 +25,7 @@
   <div class="flex flex-wrap overflow-hidden bg-green-1 mt-2">
     
     <div class="w-full overflow-hidden" v-if="this.isLoggedIn()">
-      <button type="submit" class="bg-green-500 w-1/2 hover:bg-green-700 text-white font-bold py-2 px-2 mt-2 rounded-full" @click="sendBooking()">
+      <button type="submit" class="bg-green-500 w-1/2 hover:bg-green-700 text-white font-bold py-2 px-2 mt-2 rounded-full">
       Buy Now
       </button>
     </div>
@@ -74,6 +74,7 @@ export default {
     var stripe = Stripe(
       "pk_test_51IsjoPK0RxPPVgejwsizP9ghkzrEOEAho8VjGbz0Rtn2i31J5t5zr6NGp04eZD0ZHF5TwIzvCZf2XFmZR4syWqiY00ldbn6Luv"
     );
+    console.log(this.$store.state.user.firstName + " " + this.$store.state.user.lastName)
     var elements = stripe.elements();
     var style = {
       base: {
@@ -105,7 +106,8 @@ export default {
           card: cardElement,
           billing_details: {
             //Placeholder name
-            name: this.fullName,
+            name: self.$store.state.user.firstName + " " + self.$store.state.user.lastName,
+            email: self.$store.state.user.email,
           },
         })
         .then(self.stripePaymentMethodHandler);
@@ -114,10 +116,14 @@ export default {
   },
 
   props: {
-        makeBooking: {
-            type: Object,
-            required: true,
-        }
+      makeBooking: {
+        type: Object,
+        required: true,
+      },
+      roomPrices: {
+        type: Object,
+        required: true,
+      }
     },
 
     computed:{
@@ -128,11 +134,19 @@ export default {
         }
         return ""
       },
+      totalPoints(){
+        return this.roomPrices.reduce((sum, room) => {
+            return sum += room.price * this.nbrOfNights;
+        }, 0);
+      },
+      nbrOfNights(){
+        return this.$store.state.nbrOfNights
+      }
     },
 
   methods: {
     
-    sendBooking() {
+    async sendBooking() {
       this.$store.commit("setBooking", this.makeBooking);
 
       // Code here for waiting for payment response.
@@ -140,9 +154,17 @@ export default {
       this.$store.dispatch("sendBooking");
 
       // Code here for displaying booking confirmation modal.
+
+      if(this.$store.state.user.memberTypeId == 1){
+        this.$store.commit("setMemberPoints", this.totalPoints);
+      }
+      else if(this.$store.state.user.memberTypeId == 2){
+        this.$store.commit("setMemberPoints", this.totalPoints * 1.25);
+      }
+      this.$store.dispatch("updateMemberPoints");
       },
 
-    stripePaymentMethodHandler(result) {
+    async stripePaymentMethodHandler(result) {
       var self = this;
       console.log("Hello this is the payment method handler greeting you!");
       if (result.error) {
@@ -150,12 +172,16 @@ export default {
         console.log("Error firing");
       } else {
         //otherwise send paymentMethod.id to your server
+        this.sendBooking()
+        
         console.log(result);
-        fetch("https://localhost:44323/api/Payment/Pay", {
+        this.$emit('emitToggle', this.toggleModal)
+        await fetch("https://localhost:44323/api/Payment/Pay", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             PaymentMethodId: result.paymentMethod.id,
+            totalPrice: this.$store.state.totalPrice,
           }),
         }).then(function (result) {
           //handle server response step 4
@@ -184,14 +210,14 @@ export default {
       }
     },
 
-    handleStripeJsResult(result)
+    async handleStripeJsResult(result)
     {
       if(result.error){
         //Show error in payment form
       } else {
         //The card action has been handled
         //The paymentIntent can be confirmed again on the server
-        fetch("https://localhost:44323/api/Payment/Pay", {
+        await fetch("https://localhost:44323/api/Payment/Pay", {
           method: 'POST',
           headers: {'Content-Type': 'application/json' },
           body: JSON.stringify({ paymentIntentId: result.paymentIntent.id })
@@ -211,6 +237,11 @@ export default {
       lol.style.display = "block";
     }
   },
+  data(){
+    return{
+      toggleModal: true
+    }
+  }
 };
 
 </script>

@@ -21,8 +21,8 @@
                 <h1>Check-out: {{ booking.checkOut }}</h1>
                 <h1>Staying {{ nbrOfNights }} nights</h1>
             </div>
+            
         </div>
-
     </div>
 </template>
 
@@ -30,6 +30,13 @@
 import DeleteButton from '/src/components/bookings/elements/deleteBtn.vue'
 
 export default {
+
+    props: {
+        roomDetails: {
+            type: Object,
+            required: true,
+        }
+    },
 
     components:{
         DeleteButton
@@ -41,18 +48,10 @@ export default {
         }
     },
 
-    props: {
-        roomDetails: {
-            type: Object,
-            required: true,
-        }
-    },
-
     methods: {
         incrementIndex: function (index) {
             return index + 1
         },
-
         deleteRoom: function(index){
             this.roomDetails.roomInfo.splice(index, 1);
         },
@@ -60,6 +59,7 @@ export default {
             this.$store.commit("setNbrOfNights", payload);
         },
     },
+
     computed: {
         nbrOfNights(){
             var date1 = new Date(this.booking.checkIn);

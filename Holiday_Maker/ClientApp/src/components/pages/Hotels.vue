@@ -1,6 +1,6 @@
 <template>
     <div class="container1">
-
+        
         <div class="container2 shadow-md bg-green-1">
             <Name @filter-search="filterName"/>
             <StarRating @filter-search="filterStars"/>
@@ -216,8 +216,8 @@ export default{
                 PropName: '',
                 PropStars: 1,
                 PropRating: 0,
-                PropMinPrice: 50,
-                PropMaxPrice: 2000,
+                PropMinPrice: 0,
+                PropMaxPrice: 750,
                 PropExtras: [],
                 PropAmenities: [],
                 PropRooms: [],

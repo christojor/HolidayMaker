@@ -15,18 +15,18 @@ export function getByMinPrice(list, filter) {
     if(filter.PropMinPrice == 0){ 
         return list
     }
-    else if(filter.PropMinPrice == 2000){ 
-        return list.filter(item => item.rooms.filter(item => item.price > 2000).length > 0) 
+    else if(filter.PropMinPrice == 750){ 
+        return list.filter(item => item.rooms.filter(item => item.price > 750).length > 0) 
     }
     return list.filter(item => item.rooms.filter(item => item.price >= filter.PropMinPrice).length > 0)
 } 
 export function getByMaxPrice(list, filter) {
     if (filter.PropMaxPrice == null) return list
     if(filter.PropMaxPrice == 0){ 
-        return null 
+        return list.filter(item => item.rooms.filter(item => item.price == 0).length > 0) 
     }
-    else if(filter.PropMaxPrice == 2000){ 
-        return list.filter(item => item.rooms.filter(item => item.price > 0).length > 0) 
+    else if(filter.PropMaxPrice == 750){ 
+        return list.filter(item => item.rooms.filter(item => item.price >= 0).length > 0) 
     }
     return list.filter(item => item.rooms.filter(item => item.price <= filter.PropMaxPrice).length > 0)
 }
@@ -123,13 +123,11 @@ export function getByRooms(list, filter) {
     return list.filter(item => returnlist.filter(r => r.accomodationId == item.id).length > 0)
 }
 export function getByBeach(list, filter) {
-    if (!filter.DistanceBeach) return list
-    if (filter.DistanceBeach == 0 || filter.DistanceBeach == 5000) return list
+    if (!filter.DistanceBeach || filter.DistanceBeach == 0 || filter.DistanceBeach == 5000) return list
     return list.filter(item => item.distanceToBeach <= filter.DistanceBeach)
 } 
 export function getByCity(list, filter) {
-    if (!filter.DistanceCity) return list
-    if (filter.DistanceCity == 0 || filter.DistanceCity == 5000) return list
+    if (!filter.DistanceCity || filter.DistanceCity == 0 || filter.DistanceCity == 5000) return list
     return list.filter(item => item.distanceToCenter <= filter.DistanceCity)
 } 
 export function getByWifi(list, filter) {

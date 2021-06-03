@@ -1,9 +1,7 @@
 <template>
-<b-navbar>
   <div class="flex flex-wrap overflow-hidden">
   <div class="w-1/2 overflow-hidden">
 <ul class="flex">
-  <!-- <div class="text-green-500 hover:text-green-800 hover:underline"> -->
   <li class="mr-6">
     <div ref="overview">
     <a style=cursor:pointer class="overview-button text-green-500 hover:text-green-800 hover:underline" @click="scrollPageTo('overview')">Overview</a>
@@ -24,7 +22,6 @@
     <a style=cursor:pointer class="rooms-button text-green-500 hover:text-green-800 hover:underline" @click="scrollPageTo('rooms')">Available Rooms</a>
     </div>
   </li>
-  <!-- </div> -->
 </ul>
 </div>
 <div class="w-1/2 overflow-hidden">
@@ -33,7 +30,6 @@
   </button>
   </div>
   </div>
-</b-navbar>
 </template>
 
 <script>

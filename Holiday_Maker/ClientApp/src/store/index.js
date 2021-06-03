@@ -7,11 +7,13 @@ const store = createStore({
 
     // Properties
    state:{
+        totalPrice: 0,
         accomodations: [],
         filter: [],
         userId: localStorage.getItem('userId'),
         isLoggedIn: localStorage.getItem('loggedIn'),
         user:{
+            id: localStorage.getItem('userId'),
             userName: null,
             email: null,
             firstName: null,
@@ -26,12 +28,15 @@ const store = createStore({
         },
         userEmail: null,
         userPassword: null,
+        userFavorites: null,
+        addedMemberPoints: null,
         loginAttemptMessage: null,
         destination: null,
         apiState: enums.init,
         countries: countries.data,
-
         // Booking States
+
+        userBookings: [],
         bookedRooms: [],
         bookingParams: null,
         nbrOfNights: 1,
@@ -93,6 +98,7 @@ const store = createStore({
             state.nbrOfNights = payload;
         },
         setUser (state, payload) {
+            state.user.id = payload.Id
             state.user.userName = payload.userName;
             state.user.email = payload.email;
             state.user.firstName = payload.firstName;
@@ -104,6 +110,18 @@ const store = createStore({
             state.user.memberTypeId = payload.memberTypeId;
             state.user.memberPoints = payload.memberPoints;
         },
+        setMemberPoints (state, payload){
+            state.user.memberPoints += payload;
+        },
+        setTotalPrice(state, payload){
+            state.totalPrice = payload;
+        },
+        setUserFavorites(state, payload){
+            state.userFavorites = payload;
+        },
+        setUserBookings(state, payload){
+            state.userBookings = payload;
+        }
    },
    getters: {
         filteredList(state){
@@ -113,12 +131,20 @@ const store = createStore({
 
     // Functions that call mutations asynchronously. Called by using dispatch (instead of state) in component.
     actions:{
+        async getUserFavorites({commit}){
+            let response = await fetch('https://localhost:44323/api/User/favorites?userId=' + this.state.userId);
+            let json = await response.json();
+            commit('setUserFavorites', json);
+        },
+
+        
 
         async getAccomodations({ commit }) {
 
             let response = await fetch('https://localhost:44323/api/accomodations');
             let json = await response.json();
 
+            sessionStorage.setItem('accomodations', JSON.stringify(json))
             commit('getAccomodationsData', json);
         },
 
@@ -129,14 +155,21 @@ const store = createStore({
             if(response.status != (204))
             {
                 let json = await response.json();
+
+                sessionStorage.setItem('accomodations', JSON.stringify(json))
                 commit('updateAccomodations', json);
             }
             else {
+                sessionStorage.clear()
                 commit('updateAccomodations', null);
             }
         },
 
-        async setUserData({commit}){
+        // This method fetches a user with an API GET. Name should be getUser. The mutation sets the data.
+        // Name change also broke my code, so I changed it back. /CJ
+        // Fuck you, eat shit. Best regards, GR
+        // XOXOXO. Love you too. /CJ
+        async getUser({commit}){
             let response = await fetch('https://localhost:44323/api/User/' + this.state.userId)
             let json = await response.json();
 
@@ -149,7 +182,17 @@ const store = createStore({
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(this.state.bookingObject)
             });
-          }
+        },
+
+        async updateMemberPoints(){
+                this.state.user.id = this.state.userId;
+
+                await fetch('https://localhost:44323/api/User/UpdateMemberPoints', { 
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.state.user)
+            });
+        }
     }
 })
 

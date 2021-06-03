@@ -10,42 +10,50 @@
             <tbody>
             <tr>
                 <td>First name:</td>
-                <td><input type="text" class="form-input" id="Name" v-model="FirstName"></td>
+                <td><input required type="text" class="form-input" id="Name" v-model="FirstName"></td>
             </tr>
             <tr>
                 <td>Last name:</td>
-                <td><input type="text" class="form-input" id="Name" v-model="LastName"></td>
+                <td><input required type="text" class="form-input" id="Name" v-model="LastName"></td>
             </tr>
             <tr>
                 <td>Email:</td>
-                <td><input type="text" class="form-input" id="Email" v-model="Email"></td>
+                <td><input required type="text" class="form-input" id="Email" v-model="Email"></td>
             </tr>
             <tr>
                 <td>Address:</td>
-                <td><input type="text" class="form-input" id="Address" v-model="StreetAddress"></td>
+                <td><input required type="text" class="form-input" id="Address" v-model="StreetAddress"></td>
             </tr>
             <tr>
                 <td>ZipCode:</td>
-                <td><input type="text" class="form-input" id="ZipCode" v-model="ZipCode"></td>
+                <td><input required type="text" class="form-input" id="ZipCode" v-model="ZipCode"></td>
             </tr>
             <tr>
-                <td>Town:</td>
-                <td><input type="text" class="form-input" id="Town" v-model="City"></td>
+                <td>City:</td>
+                <td><input required type="text" class="form-input" id="Town" v-model="City"></td>
             </tr>
             <tr>
                 <td>Country:</td>
-                <td><input type="text" class="form-input" id="Country" v-model="Country"></td>
+                <td><input required type="text" class="form-input" id="Country" v-model="Country"></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type="password" class="form-input" id="Password" v-model="Pwd"></td>
+                <td><input required type="password" class="form-input" id="Password" v-model="Pwd"></td>
             </tr>
             <tr>
                 <td>Repeat password:</td>
-                <td><input type="password" class="form-input" id="Password2" v-model="Pwd2"></td>
+                <td><input required type="password" class="form-input" id="Password2" v-model="Pwd2"></td>
             </tr>
             </tbody>
         </table>
+        <div id="SuccessMessage" class="alert" style="display:none">
+             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+             <strong>Your account have been registered!</strong>
+        </div>
+        <div id="ErrorMessage" class="alert" style="display:none">
+             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+             <strong>A user with that email already exists!</strong>
+        </div>
         <button class="mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Register</button>
         
         <p style="text-align:left">Already have an account?</p>
@@ -73,6 +81,17 @@ export default {
         }
     },
     methods:{
+        showSuccess(){
+            var lol = document.getElementById("SuccessMessage");
+            lol.style.display = "block";
+        },
+        showError(){
+            var lol = document.getElementById("ErrorMessage");
+            lol.style.display = "block";
+
+        },
+
+
         async handleSubmit(){
             this.error = ''
 
@@ -101,6 +120,12 @@ export default {
             body: JSON.stringify(newUser)
             });
             let response = await rawResponse.json();
+
+            if(response){
+                this.showSuccess();
+            }else if(!response){
+                this.showError();
+            }
         }
     }
 }

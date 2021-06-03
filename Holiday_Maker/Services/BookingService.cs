@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Holiday_Maker.Helper;
 using Holiday_Maker.Models;
 using Holiday_Maker.Repository;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Holiday_Maker.Services
 {
@@ -58,5 +56,33 @@ namespace Holiday_Maker.Services
 
             return true;
         }
+
+
+        public async Task<bool> CancelBooking(int id)
+        {
+            var booking = await _bookingRepository.GetById(id);
+            if (booking != null)
+            {
+                booking.CancellationDate = DateTime.Now;
+                await _bookingRepository.Update(booking);
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<IEnumerable<Booking>> GetBookingsById(int userId)
+        {
+            var bookings = await _bookingRepository.GetAll();
+            var bookingsByUser = new List<Booking>();
+            foreach (var booking in bookings)
+            {
+                if (booking.UserId == userId)
+                {
+                    bookingsByUser.Add(booking);
+                }
+            }
+            return bookingsByUser;
+        } 
     }
 }

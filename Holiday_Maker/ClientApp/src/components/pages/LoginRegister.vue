@@ -18,12 +18,14 @@
 import Login from '/src/components/logins/Login.vue'
 import Register from '/src/components/logins/Register.vue'
 import Info from '/src/components/logins/Info.vue'
+import MyPage from '/src/components/pages/MyPage.vue'
 
 export default({
     components:{
         Login,
         Info,
         Register,
+        MyPage,
     },
     data(){
         return{

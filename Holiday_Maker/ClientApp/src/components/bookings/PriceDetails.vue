@@ -35,14 +35,18 @@ export default {
             return sum += room.price;
         }, 0);
     },
-    totalPrice(){
+      totalPrice(){
         return this.roomPrices.reduce((sum, room) => {
             return sum += room.price * this.nbrOfNights;
         }, 0);
+        
     },
     totalPriceInclTax(){
+      var totalPrice = 0;
         return this.roomPrices.reduce((sum, room) => {
-            return sum += (room.price * this.nbrOfNights) * 1.2;
+            totalPrice += (room.price * this.nbrOfNights) * 1.2;
+            this.$store.commit("setTotalPrice", totalPrice);
+            return totalPrice;
         }, 0);
     },
     priceTax(){

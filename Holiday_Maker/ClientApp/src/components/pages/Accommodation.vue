@@ -1,4 +1,5 @@
 <template>
+
   <div v-for="accomodation in accomodations" :key="accomodation">
     <div v-if="id == accomodation.id">
       <div class="flex flex-wrap overflow-hidden mt-3">
@@ -10,7 +11,7 @@
         <div class="w-4/6 overflow-hidden shadow-md rounded-md divide-y-2 divide-black bg-green-1">
 
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full">
-            <router-link to="/hotels" style=cursor:pointer class="overview-button text-green-500 hover:text-green-800 hover:underline">Back to list</router-link>
+            <router-link to="/hotels" style=cursor:pointer class="overview-button ml-2 text-green-500 hover:text-green-800 hover:underline">Back to list</router-link>
           </div>
 
           <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
@@ -32,15 +33,11 @@
           <div class="flex flex-wrap overflow-hidden xl:my-1 xl:px-1 xl:w-full divide-x divide-black">
 
             <div class="w-1/2 overflow-hidden p-2">
-
-            <Amenities :amenities="accomodation.amenities" />
-             
+              <Amenities :amenities="accomodation.amenities" />  
             </div>
-            
-            <div class="w-1/2 overflow-hidden p-2">
-            
-            <Extras :extras="accomodation.extras" />
 
+            <div class="w-1/2 overflow-hidden p-2">
+              <Extras :extras="accomodation.extras" />
             </div>
         </div>
         <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
@@ -50,7 +47,6 @@
             </button>
           </div>
         </div>
-
         <div class="w-1/6 overflow-hidden">
           <!-- Column Content -->
         </div>
@@ -58,7 +54,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 
@@ -71,36 +66,47 @@ import Rating from "/src/components/details/Rating.vue"
 import Rooms from "/src/components/details/Rooms.vue"
 
 export default {
-    props: ["id"],
+  
+  props: ["id"],
+  
+  components: { 
+    Extras,
+    Amenities,
+    Description,
+    Gallery,
+    Navbar,
+    Rating,
+    Rooms,
+  },
 
-    computed: {
+  mounted(){
+    if(this.$store.state.bookedRooms.length <= 1){
+      this.setBookedRooms([])
+    }
+  },
+  
+  computed: {   
     accomodations() {
       return this.$store.state.accomodations;
     },
   },
 
-components: { 
-Extras,
-Amenities,
-Description,
-Gallery,
-Navbar,
-Rating,
-Rooms,
-  },
   methods:{
     goToBooking(accomodationId) {
       if (this.$store.state.bookedRooms.length)
       {
-            this.$router.push({
-                name: "Booking",
-                params: { id: accomodationId },
-            });
+        this.$router.push({
+          name: "Booking",
+          params: { id: accomodationId },
+        });
       }
-      else{
+      else {
         window.alert('You must choose a room before proceeding to payment.')
-      }
-        },
-  }
+        }
+      },
+      setBookedRooms(payload) {
+            this.$store.commit("setBookedRooms", payload);
+      },
+    }
 }
 </script>
