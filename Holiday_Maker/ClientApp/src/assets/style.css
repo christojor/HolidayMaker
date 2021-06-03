@@ -1,6 +1,9 @@
 body{
     height: 100%;
-    background-color: rgb(235, 229, 229);
+    background-image: url('src/assets/images/palm.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 h2{
     font-weight: bold;
@@ -217,6 +220,7 @@ h1 {
     margin-right: 60px;
     width: 200px;
     text-align: center;
+    z-index: 1000000;
 }
 
 .contentMargin{
@@ -244,7 +248,7 @@ h1 {
 .search-dest-box{
     background-image: url('src/assets/images/sky.jpg');
     background-size: 100vw 500px;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     padding: 10px;
     height: 500px;
 }
@@ -405,12 +409,4 @@ h1 {
 
 .op90 {
     opacity: 90%;
-}
-
-.mypage-bg{
-    background-image: url('src/assets/images/palm.jpg');
-    background-size: 100vw 500px;
-    border: 1px solid black;
-    padding: 10px;
-    height: 500px;
 }

@@ -131,7 +131,7 @@ export default {
             });
         },
         SortListNames(){
-            console.log(this.UserFavorites)
+            console.log(this.UserFavorites) 
         }
     },
     computed:{

@@ -11,7 +11,7 @@
   <!-- Begin Content Div -->
 
   <div class="w-4/6 overflow-hidden">
-  <h2 class="text-green-6 mb-2" style="font-size: 40px;">Booking Summary</h2>
+  <h2 class="text-green-6 mb-2" style="font-size: 40px; font-weight: 500;text-shadow: -3px 3px 2px white, 3px -3px 3px white">Booking Summary</h2>
     <div class="flex flex-wrap overflow-hiddenshadow-md rounded-md">
 
   <div class="w-1/2 overflow-hidden">
