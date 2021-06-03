@@ -17,6 +17,8 @@ namespace Holiday_Maker.Services
         private readonly IGenericRepository<Extra> _extraRepo = null;
         private readonly IGenericRepository<AccomodationType> _accomodationTypeRepo = null;
         private readonly IGenericRepository<WifiQuality> _wifiQualityRepo = null;
+        private readonly IGenericRepository<UserRating> _userRatingRepo = null;
+
 
         public AccomodationService()
         {
@@ -27,6 +29,7 @@ namespace Holiday_Maker.Services
             _extraRepo = new GenericRepository<Extra>();
             _accomodationTypeRepo = new GenericRepository<AccomodationType>();
             _wifiQualityRepo = new GenericRepository<WifiQuality>();
+            _userRatingRepo = new GenericRepository<UserRating>();
         }
 
         public async Task<IEnumerable<Accomodation>> NestedAccomodations()
@@ -37,6 +40,7 @@ namespace Holiday_Maker.Services
             var amenityList = await _amenityRepo.GetAll();
             var extrasList = await _extraRepo.GetAll();
             var wifiQualities = await _wifiQualityRepo.GetAll();
+            var userRating = await _userRatingRepo.GetAll();
 
             foreach (var amenity in amenityList)
             {
@@ -53,6 +57,18 @@ namespace Holiday_Maker.Services
             {
                 var amenities = amenityList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
                 var extras = extrasList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
+                var rating = userRating.Where(a => a.AccomodationId == accommodation.Id);
+
+                var totalRating = 0;
+
+                foreach (var rate in rating)
+                {
+                    totalRating += rate.Rating;
+                }
+
+                totalRating = totalRating / rating.Count();
+
+                accommodation.GuestRating = totalRating;
 
                 var rooms = roomList.Where(r => r.AccomodationId == accommodation.Id);
 
@@ -64,6 +80,7 @@ namespace Holiday_Maker.Services
                     room.RoomType = roomTypes.FirstOrDefault(rt => rt.Id == room.RoomTypeId);
                     accommodation.Rooms.Add(room);
                 }
+
             }
 
             return accommodationList;

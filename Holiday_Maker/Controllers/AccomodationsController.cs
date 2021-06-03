@@ -44,6 +44,7 @@ namespace Holiday_Maker.Controllers
             }
         }
 
+
         // GET: api/Accomodations/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Accomodation>> GetAccomodation(int id)
@@ -99,6 +100,8 @@ namespace Holiday_Maker.Controllers
 
             return CreatedAtAction("GetAccomodation", new { id = accomodation.Id }, accomodation);
         }
+
+
 
         // DELETE: api/Accomodations/5
         [HttpDelete("{id}")]

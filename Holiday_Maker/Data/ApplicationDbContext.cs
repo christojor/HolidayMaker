@@ -80,8 +80,6 @@ namespace Holiday_Maker.Models
 
                 entity.Property(e => e.ThemeType).HasMaxLength(100);
 
-                entity.Property(e => e.TotalRates).HasDefaultValueSql("((0.0))");
-
                 entity.Property(e => e.Zip)
                     .IsRequired()
                     .HasMaxLength(15);
