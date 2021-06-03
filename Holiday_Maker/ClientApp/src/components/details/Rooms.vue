@@ -24,9 +24,9 @@
           <b>Extras at extra price: </b>
           <div class="rounded-t-md bg-green-1 search-div shadow-xl w-2/8">
             <div class="text-green-500">
-               <div v-for="Extra in Extras" :key="Extra.id">
-                 <input type="checkbox" id="{{Extra.id}}" :value="Extra.Name" v-model="sortExtras">
-                 <label for="{{Extra.Name}}">{{Extra.Name}}</label>
+               <div style="text-align:left;margin-left:10px" v-for="Extra in Extras" :key="Extra">
+                 <input type="checkbox" style="margin-right:10px" id="{{Extra.Name}}" :value="Extra.Checked">
+                 <label for="{{Extra.Name}}">{{Extra.Name}} {{"+"}} {{Extra.Price}} {{Extra.Currency}}</label>
                </div>
             </div>
           </div>
@@ -40,20 +40,25 @@
 <script>
 
 export default {
+  mounted(){
+    this.sortExtras();
+  },
+
   data() {
     return {
       // toggle: true,
       Extras: [
-        { Name: "Self-Catering", Checked: false, Price: 5},
-        { Name: "Half-Board",  Checked: false, Price: 10},
-        { Name: "Full-board",  Checked: false, Price: 15},
-        { Name: "Extra bed",  Checked: false, Price: 5},
-        { Name: "Crib", Checked: false, Price: 5},
-        { Name: "Self-Catering", Checked: false, Price: 20},
-        { Name: "Breakfast", Checked: false, Price: 5}
+        { Name: "Self-Catering", Checked: false, Price: 5, Currency:"€"},
+        { Name: "Half-Board",  Checked: false, Price: 10, Currency:"€"},
+        { Name: "Full-board",  Checked: false, Price: 15, Currency:"€"},
+        { Name: "Extra bed",  Checked: false, Price: 5, Currency:"€"},
+        { Name: "Crib", Checked: false, Price: 5, Currency:"€"},
+        { Name: "Self-Catering", Checked: false, Price: 20, Currency:"€"},
+        { Name: "Breakfast", Checked: false, Price: 5, Currency:"€"}
       ],
     };
   },
+
   props: {
     rooms: {
       type: Object,
@@ -81,77 +86,28 @@ export default {
       this.Extras = [];
 
       if(this.extrasList[0].selfCatering){
-        this.Extras.push({ Extra: "Self-Catering", Checked: false, Price: 5})
+        this.Extras.push({ Name: "Self-Catering", Checked: false, Price: 5, Currency: "€"})
       }
       if(this.extrasList[0].halfBoard){
-        this.Extras.push({ Extra: "Half-Board", Checked: false, Price: 10})
+        this.Extras.push({ Name: "Half-Board", Checked: false, Price: 10, Currency: "€"})
       }
       if(this.extrasList[0].fullBoard){
-        this.Extras.push({ Extra: "Full-board", Checked: false, Price: 15})
+        this.Extras.push({ Name: "Full-board", Checked: false, Price: 15, Currency: "€"})
       }
       if(this.extrasList[0].extraBed){
-        this.Extras.push({ Extra: "Extra bed", Checked: false, Price: 5})
+        this.Extras.push({ Name: "Extra bed", Checked: false, Price: 5, Currency: "€"})
       }
       if(this.extrasList[0].crib){
-        this.Extras.push({ Extra: "Crib", Checked: false, Price: 5})
+        this.Extras.push({ Name: "Crib", Checked: false, Price: 5, Currency: "€"})
       }
       if(this.extrasList[0].allInclusive){
-        this.Extras.push({ Extra: "Self-Catering", Checked: false, Price: 20})
+        this.Extras.push({ Name: "Self-Catering", Checked: false, Price: 20, Currency: "€"})
       }
       if(this.extrasList[0].breakfast){
-        this.Extras.push({ Extra: "Breakfast", Checked: false, Price: 5})
+        this.Extras.push({ Name: "Breakfast", Checked: false, Price: 5, Currency: "€"})
       }
 
     },
-
-    // createExtrasPerRoom(){
-    //   extras= new Array() [
-    //     { Name: "Self-Catering", Checked: false, Price: 5},
-    //     { Name: "Half-Board",  Checked: false, Price: 10},
-    //     { Name: "Full-board",  Checked: false, Price: 15},
-    //     { Name: "Extra bed",  Checked: false, Price: 5},
-    //     { Name: "Crib", Checked: false, Price: 5},
-    //     { Name: "Self-Catering", Checked: false, Price: 20},
-    //     { Name: "Breakfast", Checked: false, Price: 5}
-    //   ],
-    //   rooms=new Array() [
-    //     {Room: room.id}
-    //   ],
-    //   extrasPerRoom=new Array(extras, rooms);
-        
-    //   for(i=0; i<extrasPerRoom.lenght; i++)
-    //   {
-    //     for (j=0;j<this.extrasPerRoom[i].length;j++)
-    //     {
-    //       extrasAvailable=extrasPerRoom[i][j][0];
-    //       console.log("hej")
-
-    //      this.selected = [];
-
-    //      if(this.extrasAvailable[0].selfCatering){
-    //     this.selected.push({ Extra: "Self-Catering", Checked: false, Price: 5})
-    //      }
-    //      if(this.extrasAvailable[0].halfBoard){
-    //     this.selected.push({ Extra: "Half-Board", Checked: false, Price: 10})
-    //   }
-    //   if(this.extrasAvailable[0].fullBoard){
-    //     this.selected.push({ Extra: "Full-board", Checked: false, Price: 15})
-    //   }
-    //   if(this.extrasAvailable[0].extraBed){
-    //     this.selected.push({ Extra: "Extra bed", Checked: false, Price: 5})
-    //   }
-    //   if(this.extrasAvailable[0].crib){
-    //     this.selected.push({ Extra: "Crib", Checked: false, Price: 5})
-    //   }
-    //   if(this.extrasAvailable[0].allInclusive){
-    //     this.selected.push({ Extra: "Self-Catering", Checked: false, Price: 20})
-    //   }
-    //   if(this.extrasAvailable[0].breakfast){
-    //     this.selected.push({ Extra: "Breakfast", Checked: false, Price: 5})
-    //   }
-    //     }
-    //   }
-    // }
   }
 };
 </script>
