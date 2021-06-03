@@ -145,7 +145,7 @@ const store = createStore({
 
         async getQueriedDestinations({commit}){
 
-            let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination)
+            let response = await fetch('https://localhost:44323/api/Accomodations/search?destination='+ this.state.destination + '&checkInDate=' + this.state.bookingParams.checkIn + '&checkOutDate=' + this.state.bookingParams.checkOut)
 
             if(response.status != (204))
             {

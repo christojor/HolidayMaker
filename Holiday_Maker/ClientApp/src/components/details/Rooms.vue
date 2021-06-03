@@ -1,4 +1,5 @@
 <template>
+<div v-if="roomAvailable">
 <b>AVAILABLE ROOMS</b>
 <div v-for="room in rooms" :key="room">
 <div class="flex flex-wrap overflow-hidden border-black border-2 p-1 m-1">
@@ -27,6 +28,23 @@
     </div>
 </div>
 </div>
+</div>
+
+<div v-else class="flex flex-wrap overflow-hidden">
+
+  <div class="w-1/3 overflow-hidden">
+    <!-- Column Content -->
+  </div>
+
+  <div class="w-1/3 overflow-hidden">
+    <img src="/src/assets/images/fullyBooked.png" alt="fullybooked">
+  </div>
+
+  <div class="w-1/3 overflow-hidden">
+    <!-- Column Content -->
+  </div>
+
+</div>
     
 </template>
 
@@ -39,6 +57,22 @@ export default {
       required: true,
     }
   },
+  data(){
+    return{
+      image: "./assets/images/fullyBooked.png",
+    }
+  },
+
+  computed:{
+    roomAvailable(){
+     if (this.rooms.length){
+       return true;
+      }
+       else {
+         return false;
+       }
+     }
+    },
   
   methods: {
     addToBooking(room) {
