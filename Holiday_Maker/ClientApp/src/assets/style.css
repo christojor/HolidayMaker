@@ -1,6 +1,6 @@
 body{
     height: 100%;
-    background-image: url('src/assets/images/palm.jpg');
+    background-image: url('src/assets/images/wing.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -246,9 +246,7 @@ h1 {
     flex: 1;
 }
 .search-dest-box{
-    background-image: url('src/assets/images/sky.jpg');
     background-size: 100vw 500px;
-    border-bottom: 1px solid black;
     padding: 10px;
     height: 500px;
 }
@@ -391,6 +389,22 @@ h1 {
     display: inline-block;
 }
 
+.themes-drop{
+    width: 185px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 20px;
+    padding: 5px;
+    text-align: center;
+    margin-top: 10px;
+    display: inline-block;
+    font-weight: bold;
+}    
+
+.themes-drop:hover{
+    color: white;    
+}
+
 .navbarThemesButton:hover{
     color: white;
 }
@@ -405,6 +419,10 @@ h1 {
 
 .op70 {
     opacity: 70%;
+}
+
+.op80 {
+    opacity: 80%;
 }
 
 .op90 {

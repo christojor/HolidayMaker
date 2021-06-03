@@ -6,7 +6,7 @@
             <router-link to="/MyFavorites" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Favorites</router-link>
         </div>
         
-        <div class="bg-green-2" style="width:98%; margin:1%; display:inline-block">
+        <div class="bg-green-2 op80" style="width:98%; margin:1%; display:inline-block">
     <table>
         <tr class="bg-green-1">
             <th class="headerElements">Booking Id</th>

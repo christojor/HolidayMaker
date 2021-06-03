@@ -6,7 +6,7 @@
             <router-link @load="GetUserFavorites" to="/MyFavorites" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Favorites</router-link>
         </div>
         
-        <div class="bg-green-2 op90" style="width:48%; margin:1%; display:inline-block">
+        <div class="bg-green-2 op80" style="width:48%; margin:1%; display:inline-block">
             <table style="width:100%">
                 <tr class="bg-green-1">
                     <th class="headerElements">First name</th>
@@ -55,7 +55,7 @@
             </table>
         </div>
 
-        <div class="bg-green-2 op90" style="width:48%; margin:1%; display:inline-block">
+        <div class="bg-green-2 op80" style="width:48%; margin:1%; display:inline-block">
             <table style="width:100%">
                 <tr class="bg-green-1">
                     <th class="headerElements">Member Type</th>

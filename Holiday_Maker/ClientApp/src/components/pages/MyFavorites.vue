@@ -1,12 +1,12 @@
 <template>
-    <div class="container1" style="padding-top:10px">
+    <div class="container1 op90" style="padding-top:10px">
         <div class="bg-green-1 shadow-md op90" style="width:100%; border-radius:7px">
             <h2 class="header bg-green-2">My Favorites</h2>
             <router-link to="/MyBookings" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Bookings</router-link>
             <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Profile</router-link>
          </div>
 
-        <div class="container2 shadow-md bg-green-1 op90" style="padding-left:10px">
+        <div class="container2 shadow-md bg-green-1 op80" style="padding-left:10px">
             <h1 style="font-size:30px">Favorite Hotels</h1>
 
             <h1 v-if="FavList != null">Number of hotels: </h1>
@@ -29,7 +29,7 @@
             <h2 style="cursor: pointer" class=" hover:text-green-800 hover:underline" @click="goToAccommodation(closestBeachId)">{{closestBeach}}</h2>
         </div>
 
-        <div class="container3 shadow-md bg-green-1">
+        <div class="container3 shadow-md bg-green-1 op80">
             <div v-if="FavList < 1" style="width:100%">
                 <h1 style="text-align:center;font-size:30px">No Favorite Hotels</h1>
             </div>
