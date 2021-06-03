@@ -18,8 +18,9 @@
             <th class="headerElements">Booking Date</th>
             <th class="headerElements">Payment Date</th>
             <th class="headerElements">Cancellation Date</th>
+            <th class="headerElements">Rating</th>
             <th class="headerElements"></th>
-            <th class="headerElements"></th>
+            <th class="headerElements">Cancel Booking</th>
         </tr>
 
         <tr v-if="!Bookings.length">
@@ -39,8 +40,24 @@
                 <td class="bookingElements">{{Booking.paymentDate}}</td>
                 <td v-if="Booking.cancellationDate != null" style="background: #FFCCCB" class="bookingElements">{{Booking.cancellationDate}}</td>
                 <td v-if="Booking.cancellationDate == null" class="bookingElements">{{Booking.cancellationDate}}</td>
-                <td><button v-if="Booking.cancellationDate == null" class="editButton">Edit</button></td>
-            <td><CancelButton v-if="Booking.cancellationDate == null" :bookingId="Booking.id"/></td>
+                <td v-if="Booking.checkOutDate < currentDateTime() && Booking.cancellationDate == null" class="bookingElements">
+                    <select v-model="rate"
+                    >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    </select></td>
+                    <td v-else class="bookingElements"></td> 
+                <td class="bookingElements"><button v-if="Booking.cancellationDate == null && Booking.checkOutDate > currentDateTime()" class="editButton">Edit</button></td>
+            <td class="bookingElements"><CancelButton v-if="Booking.cancellationDate == null && Booking.checkOutDate > currentDateTime()" :bookingId="Booking.id"/></td>
+            
         </tr>
     </table> 
         </div> 
@@ -52,12 +69,17 @@
 import Booking from '/src/components/pages/Booking.vue'
 import MyPage from '/src/components/pages/MyPage.vue'
 import CancelButton from '/src/components/CancelBookingButton.vue'
+import Mixins from '/src/mixins.js'
+
 
 export default {
     
+    mixins:[Mixins],
+
     data(){
         return{
             componentkey: 0,
+            rate: 0,
         };
     },
 
@@ -67,7 +89,7 @@ export default {
     components:{
         Booking,
         MyPage,
-        CancelButton
+        CancelButton,
     },
 
     computed:{
