@@ -1,6 +1,6 @@
 <template>
     <div :key="componentkey" class="container1" style="padding-top:10px" >
-        <div class="bg-green-1 shadow-md" style=" width:100% ; padding-left:20px">
+        <div class="bg-green-1 shadow-md op90" style="width:100%; border-radius:7px">
             <h2 class="header bg-green-2">My Bookings</h2>
             <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Profile</router-link>
             <router-link to="/MyFavorites" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Favorites</router-link>
