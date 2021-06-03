@@ -50,7 +50,7 @@
 
 
                         <button
-                            v-if="newList != ''"
+                            v-if="newList != '' || groupName == ''"
                             disabled
                             class="rounded bg-gray-700 text-white py-2 w-3/12 m-auto shadow-lg outline-none active:outline-none focus:outline-none"
                             style="margin-right:10px"
@@ -111,13 +111,19 @@ export default {
                 else if(this.groupName != ''){
                     this.SetFavorite(this.groupName)
                 }
+                else{
+                    toggleIcon = false
+                    let toggleModal = false
+                    this.$emit("emitToggle", toggleModal, toggleIcon)
+                }
             }
-            
+            else{
+                let toggleModal = false;
+                this.$emit("emitToggle", toggleModal, toggleIcon)
+            }
+
             this.newList = ''
             this.groupName = ''
-
-            let toggleModal = false;
-            this.$emit("emitToggle", toggleModal, toggleIcon)
         },
             async SetFavorite(groupName){
                 let data = { userId: this.$store.state.userId, accomodationId: this.accomodationObject.id, groupName: groupName };
