@@ -20,7 +20,7 @@ namespace Holiday_Maker.Controllers
         }
         // GET: api/PaymentIntent
         [HttpPost("PaymentIntent")]
-        public async Task<string> PaymentIntent()
+        public string PaymentIntent()
         {
             return _paymentService.CreatePaymentIntent().ToJson();
         }

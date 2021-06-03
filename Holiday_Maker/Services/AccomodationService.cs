@@ -18,6 +18,8 @@ namespace Holiday_Maker.Services
         private readonly IGenericRepository<AccomodationType> _accomodationTypeRepo = null;
         private readonly IGenericRepository<WifiQuality> _wifiQualityRepo = null;
 
+        private readonly RoomService _roomService = null;
+
         public AccomodationService()
         {
             _accomodationRepo = new GenericRepository<Accomodation>();
@@ -27,6 +29,8 @@ namespace Holiday_Maker.Services
             _extraRepo = new GenericRepository<Extra>();
             _accomodationTypeRepo = new GenericRepository<AccomodationType>();
             _wifiQualityRepo = new GenericRepository<WifiQuality>();
+
+            _roomService = new RoomService();
         }
 
         public async Task<IEnumerable<Accomodation>> NestedAccomodations()
@@ -128,9 +132,10 @@ namespace Holiday_Maker.Services
             }
             return accomodations;
         }
-        public IQueryable<Accomodation> SearchAccomodationByCountryAndCity(string searchQuery)
+        public IQueryable<Accomodation> SearchAccomodationByCountryAndCity(string searchQuery, DateTime checkInDate, DateTime checkOutDate)
         {
             var accomodations = _accomodationRepo.GetAllRaw();
+            var availableRoomIds = _roomService.GetAvailbleRoomIds(checkInDate, checkOutDate);
 
             if (accomodations.Any(s => s.Country.Equals(searchQuery)))
             {
@@ -146,6 +151,17 @@ namespace Holiday_Maker.Services
             else
             {
                 accomodations = null;
+            }
+
+            foreach(var accomodation in accomodations)
+            {
+                foreach(var room in accomodation.Rooms)
+                {
+                    if (!availableRoomIds.Contains(room.Id)){
+
+                        accomodation.Rooms.Remove(room);
+                    }
+                }
             }
 
             return accomodations;

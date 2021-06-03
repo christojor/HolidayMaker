@@ -122,9 +122,9 @@ namespace Holiday_Maker.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Accomodation>>> Search(string destination)
+        public async Task<ActionResult<IEnumerable<Accomodation>>> Search(string destination, DateTime checkInDate, DateTime checkOutDate)
         {
-            var accomodations = _accomodationService.SearchAccomodationByCountryAndCity(destination);
+            var accomodations = _accomodationService.SearchAccomodationByCountryAndCity(destination, checkInDate, checkOutDate);
             if(accomodations !=null)
             {
                 return await accomodations.ToListAsync();
