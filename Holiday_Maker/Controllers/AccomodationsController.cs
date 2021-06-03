@@ -125,9 +125,10 @@ namespace Holiday_Maker.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Accomodation>>> Search(string destination)
+        public async Task<ActionResult<IEnumerable<Accomodation>>> Search(string destination, DateTime checkInDate, DateTime checkOutDate)
         {
-            var accomodations = _accomodationService.SearchAccomodationByCountryAndCity(destination);
+            var accomodations = _accomodationService.SearchAccomodationByCountryAndCity(destination, checkInDate, checkOutDate);
+
             if(accomodations !=null)
             {
                 return await accomodations.ToListAsync();
@@ -147,6 +148,17 @@ namespace Holiday_Maker.Controllers
             return await _roomService.NestedRooms();
         }
 
+        [HttpGet("availablerooms")]
+        public async Task<IEnumerable<int>> GetAvailableRooms(DateTime checkInDate, DateTime checkOutDate)
+        {
+
+            var availableRoomIds = _roomService.GetAvailbleRoomIds(checkInDate, checkOutDate);
+            if (availableRoomIds != null)
+            {
+                return await availableRoomIds.ToListAsync();
+            }
+            return null;
+        }
 
         [HttpGet("accomodation/rooms/{id}")]
         public async Task<IEnumerable<Room>> GetRoomsAccomodation(int id)

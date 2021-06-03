@@ -182,13 +182,15 @@ export default {
                         // Write formatted destination to state
                         this.setDestination(this.destinationSearch)
 
+                        // Check if booking parameters have values, if not then set default values
+                        this.checkBookingParams()
+
                         // Write checkIn, checkOut, adults and children to state
                         this.setBookingParameters(this.bookingParams)
-
-                        this.checkBookingParams()
+                        console.log(this.$store.state.bookingParams.checkIn)
                         
                         // Get accomodations from API and write to state
-                        this.getQueriedDestinations(this.$store.state.destination)
+                        this.getQueriedDestinations()
                     }
             }
             else {
