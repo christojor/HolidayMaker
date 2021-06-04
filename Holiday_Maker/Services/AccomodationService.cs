@@ -19,6 +19,7 @@ namespace Holiday_Maker.Services
         private readonly IGenericRepository<WifiQuality> _wifiQualityRepo = null;
         private readonly IGenericRepository<UserRating> _userRatingRepo = null;
 
+        private readonly RoomService _roomService = null;
 
         public AccomodationService()
         {
@@ -29,6 +30,8 @@ namespace Holiday_Maker.Services
             _extraRepo = new GenericRepository<Extra>();
             _accomodationTypeRepo = new GenericRepository<AccomodationType>();
             _wifiQualityRepo = new GenericRepository<WifiQuality>();
+
+            _roomService = new RoomService();
             _userRatingRepo = new GenericRepository<UserRating>();
         }
 
@@ -66,6 +69,9 @@ namespace Holiday_Maker.Services
                     totalRating += rate.Rating;
                 }
 
+
+                //Quick fix, might change later
+                if(totalRating != 0)
                 totalRating = totalRating / rating.Count();
 
                 accommodation.GuestRating = totalRating;
@@ -145,9 +151,14 @@ namespace Holiday_Maker.Services
             }
             return accomodations;
         }
-        public IQueryable<Accomodation> SearchAccomodationByCountryAndCity(string searchQuery)
+        public IQueryable<Accomodation> SearchAccomodationByCountryAndCity(string searchQuery, DateTime checkInDate, DateTime checkOutDate)
         {
+            // Get all accommodations and a list of available rooms within chosen date span
+
             var accomodations = _accomodationRepo.GetAllRaw();
+            var availableRoomIds = _roomService.GetAvailbleRoomIds(checkInDate, checkOutDate);
+
+            // Check if city or country and nest all related objects accordingly based on destination
 
             if (accomodations.Any(s => s.Country.Equals(searchQuery)))
             {
@@ -163,6 +174,19 @@ namespace Holiday_Maker.Services
             else
             {
                 accomodations = null;
+            }
+
+            // Check if any rooms are unavailable at the destination and remove them from the list
+
+            foreach(var accomodation in accomodations)
+            {
+                foreach(var room in accomodation.Rooms)
+                {
+                    if (!availableRoomIds.Contains(room.Id)){
+
+                        accomodation.Rooms.Remove(room);
+                    }
+                }
             }
 
             return accomodations;

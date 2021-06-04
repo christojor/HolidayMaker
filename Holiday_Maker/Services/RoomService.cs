@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Holiday_Maker.Models;
@@ -13,6 +14,9 @@ namespace Holiday_Maker.Services
         private readonly IGenericRepository<Accomodation> _accomodationRepo;
         private readonly IGenericRepository<AccomodationType> _accomodationTypeRepo;
         private readonly IGenericRepository<RoomType> _roomTypeRepo;
+        private readonly IGenericRepository<Booking> _bookingRepo;
+        private readonly IGenericRepository<BookedRoom> _bookedRoomRepo;
+        private readonly ApplicationDbContext _ctx;
 
         public RoomService()
         {
@@ -20,7 +24,10 @@ namespace Holiday_Maker.Services
             _roomTypeRepo = new GenericRepository<RoomType>();
             _accomodationRepo = new GenericRepository<Accomodation>();
             _accomodationTypeRepo = new GenericRepository<AccomodationType>();
-           
+            _bookingRepo = new GenericRepository<Booking>();
+            _bookedRoomRepo = new GenericRepository<BookedRoom>();
+            _ctx = new ApplicationDbContext();
+
         }
 
 
@@ -62,6 +69,27 @@ namespace Holiday_Maker.Services
                 accoRoom.RoomType = await _roomTypeRepo.GetById(accoRoom.RoomTypeId);
             }
             return accomodationsRooms;
+        }
+        public IQueryable<int> GetAvailbleRoomIds(DateTime checkInDate, DateTime checkOutDate)
+        {
+            IQueryable<Room> rooms = _ctx.Rooms;
+            IQueryable<BookedRoom> bookedRooms = _ctx.BookedRooms;
+            IQueryable<Booking> bookings = _ctx.Bookings;
+
+            var availableRoomIds =
+                from R in rooms
+                where !(from B in bookings
+                        join BR in bookedRooms
+                            on B.Id equals BR.BookingId
+                        where
+                        (B.CheckInDate <= checkOutDate && B.CheckOutDate >= checkInDate) ||
+                        (B.CheckInDate < checkOutDate && B.CheckOutDate >= checkOutDate) ||
+                        (checkInDate <= B.CheckInDate && checkOutDate >= B.CheckInDate)
+                        select BR.RoomId).Contains(R.Id)
+                select R.Id;
+
+            return availableRoomIds;
+
         }
     }
 }

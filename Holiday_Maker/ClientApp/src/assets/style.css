@@ -1,6 +1,9 @@
 body{
     height: 100%;
-    background-color: rgb(235, 229, 229);
+    background-image: url('src/assets/images/wing.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 h2{
     font-weight: bold;
@@ -217,6 +220,7 @@ h1 {
     margin-right: 60px;
     width: 200px;
     text-align: center;
+    z-index: 1000000;
 }
 
 .contentMargin{
@@ -242,9 +246,7 @@ h1 {
     flex: 1;
 }
 .search-dest-box{
-    background-image: url('src/assets/images/sky.jpg');
     background-size: 100vw 500px;
-    border: 1px solid black;
     padding: 10px;
     height: 500px;
 }
@@ -387,6 +389,22 @@ h1 {
     display: inline-block;
 }
 
+.themes-drop{
+    width: 185px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 20px;
+    padding: 5px;
+    text-align: center;
+    margin-top: 10px;
+    display: inline-block;
+    font-weight: bold;
+}    
+
+.themes-drop:hover{
+    color: white;    
+}
+
 .navbarThemesButton:hover{
     color: white;
 }
@@ -403,14 +421,10 @@ h1 {
     opacity: 70%;
 }
 
-.op90 {
-    opacity: 90%;
+.op80 {
+    opacity: 80%;
 }
 
-.mypage-bg{
-    background-image: url('src/assets/images/palm.jpg');
-    background-size: 100vw 500px;
-    border: 1px solid black;
-    padding: 10px;
-    height: 500px;
+.op90 {
+    opacity: 90%;
 }

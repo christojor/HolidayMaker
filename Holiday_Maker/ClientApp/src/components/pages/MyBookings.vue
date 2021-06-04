@@ -1,12 +1,12 @@
 <template>
     <div :key="componentkey" class="container1" style="padding-top:10px" >
-        <div class="bg-green-1 shadow-md" style=" width:100% ; padding-left:20px">
+        <div class="bg-green-1 shadow-md op90" style="width:100%; border-radius:7px">
             <h2 class="header bg-green-2">My Bookings</h2>
             <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Profile</router-link>
             <router-link to="/MyFavorites" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Favorites</router-link>
         </div>
         
-        <div class="bg-green-2" style="width:98%; margin:1%; display:inline-block">
+        <div class="bg-green-2 op80" style="width:98%; margin:1%; display:inline-block">
     <table>
         <tr class="bg-green-1">
             <th class="headerElements">Booking Id</th>

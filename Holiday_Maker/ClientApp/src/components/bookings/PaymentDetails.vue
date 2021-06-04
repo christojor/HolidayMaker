@@ -1,6 +1,6 @@
 <template>
 
-<div class="overflow-hidden border-2 rounded-md border-black shadow-md p-4 bg-green-1 divide-y-2 divide-gray-300 border-2">
+<div class="overflow-hidden border-2 rounded-md border-black shadow-md p-4 bg-green-1 divide-y-2 divide-gray-300">
   <form  id="payment-form">
     <div>
       <label>

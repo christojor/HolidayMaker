@@ -57,7 +57,7 @@ namespace Holiday_Maker.Services
             return getUser;
         }
 
-        public async Task<ActionResult<IEnumerable<Accomodation>>> GetUserFavorites(int id)
+        public async Task<ActionResult<FavoriteHelper>> GetUserFavorites(int id)
         {
             var userFavorites = await _ufRepo.GetAll();
             var rooms = await _accomodationRepo.GetAll();
@@ -78,7 +78,12 @@ namespace Holiday_Maker.Services
                 var favRoom = rooms.FirstOrDefault(r => r.Id.Equals(favoriteAccomodation.AccomodationId));
                 favoriteAccomodations.Add(favRoom);
             }
-            return favoriteAccomodations;
+
+            FavoriteHelper favoriteHelper = new FavoriteHelper();
+            favoriteHelper.Accomodation = favoriteAccomodations;
+            favoriteHelper.UserFavorite = favoriteList;
+
+            return favoriteHelper;
         }
 
 

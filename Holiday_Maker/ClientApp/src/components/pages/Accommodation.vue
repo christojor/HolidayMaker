@@ -2,7 +2,7 @@
 
   <div v-for="accomodation in accomodations" :key="accomodation">
     <div v-if="id == accomodation.id">
-      <div class="flex flex-wrap overflow-hidden mt-3">
+      <div class="flex flex-wrap overflow-hidden mt-3 op90">
 
         <div class="w-1/6 overflow-hidden">
           <!-- Column Content -->
@@ -19,7 +19,7 @@
           </div>
           
           <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
-            <Navbar/>
+            <Navbar :rooms="accomodation.rooms"/>
           </div>
 
           <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
@@ -39,12 +39,16 @@
             <div class="w-1/2 overflow-hidden p-2">
               <Extras :extras="accomodation.extras" />
             </div>
-        </div>
-        <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
+          </div>
+            
+            <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
             <Rooms :rooms="accomodation.rooms" :extrasList="accomodation.extras" />
+            <div v-if="accomodation.rooms.length">
+ 
             <button class="float-right bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-7 rounded-full" @click="goToBooking(accomodation.id)">
               Book Rooms
             </button>
+            </div>
           </div>
         </div>
         <div class="w-1/6 overflow-hidden">
@@ -88,7 +92,7 @@ export default {
   computed: {   
     accomodations() {
       return this.$store.state.accomodations;
-    },
+    }
   },
 
   methods:{

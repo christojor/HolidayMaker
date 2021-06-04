@@ -1,10 +1,12 @@
 <template>
-  <b>AVAILABLE ROOMS</b>
-  <div v-for="room in rooms" :key="room">
-    <div class="flex flex-wrap overflow-hidden border-black border-2 p-1 m-1">
-      <div class="w-1/2 overflow-hidden p-2">
-        <img class="rounded-md roomImg" :src="room.imgSrc" />
-      </div>
+<div v-if="roomAvailable">
+<b>AVAILABLE ROOMS</b>
+<div v-for="room in rooms" :key="room">
+<div class="flex flex-wrap overflow-hidden border-black border-2 p-1 m-1">
+
+  <div class="w-1/2 overflow-hidden p-2">
+    <img class="rounded-md roomImg" :src="room.imgSrc">
+   </div>
 
       <div class="w-1/2 overflow-hidden p-4">
         <button
@@ -70,6 +72,23 @@ export default {
     },
     // extrasPerRoom: Object
   },
+  data(){
+    return{
+      image: "./assets/images/fullyBooked.png",
+    }
+  },
+
+  computed:{
+    roomAvailable(){
+     if (this.rooms.length){
+       return true;
+      }
+       else {
+         return false;
+       }
+     }
+    },
+  
   methods: {
     addToBooking(room) {
       this.$store.state.bookedRooms.push(room);

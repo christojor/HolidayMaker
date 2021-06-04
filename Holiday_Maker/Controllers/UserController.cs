@@ -32,7 +32,7 @@ namespace Holiday_Maker.Controllers
 
         //Gets a user favorite with a specific Id.
         [HttpGet("favorites")]
-        public async Task<ActionResult<IEnumerable<Accomodation>>> GetFavorites(int userId)
+        public async Task<ActionResult<FavoriteHelper>> GetFavorites(int userId)
         {
 
             return await _userService.GetUserFavorites(userId);
