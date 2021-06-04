@@ -38,9 +38,9 @@ export default {
       this.ToggleIcon = toggleIcon
     },
     GetUserFavorites(){
-      if(this.UserFavorites != null){
-        for(var i = 0; i < this.UserFavorites.length; i++){
-          if(this.accomodationObject.id == this.UserFavorites[i].id){
+      if(this.UserFavorites.accomodation != null){
+        for(var i = 0; i < this.UserFavorites.accomodation.length; i++){
+          if(this.accomodationObject.id == this.UserFavorites.accomodation[i].id){
             this.ToggleIcon = !this.ToggleIcon;
           }
         }
@@ -56,7 +56,8 @@ export default {
       headers: { 'Content-Type': 'application/json' },
        // the data encoded as json
       body: JSON.stringify(data)
-});
+      });
+
     }
   },
 };
