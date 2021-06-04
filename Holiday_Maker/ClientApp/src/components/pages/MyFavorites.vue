@@ -10,7 +10,7 @@
             <h1 style="font-size:30px">Favorite Hotels</h1>
 
             <h1 v-if="FavList != null">Number of hotels: </h1>
-            <h2>{{FavList.length}}</h2>
+            <h2>{{AccomodationList.length}}</h2>
             <br/>
 
             <h1 v-if="FavList != null">Highest rated hotel: </h1>
@@ -30,17 +30,17 @@
         </div>
 
         <div class="container3 shadow-md bg-green-1 op80">
-            <div v-if="FavList < 1" style="width:100%">
+            <div v-if="AccomodationList < 1" style="width:100%">
                 <h1 style="text-align:center;font-size:30px">No Favorite Hotels</h1>
             </div>
 
             <div v-else>
-                <div v-for="Fav in FavList" :key="Fav" class="hotel-item shadow-md">
+                <div v-for="Accomodation in AccomodationList" :key="Accomodation" class="hotel-item shadow-md">
 
-                    <img :src="Fav.imgSrc" alt="" class="hotel-item-img" @click="goToAccommodation(Fav.id)">
+                    <img :src="Accomodation.imgSrc" alt="" class="hotel-item-img" @click="goToAccommodation(Accomodation.id)">
                     
                     <div class="hotel-item-desc">
-                        <HotelDescription :accomodation="Fav"/>
+                        <HotelDescription :accomodation="Accomodation"/>
                     </div>
                 
                 </div>
@@ -58,12 +58,19 @@ export default{
     },
     data() {
         return{
-            FavList: []
+            AccomodationList: [],
+            FavList: [],
         }
     },
     async created(){
         let response = await fetch('https://localhost:44323/api/User/favorites?userId=' + localStorage.getItem('userId'));
-        this.FavList = await response.json();
+        let Favos = await response.json();
+
+        this.AccomodationList = Favos.accomodation
+        this.FavList = Favos.userFavorite
+
+        console.log(this.AccomodationList)
+        console.log(this.FavList)
     },
     methods:{
         goToAccommodation(accommodationId) {
@@ -76,12 +83,12 @@ export default{
     computed:{
         highestRating(){
             let high = []
-            this.FavList.forEach(item => { high.push(item.starRating)
+            this.AccomodationList.forEach(item => { high.push(item.starRating)
             });
             high = Math.max(...high)
 
             let highHotel = []
-            this.FavList.forEach(item => { 
+            this.AccomodationList.forEach(item => { 
                 if(item.starRating == high && highHotel.length == 0)
                     highHotel.push(item.name)
             });
@@ -90,12 +97,12 @@ export default{
         },
         highestRatingId(){
             let high = []
-            this.FavList.forEach(item => { high.push(item.starRating)
+            this.AccomodationList.forEach(item => { high.push(item.starRating)
             });
             high = Math.max(...high)
 
             let highHotel = []
-            this.FavList.forEach(item => { 
+            this.AccomodationList.forEach(item => { 
                 if(item.starRating == high && highHotel.length == 0)
                     highHotel.push(item.id)
             });
@@ -104,12 +111,12 @@ export default{
         },
         mostLiked(){
             let high = []
-            this.FavList.forEach(item => { high.push(item.guestRating)
+            this.AccomodationList.forEach(item => { high.push(item.guestRating)
             });
             high = Math.max(...high)
 
             let highHotel = []
-            this.FavList.forEach(item => { 
+            this.AccomodationList.forEach(item => { 
                 if(item.guestRating == high && highHotel.length == 0)
                     highHotel.push(item.name)
             });
@@ -118,12 +125,12 @@ export default{
         },
         mostLikedId(){
             let high = []
-            this.FavList.forEach(item => { high.push(item.guestRating)
+            this.AccomodationList.forEach(item => { high.push(item.guestRating)
             });
             high = Math.max(...high)
 
             let highHotel = []
-            this.FavList.forEach(item => { 
+            this.AccomodationList.forEach(item => { 
                 if(item.guestRating == high && highHotel.length == 0)
                     highHotel.push(item.id)
             });
@@ -132,12 +139,12 @@ export default{
         },
         closestCity(){
             let low = []
-            this.FavList.forEach(item => { low.push(item.distanceToCenter)
+            this.AccomodationList.forEach(item => { low.push(item.distanceToCenter)
             });
             low = Math.min(...low)
 
             let lowHotel = []
-            this.FavList.forEach(item => { 
+            this.AccomodationList.forEach(item => { 
                 if(item.distanceToCenter == low && lowHotel.length == 0)
                     lowHotel.push(item.name)
             });
@@ -146,12 +153,12 @@ export default{
         },
         closestCityId(){
             let low = []
-            this.FavList.forEach(item => { low.push(item.distanceToCenter)
+            this.AccomodationList.forEach(item => { low.push(item.distanceToCenter)
             });
             low = Math.min(...low)
 
             let lowHotel = []
-            this.FavList.forEach(item => { 
+            this.AccomodationList.forEach(item => { 
                 if(item.distanceToCenter == low && lowHotel.length == 0)
                     lowHotel.push(item.id)
             });
@@ -160,12 +167,12 @@ export default{
         },
         closestBeach(){
             let low = []
-            this.FavList.forEach(item => { low.push(item.distanceToBeach)
+            this.AccomodationList.forEach(item => { low.push(item.distanceToBeach)
             });
             low = Math.min(...low)
 
             let lowHotel = []
-            this.FavList.forEach(item => { 
+            this.AccomodationList.forEach(item => { 
                 if(item.distanceToBeach == low && lowHotel.length == 0)
                     lowHotel.push(item.name)
             });
@@ -174,12 +181,12 @@ export default{
         },
         closestBeachId(){
             let low = []
-            this.FavList.forEach(item => { low.push(item.distanceToBeach)
+            this.AccomodationList.forEach(item => { low.push(item.distanceToBeach)
             });
             low = Math.min(...low)
 
             let lowHotel = []
-            this.FavList.forEach(item => { 
+            this.AccomodationList.forEach(item => { 
                 if(item.distanceToBeach == low && lowHotel.length == 0)
                     lowHotel.push(item.id)
             });
