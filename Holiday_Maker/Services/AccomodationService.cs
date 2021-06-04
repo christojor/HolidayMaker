@@ -69,6 +69,9 @@ namespace Holiday_Maker.Services
                     totalRating += rate.Rating;
                 }
 
+
+                //Quick fix, might change later
+                if(totalRating != 0)
                 totalRating = totalRating / rating.Count();
 
                 accommodation.GuestRating = totalRating;
