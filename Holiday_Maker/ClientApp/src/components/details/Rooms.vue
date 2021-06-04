@@ -25,7 +25,7 @@
           <div class="rounded-t-md bg-green-1 search-div shadow-xl w-2/8">
             <div class="text-green-500">
                <div style="text-align:left;margin-left:10px" v-for="Extra in Extras" :key="Extra">
-                 <input type="checkbox" style="margin-right:10px" id="{{Extra.Name}}" :value="Extra.Checked">
+                 <input type="checkbox" style="margin-right:10px" id="{{Extra.Name}}" :value="Extra.Checked" @ticked="saveSelectedExtras">
                  <label for="{{Extra.Name}}">{{Extra.Name}} {{"+"}} {{Extra.Price}} {{Extra.Currency}}</label>
                </div>
             </div>
@@ -68,7 +68,7 @@ export default {
       type: Object,
       required: true,
     },
-    extrasPerRoom: Object
+    // extrasPerRoom: Object
   },
   methods: {
     addToBooking(room) {
@@ -108,6 +108,13 @@ export default {
       }
 
     },
+    saveSelectedExtras(ticked){
+        if(ticked) {
+          savedSelectedExtras=ticked.Name.Checked
+          console.log(savedSelectedExtras)
+        }
+        
+    }
   }
 };
 </script>
