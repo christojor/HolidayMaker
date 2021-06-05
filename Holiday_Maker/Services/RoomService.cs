@@ -74,7 +74,7 @@ namespace Holiday_Maker.Services
         {
             IQueryable<Room> rooms = _ctx.Rooms;
             IQueryable<BookedRoom> bookedRooms = _ctx.BookedRooms;
-            IQueryable<Booking> bookings = _ctx.Bookings;
+            IQueryable<Booking> bookings = _ctx.Bookings.Where(B => B.CancellationDate == null);
 
             var availableRoomIds =
                 from R in rooms
@@ -82,9 +82,9 @@ namespace Holiday_Maker.Services
                         join BR in bookedRooms
                             on B.Id equals BR.BookingId
                         where
-                        (B.CheckInDate <= checkOutDate && B.CheckOutDate >= checkInDate) ||
+                        ((B.CheckInDate <= checkOutDate && B.CheckOutDate >= checkInDate) ||
                         (B.CheckInDate < checkOutDate && B.CheckOutDate >= checkOutDate) ||
-                        (checkInDate <= B.CheckInDate && checkOutDate >= B.CheckInDate)
+                        (checkInDate <= B.CheckInDate && checkOutDate >= B.CheckInDate))
                         select BR.RoomId).Contains(R.Id)
                 select R.Id;
 
