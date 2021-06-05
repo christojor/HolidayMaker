@@ -23,17 +23,19 @@
   </div>
 
   <div class="flex flex-wrap overflow-hidden bg-green-1 mt-2">
-    
+
+
     <div class="w-full overflow-hidden" v-if="this.isLoggedIn()">
       <button type="submit" class="bg-green-500 w-1/2 hover:bg-green-700 text-white font-bold py-2 px-2 mt-2 rounded-full">
-      Buy Now
+        Buy Now
       </button>
     </div>
+
     <div class="w-full overflow-hidden" v-else>
       <button type="button" class="bg-gray-500 w-1/2 text-white font-bold py-2 px-2 mt-2 rounded-full">
-      Buy Now
-    </button>
-  </div>
+        Buy Now
+      </button>
+    </div>
   </div>
   </form>
 </div>
@@ -98,6 +100,7 @@ export default {
     var self = this;
     var form = document.getElementById("payment-form");
     form.addEventListener("submit", function (event) {
+      this.awaitingPayment = true;
       event.preventDefault();
       stripe
         .createPaymentMethod({
@@ -126,13 +129,6 @@ export default {
     },
 
     computed:{
-      fullName(){
-        if (this.isLoggedIn() && this.$store.state.user)
-        {
-          return this.$store.state.user.firstName + " " + this.$store.state.user.lastName
-        }
-        return ""
-      },
       totalPoints(){
         return this.roomPrices.reduce((sum, room) => {
             return sum += room.price * this.nbrOfNights;
@@ -167,7 +163,6 @@ export default {
         console.log("Error firing");
       } else {
         //otherwise send paymentMethod.id to your server
-
         await fetch("https://localhost:44323/api/Payment/Pay", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
