@@ -92,7 +92,8 @@ export default {
         return{
             groupList: [],
             newList: '',
-            groupName: ''
+            groupName: '',
+            FavList: []
         }
     },
     props: {
@@ -137,15 +138,14 @@ export default {
             });
         },
         SortListNames(){
-            console.log(this.UserFavorites) 
+            this.FavList.forEach(item => this.groupList.push(item.groupName))
         }
     },
-    computed:{
-        UserFavorites(){
-            return this.$store.state.userFavorites
-        }
-    },
-    created(){
+    async created(){
+        let response = await fetch('https://localhost:44323/api/User/favorites?userId=' + localStorage.getItem('userId'));
+        let Favos = await response.json();
+
+        this.FavList = Favos.userFavorite
         this.SortListNames()
     }
 };

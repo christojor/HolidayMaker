@@ -4,8 +4,8 @@
         <br>
     </div>
     <div :class="{show:!Toggle}">
-        <button @click="cancelBooking" class="mt-6 bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">Yes</button>
-        <button @click="approveCancellation" class="mt-6 bg-gray-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">No</button>
+        <button @click="cancelBooking" class="mt-6 bg-gray-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">Yes</button>
+        <button @click="approveCancellation" class="mt-6 bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">No</button>
         <br>
         Are you sure?
     </div>
@@ -21,12 +21,26 @@ export default {
             Toggle: false,
         }
     },
+
+    computed:{
+        GetUserId(){
+            return this.$store.state.userId;
+        }
+    },
     
     props:{
         bookingId: null
     },
 
     methods:{
+
+        async SetUserBookings(){
+            let response = await fetch('https://localhost:44323/api/Booking?userId=' + this.GetUserId);
+            let bookings = await response.json();
+            this.$store.commit('setUserBookings', bookings);
+        },
+
+
         async cancelBooking(){
             let response = await fetch('https://localhost:44323/api/Booking/CancelBooking/' + this.bookingId ,{
                 method:'put',
@@ -34,7 +48,7 @@ export default {
             if(response)
             {
                 this.Toggle = true;
-                this.$router.go();
+                this.SetUserBookings();
             } 
         },
         approveCancellation(){

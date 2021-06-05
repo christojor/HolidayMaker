@@ -3,7 +3,7 @@
     <div v-for="accomodation in accomodations" :key="accomodation">
             <div v-if="id == accomodation.id">
 
-<div class="flex flex-wrap overflow-hidden mt-3 mb-3">
+<div class="flex flex-wrap overflow-hidden mt-3 mb-3 op90">
 
   <div class="w-1/6 overflow-hidden">
     <!-- Filler Div -->
