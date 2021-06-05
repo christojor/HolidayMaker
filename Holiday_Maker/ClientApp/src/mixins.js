@@ -27,6 +27,11 @@ export default {
         return dateTime;
       },
 
+      setMinMaxCheckDate(checkIn, checkOut){
+        document.getElementById("checkIn").setAttribute("min", checkIn);
+        document.getElementById("checkOut").setAttribute("min", checkOut);
+      },
+
       isLoggedIn(){
          return this.$store.state.isLoggedIn;
        }

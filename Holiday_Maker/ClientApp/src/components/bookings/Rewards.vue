@@ -10,7 +10,7 @@
       <h1 style="font-size:10px">(tax not included)</h1>
       <h1 style="font-size:10px">(Premium Members recieve extra 25%)</h1>
 
-      <h1 v-if="this.$store.state.user.memberTypeId == 1" class="mt-2"><b>Reward Points earned: </b>{</h1>
+      <h1 v-if="this.$store.state.user.memberTypeId == 1" class="mt-2"><b>Reward Points earned: </b></h1>
       <h1 v-if="this.$store.state.user.memberTypeId == 1" class="mt-2">{{totalPoints}}</h1>
 
       <h1 v-if="this.$store.state.user.memberTypeId == 2" class="mt-2"><b>Reward Points earned: </b></h1>

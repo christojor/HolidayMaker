@@ -85,17 +85,6 @@ import mixin from '/src/mixins.js'
 export default {
     mixins: [mixin],
 
-    beforeRouteLeave (to, from , next) {
-        const answer = window.confirm('Your booking will be cancelled if you leave this page. Are you sure?')
-
-        if (answer) {
-          next()
-        } 
-        else {
-          next(false)
-        }
-    },
-
     created(){
         this.roomDetailsObjects.bookingInfo = this.bookingParams;
         this.roomDetailsObjects.roomInfo = this.bookedRooms;
@@ -108,7 +97,6 @@ export default {
 
     beforeUnmount() {
       this.setBookedRooms([]);
-      console.log(this.$store.state.bookedRooms);
     },
 
     data(){

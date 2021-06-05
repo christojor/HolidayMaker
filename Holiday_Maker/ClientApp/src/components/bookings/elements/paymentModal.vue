@@ -15,12 +15,12 @@
               size="lg"
               style="color: #52b788"
             />
-            Payment Done
+            Booking Confirmed
           </div>
 
           <span class="text-center"
             >Thank you, your payment has been succesful. A confirmation email
-            has been sent to {{GetUserEmail}}</span
+            has been sent to <b>{{GetUserEmail}}</b></span
           >
           <button
             class="rounded bg-green-500 text-white px-6 mt-1 py-2 w-3/12 m-auto mb-3 shadow-lg hover:bg-green-400 outline-none active:outline-none focus:outline-none"
@@ -56,6 +56,7 @@ export default {
     toggleModalMethod() {
       var toggleModal = false;
       this.$emit("emitToggle", toggleModal);
+      this.$router.push('/');
     },
   },
 };

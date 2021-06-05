@@ -26,7 +26,7 @@
                 <div class="rounded-t-md bg-green-1 search-div shadow-xl w-1/8">
                     <div class="text-green-500">
                         <p class="float-left mt-2 ml-2" style="font-size: 10pt; font-weight: bold;">Check-in</p>
-                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" ref="checkOut" v-model="bookingParams.checkIn" type="date">
+                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" id="checkIn" ref="checkOut" v-model="bookingParams.checkIn" type="date" min="">
                     </div>
                 </div>
                 
@@ -34,7 +34,7 @@
                 <div class="rounded-t-md bg-green-1 search-div shadow-xl w-1/8">
                     <div class="text-green-500">
                         <p class="float-left mt-2 ml-2" style="font-size: 10pt; font-weight: bold;">Check-out</p>
-                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" ref="checkOut" v-model="bookingParams.checkOut" type="date">
+                        <input class="border-2 border-green-500 bg-white h-10 px-1 mt-2 pr-2 rounded-lg text-lg focus:outline-none" id="checkOut" ref="checkOut" v-model="bookingParams.checkOut" type="date" min="">
                     </div>
                 </div>
                 
@@ -44,15 +44,16 @@
                         <font-awesome-icon :icon="['fas', 'users']" class="mt-3 mr-4 fa-2x float-left" style="color: #52B788;"/>
                         <select class="float-left border-2 border-green-500 bg-white h-10 w-40 px-5 mt-2 pr-4 rounded-lg text-lg focus:outline-none" v-model="bookingParams.travellersAdults">
                             <option disabled selected value="">Adults</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                            <option value="1">1 Adult</option>
+                            <option value="2">2 Adults</option>
+                            <option value="3">3 Adults</option>
                         </select>
                         <select class="float-left border-2 border-green-500 bg-white h-10 w-40 px-5 mt-2 ml-2 pr-4 rounded-lg text-lg focus:outline-none" v-model="bookingParams.travellersChildren">
                             <option disabled selected value="">Children</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                            <option value="0">0 Children</option>
+                            <option value="1">1 Child</option>
+                            <option value="2">2 Children</option>
+                            <option value="3">3 Children</option>
                         </select>
                     </div>
                 </div>
@@ -114,7 +115,8 @@ export default {
     mixins: [mixin],
 
     mounted(){
-        this.setApiState(enums.init)
+        this.setMinMaxCheckDate(this.currentDate(0), this.currentDate(1));
+        this.setApiState(enums.init);
     },
 
     data()
@@ -142,6 +144,7 @@ export default {
     },
 
     methods:{
+
         formatQuery(){
             this.destinationSearch = this.destinationSearch.trim()
             this.destinationSearch  = this.destinationSearch.toLowerCase()
@@ -187,7 +190,6 @@ export default {
 
                         // Write checkIn, checkOut, adults and children to state
                         this.setBookingParameters(this.bookingParams)
-                        console.log(this.$store.state.bookingParams.checkIn)
                         
                         // Get accomodations from API and write to state
                         this.getQueriedDestinations()

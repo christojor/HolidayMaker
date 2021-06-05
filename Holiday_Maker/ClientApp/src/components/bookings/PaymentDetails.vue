@@ -18,7 +18,7 @@
 
     <div id="SuccessMessage" class="alert" style="display:none">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      <strong>Booking Confirmed!</strong>
+      <strong>Payment successful!</strong>
     </div>
   </div>
 
@@ -74,7 +74,6 @@ export default {
     var stripe = Stripe(
       "pk_test_51IsjoPK0RxPPVgejwsizP9ghkzrEOEAho8VjGbz0Rtn2i31J5t5zr6NGp04eZD0ZHF5TwIzvCZf2XFmZR4syWqiY00ldbn6Luv"
     );
-    console.log(this.$store.state.user.firstName + " " + this.$store.state.user.lastName)
     var elements = stripe.elements();
     var style = {
       base: {
@@ -149,11 +148,7 @@ export default {
     async sendBooking() {
       this.$store.commit("setBooking", this.makeBooking);
 
-      // Code here for waiting for payment response.
-
       this.$store.dispatch("sendBooking");
-
-      // Code here for displaying booking confirmation modal.
 
       if(this.$store.state.user.memberTypeId == 1){
         this.$store.commit("setMemberPoints", this.totalPoints);
@@ -172,10 +167,7 @@ export default {
         console.log("Error firing");
       } else {
         //otherwise send paymentMethod.id to your server
-        this.sendBooking()
-        
-        console.log(result);
-        this.$emit('emitToggle', this.toggleModal)
+
         await fetch("https://localhost:44323/api/Payment/Pay", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -205,7 +197,9 @@ export default {
       } else {
         //show success message
         console.log(response)
-        this.showSuccess();
+        // this.showSuccess();
+        this.sendBooking()
+        this.$emit('emitToggle', this.toggleModal)
         console.log("show success message")
       }
     },
@@ -226,15 +220,9 @@ export default {
         }).then(this.handleServerResponse);
       }
     },
-        lolgsomeshit(){
-      console.log("fucker");
-    },
-    logToConsole() {
-      console.log("lmsssssssssssssssssao");
-    },
     showSuccess(){
-      var lol = document.getElementById("SuccessMessage");
-      lol.style.display = "block";
+      var successMessage = document.getElementById("SuccessMessage");
+      successMessage.style.display = "block";
     }
   },
   data(){
