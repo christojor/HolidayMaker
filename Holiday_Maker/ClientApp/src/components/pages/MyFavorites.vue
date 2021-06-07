@@ -15,7 +15,7 @@
 
                 <div v-for="group in groupList" :key="group">
                     <a style="cursor: pointer" class="hover:text-green-800 hover:underline" @click="SortListNames();SortList(group);">{{group}}</a>
-                    <button class="bg-gray-500 hover:bg-red-500 text-white px-2 rounded-full shadow-xl" style="float:right; height:20px;">REMOVE</button><br/>
+                    <button class="bg-gray-500 hover:bg-red-500 text-white px-2 rounded-full shadow-xl" style="float:right; height:20px;" @click="RemoveUserFavoriteList(group)">REMOVE</button><br/>
                 </div>
                 
                 <a style="cursor: pointer" class="hover:text-green-800 hover:underline" @click="SortList('all')">Show All Hotels</a>
@@ -86,6 +86,17 @@ export default{
         }
     },
     methods:{
+
+        async RemoveUserFavoriteList(groupToRemove){
+            var objectToRemove = {userId: this.$store.state.userId, groupName: groupToRemove};
+            await fetch('https://localhost:44323/api/User/favorites/removelist',{
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify(objectToRemove)
+            });
+            this.GetUserFavorites;
+        },
+
         goToAccommodation(accommodationId) {
             this.$router.push({
                 name: "Accommodation",
