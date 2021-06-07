@@ -21,9 +21,9 @@
                 <span class="text-center"
                     >Select list to save favorite</span
                 >
-                <select v-model="groupName">
+                <select @click="SortListNames" v-model="groupName">
                     <option disabled value="">Select group</option>
-                    <option v-for="list in groupList" :key="list" :value="list">{{list}}</option>
+                    <option v-for="list in groupList"  :value="list" :key="list">{{list}}</option>
                 </select>
 
                 <span class="text-center" style="margin-top: 20px"
@@ -88,6 +88,11 @@
 
 <script>
 export default {
+
+    mounted(){
+        this.SortListNames();
+    },
+
     data(){
         return{
             groupList: [],
@@ -100,17 +105,27 @@ export default {
         toggleModal: Boolean,
         accomodationObject: Object
     },
-    methods: {
-        toggleModalMethod(toggleIcon) {
+    computed:{
+        GetUserFavorites(){
+            return this.$store.state.userFavorites;
+        }
+    },
 
+    methods: { 
+        toggleModalMethod(toggleIcon) {
             if(toggleIcon == true){
                 if(this.newList != ''){
                     this.groupName = this.newList
-                    this.SetFavorite(groupName)
+                    this.SetFavorite(this.groupName)
+                    let toggleModal = false
+                    this.$emit("emitToggle", toggleModal, toggleIcon)
                 }
 
                 else if(this.groupName != ''){
                     this.SetFavorite(this.groupName)
+
+                    let toggleModal = false
+                    this.$emit("emitToggle", toggleModal, toggleIcon)
                 }
                 else{
                     toggleIcon = false
@@ -125,6 +140,7 @@ export default {
 
             this.newList = ''
             this.groupName = ''
+
         },
             async SetFavorite(groupName){
                 let data = { userId: this.$store.state.userId, accomodationId: this.accomodationObject.id, groupName: groupName };
@@ -138,15 +154,10 @@ export default {
             });
         },
         SortListNames(){
-            this.FavList.forEach(item => this.groupList.push(item.groupName))
+            this.FavList = this.GetUserFavorites.userFavorite;
+            this.FavList.forEach(item => {if(!this.groupList.includes(item.groupName)){this.groupList.push(item.groupName)}})
         }
     },
-    async created(){
-        let response = await fetch('https://localhost:44323/api/User/favorites?userId=' + localStorage.getItem('userId'));
-        let Favos = await response.json();
 
-        this.FavList = Favos.userFavorite
-        this.SortListNames()
-    }
 };
 </script>

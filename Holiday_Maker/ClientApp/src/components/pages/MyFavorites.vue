@@ -29,7 +29,7 @@
             <h2 style="cursor: pointer" class=" hover:text-green-800 hover:underline" @click="goToAccommodation(closestBeachId)">{{closestBeach}}</h2>
         </div>
 
-        <div class="container3 shadow-md bg-green-1 op80">
+        <div class="container3 shadow-md bg-green-1">
             <div v-if="AccomodationList < 1" style="width:100%">
                 <h1 style="text-align:center;font-size:30px">No Favorite Hotels</h1>
             </div>
@@ -63,14 +63,14 @@ export default{
         }
     },
     async created(){
-        let response = await fetch('https://localhost:44323/api/User/favorites?userId=' + localStorage.getItem('userId'));
-        let Favos = await response.json();
+        // let response = await fetch('https://localhost:44323/api/User/favorites?userId=' + localStorage.getItem('userId'));
+        // let Favos = await response.json();
 
-        this.AccomodationList = Favos.accomodation
-        this.FavList = Favos.userFavorite
 
-        console.log(this.AccomodationList)
-        console.log(this.FavList)
+
+
+        this.AccomodationList = this.GetUserFavorites.accomodation;
+        this.FavList = this.GetUserFavorites.userFavorite;
     },
     methods:{
         goToAccommodation(accommodationId) {
@@ -81,6 +81,10 @@ export default{
         },
     },
     computed:{
+        GetUserFavorites(){
+            return this.$store.state.userFavorites;
+        },
+
         highestRating(){
             let high = []
             this.AccomodationList.forEach(item => { high.push(item.starRating)
