@@ -76,7 +76,8 @@ export default {
   
   methods: {
     addToBooking(room) {
-      this.$store.state.bookedRooms.push(room)
+      // this.$store.state.bookedRooms.push(room)
+      this.$store.commit("addToBookedRooms", room)
     }
   } 
 }
