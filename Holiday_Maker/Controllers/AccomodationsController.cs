@@ -101,6 +101,12 @@ namespace Holiday_Maker.Controllers
             return CreatedAtAction("GetAccomodation", new { id = accomodation.Id }, accomodation);
         }
 
+        [HttpPost ("UpdateRating")]
+        public async Task<bool> UpdateRating(UserRating userRating)
+        {   
+            return await _accomodationService.UpdateRating(userRating);
+        }
+
 
 
         // DELETE: api/Accomodations/5

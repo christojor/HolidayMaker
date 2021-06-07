@@ -1,11 +1,11 @@
 <template>
     <div :class="{show:Toggle}">
-        <button @click="approveCancellation" class="mt-6 bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">Cancel Booking</button>
+        <button @click="approveCancellation" class=" bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">Cancel</button>
         <br>
     </div>
-    <div :class="{show:!Toggle}">
-        <button @click="cancelBooking" class="mt-6 bg-gray-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">Yes</button>
-        <button @click="approveCancellation" class="mt-6 bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">No</button>
+    <div :class="{show:!Toggle}" style="width:150px">
+        <button @click="cancelBooking" class="bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">Yes</button>
+        <button @click="approveCancellation" class="bg-gray-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-xl">No</button>
         <br>
         Are you sure?
     </div>

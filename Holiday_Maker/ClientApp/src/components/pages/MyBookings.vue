@@ -1,4 +1,5 @@
 <template>
+
     <div :key="componentkey" class="container1" style="padding-top:10px" >
         <div class="bg-green-1 shadow-md op90" style="width:100%; border-radius:7px">
             <h2 class="header bg-green-2">My Bookings</h2>
@@ -18,8 +19,9 @@
             <th class="headerElements">Booking Date</th>
             <th class="headerElements">Payment Date</th>
             <th class="headerElements">Cancellation Date</th>
+            <th class="headerElements">Rating</th>
             <th class="headerElements"></th>
-            <th class="headerElements"></th>
+            <th class="headerElements">Cancel Booking</th>
         </tr>
 
         <tr v-if="!Bookings.length">
@@ -39,8 +41,13 @@
                 <td class="bookingElements">{{Booking.paymentDate}}</td>
                 <td v-if="Booking.cancellationDate != null" style="background: #FFCCCB" class="bookingElements">{{Booking.cancellationDate}}</td>
                 <td v-if="Booking.cancellationDate == null" class="bookingElements">{{Booking.cancellationDate}}</td>
-                <td><button v-if="Booking.cancellationDate == null" class="editButton">Edit</button></td>
-            <td><CancelButton v-if="Booking.cancellationDate == null" :bookingId="Booking.id"/></td>
+                <td v-if="Booking.checkOutDate < currentDateTime() && Booking.cancellationDate == null" class="bookingElements">
+                    <HotelBookingRating :id="Booking.accomodationId"/>
+                </td>
+                    <td v-else class="bookingElements"></td> 
+                <td class="bookingElements"><button v-if="Booking.cancellationDate == null && Booking.checkOutDate > currentDateTime()" class="editButton">Edit</button></td>
+            <td class="bookingElements"><CancelButton v-if="Booking.cancellationDate == null && Booking.checkOutDate > currentDateTime()" :bookingId="Booking.id"/></td>
+            
         </tr>
     </table> 
         </div> 
@@ -52,9 +59,14 @@
 import Booking from '/src/components/pages/Booking.vue'
 import MyPage from '/src/components/pages/MyPage.vue'
 import CancelButton from '/src/components/CancelBookingButton.vue'
+import Mixins from '/src/mixins.js'
+import HotelBookingRating from '/src/components/bookings/elements/HotelBookingRating.vue'
+
 
 export default {
     
+    mixins:[Mixins],
+
     data(){
         return{
             componentkey: 0,
@@ -67,7 +79,8 @@ export default {
     components:{
         Booking,
         MyPage,
-        CancelButton
+        CancelButton,
+        HotelBookingRating
     },
 
     computed:{
@@ -84,11 +97,7 @@ export default {
             let response = await fetch('https://localhost:44323/api/Booking?userId=' + this.GetUserId);
             let bookings = await response.json();
             this.$store.commit('setUserBookings', bookings);
-        }
-    }
+        },      
+    },
 }
 </script>
-
-<style>
-
-</style>
