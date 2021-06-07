@@ -47,11 +47,7 @@ export default {
     toggleModal: Boolean,
   },
 
-  computed:{
-    GetUserEmail(){
-      return this.$store.state.user.email;
-    }
-  },
+
   methods: {
     toggleModalMethod() {
       var toggleModal = false;

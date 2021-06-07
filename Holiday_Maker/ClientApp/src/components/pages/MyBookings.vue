@@ -41,9 +41,9 @@
                 <td v-if="Booking.cancellationDate != null" style="background: #FFCCCB" class="bookingElements">{{Booking.cancellationDate}}</td>
                 <td v-if="Booking.cancellationDate == null" class="bookingElements">{{Booking.cancellationDate}}</td>
                 <td v-if="Booking.checkOutDate < currentDateTime() && Booking.cancellationDate == null" class="bookingElements">
-                    <select v-model="rate"
+                    <select v-model="rate" @click="setRating(Booking.accomodationId)"
                     >
-                    <option value="1">1</option>
+                    <option :value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -79,7 +79,7 @@ export default {
     data(){
         return{
             componentkey: 0,
-            rate: 0,
+            rate: null,
         };
     },
 
@@ -106,8 +106,30 @@ export default {
             let response = await fetch('https://localhost:44323/api/Booking?userId=' + this.GetUserId);
             let bookings = await response.json();
             this.$store.commit('setUserBookings', bookings);
+
+        },
+        setRating(Id){
+            var ratingObject = {
+                accomodationId: Id,
+                userId: this.$store.state.userId,
+                rating: this.rate
+            }
+            console.log(JSON.stringify(ratingObject))
+            this.sendRating(ratingObject)
+            
+
+        },
+        async sendRating(ratingObject){
+            await fetch('https://localhost:44323​/api​/Accomodations​/UpdateRating', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(ratingObject)
+            });
         }
-    }
+        
+    },
+    
+
 }
 </script>
 

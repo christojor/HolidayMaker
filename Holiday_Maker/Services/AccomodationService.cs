@@ -49,7 +49,7 @@ namespace Holiday_Maker.Services
                 {
                     amenity.WifiQualities.Add(wifi);
                 }
-                
+
             }
 
 
@@ -113,8 +113,8 @@ namespace Holiday_Maker.Services
                 room.RoomType = await _roomTypeRepo.GetById(room.RoomTypeId);
                 accommodation.Rooms.Add(room);
             }
-           
-                return accommodation;
+
+            return accommodation;
         }
         public IQueryable<Accomodation> SearchAccomodationById(int Id)
         {
@@ -155,10 +155,10 @@ namespace Holiday_Maker.Services
             }
 
             else if (accomodations.Any(s => s.City.Equals(searchQuery)))
-                {
-                    accomodations = accomodations.Where(s => s.City.Contains(searchQuery));
-                    accomodations = NestChildren(accomodations);
-                }
+            {
+                accomodations = accomodations.Where(s => s.City.Contains(searchQuery));
+                accomodations = NestChildren(accomodations);
+            }
             else
             {
                 accomodations = null;
@@ -235,6 +235,12 @@ namespace Holiday_Maker.Services
             }
 
             return accommodationList;
+        }
+
+        public async Task<bool> UpdateRating(UserRating userRating)
+        {
+            await _userRatingRepo.Insert(userRating);
+            return true;
         }
 
     }
