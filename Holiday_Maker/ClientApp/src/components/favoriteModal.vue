@@ -21,7 +21,7 @@
                 <span class="text-center"
                     >Select list to save favorite</span
                 >
-                <select v-model="groupName">
+                <select @click="SortListNames" v-model="groupName">
                     <option disabled value="">Select group</option>
                     <option v-for="list in groupList"  :value="list" :key="list">{{list}}</option>
                 </select>
@@ -123,6 +123,7 @@ export default {
 
                 else if(this.groupName != ''){
                     this.SetFavorite(this.groupName)
+
                     let toggleModal = false
                     this.$emit("emitToggle", toggleModal, toggleIcon)
                 }

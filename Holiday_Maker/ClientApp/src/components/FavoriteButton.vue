@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     ToggleModalMethod(toggleModal, toggleIcon) {
+      this.$store.dispatch('getUserFavorites');
       this.ToggleModal = toggleModal
       this.ToggleIcon = toggleIcon
     },
