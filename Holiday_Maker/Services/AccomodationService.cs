@@ -240,8 +240,21 @@ namespace Holiday_Maker.Services
 
         public async Task<bool> UpdateRating(UserRating userRating)
         {
+            var allUserRatings = _userRatingRepo.GetAll().Result.Where(u => u.UserId == userRating.UserId);
+
+            foreach (var rate in allUserRatings)
+            {
+                if (userRating.AccomodationId == rate.AccomodationId)
+                {
+                    rate.Rating = userRating.Rating;
+                    await _userRatingRepo.Update(rate);
+                    return true;
+                }
+            }
             await _userRatingRepo.Insert(userRating);
             return true;
+           
+            
         }
 
     }
