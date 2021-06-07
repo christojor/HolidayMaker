@@ -36,6 +36,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 
@@ -48,7 +49,9 @@ export default {
 
   data() {
     return {
-      // toggle: true,
+      image: "./assets/images/fullyBooked.png",
+    },
+    {
       Extras: [
         { Name: "Self-Catering", Checked: false, Price: 5, Currency:"€"},
         { Name: "Half-Board",  Checked: false, Price: 10, Currency:"€"},
@@ -57,8 +60,8 @@ export default {
         { Name: "Crib", Checked: false, Price: 5, Currency:"€"},
         { Name: "Self-Catering", Checked: false, Price: 20, Currency:"€"},
         { Name: "Breakfast", Checked: false, Price: 5, Currency:"€"}
-      ],
-    };
+      ]
+    }
   },
 
   props: {
@@ -70,13 +73,8 @@ export default {
       type: Object,
       required: true,
     },
-    // extrasPerRoom: Object
   },
-  data(){
-    return{
-      image: "./assets/images/fullyBooked.png",
-    }
-  },
+
 
   computed:{
     roomAvailable(){
@@ -132,7 +130,6 @@ export default {
           savedSelectedExtras=ticked.Name.Checked
           console.log(savedSelectedExtras)
         }
-        
     }
   }
 };
