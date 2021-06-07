@@ -27,8 +27,8 @@
           <div class="rounded-t-md bg-green-1 search-div shadow-xl w-2/8">
             <div class="text-green-500">
                <div style="text-align:left;margin-left:10px" v-for="Extra in Extras" :key="Extra">
-                 <input type="checkbox" style="margin-right:10px" id="{{Extra.Name}}" :value="Extra.Checked" @ticked="saveSelectedExtras">
-                 <label for="{{Extra.Name}}">{{Extra.Name}} {{"+"}} {{Extra.Price}} {{Extra.Currency}}</label>
+                 <input type="checkbox" style="margin-right:10px" id="{{Extra.Name}}" :value="Extra.Checked" @click="saveSelectedExtras(Extra)">
+                 <label for="{{Extra.Name}}" @click="saveSelectedExtras(Extra)">{{Extra.Name}} {{"+"}} {{Extra.Price}} {{Extra.Currency}}</label>
                </div>
             </div>
           </div>
@@ -50,8 +50,7 @@ export default {
   data() {
     return {
       image: "./assets/images/fullyBooked.png",
-    },
-    {
+
       Extras: [
         { Name: "Self-Catering", Checked: false, Price: 5, Currency:"€"},
         { Name: "Half-Board",  Checked: false, Price: 10, Currency:"€"},
@@ -60,9 +59,12 @@ export default {
         { Name: "Crib", Checked: false, Price: 5, Currency:"€"},
         { Name: "Self-Catering", Checked: false, Price: 20, Currency:"€"},
         { Name: "Breakfast", Checked: false, Price: 5, Currency:"€"}
-      ]
+      ],
+    
+        savedSelectedExtras: []
     }
-  },
+
+    },
 
   props: {
     rooms: {
@@ -73,8 +75,8 @@ export default {
       type: Object,
       required: true,
     },
-  },
 
+  },
 
   computed:{
     roomAvailable(){
@@ -91,14 +93,7 @@ export default {
     addToBooking(room) {
       this.$store.state.bookedRooms.push(room);
     },
-    // toggledisplay(){
-    //   this.toggle=!this.toggle
-    // },
-    // handleSubmit(){
-    //   let filter = {
-    //     PropExtras: this.Extras
-    //   }
-    // },
+ 
     sortExtras(){
       this.Extras = [];
 
@@ -125,11 +120,17 @@ export default {
       }
 
     },
-    saveSelectedExtras(ticked){
-        if(ticked) {
-          savedSelectedExtras=ticked.Name.Checked
-          console.log(savedSelectedExtras)
-        }
+    saveSelectedExtras(Extra){
+           
+             if(this.savedSelectedExtras.includes(Extra.Name))
+             {
+               this.savedSelectedExtras.filter(extra => {if(extra==Extra.Name){this.savedSelectedExtras.splice(extra,1)}})
+             }
+             else
+             {
+               this.savedSelectedExtras.push(Extra.Name)
+             }     
+             console.log(this.savedSelectedExtras)   
     }
   }
 };
