@@ -79,7 +79,7 @@
 
         <div
         v-if="toggleModal"
-        class="absolute z-40 inset-0 opacity-25 bg-black"
+        class="z-40 inset-0 opacity-25 bg-black fixed"
         ></div>
     </div>
 </template>
