@@ -4,29 +4,45 @@
             <h2 class="header bg-green-2">My Favorites</h2>
             <router-link to="/MyBookings" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Bookings</router-link>
             <router-link to="/MyPage" class="myButton bg-green-500 hover:bg-green-700 py-3 px-4 rounded-full shadow-xl" style="width:150px">My Profile</router-link>
-         </div>
+        </div>
 
-        <div class="container2 shadow-md bg-green-1 op80" style="padding-left:10px">
-            <h1 style="font-size:30px">Favorite Hotels</h1>
+        <div class="container2 op80">
 
-            <h1 v-if="FavList != null">Number of hotels: </h1>
-            <h2>{{AccomodationList.length}}</h2>
-            <br/>
+            <div class="favSideItem shadow-md bg-green-1">
+                <h1 style="font-size:30px">Hotel Lists</h1>
+                
+                <h1>Sort By List</h1>
 
-            <h1 v-if="FavList != null">Highest rated hotel: </h1>
-            <h2 style="cursor: pointer" class=" hover:text-green-800 hover:underline" @click="goToAccommodation(highestRatingId)">{{highestRating}}</h2>
-            <br/>
-            
-            <h1 v-if="FavList != null">Most Liked hotel: </h1>
-            <h2 style="cursor: pointer" class=" hover:text-green-800 hover:underline" @click="goToAccommodation(mostLikedId)">{{mostLiked}}</h2>
-            <br/>
-            
-            <h1 v-if="FavList != null">Closest to city: </h1>
-            <h2 style="cursor: pointer" class=" hover:text-green-800 hover:underline" @click="goToAccommodation(closestCityId)">{{closestCity}}</h2>
-            <br/>
-            
-            <h1 v-if="FavList != null">Closest to beach: </h1>
-            <h2 style="cursor: pointer" class=" hover:text-green-800 hover:underline" @click="goToAccommodation(closestBeachId)">{{closestBeach}}</h2>
+                <div v-for="group in groupList" :key="group">
+                    <a style="cursor: pointer" class="hover:text-green-800 hover:underline" @click="SortListNames();SortList(group);">{{group}}</a>
+                    <button class="bg-gray-500 hover:bg-red-500 text-white px-2 rounded-full shadow-xl" style="float:right; height:20px;">REMOVE</button><br/>
+                </div>
+                
+                <a style="cursor: pointer" class="hover:text-green-800 hover:underline" @click="SortList('all')">Show All Hotels</a>
+            </div>
+
+            <div class="favSideItem shadow-md bg-green-1">
+                <h1 style="font-size:30px">Favorite Hotels</h1>
+
+                <h1 v-if="FavList != null">Number of hotels: </h1>
+                <h2>{{AccomodationList.length}}</h2>
+                <br/>
+
+                <h1 v-if="FavList != null">Highest rated hotel: </h1>
+                <h2 style="cursor: pointer" class="hover:text-green-800 hover:underline" @click="goToAccommodation(highestRatingId)">{{highestRating}}</h2>
+                <br/>
+                
+                <h1 v-if="FavList != null">Most Liked hotel: </h1>
+                <h2 style="cursor: pointer" class="hover:text-green-800 hover:underline" @click="goToAccommodation(mostLikedId)">{{mostLiked}}</h2>
+                <br/>
+                
+                <h1 v-if="FavList != null">Closest to city: </h1>
+                <h2 style="cursor: pointer" class="hover:text-green-800 hover:underline" @click="goToAccommodation(closestCityId)">{{closestCity}}</h2>
+                <br/>
+                
+                <h1 v-if="FavList != null">Closest to beach: </h1>
+                <h2 style="cursor: pointer" class="hover:text-green-800 hover:underline" @click="goToAccommodation(closestBeachId)">{{closestBeach}}</h2>
+            </div>
         </div>
 
         <div class="container3 shadow-md bg-green-1">
@@ -53,6 +69,12 @@
     import HotelDescription from "/src/components/HotelDescription.vue";
 
 export default{
+    mounted(){
+        this.SortListNames();
+
+        this.AccomodationList = this.GetUserFavorites.accomodation;
+        this.FavList = this.GetUserFavorites.userFavorite;
+    },
     components:{
         HotelDescription
     },
@@ -60,17 +82,8 @@ export default{
         return{
             AccomodationList: [],
             FavList: [],
+            groupList: [],
         }
-    },
-    async created(){
-        // let response = await fetch('https://localhost:44323/api/User/favorites?userId=' + localStorage.getItem('userId'));
-        // let Favos = await response.json();
-
-
-
-
-        this.AccomodationList = this.GetUserFavorites.accomodation;
-        this.FavList = this.GetUserFavorites.userFavorite;
     },
     methods:{
         goToAccommodation(accommodationId) {
@@ -79,12 +92,35 @@ export default{
                 params: { id: accommodationId },
             });
         },
+        SortListNames(){
+            this.AccomodationList = this.GetUserFavorites.accomodation;
+            this.FavList = this.GetUserFavorites.userFavorite;
+
+            this.groupList = []
+
+            this.FavList.forEach(item => {if(!this.groupList.includes(item.groupName)){this.groupList.push(item.groupName)}})
+        },
+        SortList(group){
+            if(group == 'all'){
+                this.AccomodationList = this.GetUserFavorites.accomodation;
+                return this.AccomodationList
+            }
+            
+            this.AccomodationList = []
+
+            this.FavList.forEach(item => {
+            if(item.groupName == group){
+                this.GetUserFavorites.accomodation.forEach(a => {
+                if(a.id == item.accomodationId){    
+                    this.AccomodationList.push(a)
+                }})
+            }})
+        }
     },
     computed:{
         GetUserFavorites(){
             return this.$store.state.userFavorites;
         },
-
         highestRating(){
             let high = []
             this.AccomodationList.forEach(item => { high.push(item.starRating)
