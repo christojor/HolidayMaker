@@ -111,6 +111,22 @@ namespace Holiday_Maker.Services
             return NotFound();
         }
 
+        public async Task<bool> RemoveUserFavoriteList(int userId, string groupName)
+        {
+
+            var favorites = _ufRepo.GetAll().Result.Where(u => u.UserId.Equals(userId));
+
+            foreach (var favorite in favorites)
+            {
+                if (favorite.GroupName == groupName)
+                {
+                    await _ufRepo.Delete(favorite.Id);
+                }
+            }
+
+            return true;
+        }
+
 
         public async Task<bool> RegisterUser(User user)
         {
