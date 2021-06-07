@@ -66,6 +66,12 @@ namespace Holiday_Maker.Controllers
             await _userService.RemoveUserFavorite(userFavorite);
         }
 
+        [HttpDelete("favorites/removelist")]
+        public async Task<bool> DeleteFavoriteList(int userId, string groupName)
+        {
+            return await _userService.RemoveUserFavoriteList(userId, groupName);
+        }
+
         //Deletes user from db with a specific userId..
         [HttpDelete("{id}")]
         public async Task<bool> RemoveUser(int id)
