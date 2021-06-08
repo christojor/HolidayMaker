@@ -130,7 +130,6 @@ const store = createStore({
         removeFromBookedRooms(state, room){
             state.bookedRooms.splice(state.bookedRooms.indexOf(room), 1);
         },
-        },
         updateExtrasPrice(state, payload){
             state.extrasPrice = payload;
         },

@@ -57,7 +57,6 @@ export default {
       type: Object,
       required: true,
     },
-    },
     bookingParams: {
       type: Object,
       required: true,
@@ -84,9 +83,10 @@ export default {
        }
      }
     },
+
   methods: {
     addToBooking(room) {
-            if (this.roomAdded(room))
+      if (this.roomAdded(room))
       {
         window.alert('Room added to booking.')
       this.$store.commit("addToBookedRooms", room)
@@ -117,9 +117,7 @@ export default {
 
       console.log(this.$store.state.extrasPrice)
       console.log(this.$store.state.selectedExtras)
-    }
-  }
-};
+    },
     roomAdded(room){
        if (this.$store.state.bookedRooms.some(bookedRoom => bookedRoom.id === room.id)){
          return false;
@@ -135,7 +133,7 @@ export default {
       else{
         event.target.className = this.toggleClass.add;
       }
-    }
-  } 
+    },
+}
 }
 </script>
