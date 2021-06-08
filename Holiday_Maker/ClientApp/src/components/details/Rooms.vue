@@ -1,6 +1,6 @@
 <template>
 <div v-if="roomAvailable">
-<b>AVAILABLE ROOMS</b>
+<b>AVAILABLE ROOMS</b> from <b>{{ bookingParams.checkIn }}</b> to <b>{{ bookingParams.checkOut }}</b>
 <div v-for="room in rooms" :key="room">
 <div class="flex flex-wrap overflow-hidden border-black border-2 p-1 m-1">
 
