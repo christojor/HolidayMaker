@@ -27,7 +27,7 @@
           <div class="rounded-t-md bg-green-1 search-div shadow-xl w-2/8">
             <div class="text-green-500">
                <div style="text-align:left;margin-left:10px" v-for="Extra in Extras" :key="Extra.id">
-                 <input type="checkbox" style="margin-right:10px" :v-model="Extra.Checked">
+                 <input type="checkbox" style="margin-right:10px" :v-model="Extra.Checked" @change="setExtra(Extra)">
                  <label :for="Extra.Name">{{Extra.Name}} {{"+"}} {{Extra.Price}} {{Extra.Currency}}</label>
                </div>
               </div>
@@ -46,6 +46,9 @@
 export default {
   mounted(){
     this.sortExtras();
+    var Extra = {Extra: Checked}
+    this.setExtra(Extra)
+    console.log(this.$store.state.extras)
   },
 
    computed: {
@@ -54,10 +57,12 @@ export default {
           return this.$store.state.extras
         },
         set (savedExtras){
-          this.$store.commit('updateExtras', savedExtras)
+          this.$store.commit('setExtras', savedExtras)
         }
-      }
+    }
   },
+  
+
 
   data() {
     return {
@@ -73,7 +78,7 @@ export default {
         { Name: "Breakfast", Checked: false, Price: 5, Currency:"€"}
       ],
     
-        // savedSelectedExtras: []
+        savedExtras: []
     }
 
     },
@@ -87,6 +92,10 @@ export default {
       type: Object,
       required: true,
     },
+    savedExtras: {
+      type: Object,
+      required: true,
+    }
 
   },
 
@@ -132,6 +141,16 @@ export default {
       }
 
     },
+
+    setExtra(savedExtras){
+        this.savedExtras = [];
+        this.$store.commit('setExtras', savedExtras)
+        if(Extra.Checked)
+        {
+          this.savedExtras.push({Extra: Name, Extra: Price})
+        }
+        console.log(this.$store.state.extras)
+     },
     
     // saveSelectedExtras(Extra){
     // const inpt = document.querySelector('input');
