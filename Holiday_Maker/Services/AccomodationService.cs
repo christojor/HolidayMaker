@@ -18,6 +18,7 @@ namespace Holiday_Maker.Services
         private readonly IGenericRepository<AccomodationType> _accomodationTypeRepo = null;
         private readonly IGenericRepository<WifiQuality> _wifiQualityRepo = null;
         private readonly IGenericRepository<UserRating> _userRatingRepo = null;
+        private readonly IGenericRepository<Booking> _bookingRepo;
 
         private readonly RoomService _roomService = null;
 
@@ -30,9 +31,9 @@ namespace Holiday_Maker.Services
             _extraRepo = new GenericRepository<Extra>();
             _accomodationTypeRepo = new GenericRepository<AccomodationType>();
             _wifiQualityRepo = new GenericRepository<WifiQuality>();
-
             _roomService = new RoomService();
             _userRatingRepo = new GenericRepository<UserRating>();
+            _bookingRepo = new GenericRepository<Booking>();
         }
 
         public async Task<IEnumerable<Accomodation>> NestedAccomodations()
@@ -68,8 +69,8 @@ namespace Holiday_Maker.Services
                 {
                     totalRating += rate.Rating;
                 }
-                if(totalRating != 0)
-                totalRating = totalRating / rating.Count();
+                if (totalRating != 0)
+                    totalRating = totalRating / rating.Count();
 
                 accommodation.GuestRating = totalRating;
 
@@ -175,11 +176,12 @@ namespace Holiday_Maker.Services
 
             // Check if any rooms are unavailable at the destination and remove them from the list
 
-            foreach(var accomodation in accomodations)
+            foreach (var accomodation in accomodations)
             {
-                foreach(var room in accomodation.Rooms)
+                foreach (var room in accomodation.Rooms)
                 {
-                    if (!availableRoomIds.Contains(room.Id)){
+                    if (!availableRoomIds.Contains(room.Id))
+                    {
 
                         accomodation.Rooms.Remove(room);
                     }
@@ -281,6 +283,70 @@ namespace Holiday_Maker.Services
             var allUserRatings = _userRatingRepo.GetAll().Result.Where(u => u.UserId == userId);
 
             return allUserRatings;
+        }
+
+        public async Task<IEnumerable<Accomodation>> GetPopularAccomodations()
+        {
+            var allAccomodations = await _accomodationRepo.GetAll();
+            var allBookings = await _bookingRepo.GetAll();
+            var userRating = await _userRatingRepo.GetAll();
+
+            Accomodation first = allAccomodations.ElementAt(1), second = allAccomodations.ElementAt(2), third = allAccomodations.ElementAt(3);
+            int firstcount = 0, secondcount = 0, thirdcount = 0;
+
+            foreach(var accomodation in allAccomodations)
+            {
+                var rating = userRating.Where(a => a.AccomodationId == accomodation.Id);
+
+                var totalRating = 0;
+
+                foreach (var rate in rating)
+                {
+                    totalRating += rate.Rating;
+                }
+                if (totalRating != 0)
+                    totalRating = totalRating / rating.Count();
+
+                accomodation.GuestRating = totalRating;
+
+                var temp = 0;
+
+                foreach(var booking in allBookings)
+                {
+                    if(accomodation.Id == booking.AccomodationId)
+                    {
+                        ++temp;
+                    }
+                }
+                if(temp > firstcount)
+                {
+                    third = second;
+                    thirdcount = secondcount;
+
+                    second = first;
+                    secondcount = firstcount;
+
+                    first = accomodation;
+                    firstcount = temp;
+                }
+                else if (temp > secondcount)
+                {
+                    third = second;
+                    thirdcount = secondcount;
+
+                    second = accomodation;
+                    secondcount = temp;
+                }
+                else if (temp > thirdcount)
+                {
+                    third = accomodation;
+                    thirdcount = temp;
+                }
+            }
+
+            Accomodation[] popularHotels = { first, second, third };
+
+            return popularHotels;
         }
     }
 }

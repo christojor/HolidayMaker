@@ -333,7 +333,17 @@ h1 {
 }
 *:focus {
     outline: none;
-   }
+}
+/*---------------Popular Hotels-----------*/
+.popularHotel{
+    width: 27%;
+    height: 450px;
+    margin: 3%;
+    border-radius: 7px;
+    display: inline-block;
+    padding: 5px 1% 5px 1%;
+    vertical-align: top;
+}
 /*-------------Login Form--------------*/
 .form-head{
     text-align: center;

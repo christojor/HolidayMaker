@@ -104,12 +104,14 @@
                 <input type="submit" value="SEARCH" @click="search" class="mt-6 w-2/6 bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full shadow-xl"/>
             </div>
         </form>
+        <Popular/>
     </div>
 </template>
 
 <script>
-import enums from "../assets/enums.js";
+import enums from "../assets/enums.js"
 import mixin from "../mixins.js"
+import Popular from "/src/components/PopularHotels.vue"
 
 export default {
     mixins: [mixin],
@@ -118,7 +120,9 @@ export default {
         this.setMinMaxCheckDate(this.currentDate(0), this.currentDate(1));
         this.setApiState(enums.init);
     },
-
+    components:{
+        Popular,
+    },
     data()
     {
         return{
@@ -142,15 +146,12 @@ export default {
             selectedCountries: [],
         }
     },
-
     methods:{
-
         formatQuery(){
             this.destinationSearch = this.destinationSearch.trim()
             this.destinationSearch  = this.destinationSearch.toLowerCase()
             this.destinationSearch  = this.destinationSearch.charAt(0).toUpperCase() + this.destinationSearch.slice(1)
         },
-
         checkBookingParams(){
             if (this.bookingParams.checkIn == ''){
                 this.bookingParams.checkIn = this.currentDate(0)
@@ -168,7 +169,6 @@ export default {
                 this.bookingParams.travellersChildren = 0
             }
         },
-
         async search(e)
         {
             e.preventDefault()
@@ -207,7 +207,6 @@ export default {
 
             // Route to results page
             this.$router.push({ name: "Hotels"})
-
         },
         // Autocomplete events
         searchCountry(event) {
@@ -222,29 +221,27 @@ export default {
                 }
             }, 250);
         },
-
         setInput(event) {
             this.destinationSearch = event.value.name
         },
-
-    // Set destination in state to formatted search parameter
-    setDestination(searchQuery) {
-      this.$store.commit("setDestination", searchQuery);
-    },
-    setBookingParameters(payload) {
-      this.$store.commit("setBookingParameters", payload);
-    },
-    setApiState(newState) {
-      this.$store.commit("setApiState", newState);
-    },
-    // Call API and update accomodations state based on destination state
-    getQueriedDestinations() {
-      this.$store.dispatch("getQueriedDestinations");
-    },
-    // Get all accommodations (no search query)
-    getAccomodations() {
-      this.$store.dispatch("getAccomodations");
-    },
+        // Set destination in state to formatted search parameter
+        setDestination(searchQuery) {
+            this.$store.commit("setDestination", searchQuery);
         },
+        setBookingParameters(payload) {
+            this.$store.commit("setBookingParameters", payload);
+        },
+        setApiState(newState) {
+            this.$store.commit("setApiState", newState);
+        },
+        // Call API and update accomodations state based on destination state
+        getQueriedDestinations() {
+            this.$store.dispatch("getQueriedDestinations");
+        },
+        // Get all accommodations (no search query)
+        getAccomodations() {
+            this.$store.dispatch("getAccomodations");
+        },
+    },
 }
 </script>

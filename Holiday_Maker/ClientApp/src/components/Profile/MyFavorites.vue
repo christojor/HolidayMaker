@@ -110,6 +110,8 @@ export default{
             this.groupList = []
 
             this.FavList.forEach(item => {if(!this.groupList.includes(item.groupName)){this.groupList.push(item.groupName)}})
+
+            this.$store.commit('updateAccomodations', this.AccomodationList)
         },
         SortList(group){
             if(group == 'all'){
