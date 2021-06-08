@@ -19,7 +19,7 @@
           </div>
           
           <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
-            <Navbar :rooms="accomodation.rooms" :bookingParams="bookingParams" />
+            <Navbar :rooms="accomodation.rooms" />
           </div>
 
           <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
@@ -42,7 +42,7 @@
           </div>
             
             <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
-            <Rooms :rooms="accomodation.rooms" />
+            <Rooms :rooms="accomodation.rooms" :bookingParams="bookingParams" />
             <div v-if="accomodation.rooms.length">
             <button class="float-right bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-7 rounded-full" @click="goToBooking(accomodation.id)">
               Book Rooms
@@ -93,20 +93,42 @@ export default {
       return this.$store.state.accomodations;
     },
     nbrOfTravellers(){
-       let totalTravellers = bookingParams.travellersAdults + bookingParams.travellersChildren;
-       console.log(totalTravellers);
+       let totalTravellers = (parseInt(this.bookingParams.travellersAdults) + parseInt(this.bookingParams.travellersChildren));
        return totalTravellers;
-     }
+     },
+     maxNbrOfGuests(){
+        let maxGuests = null;
+        this.$store.state.bookedRooms.forEach(room => {
+          maxGuests += room.nbrOfGuests
+        });
+        return maxGuests;
+        },
+      nbrOfExtraBeds(){
+        let totalExtraBeds = null;
+        this.$store.state.bookedRooms.forEach(room => {
+          totalExtraBeds += room.nbrOfExtraBeds
+        });
+        return totalExtraBeds;
+      },
+      bookingParams(){
+        return this.$store.state.bookingParams;
+      },
     },
 
   methods:{
     goToBooking(accomodationId) {
       if (this.$store.state.bookedRooms.length)
       {
-        this.$router.push({
+        if (this.nbrOfTravellers > (this.maxNbrOfGuests + this.nbrOfExtraBeds))
+        {
+          window.alert('The total number of guests (' + this.nbrOfTravellers + ') exceed the number of beds ('+ this.maxNbrOfGuests + ') in your chosen room(s). Add extra bed(s) or additional room(s) to your booking.')
+        }
+        else {
+          this.$router.push({
           name: "Booking",
           params: { id: accomodationId },
         });
+        }
       }
       else {
         window.alert('You must choose a room before proceeding to payment.')
@@ -114,9 +136,6 @@ export default {
       },
       setBookedRooms(payload) {
             this.$store.commit("setBookedRooms", payload);
-      },
-      bookingParams(){
-        return this.$store.state.bookingParams;
       },
     }
 }
