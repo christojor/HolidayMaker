@@ -11,7 +11,7 @@
    <div class="w-1/2 overflow-hidden p-4">
     <form>     
      <button type="button" :class="toggleClass.add" @click="toggleAddRemoveButton($event); addToBooking(room)">
-       Add Room
+       Add / Remove
      </button>
      </form>
      <div>
@@ -70,7 +70,7 @@ export default {
       toggleClass:{
         add: "float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full",
         added:"float-right bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-      }
+      },
     }
   },
 
@@ -87,9 +87,24 @@ export default {
   
   methods: {
     addToBooking(room) {
-      console.log("Room added")
+      if (this.roomAdded(room))
+      {
+        window.alert('Room added to booking.')
       this.$store.commit("addToBookedRooms", room)
+      }
+      else{
+        window.alert('Room removed from booking.')
+        this.$store.commit("removeFromBookedRooms", room)
+      }
     },
+    roomAdded(room){
+       if (this.$store.state.bookedRooms.some(bookedRoom => bookedRoom.id === room.id)){
+         return false;
+       }
+       else{
+         return true;
+       }
+     },
     toggleAddRemoveButton(event) {
       if(event.target.className == this.toggleClass.add){
         event.target.className = this.toggleClass.added;
