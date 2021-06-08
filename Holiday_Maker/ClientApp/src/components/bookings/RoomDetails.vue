@@ -11,7 +11,7 @@
                     <h1 class="ml-2"><b>Room {{ index + 1 }}</b></h1>
                 </div>
                 
-                <div class="w-1/2 overflow-hidden" v-if="roomDetails.roomInfo.length > 1">
+                <div class="w-1/2 overflow-hidden" v-if="roomDetails.roomInfo.length > 1 && guestsAtRoomCapacity()">
                     <DeleteButton class="float-right" @click="deleteRoom(index)" />
                 </div>
             </div>
@@ -62,6 +62,14 @@ export default {
         setNbrOfNights(payload) {
             this.$store.commit("setNbrOfNights", payload);
         },
+        guestsAtRoomCapacity(){
+            if ((this.nbrOfGuests + this.lowestRoomCapacity) <= this.totalRoomCapacity){
+                return true
+            }
+            else{
+                return false
+            }
+        },
     },
 
     computed: {
@@ -72,6 +80,31 @@ export default {
             var daysBetween = dateDifference / (1000 * 3600 * 24);
             this.setNbrOfNights(daysBetween)
             return daysBetween
+        },
+        nbrOfGuests(){
+            let totalGuests = parseInt(this.roomDetails.bookingInfo.travellersAdults) + parseInt(this.roomDetails.bookingInfo.travellersChildren)
+            return totalGuests;
+        },
+        totalRoomCapacity(){
+            let totalCapacity = null
+
+            this.roomDetails.roomInfo.forEach(room => {
+                    totalCapacity += parseInt(room.nbrOfGuests)
+            });
+            return totalCapacity;
+        },
+        lowestRoomCapacity(){
+            let lowestRoomCapacity = parseInt(this.roomDetails.roomInfo[0].nbrOfGuests);
+
+            //  (parseInt(this.roomDetails.roomInfo[0].maxNbrOfGuests) + parseInt(this.roomDetails.roomInfo[0].nbrOfExtraBeds)); - Save for when choosing extras is implemented
+
+            this.roomDetails.roomInfo.forEach(room => {
+                if (lowestRoomCapacity > parseInt(room.nbrOfGuests)){
+                    lowestRoomCapacity = parseInt(room.nbrOfGuests)
+                }
+            });
+
+            return lowestRoomCapacity;
         },
     }
 }
