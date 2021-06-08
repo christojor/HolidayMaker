@@ -26,7 +26,7 @@
                 <font-awesome-icon :icon="['fas', 'star']" size="lg" style="color: #52B788;"/>
             </div><br/>
         
-            <FavoriteButton :accomodationObject="accomodation"/>
+            <FavoriteButton v-if="this.$store.state.isLoggedIn" :accomodationObject="accomodation"/>
         </div>
         <div v-if="lowestRoom(accomodation.id) == Infinity">
             <p style="font-size:14px;">Go to hotel</p>

@@ -25,7 +25,9 @@ export default {
     if (this.accomodations == null){
       this.updateAccomodations();
     }
-    this.$store.dispatch('getUserFavorites');
+    if(this.$store.state.isLoggedIn){
+      this.$store.dispatch('getUserFavorites');
+    }
   },
 
   components:{
