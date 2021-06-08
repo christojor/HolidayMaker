@@ -121,13 +121,7 @@ const store = createStore({
         },
         setUserBookings(state, payload){
             state.userBookings = payload;
-        },
-        addToBookedRooms (state, room) {
-            state.bookedRooms.push(room)
-          },
-        removeFromBookedRooms(state, room){
-            state.bookedRooms.splice(state.bookedRooms.indexOf(room), 1);
-        },
+        }
    },
    getters: {
         filteredList(state){
