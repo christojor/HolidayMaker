@@ -154,7 +154,7 @@ export default {
             });
         },
         SortListNames(){
-            if(!this.GetUserFavorites.userFavorite){
+            if(this.GetUserFavorites == null){
                 this.FavList = []
             }
             else{

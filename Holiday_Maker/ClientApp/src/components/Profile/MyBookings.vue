@@ -32,7 +32,8 @@
 
         <tr v-else v-for="Booking in Bookings" :key="Booking.id">
                 <td class="bookingElements">{{Booking.id}}</td>
-                <td class="bookingElements">{{Booking.accomodationId}}</td>
+                <td v-if="this.getAccomodationName(Booking.accomodationId) != null" class="bookingElements">{{this.getAccomodationName(Booking.accomodationId)}}</td>
+                <td v-else class="bookingElements">{{Booking.accomodationId}}</td>
                 <td class="bookingElements">{{Booking.nbrOfAdults}}</td>
                 <td class="bookingElements">{{Booking.nbrOfChildren}}</td>
                 <td class="bookingElements">{{Booking.checkInDate}}</td>
@@ -58,9 +59,9 @@
 <script>
 import Booking from '/src/components/pages/Booking.vue'
 import MyPage from '/src/components/pages/MyPage.vue'
-import CancelButton from '/src/components/CancelBookingButton.vue'
+import CancelButton from '/src/components/Profile/CancelBookingButton.vue'
 import Mixins from '/src/mixins.js'
-import HotelBookingRating from '/src/components/bookings/elements/HotelBookingRating.vue'
+import HotelBookingRating from '/src/components/Profile/HotelBookingRating.vue'
 
 
 export default {
@@ -89,6 +90,9 @@ export default {
         },
         Bookings(){
             return this.$store.state.userBookings;
+        },
+        Accomodations(){
+            return this.$store.state.accomodations;
         }
     },
 
@@ -97,7 +101,14 @@ export default {
             let response = await fetch('https://localhost:44323/api/Booking?userId=' + this.GetUserId);
             let bookings = await response.json();
             this.$store.commit('setUserBookings', bookings);
-        },      
+        },
+        getAccomodationName(id){
+            let accomodation = this.Accomodations.filter(a => (a.id == id) == true)
+            if(accomodation != ''){
+                return accomodation[0].name
+            }
+            return null
+        }
     },
 }
 </script>

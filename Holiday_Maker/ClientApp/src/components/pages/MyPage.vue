@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import RemoveUserButton from '/src/components/RemoveUserButton.vue'
+import RemoveUserButton from '/src/components/Profile/RemoveUserButton.vue'
 export default {
     components:{
         RemoveUserButton

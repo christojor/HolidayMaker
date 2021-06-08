@@ -39,10 +39,12 @@ export default {
       this.ToggleIcon = toggleIcon
     },
     GetUserFavorites(){
-      if(this.UserFavorites.accomodation != null){
-        for(var i = 0; i < this.UserFavorites.accomodation.length; i++){
-          if(this.accomodationObject.id == this.UserFavorites.accomodation[i].id){
-            this.ToggleIcon = !this.ToggleIcon;
+      if(this.UserFavorites != null){
+        if(this.UserFavorites.accomodation != null){
+          for(var i = 0; i < this.UserFavorites.accomodation.length; i++){
+            if(this.accomodationObject.id == this.UserFavorites.accomodation[i].id){
+              this.ToggleIcon = !this.ToggleIcon;
+            }
           }
         }
       }

@@ -274,9 +274,13 @@ namespace Holiday_Maker.Services
             }
             await _userRatingRepo.Insert(userRating);
             return true;
-           
-            
         }
 
+        public IEnumerable<UserRating> GetRating(int userId)
+        {
+            var allUserRatings = _userRatingRepo.GetAll().Result.Where(u => u.UserId == userId);
+
+            return allUserRatings;
+        }
     }
 }

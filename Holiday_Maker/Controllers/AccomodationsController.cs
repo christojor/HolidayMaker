@@ -107,7 +107,11 @@ namespace Holiday_Maker.Controllers
             return await _accomodationService.UpdateRating(userRating);
         }
 
-
+        [HttpGet("GetRating")]
+        public IEnumerable<UserRating> GetRating(int userId)
+        {
+            return _accomodationService.GetRating(userId);
+        }
 
         // DELETE: api/Accomodations/5
         [HttpDelete("{id}")]

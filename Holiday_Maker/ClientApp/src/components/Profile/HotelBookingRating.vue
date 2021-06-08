@@ -15,9 +15,13 @@
 
 <script>
 export default {
+  mounted(){
+    this.getUserRatings()
+  },
   data() {
     return {
       rate: null,
+      ratings: []
     };
   },
   props: {
@@ -37,6 +41,12 @@ export default {
         body: JSON.stringify(ratingObject),
       });
     },
+    async getUserRatings(){
+      let response = await fetch('https://localhost:44323/api/Accomodations/GetRating?userId=' + this.$store.state.userId);
+      this.ratings = await response.json();
+
+      this.ratings.forEach(r => {if(r.accomodationId == this.id){this.rate = r.rating}})
+    }
   },
 };
 </script>
