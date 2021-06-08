@@ -1,6 +1,6 @@
 <template>
 <div v-if="roomAvailable">
-<b>AVAILABLE ROOMS</b>
+<b>AVAILABLE ROOMS</b> from <b>{{ bookingParams.checkIn }}</b> to <b>{{ bookingParams.checkOut }}</b>
 <div v-for="room in rooms" :key="room.id">
 <div class="flex flex-wrap overflow-hidden border-black border-2 p-1 m-1">
 
@@ -8,19 +8,18 @@
     <img class="rounded-md roomImg" :src="room.imgSrc">
    </div>
 
-      <div class="w-1/2 overflow-hidden p-4">
-        <button
-          class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
-          @click="addToBooking(room)"
-        >
-          Add Room
-        </button>
-        <div>
-          <b>Room Type:</b> {{ room.roomType.name }}<br />
-          <b>Number of Guests: </b> {{ room.nbrOfGuests }}<br />
-          <b>Number of Extra Beds:</b> {{ room.nbrOfExtraBeds }}<br />
-          <b>Price:</b> {{ room.price }}€ <br />
-          <div v-if="room.isRefundable == true"><b>Refund:</b> Yes<br /></div>
+   <div class="w-1/2 overflow-hidden p-4">
+    <form>     
+     <button type="button" :class="toggleClass.add" @click="toggleAddRemoveButton($event); addToBooking(room)">
+       Add / Remove
+     </button>
+     </form>
+     <div>
+     <b>Room Type:</b> {{ room.roomType.name }}<br>
+     <b>Number of Guests: </b> {{ room.nbrOfGuests }}<br>
+     <b>Number of Extra Beds:</b> {{ room.nbrOfExtraBeds }}<br>
+     <b>Price:</b> {{ room.price }}€ <br>
+     <div v-if="room.isRefundable == true"><b>Refund:</b> Yes<br /></div>
           <div v-if="room.isRefundable == false"><b>Refund:</b> No<br /></div>
           <b>Description:</b> {{ room.description }}<br />
           <b>Extras at extra price: </b>
@@ -58,6 +57,21 @@ export default {
       type: Object,
       required: true,
     },
+    },
+    bookingParams: {
+      type: Object,
+      required: true,
+    }
+  },
+  
+  data(){
+    return{
+      image: "./assets/images/fullyBooked.png",
+      toggleClass:{
+        add: "float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full",
+        added:"float-right bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+      },
+    }
   },
 
   computed:{
@@ -72,7 +86,15 @@ export default {
     },
   methods: {
     addToBooking(room) {
-      this.$store.state.bookedRooms.push(room);
+            if (this.roomAdded(room))
+      {
+        window.alert('Room added to booking.')
+      this.$store.commit("addToBookedRooms", room)
+      }
+      else{
+        window.alert('Room removed from booking.')
+        this.$store.commit("removeFromBookedRooms", room)
+      }
     },
     addExtraMethod(Extra){
       this.savedExtras.push(Extra.Name)
@@ -98,4 +120,22 @@ export default {
     }
   }
 };
+    roomAdded(room){
+       if (this.$store.state.bookedRooms.some(bookedRoom => bookedRoom.id === room.id)){
+         return false;
+       }
+       else{
+         return true;
+       }
+     },
+    toggleAddRemoveButton(event) {
+      if(event.target.className == this.toggleClass.add){
+        event.target.className = this.toggleClass.added;
+      }
+      else{
+        event.target.className = this.toggleClass.add;
+      }
+    }
+  } 
+}
 </script>
