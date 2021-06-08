@@ -44,6 +44,8 @@ const store = createStore({
             booking:{},
             bookedRoom: []
               },
+        paymentError: null,
+        paymentErrorMessage: null,
    },
 
    // Methods for changing states synchronously
@@ -121,6 +123,12 @@ const store = createStore({
         },
         setUserBookings(state, payload){
             state.userBookings = payload;
+        },
+        setPaymentFailed(state, payload){
+            state.paymentError = payload;
+        },
+        setPaymentFailureMessage(state, payload){
+            state.paymentErrorMessage = payload
         }
    },
    getters: {
