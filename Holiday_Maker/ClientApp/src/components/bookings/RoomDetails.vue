@@ -24,8 +24,11 @@
                 <h1>Check-in: {{ booking.checkIn }}</h1>
                 <h1>Check-out: {{ booking.checkOut }}</h1>
                 <h1>Staying {{ nbrOfNights }} nights</h1>
-            </div>
-            
+            </div> 
+        </div>
+        <div class="w-full overflow-hidden border-2 rounded-md border-gray-300 mb-2">
+            <h1 class="ml-2"><b>Extras</b></h1>
+            <h1 class="ml-2" v-for="extra in selectedExtras" :key="extra">{{extra}}</h1>
         </div>
     </div>
 </template>
@@ -73,6 +76,9 @@ export default {
             this.setNbrOfNights(daysBetween)
             return daysBetween
         },
+        selectedExtras(){
+            return this.$store.state.selectedExtras
+        }
     }
 }
 </script>

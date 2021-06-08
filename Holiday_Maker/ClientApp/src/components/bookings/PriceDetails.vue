@@ -7,6 +7,7 @@
 
   <div class="w-full overflow-hidden">
     <h1>{{ nbrOfNights }} nights x {{ price }}€</h1>
+    <h1>Price of Extras: {{ extrasPrice }}€</h1>
     <h1>Price: {{ totalPrice }}€</h1>
     <h1>Tax (20%): {{ priceTax }}€</h1>
     <h1><b>Total: {{ totalPriceInclTax }}€</b></h1>
@@ -30,6 +31,9 @@ export default {
     },
   
   computed:{
+    extrasPrice(){
+      return this.$store.state.extrasPrice
+    },
     price(){
         return this.roomPrices.reduce((sum, room) => {
             return sum += room.price;
@@ -37,21 +41,21 @@ export default {
     },
       totalPrice(){
         return this.roomPrices.reduce((sum, room) => {
-            return sum += room.price * this.nbrOfNights;
+            return sum += (room.price * this.nbrOfNights) + this.extrasPrice;
         }, 0);
         
     },
     totalPriceInclTax(){
       var totalPrice = 0;
         return this.roomPrices.reduce((sum, room) => {
-            totalPrice += (room.price * this.nbrOfNights) * 1.2;
+            totalPrice += ((room.price * this.nbrOfNights) + this.extrasPrice) * 1.2;
             this.$store.commit("setTotalPrice", totalPrice);
             return totalPrice;
         }, 0);
     },
     priceTax(){
         return this.roomPrices.reduce((sum, room) => {
-            return sum += (room.price * this.nbrOfNights) * 0.2;
+            return sum += ((room.price * this.nbrOfNights) + this.extrasPrice) * 0.2;
         }, 0);
     },
     nbrOfNights(){
