@@ -154,7 +154,13 @@ export default {
             });
         },
         SortListNames(){
-            this.FavList = this.GetUserFavorites.userFavorite;
+            if(this.GetUserFavorites.userFavorite == null){
+                this.FavList = []
+            }
+            else{
+               this.FavList = this.GetUserFavorites.userFavorite; 
+            }
+            
             this.FavList.forEach(item => {if(!this.groupList.includes(item.groupName)){this.groupList.push(item.groupName)}})
         }
     },
