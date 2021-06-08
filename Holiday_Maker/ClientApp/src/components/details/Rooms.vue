@@ -55,8 +55,13 @@ export default {
     rooms: {
       type: Object,
       required: true,
+    },
+    bookingParams: {
+      type: Object,
+      required: true,
     }
   },
+  
   data(){
     return{
       image: "./assets/images/fullyBooked.png",
@@ -71,12 +76,12 @@ export default {
        else {
          return false;
        }
-     }
+     },
     },
   
   methods: {
     addToBooking(room) {
-      this.$store.state.bookedRooms.push(room)
+      this.$store.commit("addToBookedRooms", room)
     }
   } 
 }

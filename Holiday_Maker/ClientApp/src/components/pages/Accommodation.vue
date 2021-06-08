@@ -19,7 +19,7 @@
           </div>
           
           <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
-            <Navbar :rooms="accomodation.rooms"/>
+            <Navbar :rooms="accomodation.rooms" :bookingParams="bookingParams" />
           </div>
 
           <div class="w-full overflow-hidden xl:my-1 xl:px-1 xl:w-full p-2">
@@ -91,8 +91,13 @@ export default {
   computed: {   
     accomodations() {
       return this.$store.state.accomodations;
-    }
-  },
+    },
+    nbrOfTravellers(){
+       let totalTravellers = bookingParams.travellersAdults + bookingParams.travellersChildren;
+       console.log(totalTravellers);
+       return totalTravellers;
+     }
+    },
 
   methods:{
     goToBooking(accomodationId) {
@@ -109,6 +114,9 @@ export default {
       },
       setBookedRooms(payload) {
             this.$store.commit("setBookedRooms", payload);
+      },
+      bookingParams(){
+        return this.$store.state.bookingParams;
       },
     }
 }
