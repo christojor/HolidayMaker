@@ -44,6 +44,7 @@ const store = createStore({
             booking:{},
             bookedRoom: []
               },
+        extras: []
    },
 
    // Methods for changing states synchronously
@@ -121,6 +122,9 @@ const store = createStore({
         },
         setUserBookings(state, payload){
             state.userBookings = payload;
+        },
+        setExtras(state, savedExtras){
+            state.extras=savedExtras
         }
    },
    getters: {

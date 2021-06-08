@@ -1,7 +1,7 @@
 <template>
 <div v-if="roomAvailable">
 <b>AVAILABLE ROOMS</b>
-<div v-for="room in rooms" :key="room">
+<div v-for="room in rooms" :key="room.id">
 <div class="flex flex-wrap overflow-hidden border-black border-2 p-1 m-1">
 
   <div class="w-1/2 overflow-hidden p-2">
@@ -26,17 +26,18 @@
           <b>Extras at extra price: </b>
           <div class="rounded-t-md bg-green-1 search-div shadow-xl w-2/8">
             <div class="text-green-500">
-               <div style="text-align:left;margin-left:10px" v-for="Extra in Extras" :key="Extra">
-                 <input type="checkbox" style="margin-right:10px" id="{{Extra.Name}}" :value="Extra.Checked" @click="saveSelectedExtras(Extra)">
-                 <label for="{{Extra.Name}}" @click="saveSelectedExtras(Extra)">{{Extra.Name}} {{"+"}} {{Extra.Price}} {{Extra.Currency}}</label>
+               <div style="text-align:left;margin-left:10px" v-for="Extra in Extras" :key="Extra.id">
+                 <input type="checkbox" style="margin-right:10px" :v-model="Extra.Checked">
+                 <label :for="Extra.Name">{{Extra.Name}} {{"+"}} {{Extra.Price}} {{Extra.Currency}}</label>
                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
 </template>
 
 
@@ -45,6 +46,17 @@
 export default {
   mounted(){
     this.sortExtras();
+  },
+
+   computed: {
+      extras: {
+        get() {
+          return this.$store.state.extras
+        },
+        set (savedExtras){
+          this.$store.commit('updateExtras', savedExtras)
+        }
+      }
   },
 
   data() {
@@ -66,7 +78,7 @@ export default {
 
     },
 
-  props: {
+   props: {
     rooms: {
       type: Object,
       required: true,
@@ -120,18 +132,23 @@ export default {
       }
 
     },
-    saveSelectedExtras(Extra){
-           
-             if(this.savedSelectedExtras.includes(Extra.Name))
-             {
-               this.savedSelectedExtras.filter(extra => {if(extra==Extra.Name){this.savedSelectedExtras.splice(extra,1)}})
-             }
-             else
-             {
-               this.savedSelectedExtras.push(Extra.Name)
-             }     
-             console.log(this.savedSelectedExtras)   
-    }
+    
+    // saveSelectedExtras(Extra){
+    // const inpt = document.querySelector('input');
+    // inpt.onclick = function() {
+      
+      
+    //          if(this.savedSelectedExtras.includes(Extra.Name))
+    //          {
+    //            this.savedSelectedExtras.filter(extra => {if(extra==Extra.Name){this.savedSelectedExtras.splice(extra,1)}})
+    //          }
+    //          else
+    //          {
+    //            this.savedSelectedExtras.push(Extra.Name)
+    //          }     
+    //          console.log(this.savedSelectedExtras)  
+    //         }          
+    // }
   }
 };
 </script>
