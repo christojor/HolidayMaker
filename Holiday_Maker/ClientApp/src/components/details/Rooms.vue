@@ -73,7 +73,7 @@ export default {
         { Name: "Breakfast", Checked: false, Price: 5, Currency:"€"}
       ],
     
-        savedSelectedExtras: []
+        // savedSelectedExtras: []
     }
 
     },
