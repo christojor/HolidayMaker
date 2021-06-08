@@ -8,10 +8,12 @@
     <img class="rounded-md roomImg" :src="room.imgSrc">
    </div>
 
-   <div class="w-1/2 overflow-hidden p-4">     
-     <button class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" @click="addToBooking(room)">
-      Add Room
-     </button> 
+   <div class="w-1/2 overflow-hidden p-4">
+    <form>     
+     <button type="button" :class="toggleClass.add" @click="toggleAddRemoveButton($event); addToBooking(room)">
+       Add Room
+     </button>
+     </form>
      <div>
      <b>Room Type:</b> {{ room.roomType.name }}<br>
      <b>Number of Guests: </b> {{ room.nbrOfGuests }}<br>
@@ -65,6 +67,10 @@ export default {
   data(){
     return{
       image: "./assets/images/fullyBooked.png",
+      toggleClass:{
+        add: "float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full",
+        added:"float-right bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+      }
     }
   },
 
@@ -81,7 +87,16 @@ export default {
   
   methods: {
     addToBooking(room) {
+      console.log("Room added")
       this.$store.commit("addToBookedRooms", room)
+    },
+    toggleAddRemoveButton(event) {
+      if(event.target.className == this.toggleClass.add){
+        event.target.className = this.toggleClass.added;
+      }
+      else{
+        event.target.className = this.toggleClass.add;
+      }
     }
   } 
 }
