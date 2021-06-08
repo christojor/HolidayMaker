@@ -24,14 +24,7 @@
           <div v-if="room.isRefundable == false"><b>Refund:</b> No<br /></div>
           <b>Description:</b> {{ room.description }}<br />
           <b>Extras at extra price: </b>
-          <div class="rounded-t-md bg-green-1 search-div shadow-xl w-2/8">
-            <div class="text-green-500">
-               <div style="text-align:left;margin-left:10px" v-for="Extra in Extras" :key="Extra.id">
-                 <input type="checkbox" style="margin-right:10px" :v-model="Extra.Checked" @change="setExtra(Extra)">
-                 <label :for="Extra.Name">{{Extra.Name}} {{"+"}} {{Extra.Price}} {{Extra.Currency}}</label>
-               </div>
-              </div>
-            </div>
+          <Extras :extrasList="extrasList" @addExtra="addExtraMethod" @removeExtra="removeExtraMethod"/>
           </div>
         </div>
       </div>
@@ -42,46 +35,19 @@
 
 
 <script>
+import Extras from "/src/components/details/RoomExtras.vue";
 
 export default {
-  mounted(){
-    this.sortExtras();
-    var Extra = {Extra: Checked}
-    this.setExtra(Extra)
-    console.log(this.$store.state.extras)
+  components:{
+    Extras
   },
-
-   computed: {
-      extras: {
-        get() {
-          return this.$store.state.extras
-        },
-        set (savedExtras){
-          this.$store.commit('setExtras', savedExtras)
-        }
-    }
-  },
-  
-
-
   data() {
     return {
       image: "./assets/images/fullyBooked.png",
-
-      Extras: [
-        { Name: "Self-Catering", Checked: false, Price: 5, Currency:"€"},
-        { Name: "Half-Board",  Checked: false, Price: 10, Currency:"€"},
-        { Name: "Full-board",  Checked: false, Price: 15, Currency:"€"},
-        { Name: "Extra bed",  Checked: false, Price: 5, Currency:"€"},
-        { Name: "Crib", Checked: false, Price: 5, Currency:"€"},
-        { Name: "Self-Catering", Checked: false, Price: 20, Currency:"€"},
-        { Name: "Breakfast", Checked: false, Price: 5, Currency:"€"}
-      ],
-    
-        savedExtras: []
+      savedExtras: [],
+      totalPrice: 0,
     }
-
-    },
+  },
 
    props: {
     rooms: {
@@ -92,11 +58,6 @@ export default {
       type: Object,
       required: true,
     },
-    savedExtras: {
-      type: Object,
-      required: true,
-    }
-
   },
 
   computed:{
@@ -109,65 +70,32 @@ export default {
        }
      }
     },
-  
   methods: {
     addToBooking(room) {
       this.$store.state.bookedRooms.push(room);
     },
- 
-    sortExtras(){
-      this.Extras = [];
+    addExtraMethod(Extra){
+      this.savedExtras.push(Extra.Name)
 
-      if(this.extrasList[0].selfCatering){
-        this.Extras.push({ Name: "Self-Catering", Checked: false, Price: 5, Currency: "€"})
-      }
-      if(this.extrasList[0].halfBoard){
-        this.Extras.push({ Name: "Half-Board", Checked: false, Price: 10, Currency: "€"})
-      }
-      if(this.extrasList[0].fullBoard){
-        this.Extras.push({ Name: "Full-board", Checked: false, Price: 15, Currency: "€"})
-      }
-      if(this.extrasList[0].extraBed){
-        this.Extras.push({ Name: "Extra bed", Checked: false, Price: 5, Currency: "€"})
-      }
-      if(this.extrasList[0].crib){
-        this.Extras.push({ Name: "Crib", Checked: false, Price: 5, Currency: "€"})
-      }
-      if(this.extrasList[0].allInclusive){
-        this.Extras.push({ Name: "Self-Catering", Checked: false, Price: 20, Currency: "€"})
-      }
-      if(this.extrasList[0].breakfast){
-        this.Extras.push({ Name: "Breakfast", Checked: false, Price: 5, Currency: "€"})
-      }
+      this.totalPrice += Extra.Price
 
+      this.$store.commit('updateExtrasPrice', this.totalPrice)
+      this.$store.commit('updateSelectedExtras', this.savedExtras)
+
+      console.log(this.$store.state.extrasPrice)
+      console.log(this.$store.state.selectedExtras)
     },
+    removeExtraMethod(Extra){
+      this.savedExtras.filter(extra => {if(extra.name == Extra.Name){this.savedExtras.splice(extra,1)}})
 
-    setExtra(savedExtras){
-        this.savedExtras = [];
-        this.$store.commit('setExtras', savedExtras)
-        if(Extra.Checked)
-        {
-          this.savedExtras.push({Extra: Name, Extra: Price})
-        }
-        console.log(this.$store.state.extras)
-     },
-    
-    // saveSelectedExtras(Extra){
-    // const inpt = document.querySelector('input');
-    // inpt.onclick = function() {
-      
-      
-    //          if(this.savedSelectedExtras.includes(Extra.Name))
-    //          {
-    //            this.savedSelectedExtras.filter(extra => {if(extra==Extra.Name){this.savedSelectedExtras.splice(extra,1)}})
-    //          }
-    //          else
-    //          {
-    //            this.savedSelectedExtras.push(Extra.Name)
-    //          }     
-    //          console.log(this.savedSelectedExtras)  
-    //         }          
-    // }
+      this.totalPrice -= Extra.Price
+
+      this.$store.commit('updateExtrasPrice', this.totalPrice)
+      this.$store.commit('updateSelectedExtras', this.savedExtras)
+
+      console.log(this.$store.state.extrasPrice)
+      console.log(this.$store.state.selectedExtras)
+    }
   }
 };
 </script>

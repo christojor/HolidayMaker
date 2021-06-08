@@ -43,9 +43,9 @@ const store = createStore({
         bookingObject: {
             booking:{},
             bookedRoom: []
-              },
-        extras: [],
-        savedExtras: []
+        },
+        extrasPrice: null,
+        selectedExtras: null,
    },
 
    // Methods for changing states synchronously
@@ -124,8 +124,11 @@ const store = createStore({
         setUserBookings(state, payload){
             state.userBookings = payload;
         },
-        setExtras(state, savedExtras){
-            state.extras=savedExtras
+        updateExtrasPrice(state, payload){
+            state.extrasPrice = payload;
+        },
+        updateSelectedExtras(state, payload){
+            state.selectedExtras = payload;
         }
    },
    getters: {
