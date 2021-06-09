@@ -30,6 +30,22 @@
     </div>
   </div>
 
+<div v-else class="flex flex-wrap overflow-hidden">
+
+  <div class="w-1/3 overflow-hidden">
+    <!-- Column Content -->
+  </div>
+
+  <div class="w-1/3 overflow-hidden">
+    <img src="/src/assets/images/fullyBooked.png" alt="fullybooked">
+  </div>
+
+  <div class="w-1/3 overflow-hidden">
+    <!-- Column Content -->
+  </div>
+
+</div>
+
 </template>
 
 
