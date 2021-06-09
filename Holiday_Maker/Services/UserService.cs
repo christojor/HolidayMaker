@@ -13,11 +13,13 @@ namespace Holiday_Maker.Services
         private IGenericRepository<UserFavorite> _ufRepo;
         private IGenericRepository<Accomodation> _accomodationRepo;
         private IGenericRepository<User> _userRepo;
+        private readonly IGenericRepository<UserRating> _userRatingRepo;
         public UserService()
         {
             _ufRepo = new GenericRepository<UserFavorite>();
             _accomodationRepo = new GenericRepository<Accomodation>();
             _userRepo = new GenericRepository<User>();
+            _userRatingRepo = new GenericRepository<UserRating>();
         }
 
         public async Task<ActionResult<User>> GetUserById(int id)
@@ -61,6 +63,7 @@ namespace Holiday_Maker.Services
         {
             var userFavorites = await _ufRepo.GetAll();
             var rooms = await _accomodationRepo.GetAll();
+            var userRating = await _userRatingRepo.GetAll();
 
             var favoriteList = new List<UserFavorite>();
             var favoriteAccomodations = new List<Accomodation>();
@@ -76,6 +79,20 @@ namespace Holiday_Maker.Services
             foreach (var favoriteAccomodation in favoriteList)
             {
                 var favRoom = rooms.FirstOrDefault(r => r.Id.Equals(favoriteAccomodation.AccomodationId));
+
+                var rating = userRating.Where(a => a.AccomodationId == favRoom.Id);
+
+                var totalRating = 0;
+
+                foreach (var rate in rating)
+                {
+                    totalRating += rate.Rating;
+                }
+                if (totalRating != 0)
+                    totalRating = totalRating / rating.Count();
+
+                favRoom.GuestRating = totalRating;
+
                 favoriteAccomodations.Add(favRoom);
             }
 
