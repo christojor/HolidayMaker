@@ -7,7 +7,7 @@
 
   <div class="w-full overflow-hidden">
     <h1>{{ nbrOfNights }} nights x {{ price }}€</h1>
-    <h1>Price of Extras: {{ extrasPrice }}€</h1>
+    <h1>Price of Extras: {{ allExtrasPrice() }}€</h1>
     <h1>Price: {{ totalPrice }}€</h1>
     <h1>Tax (20%): {{ priceTax }}€</h1>
     <h1><b>Total: {{ totalPriceInclTax }}€</b></h1>
@@ -29,6 +29,19 @@ export default {
       required: true,
       }
     },
+
+    methods:{
+      roomExtrasPrice(id){
+        let price = 0
+        this.extrasPrice.filter(extra => {if(extra.roomId == id){price += extra.price}})
+        return price
+      },
+      allExtrasPrice(){
+        let price = 0
+        this.extrasPrice.filter(extra => price += extra.price)
+        return price
+      }
+    },
   
   computed:{
     extrasPrice(){
@@ -41,21 +54,21 @@ export default {
     },
       totalPrice(){
         return this.roomPrices.reduce((sum, room) => {
-            return sum += (room.price * this.nbrOfNights) + this.extrasPrice;
+            return sum += (room.price * this.nbrOfNights) + this.roomExtrasPrice(room.id);
         }, 0);
         
     },
     totalPriceInclTax(){
       var totalPrice = 0;
         return this.roomPrices.reduce((sum, room) => {
-            totalPrice += ((room.price * this.nbrOfNights) + this.extrasPrice) * 1.2;
+            totalPrice += ((room.price * this.nbrOfNights) + this.roomExtrasPrice(room.id)) * 1.2;
             this.$store.commit("setTotalPrice", totalPrice);
             return totalPrice;
         }, 0);
     },
     priceTax(){
         return this.roomPrices.reduce((sum, room) => {
-            return sum += ((room.price * this.nbrOfNights) + this.extrasPrice) * 0.2;
+            return sum += ((room.price * this.nbrOfNights) + this.roomExtrasPrice(room.id)) * 0.2;
         }, 0);
     },
     nbrOfNights(){

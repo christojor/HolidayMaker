@@ -45,7 +45,7 @@
             <Rooms :rooms="accomodation.rooms" :bookingParams="bookingParams" :extrasList="accomodation.extras" />
             <div v-if="accomodation.rooms.length">
  
-            <button class="float-right bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-7 rounded-full" @click="goToBooking(accomodation.id)">
+            <button class="outline float-right bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-7 rounded-full" @click="goToBooking(accomodation.id)">
               Book Rooms
             </button>
             </div>
