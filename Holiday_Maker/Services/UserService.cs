@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Holiday_Maker.Models;
 using Holiday_Maker.Repository;
@@ -33,6 +34,29 @@ namespace Holiday_Maker.Services
             }
             return NotFound();
         }
+
+        public async Task<bool> UpdateUserInformation(User user)
+        {
+
+            var currentInfo = await _userRepo.GetById(user.Id);
+            if (currentInfo != null)
+            {
+                currentInfo.FirstName = user.FirstName;
+                currentInfo.LastName = user.LastName;
+                currentInfo.Country = user.Country;
+                currentInfo.City = user.City;
+                currentInfo.StreetAddress = user.StreetAddress;
+                currentInfo.ZipCode = user.ZipCode;
+                currentInfo.Username = user.Username;
+                await _userRepo.Update(currentInfo);
+            }
+
+
+            return true;
+        }
+
+
+
 
         public async Task<bool> RemoveUser(int id)
         {

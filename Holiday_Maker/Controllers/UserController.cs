@@ -84,5 +84,12 @@ namespace Holiday_Maker.Controllers
         {
             return await _userService.UpdateMemberPoints(user.Id, user.MemberPoints);
         }
+
+        [HttpPut("UpdateUserInfo")]
+        public async Task<bool> UpdateUserInformation(User user)
+        {
+
+            return await _userService.UpdateUserInformation(user);
+        }
     }
 }

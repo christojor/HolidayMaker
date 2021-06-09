@@ -1,4 +1,6 @@
 <template>
+    <EditUserModal :toggleModal="ToggleModal" @toggleEmit="ToggleModalMethod" />
+
     <div class="container1" style="padding-top:10px">
         <div class="bg-green-1 shadow-md op90" style="width:100%; border-radius:7px">
             <h2 class="header bg-green-2">My Profile</h2>
@@ -48,9 +50,9 @@
             </table>
             <table style="width:100%">
                 <tr>
-                    <!--<th class="bg-green-1">
-                        <button class="outline bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl myButton">Edit</button>
-                    </th>-->
+                    <th class="bg-green-1">
+                        <button @click="ToggleModalMethod(true)" class="outline bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl myButton">Edit</button>
+                    </th>
                 </tr>
             </table>
         </div>
@@ -91,10 +93,19 @@
 
 <script>
 import RemoveUserButton from '/src/components/Profile/RemoveUserButton.vue'
+import EditUserModal from '/src/components/EditUserModal.vue'
 export default {
     components:{
-        RemoveUserButton
+        RemoveUserButton,
+        EditUserModal
     },
+
+    data(){
+        return{
+             ToggleModal: false
+        }
+    },
+
     computed:{
         GetUser(){
             return this.$store.state.user;
@@ -109,6 +120,11 @@ export default {
         GetUserFavorites(){
             this.$store.dispatch('getUserFavorites');
         },
+    },
+    methods:{
+      ToggleModalMethod(toggleModal) {
+      this.ToggleModal = toggleModal
+    },
     }
 }
 </script>
