@@ -162,6 +162,8 @@ export default {
         //show error in payment form
         console.log("Error firing");
       } else {
+        this.$store.commit("setPaymentFailed", false)
+        this.$store.commit("setPaymentFailureMessage", null)
         //otherwise send paymentMethod.id to your server
         await fetch("https://localhost:44323/api/Payment/Pay", {
           method: "POST",
@@ -183,6 +185,12 @@ export default {
       if(response.error){
         //Show error from server on payment form
         console.log("Show error message")
+        this.$store.commit("setPaymentFailed", true)
+        this.$store.commit("setPaymentFailureMessage", response.error)
+        this.$emit('emitToggle', this.toggleModal)
+        console.log(this.$store.state.paymentError)
+        console.log(this.$store.state.paymentErrorMessage)
+
       } else if (response.requires_action){
         //Use stripe.js to handle required card action
         console.log("Requires card action")
@@ -222,7 +230,7 @@ export default {
   },
   data(){
     return{
-      toggleModal: true
+      toggleModal: true,
     }
   }
 };
