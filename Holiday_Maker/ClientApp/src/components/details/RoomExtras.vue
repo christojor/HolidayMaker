@@ -14,6 +14,7 @@
 export default{
     mounted(){
         this.sortExtras();
+        this.$emit('addExtra', [])
     },
     data(){
         return{
@@ -25,8 +26,12 @@ export default{
             type: Object,
             required: true,
         },
+        roomId: {
+            type: Number,
+            required: true,
         },
-        methods:{
+    },
+    methods:{
         setExtra(Extra){
             Extra.Checked = !Extra.Checked
 
@@ -44,25 +49,25 @@ export default{
             this.Extras = []
             
             if(this.extrasList[0].selfCatering){
-                this.Extras.push({ Name: "Self-Catering", Checked: false, Price: 5, Currency: "€"})
+                this.Extras.push({ Name: "Self-Catering", Checked: false, Price: 5, Currency: "€", roomId: this.roomId})
             }
             if(this.extrasList[0].halfBoard){
-                this.Extras.push({ Name: "Half-Board", Checked: false, Price: 10, Currency: "€"})
+                this.Extras.push({ Name: "Half-Board", Checked: false, Price: 10, Currency: "€", roomId: this.roomId})
             }
             if(this.extrasList[0].fullBoard){
-                this.Extras.push({ Name: "Full-board", Checked: false, Price: 15, Currency: "€"})
+                this.Extras.push({ Name: "Full-board", Checked: false, Price: 15, Currency: "€", roomId: this.roomId})
             }
             if(this.extrasList[0].extraBed){
-                this.Extras.push({ Name: "Extra bed", Checked: false, Price: 5, Currency: "€"})
+                this.Extras.push({ Name: "Extra bed", Checked: false, Price: 5, Currency: "€", roomId: this.roomId})
             }
             if(this.extrasList[0].crib){
-                this.Extras.push({ Name: "Crib", Checked: false, Price: 5, Currency: "€"})
+                this.Extras.push({ Name: "Crib", Checked: false, Price: 5, Currency: "€", roomId: this.roomId})
             }
             if(this.extrasList[0].allInclusive){
-                this.Extras.push({ Name: "Self-Catering", Checked: false, Price: 20, Currency: "€"})
+                this.Extras.push({ Name: "Self-Catering", Checked: false, Price: 20, Currency: "€", roomId: this.roomId})
             }
             if(this.extrasList[0].breakfast){
-                this.Extras.push({ Name: "Breakfast", Checked: false, Price: 5, Currency: "€"})
+                this.Extras.push({ Name: "Breakfast", Checked: false, Price: 5, Currency: "€", roomId: this.roomId})
             }
         },
     }

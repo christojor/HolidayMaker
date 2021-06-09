@@ -97,6 +97,7 @@ export default {
 
     beforeUnmount() {
       this.setBookedRooms([]);
+      this.setExtras([]);
     },
 
     data(){
@@ -168,6 +169,9 @@ export default {
     methods: {
       setBookedRooms(payload){
         this.$store.commit("setBookedRooms", payload);
+      },
+      setExtras(payload){
+        this.$store.commit("setExtras", payload);
       },
       toggleModalMethod(toggleModal){
         this.toggleModal = toggleModal

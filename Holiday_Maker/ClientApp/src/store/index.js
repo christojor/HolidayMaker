@@ -45,8 +45,8 @@ const store = createStore({
             bookedRoom: []
         },
         extrasPrice: null,
-        selectedExtras: null,
-
+        selectedExtras: [],
+        extrasPrice: [],
         paymentError: null,
         paymentErrorMessage: null,
    },
@@ -139,11 +139,15 @@ const store = createStore({
         removeFromBookedRooms(state, room){
             state.bookedRooms.splice(state.bookedRooms.indexOf(room), 1);
         },
-        updateExtrasPrice(state, payload){
-            state.extrasPrice = payload;
-        },
         updateSelectedExtras(state, payload){
             state.selectedExtras = payload;
+        },
+        updateExtrasPrice(state, payload){
+            state.extrasPrice.push(payload)
+        },
+        setExtras(state, payload){
+            state.selectedExtras = payload
+            state.extrasPrice = payload
         }
    },
    getters: {

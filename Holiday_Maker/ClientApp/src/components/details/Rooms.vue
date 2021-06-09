@@ -10,7 +10,7 @@
 
    <div class="w-1/2 overflow-hidden p-4">
     <form>     
-     <button type="button" :class="toggleClass.add" class="outline" @click="toggleAddRemoveButton($event); addToBooking(room)">
+     <button type="button" :class="toggleClass.add" @click="toggleAddRemoveButton($event); addToBooking(room)">
        Add / Remove
      </button>
      </form>
@@ -23,7 +23,7 @@
           <div v-if="room.isRefundable == false"><b>Refund:</b> No<br /></div>
           <b>Description:</b> {{ room.description }}<br />
           <b>Extras at extra price: </b>
-          <Extras :extrasList="extrasList" @addExtra="addExtraMethod" @removeExtra="removeExtraMethod"/>
+          <Extras :extrasList="extrasList" :roomId="room.id" @addExtra="addExtraMethod" @removeExtra="removeExtraMethod"/>
           </div>
         </div>
       </div>
@@ -46,8 +46,8 @@ export default {
       savedExtras: [],
       totalPrice: 0,
       toggleClass:{
-        add: "float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full",
-        added:"float-right bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+        add: "float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full outline",
+        added:"float-right bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full outline"
       },
     }
   },
@@ -91,26 +91,12 @@ export default {
       }
     },
     addExtraMethod(Extra){
-      this.savedExtras.push(Extra.Name)
-
-      this.totalPrice += Extra.Price
-
-      this.$store.commit('updateExtrasPrice', this.totalPrice)
+      this.savedExtras.push({name: Extra.Name, price: Extra.Price, roomId: Extra.roomId})
       this.$store.commit('updateSelectedExtras', this.savedExtras)
-
-      console.log(this.$store.state.extrasPrice)
-      console.log(this.$store.state.selectedExtras)
     },
     removeExtraMethod(Extra){
       this.savedExtras.filter(extra => {if(extra.name == Extra.Name){this.savedExtras.splice(extra,1)}})
-
-      this.totalPrice -= Extra.Price
-
-      this.$store.commit('updateExtrasPrice', this.totalPrice)
       this.$store.commit('updateSelectedExtras', this.savedExtras)
-
-      console.log(this.$store.state.extrasPrice)
-      console.log(this.$store.state.selectedExtras)
     },
     roomAdded(room){
        if (this.$store.state.bookedRooms.some(bookedRoom => bookedRoom.id === room.id)){

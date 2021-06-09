@@ -24,11 +24,9 @@
                 <h1>Check-in: {{ booking.checkIn }}</h1>
                 <h1>Check-out: {{ booking.checkOut }}</h1>
                 <h1>Staying {{ nbrOfNights }} nights</h1>
+                <h1>Extras: </h1>
+                <h1 v-for="extra in roomExtras(room.id)" :key="extra">{{extra.name}}</h1>
             </div> 
-        </div>
-        <div class="w-full overflow-hidden border-2 rounded-md border-gray-300 mb-2">
-            <h1 class="ml-2"><b>Extras</b></h1>
-            <h1 class="ml-2" v-for="extra in selectedExtras" :key="extra">{{extra}}</h1>
         </div>
     </div>
 </template>
@@ -73,6 +71,13 @@ export default {
                 return false
             }
         },
+        roomExtras(id){
+            let roomExtras = this.selectedExtras.filter(extra => (extra.roomId == id) == true)
+            let extrasPrice = {price: 0, roomId: id}
+            roomExtras.forEach(extra => extrasPrice.price += extra.price)
+            this.$store.commit('updateExtrasPrice', extrasPrice)
+            return roomExtras
+        }
     },
 
     computed: {
