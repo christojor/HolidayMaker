@@ -230,6 +230,7 @@ namespace Holiday_Maker.Services
             var amenityList = _amenityRepo.GetAllRaw();
             var extrasList = _extraRepo.GetAllRaw();
             var wifiQualities = _wifiQualityRepo.GetAllRaw();
+            var userRating = _userRatingRepo.GetAllRaw();
 
             foreach (var amenity in amenityList)
             {
@@ -243,6 +244,18 @@ namespace Holiday_Maker.Services
 
             foreach (var accommodation in accommodationList)
             {
+                var rating = userRating.Where(a => a.AccomodationId == accommodation.Id);
+
+                var totalRating = 0;
+                foreach (var rate in rating)
+                {
+                    totalRating += rate.Rating;
+                }
+                if (totalRating != 0)
+                    totalRating = totalRating / rating.Count();
+
+                accommodation.GuestRating = totalRating;
+
                 var amenities = amenityList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
                 var extras = extrasList.FirstOrDefault(a => a.AccomodationId == accommodation.Id);
 

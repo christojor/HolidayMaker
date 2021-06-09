@@ -46,7 +46,7 @@
                     <HotelBookingRating :id="Booking.accomodationId"/>
                 </td>
                     <td v-else class="bookingElements"></td> 
-                <td class="bookingElements"><button v-if="Booking.cancellationDate == null && Booking.checkOutDate > currentDateTime()" class="editButton">Edit</button></td>
+                <td class="bookingElements"><button v-if="Booking.cancellationDate == null && Booking.checkOutDate > currentDateTime()" class="outline editButton">Edit</button></td>
             <td class="bookingElements"><CancelButton v-if="Booking.cancellationDate == null && Booking.checkOutDate > currentDateTime()" :bookingId="Booking.id"/></td>
             
         </tr>

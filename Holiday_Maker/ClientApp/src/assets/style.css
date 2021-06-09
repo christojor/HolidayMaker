@@ -24,6 +24,9 @@ p{
 .show{
     display: none;
 }
+.outline:focus{
+    outline: none;
+}
 /*--------------------- Nav -------------------*/
 nav{
     background-color: white;
@@ -88,12 +91,6 @@ aside{
 }
 .navbarThemesButton:hover{
     color: white;
-}
-.navbarThemesButton:focus{
-    outline: none;
-}
-.loginButton:focus{
-    outline: none;
 }
 /*----------Layout----------*/
 .container1{
@@ -275,7 +272,7 @@ h1 {
 /*-----------------Theme Button---------------*/
 .content {
     right: 20vw;
-    margin-right: 60px;
+    margin-right: 30px;
     width: 200px;
     text-align: center;
     z-index: 1000000;

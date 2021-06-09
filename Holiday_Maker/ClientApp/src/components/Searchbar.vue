@@ -71,10 +71,10 @@
                                 <a class="flex border rounded-b-lg border-green-500 rounded py-2 px-4 bg-green-1 text-green-500 font-bold" href="#">
                                 <font-awesome-icon :icon="['fas', 'home']" class="mt-1 mr-4 float-left" style="color: #52B788;"/>Accommodations</a>
                             </li>
-                            <li class="w-1/2">
+                            <!--<li class="w-1/2">
                                 <a class="flex border rounded-b-lg border-green-500 hover:border-green-100 bg-green-500 text-green-100 py-2 px-4" href="#">
                                 <font-awesome-icon :icon="['fas', 'plane']" class="mt-1 mr-4 float-left" style="color: #D8F3DC;"/>Flights</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </div>
                 </div>

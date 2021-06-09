@@ -10,7 +10,7 @@
 
    <div class="w-1/2 overflow-hidden p-4">
     <form>     
-     <button type="button" :class="toggleClass.add" @click="toggleAddRemoveButton($event); addToBooking(room)">
+     <button type="button" :class="toggleClass.add" class="outline" @click="toggleAddRemoveButton($event); addToBooking(room)">
        Add / Remove
      </button>
      </form>

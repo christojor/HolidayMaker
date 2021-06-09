@@ -20,7 +20,7 @@
             </tr>
             </tbody>
         </table>
-        <button type="submit" class="loginButton mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Log in</button>
+        <button type="submit" class="outline loginButton mt-6 w-1/2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full shadow-xl">Log in</button>
 
         <p style="text-align:left">Don't have an account?</p>
     </form>
