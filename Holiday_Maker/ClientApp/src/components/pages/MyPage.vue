@@ -51,7 +51,7 @@
             <table style="width:100%">
                 <tr>
                     <th class="bg-green-1">
-                        <button @click="ToggleModalMethod(true)" class="outline bg-gray-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-xl myButton">Edit</button>
+                        <button @click="ToggleModalMethod(true)" class="outline bg-gray-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-xl myButton">Edit</button>
                     </th>
                 </tr>
             </table>
