@@ -45,6 +45,10 @@ export default {
       image: "./assets/images/fullyBooked.png",
       savedExtras: [],
       totalPrice: 0,
+      toggleClass:{
+        add: "float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full",
+        added:"float-right bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+      },
     }
   },
 
@@ -60,16 +64,6 @@ export default {
     bookingParams: {
       type: Object,
       required: true,
-    }
-  },
-  
-  data(){
-    return{
-      image: "./assets/images/fullyBooked.png",
-      toggleClass:{
-        add: "float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full",
-        added:"float-right bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-      },
     }
   },
 
