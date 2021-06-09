@@ -104,7 +104,7 @@ const store = createStore({
         },
         setUser (state, payload) {
             state.user.id = payload.Id
-            state.user.userName = payload.userName;
+            state.user.userName = payload.username;
             state.user.email = payload.email;
             state.user.firstName = payload.firstName;
             state.user.lastName = payload.lastName;
