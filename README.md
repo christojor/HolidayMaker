@@ -33,3 +33,6 @@ Man startar debugga i Visual Studio för att starta API-servern. I Visual Studio
 För att komma till vår API-test sida: https://localhost:44323/swagger/index.html 
 För att komma till själva hemsidan: http://localhost:3000/ (viktigt det ej är HTTPS)
 
+## Kända buggar
+
+* Går inte att söka på orter med mellanslag.
