@@ -180,7 +180,7 @@ export default {
         { "name": "Qatar", "code": "QA" },
         { "name": "Reunion", "code": "RE" },
         { "name": "Romania", "code": "RO" },
-        { "name": "Russian Federation", "code": "RU" },
+        { "name": "Russia", "code": "RU" },
         { "name": "Rwanda", "code": "RW" },
         { "name": "Saint Helena", "code": "SH" },
         { "name": "Saint Kitts and Nevis", "code": "KN" },
