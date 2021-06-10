@@ -175,15 +175,17 @@ namespace Holiday_Maker.Services
             }
 
             // Check if any rooms are unavailable at the destination and remove them from the list
-
-            foreach (var accomodation in accomodations)
+            if (accomodations != null)
             {
-                foreach (var room in accomodation.Rooms)
+                foreach (var accomodation in accomodations)
                 {
-                    if (!availableRoomIds.Contains(room.Id))
+                    foreach (var room in accomodation.Rooms)
                     {
+                        if (!availableRoomIds.Contains(room.Id))
+                        {
 
-                        accomodation.Rooms.Remove(room);
+                            accomodation.Rooms.Remove(room);
+                        }
                     }
                 }
             }
