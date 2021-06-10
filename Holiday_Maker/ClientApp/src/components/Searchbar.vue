@@ -147,11 +147,6 @@ export default {
         }
     },
     methods:{
-        formatQuery(){
-            this.destinationSearch = this.destinationSearch.trim()
-            this.destinationSearch  = this.destinationSearch.toLowerCase()
-            this.destinationSearch  = this.destinationSearch.charAt(0).toUpperCase() + this.destinationSearch.slice(1)
-        },
         checkBookingParams(){
             if (this.bookingParams.checkIn == ''){
                 this.bookingParams.checkIn = this.currentDate(0)
@@ -174,13 +169,15 @@ export default {
             e.preventDefault()
 
             if(this.destinationSearch.length > 1)
-            {   // Format destinationSearch if more than one word
-                if (this.destinationSearch.match(/\b\w+\b/g) > 1){
-                    this.formatQuery()
+            { 
+                    this.destinationSearch = this.destinationSearch.trim().split(/\s+/)
+
+                    if(this.destinationSearch.length > 1)
+                    {
+                        let word1 = this.destinationSearch[0]
+                        let word2 = this.destinationSearch[1]
+                        this.destinationSearch = word1 + " " + word2
                     }
-                else{
-                        this.destinationSearch = this.destinationSearch.split(" ")[0]
-                        this.formatQuery()
                         
                         // Write formatted destination to state
                         this.setDestination(this.destinationSearch)
@@ -193,7 +190,6 @@ export default {
                         
                         // Get accomodations from API and write to state
                         this.getQueriedDestinations()
-                    }
             }
             else {
                 // Write checkIn, checkOut, adults and children to state
