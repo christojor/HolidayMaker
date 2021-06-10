@@ -7,7 +7,7 @@
 
     <div v-if="this.$store.state.isLoggedIn" class="w-full overflow-hidden">
       <h1 class="mt-2"><b>Every 1€ spent is converted to 1 point</b></h1>
-      <h1 style="font-size:10px">(tax not included)</h1>
+      <h1 style="font-size:10px">(tax and extras not included)</h1>
       <h1 style="font-size:10px">(Premium Members recieve extra 25%)</h1>
 
       <h1 v-if="this.$store.state.user.memberTypeId == 1" class="mt-2"><b>Reward Points earned: </b></h1>
