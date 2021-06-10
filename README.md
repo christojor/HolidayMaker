@@ -3,9 +3,10 @@
 ## Hur man använder projektet
 
 Använder VueX, vue-vite, Swagger
-npm install, npm run dev
 
 Andra dependencies och hur de installeras: 
+
+npm install, npm run dev
 
 npm install primevue@^3.3.5 --save
 
